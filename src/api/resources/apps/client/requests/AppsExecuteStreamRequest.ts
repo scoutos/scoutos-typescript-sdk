@@ -52,7 +52,6 @@ import * as Scout from "../../../../index";
  *                 "key": "value"
  *             }
  *         },
- *         streaming: true,
  *         organizationId: "string",
  *         threadId: "string",
  *         environment: "string"
@@ -62,7 +61,6 @@ export interface AppsExecuteStreamRequest {
     config?: Scout.FlowDag;
     id?: string;
     inputs: Record<string, unknown>;
-    streaming?: boolean;
     organizationId?: string;
     threadId?: string;
     environment?: string;

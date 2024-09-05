@@ -419,7 +419,6 @@ await client.apps.executeStream({
             key: "value",
         },
     },
-    streaming: true,
     organizationId: "string",
     threadId: "string",
     environment: "string",

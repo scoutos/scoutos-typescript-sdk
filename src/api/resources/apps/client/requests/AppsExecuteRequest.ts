@@ -16,7 +16,6 @@ export interface AppsExecuteRequest {
     config?: Scout.FlowDag;
     id?: string;
     inputs: Record<string, unknown>;
-    streaming?: boolean;
     organizationId?: string;
     threadId?: string;
     environment?: string;

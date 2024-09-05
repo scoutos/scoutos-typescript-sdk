@@ -14,7 +14,6 @@ export const AppsExecuteRequest: core.serialization.Schema<
     config: FlowDag.optional(),
     id: core.serialization.string().optional(),
     inputs: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
-    streaming: core.serialization.boolean().optional(),
     organizationId: core.serialization.property("organization_id", core.serialization.string().optional()),
     threadId: core.serialization.property("thread_id", core.serialization.string().optional()),
     environment: core.serialization.string().optional(),
@@ -25,7 +24,6 @@ export declare namespace AppsExecuteRequest {
         config?: FlowDag.Raw | null;
         id?: string | null;
         inputs: Record<string, unknown>;
-        streaming?: boolean | null;
         organization_id?: string | null;
         thread_id?: string | null;
         environment?: string | null;

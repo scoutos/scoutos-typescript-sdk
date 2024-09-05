@@ -18,7 +18,7 @@ Instantiate and use the client with the following:
 ```typescript
 import { ScoutClient } from "scoutos";
 
-const client = new ScoutClient({ environment: "YOUR_BASE_URL" });
+const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
 await client.createAppV2AppsPost({
     body: {},
 });

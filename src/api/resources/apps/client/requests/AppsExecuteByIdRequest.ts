@@ -8,7 +8,7 @@
  *         body: undefined
  *     }
  */
-export interface AppsExecuteV2AppsAppIdExecutePostRequest {
+export interface AppsExecuteByIdRequest {
     revisionId?: string;
     sessionId?: string;
     body?: Record<string, unknown>;

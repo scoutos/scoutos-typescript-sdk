@@ -1,9 +1,9 @@
-# Chdeskur TypeScript Library
+# Scoutos TypeScript Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-SDK%20generated%20by%20Fern-brightgreen)](https://github.com/fern-api/fern)
 [![npm shield](https://img.shields.io/npm/v/scoutos)](https://www.npmjs.com/package/scoutos)
 
-The Chdeskur TypeScript library provides convenient access to the Chdeskur API from TypeScript.
+The Scoutos TypeScript library provides convenient access to the Scoutos API from TypeScript.
 
 ## Installation
 
@@ -19,7 +19,7 @@ Instantiate and use the client with the following:
 import { ScoutClient } from "scoutos";
 
 const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
-await client.createAppV2AppsPost({
+await client.create({
     body: {},
 });
 ```
@@ -32,7 +32,7 @@ following namespace:
 ```typescript
 import { Scout } from "scoutos";
 
-const request: Scout.ListAppRunLogsV2RunLogsGetRequest = {
+const request: Scout.AppsListRequest = {
     ...
 };
 ```
@@ -46,7 +46,7 @@ will be thrown.
 import { ScoutError } from "scoutos";
 
 try {
-    await client.createAppV2AppsPost(...);
+    await client.create(...);
 } catch (err) {
     if (err instanceof ScoutError) {
         console.log(err.statusCode);
@@ -73,7 +73,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.createAppV2AppsPost(..., {
+const response = await client.create(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -83,7 +83,7 @@ const response = await client.createAppV2AppsPost(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.createAppV2AppsPost(..., {
+const response = await client.create(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -94,7 +94,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.createAppV2AppsPost(..., {
+const response = await client.create(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request

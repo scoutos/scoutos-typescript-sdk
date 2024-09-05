@@ -6,7 +6,7 @@
  * @example
  *     {}
  */
-export interface ListAppsV2AppsGetRequest {
+export interface AppsListRequest {
     /**
      * Field to sort by
      */

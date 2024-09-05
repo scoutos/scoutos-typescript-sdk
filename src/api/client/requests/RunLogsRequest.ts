@@ -8,7 +8,7 @@
  *         appId: "app_id"
  *     }
  */
-export interface ListAppRunLogsV2RunLogsGetRequest {
+export interface RunLogsRequest {
     appId: string;
     startDate?: string;
     endDate?: string;

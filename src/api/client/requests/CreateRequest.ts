@@ -10,7 +10,7 @@ import * as Scout from "../../index";
  *         body: {}
  *     }
  */
-export interface CreateAppV2AppsPostRequest {
+export interface CreateRequest {
     deployToEndpoint?: boolean;
     body: Scout.AppConfigInput;
 }

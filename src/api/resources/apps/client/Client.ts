@@ -55,8 +55,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "scoutos/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "scoutos/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -136,8 +136,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "scoutos/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "scoutos/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -218,8 +218,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "scoutos/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "scoutos/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -321,8 +321,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "scoutos/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "scoutos/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -409,8 +409,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "scoutos/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "scoutos/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -491,8 +491,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "scoutos/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "scoutos/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -579,8 +579,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.5",
-                "User-Agent": "scoutos/0.0.5",
+                "X-Fern-SDK-Version": "0.0.6",
+                "User-Agent": "scoutos/0.0.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -640,12 +640,14 @@ export class Apps {
         return (this._revisions ??= new Revisions(this._options));
     }
 
-    protected async _getAuthorizationHeader(): Promise<string | undefined> {
+    protected async _getAuthorizationHeader(): Promise<string> {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
-        if (bearer != null) {
-            return `Bearer ${bearer}`;
+        if (bearer == null) {
+            throw new errors.ScoutError({
+                message: "Please specify SCOUT_API_KEY when instantiating the client.",
+            });
         }
 
-        return undefined;
+        return `Bearer ${bearer}`;
     }
 }

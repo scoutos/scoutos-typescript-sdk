@@ -1,57 +1,5 @@
 # Reference
 
-<details><summary><code>client.<a href="/src/Client.ts">create</a>({ ...params }) -> Scout.AppsServiceHandlersCreateAppResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.create({
-    body: {},
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Scout.CreateRequest`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ScoutClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-##
-
 ## Info
 
 <details><summary><code>client.info.<a href="/src/api/resources/info/client/Client.ts">get</a>() -> Scout.Info</code></summary>
@@ -230,6 +178,69 @@ await client.apps.update("app_id", {});
 </dl>
 </details>
 
+<details><summary><code>client.apps.<a href="/src/api/resources/apps/client/Client.ts">delete</a>(appId) -> Scout.AppsServiceHandlersDeleteAppResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Given an App ID, return it's configuration data.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.apps.delete("app_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**appId:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Apps.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.apps.<a href="/src/api/resources/apps/client/Client.ts">list</a>({ ...params }) -> Scout.AppsServiceHandlersListAppsResponse</code></summary>
 <dl>
 <dd>
@@ -275,6 +286,56 @@ await client.apps.list();
 <dd>
 
 **request:** `Scout.AppsListRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Apps.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.apps.<a href="/src/api/resources/apps/client/Client.ts">create</a>({ ...params }) -> Scout.AppsServiceHandlersCreateAppResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.apps.create({
+    body: {},
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.AppsCreateRequest`
 
 </dd>
 </dl>
@@ -393,6 +454,58 @@ await client.apps.executeById("app_id", {
 <dd>
 
 **requestOptions:** `Apps.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Logs
+
+<details><summary><code>client.logs.<a href="/src/api/resources/logs/client/Client.ts">run</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.logs.run({
+    appId: "app_id",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.LogsRunRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Logs.RequestOptions`
 
 </dd>
 </dl>

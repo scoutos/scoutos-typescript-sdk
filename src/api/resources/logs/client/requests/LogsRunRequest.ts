@@ -8,7 +8,7 @@
  *         appId: "app_id"
  *     }
  */
-export interface RunLogsRequest {
+export interface LogsRunRequest {
     appId: string;
     startDate?: string;
     endDate?: string;

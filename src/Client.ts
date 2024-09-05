@@ -4,12 +4,9 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
-import * as Scout from "./api/index";
-import urlJoin from "url-join";
-import * as serializers from "./serialization/index";
-import * as errors from "./errors/index";
 import { Info } from "./api/resources/info/client/Client";
 import { Apps } from "./api/resources/apps/client/Client";
+import { Logs } from "./api/resources/logs/client/Client";
 import { Copilot } from "./api/resources/copilot/client/Client";
 import { Blocks } from "./api/resources/blocks/client/Client";
 
@@ -33,276 +30,6 @@ export declare namespace ScoutClient {
 export class ScoutClient {
     constructor(protected readonly _options: ScoutClient.Options = {}) {}
 
-    /**
-     * Given an App ID, return it's configuration data.
-     *
-     * @param {string} appId
-     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Scout.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.delete("app_id")
-     */
-    public async delete(
-        appId: string,
-        requestOptions?: ScoutClient.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersDeleteAppResponse> {
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/apps/${encodeURIComponent(appId)}`
-            ),
-            method: "DELETE",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.4",
-                "User-Agent": "scoutos/0.0.4",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return serializers.AppsServiceHandlersDeleteAppResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.ScoutError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ScoutError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ScoutTimeoutError();
-            case "unknown":
-                throw new errors.ScoutError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * @param {Scout.RunLogsRequest} request
-     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Scout.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.runLogs({
-     *         appId: "app_id"
-     *     })
-     */
-    public async runLogs(request: Scout.RunLogsRequest, requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
-        const { appId, startDate, endDate, limit, sessionId, status, cursor } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
-        _queryParams["app_id"] = appId;
-        if (startDate != null) {
-            _queryParams["start_date"] = startDate;
-        }
-
-        if (endDate != null) {
-            _queryParams["end_date"] = endDate;
-        }
-
-        if (limit != null) {
-            _queryParams["limit"] = limit.toString();
-        }
-
-        if (sessionId != null) {
-            _queryParams["session_id"] = sessionId;
-        }
-
-        if (status != null) {
-            _queryParams["status"] = status;
-        }
-
-        if (cursor != null) {
-            _queryParams["cursor"] = cursor;
-        }
-
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/run_logs"
-            ),
-            method: "GET",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.4",
-                "User-Agent": "scoutos/0.0.4",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-            },
-            contentType: "application/json",
-            queryParameters: _queryParams,
-            requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return _response.body;
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.ScoutError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ScoutError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ScoutTimeoutError();
-            case "unknown":
-                throw new errors.ScoutError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
-     * @param {Scout.CreateRequest} request
-     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Scout.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.create({
-     *         body: {}
-     *     })
-     */
-    public async create(
-        request: Scout.CreateRequest,
-        requestOptions?: ScoutClient.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersCreateAppResponse> {
-        const { deployToEndpoint, body: _body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
-        if (deployToEndpoint != null) {
-            _queryParams["deploy_to_endpoint"] = deployToEndpoint.toString();
-        }
-
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/apps"
-            ),
-            method: "POST",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.4",
-                "User-Agent": "scoutos/0.0.4",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-            },
-            contentType: "application/json",
-            queryParameters: _queryParams,
-            requestType: "json",
-            body: serializers.AppConfigInput.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return serializers.AppsServiceHandlersCreateAppResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
-                default:
-                    throw new errors.ScoutError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ScoutError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ScoutTimeoutError();
-            case "unknown":
-                throw new errors.ScoutError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
     protected _info: Info | undefined;
 
     public get info(): Info {
@@ -315,6 +42,12 @@ export class ScoutClient {
         return (this._apps ??= new Apps(this._options));
     }
 
+    protected _logs: Logs | undefined;
+
+    public get logs(): Logs {
+        return (this._logs ??= new Logs(this._options));
+    }
+
     protected _copilot: Copilot | undefined;
 
     public get copilot(): Copilot {
@@ -325,14 +58,5 @@ export class ScoutClient {
 
     public get blocks(): Blocks {
         return (this._blocks ??= new Blocks(this._options));
-    }
-
-    protected async _getAuthorizationHeader(): Promise<string | undefined> {
-        const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
-        if (bearer != null) {
-            return `Bearer ${bearer}`;
-        }
-
-        return undefined;
     }
 }

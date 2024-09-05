@@ -6,10 +6,10 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Scout from "../../../index";
 import urlJoin from "url-join";
-import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
+import * as serializers from "../../../../serialization/index";
 
-export declare namespace Info {
+export declare namespace Logs {
     interface Options {
         environment?: core.Supplier<environments.ScoutEnvironment | string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
@@ -26,22 +26,52 @@ export declare namespace Info {
     }
 }
 
-export class Info {
-    constructor(protected readonly _options: Info.Options = {}) {}
+export class Logs {
+    constructor(protected readonly _options: Logs.Options = {}) {}
 
     /**
-     * Return information about the running service.
+     * @param {Scout.LogsRunRequest} request
+     * @param {Logs.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @param {Info.RequestOptions} requestOptions - Request-specific configuration.
+     * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.info.get()
+     *     await client.logs.run({
+     *         appId: "app_id"
+     *     })
      */
-    public async get(requestOptions?: Info.RequestOptions): Promise<Scout.Info> {
+    public async run(request: Scout.LogsRunRequest, requestOptions?: Logs.RequestOptions): Promise<unknown> {
+        const { appId, startDate, endDate, limit, sessionId, status, cursor } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        _queryParams["app_id"] = appId;
+        if (startDate != null) {
+            _queryParams["start_date"] = startDate;
+        }
+
+        if (endDate != null) {
+            _queryParams["end_date"] = endDate;
+        }
+
+        if (limit != null) {
+            _queryParams["limit"] = limit.toString();
+        }
+
+        if (sessionId != null) {
+            _queryParams["session_id"] = sessionId;
+        }
+
+        if (status != null) {
+            _queryParams["status"] = status;
+        }
+
+        if (cursor != null) {
+            _queryParams["cursor"] = cursor;
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "info"
+                "v2/run_logs"
             ),
             method: "GET",
             headers: {
@@ -54,26 +84,34 @@ export class Info {
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.Info.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.ScoutError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-            });
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
         }
 
         switch (_response.error.reason) {

@@ -53,3 +53,5 @@ export * from "./AppsServiceHandlersListAppRevisionsResponse";
 export * from "./AppsServiceHandlersListAppsResponse";
 export * from "./AppsServiceHandlersPromoteAppRevisionResponse";
 export * from "./AppsServiceHandlersUpdateAppResponse";
+export * from "./Message";
+export * from "./MessageChunk";

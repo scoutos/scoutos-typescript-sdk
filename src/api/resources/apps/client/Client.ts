@@ -8,6 +8,7 @@ import * as Scout from "../../../index";
 import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
+import * as stream from "stream";
 import { Revisions } from "../resources/revisions/client/Client";
 
 export declare namespace Apps {
@@ -55,8 +56,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.6",
-                "User-Agent": "scoutos/0.0.6",
+                "X-Fern-SDK-Version": "0.0.7",
+                "User-Agent": "scoutos/0.0.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -136,8 +137,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.6",
-                "User-Agent": "scoutos/0.0.6",
+                "X-Fern-SDK-Version": "0.0.7",
+                "User-Agent": "scoutos/0.0.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -218,8 +219,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.6",
-                "User-Agent": "scoutos/0.0.6",
+                "X-Fern-SDK-Version": "0.0.7",
+                "User-Agent": "scoutos/0.0.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -321,8 +322,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.6",
-                "User-Agent": "scoutos/0.0.6",
+                "X-Fern-SDK-Version": "0.0.7",
+                "User-Agent": "scoutos/0.0.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -409,8 +410,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.6",
-                "User-Agent": "scoutos/0.0.6",
+                "X-Fern-SDK-Version": "0.0.7",
+                "User-Agent": "scoutos/0.0.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -467,8 +468,93 @@ export class Apps {
         }
     }
 
+    public async executeStream(
+        request: Scout.AppsExecuteStreamRequest,
+        requestOptions?: Apps.RequestOptions
+    ): Promise<core.Stream<Scout.MessageChunk>> {
+        const _response = await (this._options.fetcher ?? core.fetcher)<stream.Readable>({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
+                "v1/apps/execute"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.0.7",
+                "User-Agent": "scoutos/0.0.7",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: {
+                ...serializers.AppsExecuteStreamRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+                stream: true,
+            },
+            responseType: "sse",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return new core.Stream({
+                stream: _response.body,
+                parse: async (data) => {
+                    return serializers.MessageChunk.parseOrThrow(data, {
+                        unrecognizedObjectKeys: "passthrough",
+                        allowUnrecognizedUnionMembers: true,
+                        allowUnrecognizedEnumValues: true,
+                        skipValidation: true,
+                        breadcrumbsPrefix: ["response"],
+                    });
+                },
+                signal: requestOptions?.abortSignal,
+                eventShape: {
+                    type: "sse",
+                    streamTerminator: "[DONE]",
+                },
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError();
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
     /**
-     * @param {Scout.FlowRequest} request
+     * @param {Scout.AppsExecuteRequest} request
      * @param {Apps.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -480,7 +566,10 @@ export class Apps {
      *         }
      *     })
      */
-    public async execute(request: Scout.FlowRequest, requestOptions?: Apps.RequestOptions): Promise<unknown> {
+    public async execute(
+        request: Scout.AppsExecuteRequest,
+        requestOptions?: Apps.RequestOptions
+    ): Promise<Scout.Message> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -491,20 +580,29 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.6",
-                "User-Agent": "scoutos/0.0.6",
+                "X-Fern-SDK-Version": "0.0.7",
+                "User-Agent": "scoutos/0.0.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.FlowRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: {
+                ...serializers.AppsExecuteRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+                stream: false,
+            },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return serializers.Message.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
@@ -579,8 +677,8 @@ export class Apps {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.6",
-                "User-Agent": "scoutos/0.0.6",
+                "X-Fern-SDK-Version": "0.0.7",
+                "User-Agent": "scoutos/0.0.7",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

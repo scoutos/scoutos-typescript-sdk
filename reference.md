@@ -354,7 +354,111 @@ await client.apps.create({
 </dl>
 </details>
 
-<details><summary><code>client.apps.<a href="/src/api/resources/apps/client/Client.ts">execute</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>client.apps.<a href="/src/api/resources/apps/client/Client.ts">executeStream</a>({ ...params }) -> core.Stream<Scout.MessageChunk></code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.apps.executeStream({
+    config: {
+        id: "string",
+        name: "string",
+        description: "string",
+        inputs: {
+            string: {
+                type: Scout.Types.String,
+                default: {
+                    key: "value",
+                },
+                description: "string",
+                displayName: "string",
+                required: true,
+            },
+        },
+        outputs: {
+            string: {
+                key: "value",
+            },
+        },
+        nodes: [
+            {
+                name: "string",
+                type: Scout.NodeTypes.TextGeneration,
+                title: "string",
+                startMessage: "string",
+                inputs: {
+                    string: {
+                        key: "value",
+                    },
+                },
+                output: true,
+                depends: [
+                    {
+                        key: "value",
+                    },
+                ],
+                runWhen: [
+                    {
+                        key: "value",
+                    },
+                ],
+            },
+        ],
+    },
+    id: "string",
+    inputs: {
+        string: {
+            key: "value",
+        },
+    },
+    streaming: true,
+    organizationId: "string",
+    threadId: "string",
+    environment: "string",
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.AppsExecuteStreamRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Apps.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.apps.<a href="/src/api/resources/apps/client/Client.ts">execute</a>({ ...params }) -> Scout.Message</code></summary>
 <dl>
 <dd>
 
@@ -387,7 +491,7 @@ await client.apps.execute({
 <dl>
 <dd>
 
-**request:** `Scout.FlowRequest`
+**request:** `Scout.AppsExecuteRequest`
 
 </dd>
 </dl>

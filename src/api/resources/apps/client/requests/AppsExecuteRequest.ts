@@ -12,7 +12,7 @@ import * as Scout from "../../../../index";
  *         }
  *     }
  */
-export interface FlowRequest {
+export interface AppsExecuteRequest {
     config?: Scout.FlowDag;
     id?: string;
     inputs: Record<string, unknown>;

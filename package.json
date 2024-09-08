@@ -1,6 +1,6 @@
 {
     "name": "scoutos",
-    "version": "0.0.8",
+    "version": "0.0.2",
     "private": false,
     "repository": "https://github.com/fern-demo/scoutos-typescript-sdk",
     "main": "./index.js",

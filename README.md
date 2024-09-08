@@ -19,8 +19,12 @@ Instantiate and use the client with the following:
 import { ScoutClient } from "scoutos";
 
 const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
-await client.apps.create({
-    body: {},
+await client.workflows.runStream("string", {
+    revisionId: "string",
+    sessionId: "string",
+    input: {
+        string: 1,
+    },
 });
 ```
 
@@ -32,7 +36,7 @@ following namespace:
 ```typescript
 import { Scout } from "scoutos";
 
-const request: Scout.AppsListRequest = {
+const request: Scout.WorkflowsRunStreamRequest = {
     ...
 };
 ```
@@ -46,7 +50,7 @@ will be thrown.
 import { ScoutError } from "scoutos";
 
 try {
-    await client.apps.create(...);
+    await client.workflows.runStream(...);
 } catch (err) {
     if (err instanceof ScoutError) {
         console.log(err.statusCode);
@@ -73,7 +77,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.apps.create(..., {
+const response = await client.workflows.runStream(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -83,7 +87,7 @@ const response = await client.apps.create(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.apps.create(..., {
+const response = await client.workflows.runStream(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -94,7 +98,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.apps.create(..., {
+const response = await client.workflows.runStream(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request

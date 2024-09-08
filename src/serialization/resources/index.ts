@@ -1,2 +1,2 @@
-export * as apps from "./apps";
-export * from "./apps/client/requests";
+export * as workflows from "./workflows";
+export * from "./workflows/client/requests";

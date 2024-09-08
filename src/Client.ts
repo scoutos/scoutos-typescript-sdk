@@ -4,11 +4,7 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
-import { Info } from "./api/resources/info/client/Client";
-import { Apps } from "./api/resources/apps/client/Client";
-import { Logs } from "./api/resources/logs/client/Client";
-import { Copilot } from "./api/resources/copilot/client/Client";
-import { Blocks } from "./api/resources/blocks/client/Client";
+import { Workflows } from "./api/resources/workflows/client/Client";
 
 export declare namespace ScoutClient {
     interface Options {
@@ -30,33 +26,9 @@ export declare namespace ScoutClient {
 export class ScoutClient {
     constructor(protected readonly _options: ScoutClient.Options = {}) {}
 
-    protected _info: Info | undefined;
+    protected _workflows: Workflows | undefined;
 
-    public get info(): Info {
-        return (this._info ??= new Info(this._options));
-    }
-
-    protected _apps: Apps | undefined;
-
-    public get apps(): Apps {
-        return (this._apps ??= new Apps(this._options));
-    }
-
-    protected _logs: Logs | undefined;
-
-    public get logs(): Logs {
-        return (this._logs ??= new Logs(this._options));
-    }
-
-    protected _copilot: Copilot | undefined;
-
-    public get copilot(): Copilot {
-        return (this._copilot ??= new Copilot(this._options));
-    }
-
-    protected _blocks: Blocks | undefined;
-
-    public get blocks(): Blocks {
-        return (this._blocks ??= new Blocks(this._options));
+    public get workflows(): Workflows {
+        return (this._workflows ??= new Workflows(this._options));
     }
 }

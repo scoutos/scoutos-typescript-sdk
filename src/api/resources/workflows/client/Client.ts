@@ -30,9 +30,9 @@ export declare namespace Workflows {
 export class Workflows {
     constructor(protected readonly _options: Workflows.Options = {}) {}
 
-    public async runStream(
-        appId: string,
-        request: Scout.WorkflowsRunStreamRequest,
+    public async executeStream(
+        workflowId: string,
+        request: Scout.WorkflowsExecuteStreamRequest,
         requestOptions?: Workflows.RequestOptions
     ): Promise<core.Stream<Scout.WorkflowRunResponseStreaming>> {
         const { revisionId, sessionId, ..._body } = request;
@@ -48,14 +48,14 @@ export class Workflows {
         const _response = await (this._options.fetcher ?? core.fetcher)<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(appId)}/run`
+                `v2/workflows/${encodeURIComponent(workflowId)}/execute`
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.3",
+                "X-Fern-SDK-Version": "0.0.43",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -63,7 +63,7 @@ export class Workflows {
             queryParameters: _queryParams,
             requestType: "json",
             body: {
-                ...serializers.WorkflowsRunStreamRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+                ...serializers.WorkflowsExecuteStreamRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
                 streaming: true,
             },
             responseType: "sse",
@@ -127,22 +127,22 @@ export class Workflows {
     }
 
     /**
-     * @param {string} appId
-     * @param {Scout.WorkflowsRunRequest} request
+     * @param {string} workflowId
+     * @param {Scout.WorkflowsExecuteRequest} request
      * @param {Workflows.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.workflows.run("app_id", {
+     *     await client.workflows.execute("workflow_id", {
      *         input: {
      *             "key": 1
      *         }
      *     })
      */
-    public async run(
-        appId: string,
-        request: Scout.WorkflowsRunRequest,
+    public async execute(
+        workflowId: string,
+        request: Scout.WorkflowsExecuteRequest,
         requestOptions?: Workflows.RequestOptions
     ): Promise<Scout.WorkflowRunResponseBatch> {
         const { revisionId, sessionId, ..._body } = request;
@@ -158,14 +158,14 @@ export class Workflows {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(appId)}/run`
+                `v2/workflows/${encodeURIComponent(workflowId)}/execute`
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.0.3",
+                "X-Fern-SDK-Version": "0.0.43",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -173,7 +173,7 @@ export class Workflows {
             queryParameters: _queryParams,
             requestType: "json",
             body: {
-                ...serializers.WorkflowsRunRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+                ...serializers.WorkflowsExecuteRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
                 streaming: false,
             },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,

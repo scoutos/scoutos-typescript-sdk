@@ -7,11 +7,11 @@ import * as Scout from "../../../../../api/index";
 import * as core from "../../../../../core";
 import { ReqBody } from "../../../../types/ReqBody";
 
-export const WorkflowsRunRequest: core.serialization.Schema<
-    serializers.WorkflowsRunRequest.Raw,
-    Omit<Scout.WorkflowsRunRequest, "revisionId" | "sessionId">
+export const WorkflowsExecuteStreamRequest: core.serialization.Schema<
+    serializers.WorkflowsExecuteStreamRequest.Raw,
+    Omit<Scout.WorkflowsExecuteStreamRequest, "revisionId" | "sessionId">
 > = core.serialization.object({}).extend(ReqBody);
 
-export declare namespace WorkflowsRunRequest {
+export declare namespace WorkflowsExecuteStreamRequest {
     interface Raw extends ReqBody.Raw {}
 }

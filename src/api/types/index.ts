@@ -6,6 +6,7 @@ export * from "./ReqBody";
 export * from "./State";
 export * from "./ValidationErrorLocItem";
 export * from "./ValidationError";
+export * from "./WorkflowRunEvent";
 export * from "./WorkflowRunResponseBatch";
 export * from "./WorkflowRunResponseStreaming";
 export * from "./Message";

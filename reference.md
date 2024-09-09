@@ -64,7 +64,7 @@ await client.workflows.executeStream("string", {
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">execute</a>(workflowId, { ...params }) -> unknown</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">execute</a>(workflowId, { ...params }) -> Scout.WorkflowRunResponseBatch</code></summary>
 <dl>
 <dd>
 
@@ -77,11 +77,9 @@ await client.workflows.executeStream("string", {
 <dd>
 
 ```typescript
-await client.workflows.execute("string", {
-    revisionId: "string",
-    sessionId: "string",
+await client.workflows.execute("workflow_id", {
     input: {
-        string: 1,
+        key: 1,
     },
 });
 ```

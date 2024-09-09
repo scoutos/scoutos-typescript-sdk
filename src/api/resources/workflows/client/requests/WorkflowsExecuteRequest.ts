@@ -7,10 +7,8 @@ import * as Scout from "../../../../index";
 /**
  * @example
  *     {
- *         revisionId: "string",
- *         sessionId: "string",
  *         input: {
- *             "string": 1
+ *             "key": 1
  *         }
  *     }
  */

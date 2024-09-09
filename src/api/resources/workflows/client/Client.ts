@@ -135,11 +135,9 @@ export class Workflows {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.workflows.execute("string", {
-     *         revisionId: "string",
-     *         sessionId: "string",
+     *     await client.workflows.execute("workflow_id", {
      *         input: {
-     *             "string": 1
+     *             "key": 1
      *         }
      *     })
      */
@@ -147,7 +145,7 @@ export class Workflows {
         workflowId: string,
         request: Scout.WorkflowsExecuteRequest,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<unknown> {
+    ): Promise<Scout.WorkflowRunResponseBatch> {
         const { revisionId, sessionId, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (revisionId != null) {
@@ -185,7 +183,13 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return serializers.WorkflowRunResponseBatch.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {

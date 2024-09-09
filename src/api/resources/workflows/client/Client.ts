@@ -34,7 +34,7 @@ export class Workflows {
         workflowId: string,
         request: Scout.WorkflowsExecuteStreamRequest,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<core.Stream<Scout.WorkflowRunResponseStreaming>> {
+    ): Promise<core.Stream<Scout.MessageChunk>> {
         const { revisionId, sessionId, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (revisionId != null) {
@@ -55,8 +55,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.1",
-                "User-Agent": "scoutos/0.1.1",
+                "X-Fern-SDK-Version": "0.1.2",
+                "User-Agent": "scoutos/0.1.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -76,7 +76,7 @@ export class Workflows {
             return new core.Stream({
                 stream: _response.body,
                 parse: async (data) => {
-                    return serializers.WorkflowRunResponseStreaming.parseOrThrow(data, {
+                    return serializers.MessageChunk.parseOrThrow(data, {
                         unrecognizedObjectKeys: "passthrough",
                         allowUnrecognizedUnionMembers: true,
                         allowUnrecognizedEnumValues: true,
@@ -135,9 +135,11 @@ export class Workflows {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.workflows.execute("workflow_id", {
+     *     await client.workflows.execute("string", {
+     *         revisionId: "string",
+     *         sessionId: "string",
      *         input: {
-     *             "key": 1
+     *             "string": 1
      *         }
      *     })
      */
@@ -145,7 +147,7 @@ export class Workflows {
         workflowId: string,
         request: Scout.WorkflowsExecuteRequest,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<Scout.WorkflowRunResponseBatch> {
+    ): Promise<unknown> {
         const { revisionId, sessionId, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (revisionId != null) {
@@ -166,8 +168,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.1",
-                "User-Agent": "scoutos/0.1.1",
+                "X-Fern-SDK-Version": "0.1.2",
+                "User-Agent": "scoutos/0.1.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -183,13 +185,7 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.WorkflowRunResponseBatch.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body;
         }
 
         if (_response.error.reason === "status-code") {

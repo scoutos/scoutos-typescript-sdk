@@ -2,7 +2,7 @@
 
 ## Workflows
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">executeStream</a>(workflowId, { ...params }) -> core.Stream<Scout.WorkflowRunResponseStreaming></code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">executeStream</a>(workflowId, { ...params }) -> core.Stream<Scout.MessageChunk></code></summary>
 <dl>
 <dd>
 
@@ -64,7 +64,7 @@ await client.workflows.executeStream("string", {
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">execute</a>(workflowId, { ...params }) -> Scout.WorkflowRunResponseBatch</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">execute</a>(workflowId, { ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -77,9 +77,11 @@ await client.workflows.executeStream("string", {
 <dd>
 
 ```typescript
-await client.workflows.execute("workflow_id", {
+await client.workflows.execute("string", {
+    revisionId: "string",
+    sessionId: "string",
     input: {
-        key: 1,
+        string: 1,
     },
 });
 ```

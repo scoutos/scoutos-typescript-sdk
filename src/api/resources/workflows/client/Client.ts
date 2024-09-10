@@ -34,7 +34,7 @@ export class Workflows {
         workflowId: string,
         request: Scout.WorkflowsExecuteStreamRequest,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<core.Stream<Scout.MessageChunk>> {
+    ): Promise<core.Stream<Scout.WorkflowRunResponseStreaming>> {
         const { revisionId, sessionId, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (revisionId != null) {
@@ -55,8 +55,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.3",
-                "User-Agent": "scoutos/0.1.3",
+                "X-Fern-SDK-Version": "0.1.4",
+                "User-Agent": "scoutos/0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -76,7 +76,7 @@ export class Workflows {
             return new core.Stream({
                 stream: _response.body,
                 parse: async (data) => {
-                    return serializers.MessageChunk.parseOrThrow(data, {
+                    return serializers.WorkflowRunResponseStreaming.parseOrThrow(data, {
                         unrecognizedObjectKeys: "passthrough",
                         allowUnrecognizedUnionMembers: true,
                         allowUnrecognizedEnumValues: true,
@@ -166,8 +166,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.3",
-                "User-Agent": "scoutos/0.1.3",
+                "X-Fern-SDK-Version": "0.1.4",
+                "User-Agent": "scoutos/0.1.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -5,5 +5,5 @@
 import * as Scout from "../index";
 
 export interface WorkflowRunResponseBatch {
-    state: Scout.State;
+    data: Scout.WorkflowRunResponseBatchData;
 }

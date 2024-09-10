@@ -7,8 +7,21 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 
 export const WorkflowRunEvent: core.serialization.Schema<serializers.WorkflowRunEvent.Raw, Scout.WorkflowRunEvent> =
-    core.serialization.enum_(["app_run_started", "app_run_completed", "app_run_failed"]);
+    core.serialization.enum_([
+        "app_run_started",
+        "app_run_completed",
+        "app_run_failed",
+        "block_run_started",
+        "block_run_completed",
+        "block_run_failed",
+    ]);
 
 export declare namespace WorkflowRunEvent {
-    type Raw = "app_run_started" | "app_run_completed" | "app_run_failed";
+    type Raw =
+        | "app_run_started"
+        | "app_run_completed"
+        | "app_run_failed"
+        | "block_run_started"
+        | "block_run_completed"
+        | "block_run_failed";
 }

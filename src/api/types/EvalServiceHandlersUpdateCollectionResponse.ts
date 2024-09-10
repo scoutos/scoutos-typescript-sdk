@@ -4,6 +4,6 @@
 
 import * as Scout from "../index";
 
-export interface BlockState {
-    output: Scout.BlockStateOutput;
+export interface EvalServiceHandlersUpdateCollectionResponse {
+    data?: Scout.Collection;
 }

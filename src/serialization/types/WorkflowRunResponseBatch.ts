@@ -5,17 +5,17 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { State } from "./State";
+import { WorkflowRunResponseBatchData } from "./WorkflowRunResponseBatchData";
 
 export const WorkflowRunResponseBatch: core.serialization.ObjectSchema<
     serializers.WorkflowRunResponseBatch.Raw,
     Scout.WorkflowRunResponseBatch
 > = core.serialization.object({
-    state: State,
+    data: WorkflowRunResponseBatchData,
 });
 
 export declare namespace WorkflowRunResponseBatch {
     interface Raw {
-        state: State.Raw;
+        data: WorkflowRunResponseBatchData.Raw;
     }
 }

@@ -4,6 +4,4 @@
 
 import * as Scout from "../index";
 
-export interface State {
-    blocks: Record<string, Scout.BlockState>;
-}
+export type IdentityDetails = Scout.UserIdentity | Scout.ApiKeyIdentity;

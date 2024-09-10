@@ -5,6 +5,6 @@
 import * as Scout from "../index";
 
 export interface WorkflowRunResponseStreaming {
-    event: Scout.WorkflowRunEvent;
-    data: Record<string, unknown>;
+    name: Scout.WorkflowRunEvent;
+    data: Scout.WorkflowRunResponseStreamingData;
 }

@@ -7,14 +7,13 @@ import * as Scout from "../../../../index";
 /**
  * @example
  *     {
- *         revisionId: "string",
- *         sessionId: "string",
  *         input: {
- *             "string": 1
+ *             "key": true
  *         }
  *     }
  */
-export interface WorkflowsExecuteStreamRequest extends Scout.ReqBody {
+export interface WorkflowsRunRequest extends Scout.ReqBody {
     revisionId?: string;
     sessionId?: string;
+    environment?: Scout.Environment;
 }

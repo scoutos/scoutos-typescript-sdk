@@ -10,7 +10,6 @@ export interface BlockRunFailed {
     id?: string;
     /** Identifies the root cause of the event. If not set, it defaults to the event id. */
     correlationId?: string;
-    name?: Scout.EventName;
     version?: Scout.EventVersion;
     environment: Scout.BlockRunFailedEnvironment;
     /** The timestamp of the event as UTC ISO 8601 string */

@@ -5,7 +5,6 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { EventName } from "./EventName";
 import { EventVersion } from "./EventVersion";
 import { BlockRunFailedEnvironment } from "./BlockRunFailedEnvironment";
 import { BlockRunFailedData } from "./BlockRunFailedData";
@@ -15,7 +14,6 @@ export const BlockRunFailed: core.serialization.ObjectSchema<serializers.BlockRu
         organizationId: core.serialization.property("organization_id", core.serialization.string()),
         id: core.serialization.string().optional(),
         correlationId: core.serialization.property("correlation_id", core.serialization.string().optional()),
-        name: EventName.optional(),
         version: EventVersion.optional(),
         environment: BlockRunFailedEnvironment,
         timestamp: core.serialization.string().optional(),
@@ -27,7 +25,6 @@ export declare namespace BlockRunFailed {
         organization_id: string;
         id?: string | null;
         correlation_id?: string | null;
-        name?: EventName.Raw | null;
         version?: EventVersion.Raw | null;
         environment: BlockRunFailedEnvironment.Raw;
         timestamp?: string | null;

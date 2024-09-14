@@ -5,23 +5,20 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
+import { WorkflowRunEventNames } from "./WorkflowRunEventNames";
+import { WorkflowRunEventData } from "./WorkflowRunEventData";
 
-export const WorkflowRunEvent: core.serialization.Schema<serializers.WorkflowRunEvent.Raw, Scout.WorkflowRunEvent> =
-    core.serialization.enum_([
-        "app_run_started",
-        "app_run_completed",
-        "app_run_failed",
-        "block_run_started",
-        "block_run_completed",
-        "block_run_failed",
-    ]);
+export const WorkflowRunEvent: core.serialization.ObjectSchema<
+    serializers.WorkflowRunEvent.Raw,
+    Scout.WorkflowRunEvent
+> = core.serialization.object({
+    name: WorkflowRunEventNames,
+    data: WorkflowRunEventData,
+});
 
 export declare namespace WorkflowRunEvent {
-    type Raw =
-        | "app_run_started"
-        | "app_run_completed"
-        | "app_run_failed"
-        | "block_run_started"
-        | "block_run_completed"
-        | "block_run_failed";
+    interface Raw {
+        name: WorkflowRunEventNames.Raw;
+        data: WorkflowRunEventData.Raw;
+    }
 }

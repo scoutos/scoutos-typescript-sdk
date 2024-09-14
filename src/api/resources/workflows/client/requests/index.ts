@@ -1,2 +1,2 @@
-export { type WorkflowsExecuteStreamRequest } from "./WorkflowsExecuteStreamRequest";
-export { type WorkflowsExecuteRequest } from "./WorkflowsExecuteRequest";
+export { type WorkflowsRunStreamRequest } from "./WorkflowsRunStreamRequest";
+export { type WorkflowsRunRequest } from "./WorkflowsRunRequest";

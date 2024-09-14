@@ -16,15 +16,17 @@ npm i -s scoutos
 Instantiate and use the client with the following:
 
 ```typescript
-import { ScoutClient } from "scoutos";
+import { ScoutClient, Scout } from "scoutos";
 
 const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
-await client.workflows.executeStream("string", {
+await client.workflows.runStream("string", {
     revisionId: "string",
     sessionId: "string",
+    environment: Scout.Environment.Production,
     input: {
-        string: 1,
+        string: true,
     },
+    streaming: true,
 });
 ```
 
@@ -36,7 +38,7 @@ following namespace:
 ```typescript
 import { Scout } from "scoutos";
 
-const request: Scout.WorkflowsExecuteStreamRequest = {
+const request: Scout.WorkflowsRunStreamRequest = {
     ...
 };
 ```
@@ -50,7 +52,7 @@ will be thrown.
 import { ScoutError } from "scoutos";
 
 try {
-    await client.workflows.executeStream(...);
+    await client.workflows.runStream(...);
 } catch (err) {
     if (err instanceof ScoutError) {
         console.log(err.statusCode);
@@ -77,7 +79,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.workflows.executeStream(..., {
+const response = await client.workflows.runStream(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -87,7 +89,7 @@ const response = await client.workflows.executeStream(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.workflows.executeStream(..., {
+const response = await client.workflows.runStream(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -98,7 +100,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.workflows.executeStream(..., {
+const response = await client.workflows.runStream(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request

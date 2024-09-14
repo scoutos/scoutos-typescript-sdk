@@ -6,30 +6,30 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { EventVersion } from "./EventVersion";
-import { BlockRunCompletedEnvironment } from "./BlockRunCompletedEnvironment";
-import { BlockRunCompletedData } from "./BlockRunCompletedData";
+import { WorkflowRunStartedEnvironment } from "./WorkflowRunStartedEnvironment";
+import { AppRunStartedData } from "./AppRunStartedData";
 
-export const BlockRunCompleted: core.serialization.ObjectSchema<
-    serializers.BlockRunCompleted.Raw,
-    Scout.BlockRunCompleted
+export const WorkflowRunStarted: core.serialization.ObjectSchema<
+    serializers.WorkflowRunStarted.Raw,
+    Scout.WorkflowRunStarted
 > = core.serialization.object({
     organizationId: core.serialization.property("organization_id", core.serialization.string()),
     id: core.serialization.string().optional(),
     correlationId: core.serialization.property("correlation_id", core.serialization.string().optional()),
     version: EventVersion.optional(),
-    environment: BlockRunCompletedEnvironment,
+    environment: WorkflowRunStartedEnvironment,
     timestamp: core.serialization.string().optional(),
-    data: BlockRunCompletedData,
+    data: AppRunStartedData,
 });
 
-export declare namespace BlockRunCompleted {
+export declare namespace WorkflowRunStarted {
     interface Raw {
         organization_id: string;
         id?: string | null;
         correlation_id?: string | null;
         version?: EventVersion.Raw | null;
-        environment: BlockRunCompletedEnvironment.Raw;
+        environment: WorkflowRunStartedEnvironment.Raw;
         timestamp?: string | null;
-        data: BlockRunCompletedData.Raw;
+        data: AppRunStartedData.Raw;
     }
 }

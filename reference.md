@@ -2,7 +2,7 @@
 
 ## Workflows
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">executeStream</a>(workflowId, { ...params }) -> core.Stream<Scout.WorkflowRunResponseStreaming></code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">runStream</a>(workflowId, { ...params }) -> core.Stream<Scout.WorkflowRunEvent></code></summary>
 <dl>
 <dd>
 
@@ -15,12 +15,14 @@
 <dd>
 
 ```typescript
-await client.workflows.executeStream("string", {
+await client.workflows.runStream("string", {
     revisionId: "string",
     sessionId: "string",
+    environment: Scout.Environment.Production,
     input: {
-        string: 1,
+        string: true,
     },
+    streaming: true,
 });
 ```
 
@@ -45,7 +47,7 @@ await client.workflows.executeStream("string", {
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowsExecuteStreamRequest`
+**request:** `Scout.WorkflowsRunStreamRequest`
 
 </dd>
 </dl>
@@ -64,7 +66,7 @@ await client.workflows.executeStream("string", {
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">execute</a>(workflowId, { ...params }) -> Scout.WorkflowRunResponseBatch</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">run</a>(workflowId, { ...params }) -> Scout.WorkflowRunResponse</code></summary>
 <dl>
 <dd>
 
@@ -77,9 +79,9 @@ await client.workflows.executeStream("string", {
 <dd>
 
 ```typescript
-await client.workflows.execute("workflow_id", {
+await client.workflows.run("workflow_id", {
     input: {
-        key: 1,
+        key: true,
     },
 });
 ```
@@ -105,7 +107,7 @@ await client.workflows.execute("workflow_id", {
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowsExecuteRequest`
+**request:** `Scout.WorkflowsRunRequest`
 
 </dd>
 </dl>

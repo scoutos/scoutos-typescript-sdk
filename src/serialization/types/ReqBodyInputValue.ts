@@ -8,12 +8,14 @@ import * as core from "../../core";
 
 export const ReqBodyInputValue: core.serialization.Schema<serializers.ReqBodyInputValue.Raw, Scout.ReqBodyInputValue> =
     core.serialization.undiscriminatedUnion([
-        core.serialization.number(),
-        core.serialization.number(),
-        core.serialization.string(),
+        core.serialization.boolean(),
         core.serialization.record(core.serialization.string(), core.serialization.unknown()),
+        core.serialization.number(),
+        core.serialization.number(),
+        core.serialization.list(core.serialization.unknown()),
+        core.serialization.string(),
     ]);
 
 export declare namespace ReqBodyInputValue {
-    type Raw = number | number | string | Record<string, unknown>;
+    type Raw = boolean | Record<string, unknown> | number | number | unknown[] | string;
 }

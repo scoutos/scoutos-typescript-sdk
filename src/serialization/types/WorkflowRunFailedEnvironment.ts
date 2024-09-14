@@ -6,11 +6,11 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 
-export const AppRunStartedEnvironment: core.serialization.Schema<
-    serializers.AppRunStartedEnvironment.Raw,
-    Scout.AppRunStartedEnvironment
+export const WorkflowRunFailedEnvironment: core.serialization.Schema<
+    serializers.WorkflowRunFailedEnvironment.Raw,
+    Scout.WorkflowRunFailedEnvironment
 > = core.serialization.enum_(["development", "preview", "production", "test"]);
 
-export declare namespace AppRunStartedEnvironment {
+export declare namespace WorkflowRunFailedEnvironment {
     type Raw = "development" | "preview" | "production" | "test";
 }

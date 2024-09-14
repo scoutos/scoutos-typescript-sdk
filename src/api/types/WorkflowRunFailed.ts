@@ -4,16 +4,15 @@
 
 import * as Scout from "../index";
 
-export interface AppRunStarted {
+export interface WorkflowRunFailed {
     organizationId: string;
     /** The unique identifier of the event */
     id?: string;
     /** Identifies the root cause of the event. If not set, it defaults to the event id. */
     correlationId?: string;
-    name?: Scout.EventName;
     version?: Scout.EventVersion;
-    environment: Scout.AppRunStartedEnvironment;
+    environment: Scout.WorkflowRunFailedEnvironment;
     /** The timestamp of the event as UTC ISO 8601 string */
     timestamp?: string;
-    data: Scout.AppRunStartedData;
+    data: Scout.AppRunFailedData;
 }

@@ -4,6 +4,7 @@
 
 import * as Scout from "../index";
 
-export interface WorkflowRunResponseBatch {
-    data: Scout.WorkflowRunResponseBatchData;
+export interface Workflow {
+    run: Scout.WorkflowRun;
+    workflowId: string;
 }

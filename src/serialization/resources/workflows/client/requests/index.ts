@@ -1,2 +1,2 @@
-export { WorkflowsExecuteStreamRequest } from "./WorkflowsExecuteStreamRequest";
-export { WorkflowsExecuteRequest } from "./WorkflowsExecuteRequest";
+export { WorkflowsRunStreamRequest } from "./WorkflowsRunStreamRequest";
+export { WorkflowsRunRequest } from "./WorkflowsRunRequest";

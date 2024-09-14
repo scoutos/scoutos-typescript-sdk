@@ -4,4 +4,6 @@
 
 import * as Scout from "../index";
 
-export type WorkflowRunResponseBatchData = Scout.AppRunCompleted | Scout.AppRunFailed;
+export interface WorkflowRunResponse {
+    workflow: Scout.Workflow;
+}

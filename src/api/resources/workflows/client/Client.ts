@@ -30,12 +30,12 @@ export declare namespace Workflows {
 export class Workflows {
     constructor(protected readonly _options: Workflows.Options = {}) {}
 
-    public async executeStream(
+    public async runStream(
         workflowId: string,
-        request: Scout.WorkflowsExecuteStreamRequest,
+        request: Scout.WorkflowsRunStreamRequest,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<core.Stream<Scout.WorkflowRunResponseStreaming>> {
-        const { revisionId, sessionId, ..._body } = request;
+    ): Promise<core.Stream<Scout.WorkflowRunEvent>> {
+        const { revisionId, sessionId, environment, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (revisionId != null) {
             _queryParams["revision_id"] = revisionId;
@@ -43,6 +43,10 @@ export class Workflows {
 
         if (sessionId != null) {
             _queryParams["session_id"] = sessionId;
+        }
+
+        if (environment != null) {
+            _queryParams["environment"] = environment;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)<stream.Readable>({
@@ -55,8 +59,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.6",
-                "User-Agent": "scoutos/0.1.6",
+                "X-Fern-SDK-Version": "0.1.11",
+                "User-Agent": "scoutos/0.1.11",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -64,8 +68,8 @@ export class Workflows {
             queryParameters: _queryParams,
             requestType: "json",
             body: {
-                ...serializers.WorkflowsExecuteStreamRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
-                streaming: true,
+                ...serializers.WorkflowsRunStreamRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+                stream: true,
             },
             responseType: "sse",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
@@ -76,7 +80,7 @@ export class Workflows {
             return new core.Stream({
                 stream: _response.body,
                 parse: async (data) => {
-                    return serializers.WorkflowRunResponseStreaming.parseOrThrow(data, {
+                    return serializers.WorkflowRunEvent.parseOrThrow(data, {
                         unrecognizedObjectKeys: "passthrough",
                         allowUnrecognizedUnionMembers: true,
                         allowUnrecognizedEnumValues: true,
@@ -129,24 +133,24 @@ export class Workflows {
 
     /**
      * @param {string} workflowId
-     * @param {Scout.WorkflowsExecuteRequest} request
+     * @param {Scout.WorkflowsRunRequest} request
      * @param {Workflows.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.workflows.execute("workflow_id", {
+     *     await client.workflows.run("workflow_id", {
      *         input: {
-     *             "key": 1
+     *             "key": true
      *         }
      *     })
      */
-    public async execute(
+    public async run(
         workflowId: string,
-        request: Scout.WorkflowsExecuteRequest,
+        request: Scout.WorkflowsRunRequest,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<Scout.WorkflowRunResponseBatch> {
-        const { revisionId, sessionId, ..._body } = request;
+    ): Promise<Scout.WorkflowRunResponse> {
+        const { revisionId, sessionId, environment, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (revisionId != null) {
             _queryParams["revision_id"] = revisionId;
@@ -154,6 +158,10 @@ export class Workflows {
 
         if (sessionId != null) {
             _queryParams["session_id"] = sessionId;
+        }
+
+        if (environment != null) {
+            _queryParams["environment"] = environment;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -166,8 +174,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.6",
-                "User-Agent": "scoutos/0.1.6",
+                "X-Fern-SDK-Version": "0.1.11",
+                "User-Agent": "scoutos/0.1.11",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -175,15 +183,15 @@ export class Workflows {
             queryParameters: _queryParams,
             requestType: "json",
             body: {
-                ...serializers.WorkflowsExecuteRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
-                streaming: false,
+                ...serializers.WorkflowsRunRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+                stream: false,
             },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.WorkflowRunResponseBatch.parseOrThrow(_response.body, {
+            return serializers.WorkflowRunResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

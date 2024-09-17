@@ -8,6 +8,7 @@ export type WorkflowRunEventData =
     | Scout.WorkflowRunEventData.BlockRunCompleted
     | Scout.WorkflowRunEventData.BlockRunFailed
     | Scout.WorkflowRunEventData.BlockRunStarted
+    | Scout.WorkflowRunEventData.BlockStateUpdated
     | Scout.WorkflowRunEventData.WorkflowRunCompleted
     | Scout.WorkflowRunEventData.WorkflowRunFailed
     | Scout.WorkflowRunEventData.WorkflowRunStarted;
@@ -23,6 +24,10 @@ export declare namespace WorkflowRunEventData {
 
     interface BlockRunStarted extends Scout.BlockRunStarted {
         name: "block_run_started";
+    }
+
+    interface BlockStateUpdated extends Scout.BlockStateUpdated {
+        name: "block_state_updated";
     }
 
     interface WorkflowRunCompleted extends Scout.WorkflowRunCompleted {

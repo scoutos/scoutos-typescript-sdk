@@ -7,7 +7,7 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { EventVersion } from "./EventVersion";
 import { WorkflowRunStartedEnvironment } from "./WorkflowRunStartedEnvironment";
-import { AppRunStartedData } from "./AppRunStartedData";
+import { WorkflowRunStartedData } from "./WorkflowRunStartedData";
 
 export const WorkflowRunStarted: core.serialization.ObjectSchema<
     serializers.WorkflowRunStarted.Raw,
@@ -19,7 +19,7 @@ export const WorkflowRunStarted: core.serialization.ObjectSchema<
     version: EventVersion.optional(),
     environment: WorkflowRunStartedEnvironment,
     timestamp: core.serialization.string().optional(),
-    data: AppRunStartedData,
+    data: WorkflowRunStartedData,
 });
 
 export declare namespace WorkflowRunStarted {
@@ -30,6 +30,6 @@ export declare namespace WorkflowRunStarted {
         version?: EventVersion.Raw | null;
         environment: WorkflowRunStartedEnvironment.Raw;
         timestamp?: string | null;
-        data: AppRunStartedData.Raw;
+        data: WorkflowRunStartedData.Raw;
     }
 }

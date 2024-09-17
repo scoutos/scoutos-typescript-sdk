@@ -5,17 +5,19 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { Workflow } from "./Workflow";
+import { WorkflowRun } from "./WorkflowRun";
 
 export const WorkflowRunResponse: core.serialization.ObjectSchema<
     serializers.WorkflowRunResponse.Raw,
     Scout.WorkflowRunResponse
 > = core.serialization.object({
-    workflow: Workflow,
+    run: WorkflowRun,
+    workflowId: core.serialization.property("workflow_id", core.serialization.string()),
 });
 
 export declare namespace WorkflowRunResponse {
     interface Raw {
-        workflow: Workflow.Raw;
+        run: WorkflowRun.Raw;
+        workflow_id: string;
     }
 }

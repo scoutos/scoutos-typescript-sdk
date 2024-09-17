@@ -7,7 +7,7 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { EventVersion } from "./EventVersion";
 import { WorkflowRunFailedEnvironment } from "./WorkflowRunFailedEnvironment";
-import { AppRunFailedData } from "./AppRunFailedData";
+import { WorkflowRunFailedData } from "./WorkflowRunFailedData";
 
 export const WorkflowRunFailed: core.serialization.ObjectSchema<
     serializers.WorkflowRunFailed.Raw,
@@ -19,7 +19,7 @@ export const WorkflowRunFailed: core.serialization.ObjectSchema<
     version: EventVersion.optional(),
     environment: WorkflowRunFailedEnvironment,
     timestamp: core.serialization.string().optional(),
-    data: AppRunFailedData,
+    data: WorkflowRunFailedData,
 });
 
 export declare namespace WorkflowRunFailed {
@@ -30,6 +30,6 @@ export declare namespace WorkflowRunFailed {
         version?: EventVersion.Raw | null;
         environment: WorkflowRunFailedEnvironment.Raw;
         timestamp?: string | null;
-        data: AppRunFailedData.Raw;
+        data: WorkflowRunFailedData.Raw;
     }
 }

@@ -7,30 +7,30 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { Actor } from "./Actor";
 
-export const AppRunStartedData: core.serialization.ObjectSchema<
-    serializers.AppRunStartedData.Raw,
-    Scout.AppRunStartedData
+export const WorkflowRunStartedData: core.serialization.ObjectSchema<
+    serializers.WorkflowRunStartedData.Raw,
+    Scout.WorkflowRunStartedData
 > = core.serialization.object({
     actor: Actor.optional(),
-    appId: core.serialization.property("app_id", core.serialization.string()),
-    appRunId: core.serialization.property("app_run_id", core.serialization.string().optional()),
+    workflowId: core.serialization.property("workflow_id", core.serialization.string()),
+    workflowRunId: core.serialization.property("workflow_run_id", core.serialization.string().optional()),
     input: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
     sessionId: core.serialization.property("session_id", core.serialization.string().optional()),
     state: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
-    appConfig: core.serialization.property(
-        "app_config",
+    workflowConfig: core.serialization.property(
+        "workflow_config",
         core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional()
     ),
 });
 
-export declare namespace AppRunStartedData {
+export declare namespace WorkflowRunStartedData {
     interface Raw {
         actor?: Actor.Raw | null;
-        app_id: string;
-        app_run_id?: string | null;
+        workflow_id: string;
+        workflow_run_id?: string | null;
         input: Record<string, unknown>;
         session_id?: string | null;
         state?: Record<string, unknown> | null;
-        app_config?: Record<string, unknown> | null;
+        workflow_config?: Record<string, unknown> | null;
     }
 }

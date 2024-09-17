@@ -4,12 +4,12 @@
 
 import * as Scout from "../index";
 
-export interface AppRunStartedData {
+export interface WorkflowRunStartedData {
     actor?: Scout.Actor;
-    appId: string;
-    appRunId?: string;
+    workflowId: string;
+    workflowRunId?: string;
     input: Record<string, unknown>;
     sessionId?: string;
     state?: Record<string, unknown>;
-    appConfig?: Record<string, unknown>;
+    workflowConfig?: Record<string, unknown>;
 }

@@ -16,6 +16,7 @@ export const WorkflowRunEventNames: core.serialization.Schema<
     "block_run_started",
     "block_run_completed",
     "block_run_failed",
+    "block_state_updated",
 ]);
 
 export declare namespace WorkflowRunEventNames {
@@ -25,5 +26,6 @@ export declare namespace WorkflowRunEventNames {
         | "workflow_run_failed"
         | "block_run_started"
         | "block_run_completed"
-        | "block_run_failed";
+        | "block_run_failed"
+        | "block_state_updated";
 }

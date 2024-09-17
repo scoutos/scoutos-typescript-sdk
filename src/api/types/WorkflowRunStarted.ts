@@ -14,5 +14,5 @@ export interface WorkflowRunStarted {
     environment: Scout.WorkflowRunStartedEnvironment;
     /** The timestamp of the event as UTC ISO 8601 string */
     timestamp?: string;
-    data: Scout.AppRunStartedData;
+    data: Scout.WorkflowRunStartedData;
 }

@@ -14,5 +14,5 @@ export interface WorkflowRunFailed {
     environment: Scout.WorkflowRunFailedEnvironment;
     /** The timestamp of the event as UTC ISO 8601 string */
     timestamp?: string;
-    data: Scout.AppRunFailedData;
+    data: Scout.WorkflowRunFailedData;
 }

@@ -5,5 +5,6 @@
 import * as Scout from "../index";
 
 export interface WorkflowRunResponse {
-    workflow: Scout.Workflow;
+    run: Scout.WorkflowRun;
+    workflowId: string;
 }

@@ -10,8 +10,8 @@ export const BlockRunStartedData: core.serialization.ObjectSchema<
     serializers.BlockRunStartedData.Raw,
     Scout.BlockRunStartedData
 > = core.serialization.object({
-    appId: core.serialization.property("app_id", core.serialization.string()),
-    appRunId: core.serialization.property("app_run_id", core.serialization.string()),
+    workflowId: core.serialization.property("workflow_id", core.serialization.string()),
+    workflowRunId: core.serialization.property("workflow_run_id", core.serialization.string()),
     blockId: core.serialization.property("block_id", core.serialization.string().optional()),
     config: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
     metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
@@ -21,8 +21,8 @@ export const BlockRunStartedData: core.serialization.ObjectSchema<
 
 export declare namespace BlockRunStartedData {
     interface Raw {
-        app_id: string;
-        app_run_id: string;
+        workflow_id: string;
+        workflow_run_id: string;
         block_id?: string | null;
         config: Record<string, unknown>;
         metadata?: Record<string, unknown> | null;

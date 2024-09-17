@@ -3,8 +3,8 @@
  */
 
 export interface BlockRunStartedData {
-    appId: string;
-    appRunId: string;
+    workflowId: string;
+    workflowRunId: string;
     blockId?: string;
     config: Record<string, unknown>;
     metadata?: Record<string, unknown>;

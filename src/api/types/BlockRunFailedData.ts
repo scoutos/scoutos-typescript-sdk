@@ -3,8 +3,8 @@
  */
 
 export interface BlockRunFailedData {
-    appId: string;
-    appRunId: string;
+    workflowId: string;
+    workflowRunId: string;
     blockId?: string;
     cost?: number;
     config: Record<string, unknown>;

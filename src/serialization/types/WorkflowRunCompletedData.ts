@@ -6,26 +6,26 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 
-export const AppRunCompletedData: core.serialization.ObjectSchema<
-    serializers.AppRunCompletedData.Raw,
-    Scout.AppRunCompletedData
+export const WorkflowRunCompletedData: core.serialization.ObjectSchema<
+    serializers.WorkflowRunCompletedData.Raw,
+    Scout.WorkflowRunCompletedData
 > = core.serialization.object({
-    appId: core.serialization.property("app_id", core.serialization.string()),
-    appRunId: core.serialization.property("app_run_id", core.serialization.string()),
+    workflowId: core.serialization.property("workflow_id", core.serialization.string()),
+    workflowRunId: core.serialization.property("workflow_run_id", core.serialization.string()),
     output: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
     sessionId: core.serialization.property("session_id", core.serialization.string()),
-    appConfig: core.serialization.property(
-        "app_config",
+    workflowConfig: core.serialization.property(
+        "workflow_config",
         core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional()
     ),
 });
 
-export declare namespace AppRunCompletedData {
+export declare namespace WorkflowRunCompletedData {
     interface Raw {
-        app_id: string;
-        app_run_id: string;
+        workflow_id: string;
+        workflow_run_id: string;
         output: Record<string, unknown>;
         session_id: string;
-        app_config?: Record<string, unknown> | null;
+        workflow_config?: Record<string, unknown> | null;
     }
 }

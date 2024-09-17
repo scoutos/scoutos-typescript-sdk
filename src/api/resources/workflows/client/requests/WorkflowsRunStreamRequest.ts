@@ -10,7 +10,7 @@ import * as Scout from "../../../../index";
  *         revisionId: "string",
  *         sessionId: "string",
  *         environment: Scout.Environment.Production,
- *         input: {
+ *         inputs: {
  *             "string": true
  *         },
  *         streaming: true

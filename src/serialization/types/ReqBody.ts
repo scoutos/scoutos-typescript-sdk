@@ -5,17 +5,17 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { ReqBodyInputValue } from "./ReqBodyInputValue";
+import { ReqBodyInputsValue } from "./ReqBodyInputsValue";
 
 export const ReqBody: core.serialization.ObjectSchema<serializers.ReqBody.Raw, Scout.ReqBody> =
     core.serialization.object({
-        input: core.serialization.record(core.serialization.string(), ReqBodyInputValue),
+        inputs: core.serialization.record(core.serialization.string(), ReqBodyInputsValue),
         streaming: core.serialization.boolean().optional(),
     });
 
 export declare namespace ReqBody {
     interface Raw {
-        input: Record<string, ReqBodyInputValue.Raw>;
+        inputs: Record<string, ReqBodyInputsValue.Raw>;
         streaming?: boolean | null;
     }
 }

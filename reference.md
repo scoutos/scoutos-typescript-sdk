@@ -19,7 +19,7 @@ await client.workflows.runStream("string", {
     revisionId: "string",
     sessionId: "string",
     environment: Scout.Environment.Production,
-    input: {
+    inputs: {
         string: true,
     },
     streaming: true,
@@ -80,7 +80,7 @@ await client.workflows.runStream("string", {
 
 ```typescript
 await client.workflows.run("workflow_id", {
-    input: {
+    inputs: {
         key: true,
     },
 });

@@ -16,7 +16,7 @@ export * from "./BlockStateUpdatedData";
 export * from "./Environment";
 export * from "./EventVersion";
 export * from "./HttpValidationError";
-export * from "./ReqBodyInputValue";
+export * from "./ReqBodyInputsValue";
 export * from "./ReqBody";
 export * from "./ValidationErrorLocItem";
 export * from "./ValidationError";

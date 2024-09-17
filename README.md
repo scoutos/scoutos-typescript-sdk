@@ -23,7 +23,7 @@ await client.workflows.runStream("string", {
     revisionId: "string",
     sessionId: "string",
     environment: Scout.Environment.Production,
-    input: {
+    inputs: {
         string: true,
     },
     streaming: true,

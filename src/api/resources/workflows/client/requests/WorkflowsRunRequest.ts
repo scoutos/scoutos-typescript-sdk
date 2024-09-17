@@ -7,7 +7,7 @@ import * as Scout from "../../../../index";
 /**
  * @example
  *     {
- *         input: {
+ *         inputs: {
  *             "key": true
  *         }
  *     }

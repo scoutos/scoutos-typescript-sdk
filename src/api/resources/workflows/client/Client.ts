@@ -59,8 +59,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.12",
-                "User-Agent": "scoutos/0.1.12",
+                "X-Fern-SDK-Version": "0.1.13",
+                "User-Agent": "scoutos/0.1.13",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -140,7 +140,7 @@ export class Workflows {
      *
      * @example
      *     await client.workflows.run("workflow_id", {
-     *         input: {
+     *         inputs: {
      *             "key": true
      *         }
      *     })
@@ -174,8 +174,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.12",
-                "User-Agent": "scoutos/0.1.12",
+                "X-Fern-SDK-Version": "0.1.13",
+                "User-Agent": "scoutos/0.1.13",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

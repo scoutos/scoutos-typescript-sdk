@@ -12,6 +12,7 @@ export const ColumnTypeItemTextShort: core.serialization.ObjectSchema<
 > = core.serialization.object({
     columnId: core.serialization.property("column_id", core.serialization.string().optional()),
     columnDisplayName: core.serialization.property("column_display_name", core.serialization.string().optional()),
+    columnType: core.serialization.property("column_type", core.serialization.stringLiteral("text-short")),
     defaultValue: core.serialization.property("default_value", core.serialization.string().optional()),
     dataType: core.serialization.property("data_type", core.serialization.stringLiteral("string").optional()),
 });
@@ -20,6 +21,7 @@ export declare namespace ColumnTypeItemTextShort {
     interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
+        column_type: "text-short";
         default_value?: string | null;
         data_type?: "string" | null;
     }

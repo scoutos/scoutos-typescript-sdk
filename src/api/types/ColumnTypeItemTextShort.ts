@@ -5,6 +5,7 @@
 export interface ColumnTypeItemTextShort {
     columnId?: string;
     columnDisplayName?: string;
+    columnType: "text-short";
     defaultValue?: string;
     dataType?: "string";
 }

@@ -15,50 +15,21 @@ import { ColumnTypeItemTextShort } from "./ColumnTypeItemTextShort";
 export const CollectionConfigInputColumnsItem: core.serialization.Schema<
     serializers.CollectionConfigInputColumnsItem.Raw,
     Scout.CollectionConfigInputColumnsItem
-> = core.serialization
-    .union(core.serialization.discriminant("columnType", "column_type"), {
-        boolean: ColumnTypeItemCheckBox,
-        json: ColumnTypeItemJson,
-        number: ColumnTypeItemNumber,
-        select: ColumnTypeItemSelect,
-        "text-long": ColumnTypeItemTextLong,
-        "text-short": ColumnTypeItemTextShort,
-    })
-    .transform<Scout.CollectionConfigInputColumnsItem>({
-        transform: (value) => value,
-        untransform: (value) => value,
-    });
+> = core.serialization.undiscriminatedUnion([
+    ColumnTypeItemCheckBox,
+    ColumnTypeItemJson,
+    ColumnTypeItemNumber,
+    ColumnTypeItemSelect,
+    ColumnTypeItemTextLong,
+    ColumnTypeItemTextShort,
+]);
 
 export declare namespace CollectionConfigInputColumnsItem {
     type Raw =
-        | CollectionConfigInputColumnsItem.Boolean
-        | CollectionConfigInputColumnsItem.Json
-        | CollectionConfigInputColumnsItem.Number
-        | CollectionConfigInputColumnsItem.Select
-        | CollectionConfigInputColumnsItem.TextLong
-        | CollectionConfigInputColumnsItem.TextShort;
-
-    interface Boolean extends ColumnTypeItemCheckBox.Raw {
-        column_type: "boolean";
-    }
-
-    interface Json extends ColumnTypeItemJson.Raw {
-        column_type: "json";
-    }
-
-    interface Number extends ColumnTypeItemNumber.Raw {
-        column_type: "number";
-    }
-
-    interface Select extends ColumnTypeItemSelect.Raw {
-        column_type: "select";
-    }
-
-    interface TextLong extends ColumnTypeItemTextLong.Raw {
-        column_type: "text-long";
-    }
-
-    interface TextShort extends ColumnTypeItemTextShort.Raw {
-        column_type: "text-short";
-    }
+        | ColumnTypeItemCheckBox.Raw
+        | ColumnTypeItemJson.Raw
+        | ColumnTypeItemNumber.Raw
+        | ColumnTypeItemSelect.Raw
+        | ColumnTypeItemTextLong.Raw
+        | ColumnTypeItemTextShort.Raw;
 }

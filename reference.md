@@ -22,7 +22,6 @@ await client.workflows.runStream("string", {
     inputs: {
         string: true,
     },
-    streaming: true,
 });
 ```
 

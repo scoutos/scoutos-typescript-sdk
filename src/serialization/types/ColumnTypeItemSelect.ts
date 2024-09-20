@@ -13,6 +13,7 @@ export const ColumnTypeItemSelect: core.serialization.ObjectSchema<
 > = core.serialization.object({
     columnId: core.serialization.property("column_id", core.serialization.string().optional()),
     columnDisplayName: core.serialization.property("column_display_name", core.serialization.string().optional()),
+    columnType: core.serialization.property("column_type", core.serialization.stringLiteral("select")),
     options: core.serialization.list(SelectOptionItem),
     selectedOption: core.serialization.property("selected_option", core.serialization.number().optional()),
     dataType: core.serialization.property("data_type", core.serialization.stringLiteral("string").optional()),
@@ -22,6 +23,7 @@ export declare namespace ColumnTypeItemSelect {
     interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
+        column_type: "select";
         options: SelectOptionItem.Raw[];
         selected_option?: number | null;
         data_type?: "string" | null;

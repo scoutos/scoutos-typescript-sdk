@@ -10,12 +10,10 @@ import { ReqBodyInputsValue } from "./ReqBodyInputsValue";
 export const ReqBody: core.serialization.ObjectSchema<serializers.ReqBody.Raw, Scout.ReqBody> =
     core.serialization.object({
         inputs: core.serialization.record(core.serialization.string(), ReqBodyInputsValue),
-        streaming: core.serialization.boolean().optional(),
     });
 
 export declare namespace ReqBody {
     interface Raw {
         inputs: Record<string, ReqBodyInputsValue.Raw>;
-        streaming?: boolean | null;
     }
 }

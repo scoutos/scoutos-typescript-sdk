@@ -12,8 +12,7 @@ import * as Scout from "../../../../index";
  *         environment: Scout.Environment.Production,
  *         inputs: {
  *             "string": true
- *         },
- *         streaming: true
+ *         }
  *     }
  */
 export interface WorkflowsRunStreamRequest extends Scout.ReqBody {

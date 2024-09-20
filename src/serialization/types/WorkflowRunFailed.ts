@@ -16,6 +16,7 @@ export const WorkflowRunFailed: core.serialization.ObjectSchema<
     organizationId: core.serialization.property("organization_id", core.serialization.string()),
     id: core.serialization.string().optional(),
     correlationId: core.serialization.property("correlation_id", core.serialization.string().optional()),
+    name: core.serialization.stringLiteral("workflow_run_failed"),
     version: EventVersion.optional(),
     environment: WorkflowRunFailedEnvironment,
     timestamp: core.serialization.string().optional(),
@@ -27,6 +28,7 @@ export declare namespace WorkflowRunFailed {
         organization_id: string;
         id?: string | null;
         correlation_id?: string | null;
+        name: "workflow_run_failed";
         version?: EventVersion.Raw | null;
         environment: WorkflowRunFailedEnvironment.Raw;
         timestamp?: string | null;

@@ -10,6 +10,7 @@ export interface BlockStateUpdated {
     id?: string;
     /** Identifies the root cause of the event. If not set, it defaults to the event id. */
     correlationId?: string;
+    name: "block_state_updated";
     version?: Scout.EventVersion;
     environment: Scout.BlockStateUpdatedEnvironment;
     /** The timestamp of the event as UTC ISO 8601 string */

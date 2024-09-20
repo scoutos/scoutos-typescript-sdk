@@ -6,5 +6,4 @@ import * as Scout from "../index";
 
 export interface ReqBody {
     inputs: Record<string, Scout.ReqBodyInputsValue>;
-    streaming?: boolean;
 }

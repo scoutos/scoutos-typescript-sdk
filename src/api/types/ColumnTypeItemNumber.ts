@@ -7,6 +7,7 @@ import * as Scout from "../index";
 export interface ColumnTypeItemNumber {
     columnId?: string;
     columnDisplayName?: string;
+    columnType: "number";
     defaultValue?: Scout.ColumnTypeItemNumberDefaultValue;
     minValue?: Scout.ColumnTypeItemNumberMinValue;
     maxValue?: Scout.ColumnTypeItemNumberMaxValue;

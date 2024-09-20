@@ -16,6 +16,7 @@ export const BlockStateUpdated: core.serialization.ObjectSchema<
     organizationId: core.serialization.property("organization_id", core.serialization.string()),
     id: core.serialization.string().optional(),
     correlationId: core.serialization.property("correlation_id", core.serialization.string().optional()),
+    name: core.serialization.stringLiteral("block_state_updated"),
     version: EventVersion.optional(),
     environment: BlockStateUpdatedEnvironment,
     timestamp: core.serialization.string().optional(),
@@ -27,6 +28,7 @@ export declare namespace BlockStateUpdated {
         organization_id: string;
         id?: string | null;
         correlation_id?: string | null;
+        name: "block_state_updated";
         version?: EventVersion.Raw | null;
         environment: BlockStateUpdatedEnvironment.Raw;
         timestamp?: string | null;

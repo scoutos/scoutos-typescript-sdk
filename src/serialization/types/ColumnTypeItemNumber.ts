@@ -15,6 +15,7 @@ export const ColumnTypeItemNumber: core.serialization.ObjectSchema<
 > = core.serialization.object({
     columnId: core.serialization.property("column_id", core.serialization.string().optional()),
     columnDisplayName: core.serialization.property("column_display_name", core.serialization.string().optional()),
+    columnType: core.serialization.property("column_type", core.serialization.stringLiteral("number")),
     defaultValue: core.serialization.property("default_value", ColumnTypeItemNumberDefaultValue.optional()),
     minValue: core.serialization.property("min_value", ColumnTypeItemNumberMinValue.optional()),
     maxValue: core.serialization.property("max_value", ColumnTypeItemNumberMaxValue.optional()),
@@ -25,6 +26,7 @@ export declare namespace ColumnTypeItemNumber {
     interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
+        column_type: "number";
         default_value?: ColumnTypeItemNumberDefaultValue.Raw | null;
         min_value?: ColumnTypeItemNumberMinValue.Raw | null;
         max_value?: ColumnTypeItemNumberMaxValue.Raw | null;

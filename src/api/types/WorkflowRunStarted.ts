@@ -10,6 +10,7 @@ export interface WorkflowRunStarted {
     id?: string;
     /** Identifies the root cause of the event. If not set, it defaults to the event id. */
     correlationId?: string;
+    name: "workflow_run_started";
     version?: Scout.EventVersion;
     environment: Scout.WorkflowRunStartedEnvironment;
     /** The timestamp of the event as UTC ISO 8601 string */

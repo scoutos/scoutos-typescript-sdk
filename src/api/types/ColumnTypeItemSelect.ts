@@ -7,6 +7,7 @@ import * as Scout from "../index";
 export interface ColumnTypeItemSelect {
     columnId?: string;
     columnDisplayName?: string;
+    columnType: "select";
     options: Scout.SelectOptionItem[];
     selectedOption?: number;
     dataType?: "string";

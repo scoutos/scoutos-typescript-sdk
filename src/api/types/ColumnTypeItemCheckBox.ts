@@ -5,6 +5,7 @@
 export interface ColumnTypeItemCheckBox {
     columnId?: string;
     columnDisplayName?: string;
+    columnType: "boolean";
     defaultValue?: boolean;
     dataType?: "boolean";
 }

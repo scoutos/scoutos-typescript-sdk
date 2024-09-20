@@ -5,6 +5,7 @@
 export interface ColumnTypeItemJson {
     columnId?: string;
     columnDisplayName?: string;
+    columnType: "json";
     defaultValue?: string;
     dataType?: "json";
 }

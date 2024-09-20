@@ -5,40 +5,10 @@
 import * as Scout from "../index";
 
 export type WorkflowRunEventData =
-    | Scout.WorkflowRunEventData.BlockRunCompleted
-    | Scout.WorkflowRunEventData.BlockRunFailed
-    | Scout.WorkflowRunEventData.BlockRunStarted
-    | Scout.WorkflowRunEventData.BlockStateUpdated
-    | Scout.WorkflowRunEventData.WorkflowRunCompleted
-    | Scout.WorkflowRunEventData.WorkflowRunFailed
-    | Scout.WorkflowRunEventData.WorkflowRunStarted;
-
-export declare namespace WorkflowRunEventData {
-    interface BlockRunCompleted extends Scout.BlockRunCompleted {
-        name: "block_run_completed";
-    }
-
-    interface BlockRunFailed extends Scout.BlockRunFailed {
-        name: "block_run_failed";
-    }
-
-    interface BlockRunStarted extends Scout.BlockRunStarted {
-        name: "block_run_started";
-    }
-
-    interface BlockStateUpdated extends Scout.BlockStateUpdated {
-        name: "block_state_updated";
-    }
-
-    interface WorkflowRunCompleted extends Scout.WorkflowRunCompleted {
-        name: "workflow_run_completed";
-    }
-
-    interface WorkflowRunFailed extends Scout.WorkflowRunFailed {
-        name: "workflow_run_failed";
-    }
-
-    interface WorkflowRunStarted extends Scout.WorkflowRunStarted {
-        name: "workflow_run_started";
-    }
-}
+    | Scout.BlockRunCompleted
+    | Scout.BlockRunFailed
+    | Scout.BlockRunStarted
+    | Scout.BlockStateUpdated
+    | Scout.WorkflowRunCompleted
+    | Scout.WorkflowRunFailed
+    | Scout.WorkflowRunStarted;

@@ -8,7 +8,7 @@ export interface WorkflowRunStartedData {
     actor?: Scout.Actor;
     workflowId: string;
     workflowRunId?: string;
-    input: Record<string, unknown>;
+    inputs: Record<string, unknown>;
     sessionId?: string;
     state?: Record<string, unknown>;
     workflowConfig?: Record<string, unknown>;

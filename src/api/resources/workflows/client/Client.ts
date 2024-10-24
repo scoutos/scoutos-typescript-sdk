@@ -35,18 +35,18 @@ export class Workflows {
         request: Scout.WorkflowsRunStreamRequest,
         requestOptions?: Workflows.RequestOptions
     ): Promise<core.Stream<Scout.WorkflowRunEvent>> {
-        const { revisionId, sessionId, environment, ..._body } = request;
+        const { environment, revisionId, sessionId, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (environment != null) {
+            _queryParams["environment"] = environment;
+        }
+
         if (revisionId != null) {
             _queryParams["revision_id"] = revisionId;
         }
 
         if (sessionId != null) {
             _queryParams["session_id"] = sessionId;
-        }
-
-        if (environment != null) {
-            _queryParams["environment"] = environment;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)<stream.Readable>({
@@ -59,8 +59,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.20",
-                "User-Agent": "scoutos/0.1.20",
+                "X-Fern-SDK-Version": "0.2.0",
+                "User-Agent": "scoutos/0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -139,29 +139,25 @@ export class Workflows {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.workflows.run("workflow_id", {
-     *         inputs: {
-     *             "key": true
-     *         }
-     *     })
+     *     await client.workflows.run("workflow_id", {})
      */
     public async run(
         workflowId: string,
         request: Scout.WorkflowsRunRequest,
         requestOptions?: Workflows.RequestOptions
     ): Promise<Scout.WorkflowRunResponse> {
-        const { revisionId, sessionId, environment, ..._body } = request;
+        const { environment, revisionId, sessionId, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (environment != null) {
+            _queryParams["environment"] = environment;
+        }
+
         if (revisionId != null) {
             _queryParams["revision_id"] = revisionId;
         }
 
         if (sessionId != null) {
             _queryParams["session_id"] = sessionId;
-        }
-
-        if (environment != null) {
-            _queryParams["environment"] = environment;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -174,8 +170,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.1.20",
-                "User-Agent": "scoutos/0.1.20",
+                "X-Fern-SDK-Version": "0.2.0",
+                "User-Agent": "scoutos/0.2.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

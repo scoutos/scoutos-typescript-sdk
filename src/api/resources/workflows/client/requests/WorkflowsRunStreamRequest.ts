@@ -7,16 +7,25 @@ import * as Scout from "../../../../index";
 /**
  * @example
  *     {
+ *         environment: "string",
  *         revisionId: "string",
  *         sessionId: "string",
- *         environment: Scout.Environment.Production,
  *         inputs: {
  *             "string": true
  *         }
  *     }
  */
-export interface WorkflowsRunStreamRequest extends Scout.ReqBody {
+export interface WorkflowsRunStreamRequest {
+    /**
+     * Specifies the execution environment for the workflow. The available environments include:
+     *
+     * - `production`: The production environment, where workflows are executed under live conditions.
+     * - `staging`: A staging environment used for testing prior to production deployment.
+     * - `development`: A development environment used for testing new changes.
+     * - `console`: The console environment, runs latest changes on a workflow.
+     */
+    environment?: string;
     revisionId?: string;
     sessionId?: string;
-    environment?: Scout.Environment;
+    inputs?: Record<string, Scout.WorkflowsRunStreamRequestInputsValue>;
 }

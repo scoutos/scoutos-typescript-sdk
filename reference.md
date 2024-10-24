@@ -16,9 +16,9 @@
 
 ```typescript
 await client.workflows.runStream("string", {
+    environment: "string",
     revisionId: "string",
     sessionId: "string",
-    environment: Scout.Environment.Production,
     inputs: {
         string: true,
     },
@@ -78,11 +78,7 @@ await client.workflows.runStream("string", {
 <dd>
 
 ```typescript
-await client.workflows.run("workflow_id", {
-    inputs: {
-        key: true,
-    },
-});
+await client.workflows.run("workflow_id", {});
 ```
 
 </dd>
@@ -115,6 +111,56 @@ await client.workflows.run("workflow_id", {
 <dd>
 
 **requestOptions:** `Workflows.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Usage
+
+<details><summary><code>client.usage.<a href="/src/api/resources/usage/client/Client.ts">get</a>({ ...params }) -> Scout.ResponseModelUsage</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.usage.get();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.UsageGetRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Usage.RequestOptions`
 
 </dd>
 </dl>

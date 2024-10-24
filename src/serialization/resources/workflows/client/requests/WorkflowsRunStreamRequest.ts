@@ -5,13 +5,17 @@
 import * as serializers from "../../../../index";
 import * as Scout from "../../../../../api/index";
 import * as core from "../../../../../core";
-import { ReqBody } from "../../../../types/ReqBody";
+import { WorkflowsRunStreamRequestInputsValue } from "../../types/WorkflowsRunStreamRequestInputsValue";
 
 export const WorkflowsRunStreamRequest: core.serialization.Schema<
     serializers.WorkflowsRunStreamRequest.Raw,
-    Omit<Scout.WorkflowsRunStreamRequest, "revisionId" | "sessionId" | "environment">
-> = core.serialization.object({}).extend(ReqBody);
+    Omit<Scout.WorkflowsRunStreamRequest, "environment" | "revisionId" | "sessionId">
+> = core.serialization.object({
+    inputs: core.serialization.record(core.serialization.string(), WorkflowsRunStreamRequestInputsValue).optional(),
+});
 
 export declare namespace WorkflowsRunStreamRequest {
-    interface Raw extends ReqBody.Raw {}
+    interface Raw {
+        inputs?: Record<string, WorkflowsRunStreamRequestInputsValue.Raw> | null;
+    }
 }

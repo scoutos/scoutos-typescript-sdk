@@ -5,6 +5,7 @@
 import * as environments from "./environments";
 import * as core from "./core";
 import { Workflows } from "./api/resources/workflows/client/Client";
+import { Usage } from "./api/resources/usage/client/Client";
 import { Collections } from "./api/resources/collections/client/Client";
 import { Documents } from "./api/resources/documents/client/Client";
 
@@ -32,6 +33,12 @@ export class ScoutClient {
 
     public get workflows(): Workflows {
         return (this._workflows ??= new Workflows(this._options));
+    }
+
+    protected _usage: Usage | undefined;
+
+    public get usage(): Usage {
+        return (this._usage ??= new Usage(this._options));
     }
 
     protected _collections: Collections | undefined;

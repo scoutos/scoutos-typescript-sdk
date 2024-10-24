@@ -14,7 +14,7 @@ export const WorkflowRunStartedData: core.serialization.ObjectSchema<
     actor: Actor.optional(),
     workflowId: core.serialization.property("workflow_id", core.serialization.string()),
     workflowRunId: core.serialization.property("workflow_run_id", core.serialization.string().optional()),
-    input: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
+    inputs: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
     sessionId: core.serialization.property("session_id", core.serialization.string().optional()),
     state: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     workflowConfig: core.serialization.property(
@@ -28,7 +28,7 @@ export declare namespace WorkflowRunStartedData {
         actor?: Actor.Raw | null;
         workflow_id: string;
         workflow_run_id?: string | null;
-        input: Record<string, unknown>;
+        inputs: Record<string, unknown>;
         session_id?: string | null;
         state?: Record<string, unknown> | null;
         workflow_config?: Record<string, unknown> | null;

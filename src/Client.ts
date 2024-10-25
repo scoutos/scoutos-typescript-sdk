@@ -5,7 +5,10 @@
 import * as environments from "./environments";
 import * as core from "./core";
 import { Workflows } from "./api/resources/workflows/client/Client";
+import { Environments } from "./api/resources/environments/client/Client";
+import { Revisions } from "./api/resources/revisions/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
+import { WorkflowLogs } from "./api/resources/workflowLogs/client/Client";
 import { Collections } from "./api/resources/collections/client/Client";
 import { Documents } from "./api/resources/documents/client/Client";
 
@@ -35,10 +38,28 @@ export class ScoutClient {
         return (this._workflows ??= new Workflows(this._options));
     }
 
+    protected _environments: Environments | undefined;
+
+    public get environments(): Environments {
+        return (this._environments ??= new Environments(this._options));
+    }
+
+    protected _revisions: Revisions | undefined;
+
+    public get revisions(): Revisions {
+        return (this._revisions ??= new Revisions(this._options));
+    }
+
     protected _usage: Usage | undefined;
 
     public get usage(): Usage {
         return (this._usage ??= new Usage(this._options));
+    }
+
+    protected _workflowLogs: WorkflowLogs | undefined;
+
+    public get workflowLogs(): WorkflowLogs {
+        return (this._workflowLogs ??= new WorkflowLogs(this._options));
     }
 
     protected _collections: Collections | undefined;

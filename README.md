@@ -16,17 +16,10 @@ npm i -s scoutos
 Instantiate and use the client with the following:
 
 ```typescript
-import { ScoutClient } from "scoutos";
+import { ScoutClient, Scout } from "scoutos";
 
 const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
-await client.workflows.runStream("string", {
-    environment: "string",
-    revisionId: "string",
-    sessionId: "string",
-    inputs: {
-        string: true,
-    },
-});
+await client.workflows.post({});
 ```
 
 ## Request And Response Types
@@ -37,7 +30,7 @@ following namespace:
 ```typescript
 import { Scout } from "scoutos";
 
-const request: Scout.WorkflowsRunStreamRequest = {
+const request: Scout.WorkflowsListRequest = {
     ...
 };
 ```
@@ -51,7 +44,7 @@ will be thrown.
 import { ScoutError } from "scoutos";
 
 try {
-    await client.workflows.runStream(...);
+    await client.workflows.post(...);
 } catch (err) {
     if (err instanceof ScoutError) {
         console.log(err.statusCode);
@@ -78,7 +71,7 @@ A request is deemed retriable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.workflows.runStream(..., {
+const response = await client.workflows.post(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -88,7 +81,7 @@ const response = await client.workflows.runStream(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.workflows.runStream(..., {
+const response = await client.workflows.post(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -99,7 +92,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.workflows.runStream(..., {
+const response = await client.workflows.post(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request

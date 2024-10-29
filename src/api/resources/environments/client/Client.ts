@@ -30,7 +30,7 @@ export class Environments {
     constructor(protected readonly _options: Environments.Options = {}) {}
 
     /**
-     * List all environments for a workflow in the organization from Firestore.
+     * List all environments for a workflow in the organization
      *
      * @param {string} workflowId
      * @param {Environments.RequestOptions} requestOptions - Request-specific configuration.
@@ -54,8 +54,8 @@ export class Environments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.2.1",
-                "User-Agent": "scoutos/0.2.1",
+                "X-Fern-SDK-Version": "0.3.0",
+                "User-Agent": "scoutos/0.3.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -121,7 +121,7 @@ export class Environments {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.environments.put("workflow_id", "environment_id", {
+     *     await client.environments.update("workflow_id", "environment_id", {
      *         name: "name",
      *         description: "description",
      *         deployments: [{
@@ -129,7 +129,7 @@ export class Environments {
      *             }]
      *     })
      */
-    public async put(
+    public async update(
         workflowId: string,
         environmentId: string,
         request: Scout.UpdateRequestBody,
@@ -145,8 +145,8 @@ export class Environments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.2.1",
-                "User-Agent": "scoutos/0.2.1",
+                "X-Fern-SDK-Version": "0.3.0",
+                "User-Agent": "scoutos/0.3.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

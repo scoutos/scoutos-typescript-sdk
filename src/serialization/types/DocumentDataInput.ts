@@ -5,7 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { DocumentContent } from "./DocumentContent";
+import { DocumentDataInputContent } from "./DocumentDataInputContent";
 
 export const DocumentDataInput: core.serialization.ObjectSchema<
     serializers.DocumentDataInput.Raw,
@@ -14,7 +14,7 @@ export const DocumentDataInput: core.serialization.ObjectSchema<
     id: core.serialization.string().optional(),
     columns: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     displayName: core.serialization.property("display_name", core.serialization.string().optional()),
-    content: core.serialization.list(DocumentContent).optional(),
+    content: DocumentDataInputContent.optional(),
 });
 
 export declare namespace DocumentDataInput {
@@ -22,6 +22,6 @@ export declare namespace DocumentDataInput {
         id?: string | null;
         columns?: Record<string, unknown> | null;
         display_name?: string | null;
-        content?: DocumentContent.Raw[] | null;
+        content?: DocumentDataInputContent.Raw | null;
     }
 }

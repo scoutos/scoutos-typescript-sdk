@@ -10,4 +10,5 @@ export type CollectionConfigOutputColumnsItem =
     | Scout.ColumnTypeItemNumber
     | Scout.ColumnTypeItemSelect
     | Scout.ColumnTypeItemTextLong
-    | Scout.ColumnTypeItemTextShort;
+    | Scout.ColumnTypeItemTextShort
+    | Scout.ColumnTypeItemUrl;

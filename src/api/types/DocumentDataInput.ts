@@ -8,5 +8,5 @@ export interface DocumentDataInput {
     id?: string;
     columns?: Record<string, unknown>;
     displayName?: string;
-    content?: Scout.DocumentContent[];
+    content?: Scout.DocumentDataInputContent;
 }

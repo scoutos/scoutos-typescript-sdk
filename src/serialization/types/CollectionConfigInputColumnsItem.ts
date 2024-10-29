@@ -11,6 +11,7 @@ import { ColumnTypeItemNumber } from "./ColumnTypeItemNumber";
 import { ColumnTypeItemSelect } from "./ColumnTypeItemSelect";
 import { ColumnTypeItemTextLong } from "./ColumnTypeItemTextLong";
 import { ColumnTypeItemTextShort } from "./ColumnTypeItemTextShort";
+import { ColumnTypeItemUrl } from "./ColumnTypeItemUrl";
 
 export const CollectionConfigInputColumnsItem: core.serialization.Schema<
     serializers.CollectionConfigInputColumnsItem.Raw,
@@ -22,6 +23,7 @@ export const CollectionConfigInputColumnsItem: core.serialization.Schema<
     ColumnTypeItemSelect,
     ColumnTypeItemTextLong,
     ColumnTypeItemTextShort,
+    ColumnTypeItemUrl,
 ]);
 
 export declare namespace CollectionConfigInputColumnsItem {
@@ -31,5 +33,6 @@ export declare namespace CollectionConfigInputColumnsItem {
         | ColumnTypeItemNumber.Raw
         | ColumnTypeItemSelect.Raw
         | ColumnTypeItemTextLong.Raw
-        | ColumnTypeItemTextShort.Raw;
+        | ColumnTypeItemTextShort.Raw
+        | ColumnTypeItemUrl.Raw;
 }

@@ -4,6 +4,4 @@
 
 import * as Scout from "../index";
 
-export interface EvalServiceHandlersCreateDocumentResponse {
-    data: Scout.Document[];
-}
+export type DocumentDataInputContent = Scout.DocumentContent[] | string;

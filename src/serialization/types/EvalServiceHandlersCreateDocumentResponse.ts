@@ -5,17 +5,17 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { EvalServiceHandlersCreateDocumentResponseData } from "./EvalServiceHandlersCreateDocumentResponseData";
+import { Document } from "./Document";
 
 export const EvalServiceHandlersCreateDocumentResponse: core.serialization.ObjectSchema<
     serializers.EvalServiceHandlersCreateDocumentResponse.Raw,
     Scout.EvalServiceHandlersCreateDocumentResponse
 > = core.serialization.object({
-    data: EvalServiceHandlersCreateDocumentResponseData.optional(),
+    data: core.serialization.list(Document),
 });
 
 export declare namespace EvalServiceHandlersCreateDocumentResponse {
     interface Raw {
-        data?: EvalServiceHandlersCreateDocumentResponseData.Raw | null;
+        data: Document.Raw[];
     }
 }

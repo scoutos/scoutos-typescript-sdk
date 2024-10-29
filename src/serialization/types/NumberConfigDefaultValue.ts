@@ -6,11 +6,11 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 
-export const ColumnTypeItemNumberDefaultValue: core.serialization.Schema<
-    serializers.ColumnTypeItemNumberDefaultValue.Raw,
-    Scout.ColumnTypeItemNumberDefaultValue
+export const NumberConfigDefaultValue: core.serialization.Schema<
+    serializers.NumberConfigDefaultValue.Raw,
+    Scout.NumberConfigDefaultValue
 > = core.serialization.undiscriminatedUnion([core.serialization.number(), core.serialization.number()]);
 
-export declare namespace ColumnTypeItemNumberDefaultValue {
+export declare namespace NumberConfigDefaultValue {
     type Raw = number | number;
 }

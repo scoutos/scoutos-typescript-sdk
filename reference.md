@@ -14,7 +14,7 @@
 <dl>
 <dd>
 
-List all workflows in the organization from Firestore.
+List all workflows in the organization
 
 </dd>
 </dl>
@@ -65,7 +65,7 @@ await client.workflows.list();
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">post</a>({ ...params }) -> Scout.AppsServiceHandlersCreateWorkflowResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">create</a>({ ...params }) -> Scout.AppsServiceHandlersCreateWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -78,7 +78,7 @@ await client.workflows.list();
 <dd>
 
 ```typescript
-await client.workflows.post({});
+await client.workflows.create({});
 ```
 
 </dd>
@@ -176,7 +176,7 @@ await client.workflows.get("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">put</a>(workflowId, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">update</a>(workflowId, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -189,7 +189,7 @@ await client.workflows.get("workflow_id");
 <dd>
 
 ```typescript
-await client.workflows.put("workflow_id", {});
+await client.workflows.update("workflow_id", {});
 ```
 
 </dd>
@@ -235,21 +235,6 @@ await client.workflows.put("workflow_id", {});
 <details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">delete</a>(workflowId) -> Scout.AppsServiceHandlersDeleteWorkflowResponse</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Given an App ID, return it's configuration data.
-
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -428,7 +413,7 @@ await client.workflows.run("workflow_id", {});
 <dl>
 <dd>
 
-List all environments for a workflow in the organization from Firestore.
+List all environments for a workflow in the organization
 
 </dd>
 </dl>
@@ -479,7 +464,7 @@ await client.environments.list("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">put</a>(workflowId, environmentId, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowEnvironmentResponse</code></summary>
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">update</a>(workflowId, environmentId, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowEnvironmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -507,7 +492,7 @@ Update deployments within a workflow environment
 <dd>
 
 ```typescript
-await client.environments.put("workflow_id", "environment_id", {
+await client.environments.update("workflow_id", "environment_id", {
     name: "name",
     description: "description",
     deployments: [
@@ -580,7 +565,7 @@ await client.environments.put("workflow_id", "environment_id", {
 <dl>
 <dd>
 
-List all app revisions in the organization from Firestore.
+List all app revisions in the organization
 
 </dd>
 </dl>
@@ -631,7 +616,7 @@ await client.revisions.list("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">put</a>(workflowId, revisionId) -> Scout.AppsServiceHandlersPromoteWorkflowRevisionResponse</code></summary>
+<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">update</a>(workflowId, revisionId) -> Scout.AppsServiceHandlersPromoteWorkflowRevisionResponse</code></summary>
 <dl>
 <dd>
 
@@ -644,7 +629,7 @@ await client.revisions.list("workflow_id");
 <dd>
 
 ```typescript
-await client.revisions.put("workflow_id", "revision_id");
+await client.revisions.update("workflow_id", "revision_id");
 ```
 
 </dd>

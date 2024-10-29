@@ -5,9 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { ColumnTypeItemNumberDefaultValue } from "./ColumnTypeItemNumberDefaultValue";
-import { ColumnTypeItemNumberMinValue } from "./ColumnTypeItemNumberMinValue";
-import { ColumnTypeItemNumberMaxValue } from "./ColumnTypeItemNumberMaxValue";
+import { NumberConfig } from "./NumberConfig";
 
 export const ColumnTypeItemNumber: core.serialization.ObjectSchema<
     serializers.ColumnTypeItemNumber.Raw,
@@ -16,9 +14,7 @@ export const ColumnTypeItemNumber: core.serialization.ObjectSchema<
     columnId: core.serialization.property("column_id", core.serialization.string().optional()),
     columnDisplayName: core.serialization.property("column_display_name", core.serialization.string().optional()),
     columnType: core.serialization.property("column_type", core.serialization.stringLiteral("number")),
-    defaultValue: core.serialization.property("default_value", ColumnTypeItemNumberDefaultValue.optional()),
-    minValue: core.serialization.property("min_value", ColumnTypeItemNumberMinValue.optional()),
-    maxValue: core.serialization.property("max_value", ColumnTypeItemNumberMaxValue.optional()),
+    number: NumberConfig,
     dataType: core.serialization.property("data_type", core.serialization.stringLiteral("number").optional()),
 });
 
@@ -27,9 +23,7 @@ export declare namespace ColumnTypeItemNumber {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: "number";
-        default_value?: ColumnTypeItemNumberDefaultValue.Raw | null;
-        min_value?: ColumnTypeItemNumberMinValue.Raw | null;
-        max_value?: ColumnTypeItemNumberMaxValue.Raw | null;
+        number: NumberConfig.Raw;
         data_type?: "number" | null;
     }
 }

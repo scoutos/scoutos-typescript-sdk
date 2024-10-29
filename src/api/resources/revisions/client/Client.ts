@@ -30,7 +30,7 @@ export class Revisions {
     constructor(protected readonly _options: Revisions.Options = {}) {}
 
     /**
-     * List all app revisions in the organization from Firestore.
+     * List all app revisions in the organization
      *
      * @param {string} workflowId
      * @param {Revisions.RequestOptions} requestOptions - Request-specific configuration.
@@ -54,8 +54,8 @@ export class Revisions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.2.1",
-                "User-Agent": "scoutos/0.2.1",
+                "X-Fern-SDK-Version": "0.3.0",
+                "User-Agent": "scoutos/0.3.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -118,9 +118,9 @@ export class Revisions {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.revisions.put("workflow_id", "revision_id")
+     *     await client.revisions.update("workflow_id", "revision_id")
      */
-    public async put(
+    public async update(
         workflowId: string,
         revisionId: string,
         requestOptions?: Revisions.RequestOptions
@@ -135,8 +135,8 @@ export class Revisions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.2.1",
-                "User-Agent": "scoutos/0.2.1",
+                "X-Fern-SDK-Version": "0.3.0",
+                "User-Agent": "scoutos/0.3.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -216,8 +216,8 @@ export class Revisions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.2.1",
-                "User-Agent": "scoutos/0.2.1",
+                "X-Fern-SDK-Version": "0.3.0",
+                "User-Agent": "scoutos/0.3.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

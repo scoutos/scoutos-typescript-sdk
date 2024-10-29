@@ -1,6 +1,6 @@
 {
     "name": "scoutos",
-    "version": "0.2.1",
+    "version": "0.3.0",
     "private": false,
     "repository": "https://github.com/scoutos/scoutos-typescript-sdk",
     "main": "./index.js",

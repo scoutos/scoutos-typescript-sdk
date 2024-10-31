@@ -9,6 +9,7 @@ import { Environments } from "./api/resources/environments/client/Client";
 import { Revisions } from "./api/resources/revisions/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { WorkflowLogs } from "./api/resources/workflowLogs/client/Client";
+import { Copilots } from "./api/resources/copilots/client/Client";
 import { Collections } from "./api/resources/collections/client/Client";
 import { Documents } from "./api/resources/documents/client/Client";
 
@@ -60,6 +61,12 @@ export class ScoutClient {
 
     public get workflowLogs(): WorkflowLogs {
         return (this._workflowLogs ??= new WorkflowLogs(this._options));
+    }
+
+    protected _copilots: Copilots | undefined;
+
+    public get copilots(): Copilots {
+        return (this._copilots ??= new Copilots(this._options));
     }
 
     protected _collections: Collections | undefined;

@@ -19,6 +19,7 @@ export const BlockRunFailedData: core.serialization.ObjectSchema<
     metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     state: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
     sessionId: core.serialization.property("session_id", core.serialization.string()),
+    blockType: core.serialization.property("block_type", core.serialization.string().optional()),
 });
 
 export declare namespace BlockRunFailedData {
@@ -32,5 +33,6 @@ export declare namespace BlockRunFailedData {
         metadata?: Record<string, unknown> | null;
         state: Record<string, unknown>;
         session_id: string;
+        block_type?: string | null;
     }
 }

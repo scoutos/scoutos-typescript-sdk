@@ -77,8 +77,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.3.0",
-                "User-Agent": "scoutos/0.3.0",
+                "X-Fern-SDK-Version": "0.4.0",
+                "User-Agent": "scoutos/0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -135,7 +135,7 @@ export class Workflows {
     }
 
     /**
-     * @param {Scout.WorkflowConfigInput} request
+     * @param {Scout.CopilotConfig} request
      * @param {Workflows.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -144,33 +144,33 @@ export class Workflows {
      *     await client.workflows.create({})
      */
     public async create(
-        request: Scout.WorkflowConfigInput,
+        request: Scout.CopilotConfig,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersCreateWorkflowResponse> {
+    ): Promise<Scout.AppsServiceHandlersCreateCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/workflows"
+                "v2/copilots"
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.3.0",
-                "User-Agent": "scoutos/0.3.0",
+                "X-Fern-SDK-Version": "0.4.0",
+                "User-Agent": "scoutos/0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.WorkflowConfigInput.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.CopilotConfig.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersCreateWorkflowResponse.parseOrThrow(_response.body, {
+            return serializers.AppsServiceHandlersCreateCopilotResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -239,8 +239,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.3.0",
-                "User-Agent": "scoutos/0.3.0",
+                "X-Fern-SDK-Version": "0.4.0",
+                "User-Agent": "scoutos/0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -320,8 +320,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.3.0",
-                "User-Agent": "scoutos/0.3.0",
+                "X-Fern-SDK-Version": "0.4.0",
+                "User-Agent": "scoutos/0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -400,8 +400,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.3.0",
-                "User-Agent": "scoutos/0.3.0",
+                "X-Fern-SDK-Version": "0.4.0",
+                "User-Agent": "scoutos/0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -485,8 +485,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.3.0",
-                "User-Agent": "scoutos/0.3.0",
+                "X-Fern-SDK-Version": "0.4.0",
+                "User-Agent": "scoutos/0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -596,8 +596,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.3.0",
-                "User-Agent": "scoutos/0.3.0",
+                "X-Fern-SDK-Version": "0.4.0",
+                "User-Agent": "scoutos/0.4.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

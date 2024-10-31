@@ -13,4 +13,5 @@ export interface BlockRunFailedData {
     metadata?: Record<string, unknown>;
     state: Record<string, unknown>;
     sessionId: string;
+    blockType?: string;
 }

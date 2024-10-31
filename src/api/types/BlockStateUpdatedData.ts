@@ -8,6 +8,8 @@ export interface BlockStateUpdatedData {
     workflowId: string;
     workflowRunId: string;
     blockId?: string;
+    /** The block archetype ID */
+    blockType: string;
     updateData: Record<string, unknown>;
     /** If `complete` represents a full replacement of state, versus `partial` that indicates data must be _merged_. */
     updateType?: Scout.BlockStateUpdatedDataUpdateType;

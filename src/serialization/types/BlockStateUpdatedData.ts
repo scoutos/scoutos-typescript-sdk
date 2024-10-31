@@ -14,6 +14,7 @@ export const BlockStateUpdatedData: core.serialization.ObjectSchema<
     workflowId: core.serialization.property("workflow_id", core.serialization.string()),
     workflowRunId: core.serialization.property("workflow_run_id", core.serialization.string()),
     blockId: core.serialization.property("block_id", core.serialization.string().optional()),
+    blockType: core.serialization.property("block_type", core.serialization.string()),
     updateData: core.serialization.property(
         "update_data",
         core.serialization.record(core.serialization.string(), core.serialization.unknown())
@@ -26,6 +27,7 @@ export declare namespace BlockStateUpdatedData {
         workflow_id: string;
         workflow_run_id: string;
         block_id?: string | null;
+        block_type: string;
         update_data: Record<string, unknown>;
         update_type?: BlockStateUpdatedDataUpdateType.Raw | null;
     }

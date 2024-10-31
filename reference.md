@@ -65,7 +65,7 @@ await client.workflows.list();
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">create</a>({ ...params }) -> Scout.AppsServiceHandlersCreateCopilotResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">create</a>({ ...params }) -> Scout.AppsServiceHandlersCreateWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -94,7 +94,7 @@ await client.workflows.create({});
 <dl>
 <dd>
 
-**request:** `Scout.CopilotConfig`
+**request:** `Scout.WorkflowConfigInput`
 
 </dd>
 </dl>
@@ -877,6 +877,54 @@ await client.copilots.list();
 <dd>
 
 **request:** `Scout.CopilotsListRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Copilots.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">create</a>({ ...params }) -> Scout.AppsServiceHandlersCreateCopilotResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.copilots.create({});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.CopilotConfig`
 
 </dd>
 </dl>

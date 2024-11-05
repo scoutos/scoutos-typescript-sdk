@@ -5,20 +5,34 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { WorkflowRunEventNames } from "./WorkflowRunEventNames";
+import { EventName } from "./EventName";
+import { EventVersion } from "./EventVersion";
+import { WorkflowRunEventEnvironment } from "./WorkflowRunEventEnvironment";
 import { WorkflowRunEventData } from "./WorkflowRunEventData";
 
 export const WorkflowRunEvent: core.serialization.ObjectSchema<
     serializers.WorkflowRunEvent.Raw,
     Scout.WorkflowRunEvent
 > = core.serialization.object({
-    name: WorkflowRunEventNames,
+    organizationId: core.serialization.property("organization_id", core.serialization.string()),
+    id: core.serialization.string().optional(),
+    correlationId: core.serialization.property("correlation_id", core.serialization.string().optional()),
+    name: EventName,
+    version: EventVersion,
+    environment: WorkflowRunEventEnvironment,
+    timestamp: core.serialization.string().optional(),
     data: WorkflowRunEventData,
 });
 
 export declare namespace WorkflowRunEvent {
     interface Raw {
-        name: WorkflowRunEventNames.Raw;
+        organization_id: string;
+        id?: string | null;
+        correlation_id?: string | null;
+        name: EventName.Raw;
+        version: EventVersion.Raw;
+        environment: WorkflowRunEventEnvironment.Raw;
+        timestamp?: string | null;
         data: WorkflowRunEventData.Raw;
     }
 }

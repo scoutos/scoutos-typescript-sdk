@@ -3,8 +3,8 @@
  */
 
 export interface UserIdentity {
-    userId: string;
-    orgId: string;
-    scoutOrganizationId: string;
+    user_id: string;
+    org_id: string;
+    scout_organization_id: string;
     email: Record<string, unknown>;
 }

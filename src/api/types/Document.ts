@@ -5,10 +5,10 @@
 import * as Scout from "../index";
 
 export interface Document {
-    documentId?: string;
+    document_id?: string;
     data: Scout.DocumentDataOutput;
-    createdAt?: Date;
-    lastUpdatedAt?: Date;
-    createdBy: Scout.Identity;
-    lastUpdatedBy: Scout.Identity;
+    created_at?: string;
+    last_updated_at?: string;
+    created_by: Scout.Identity;
+    last_updated_by: Scout.Identity;
 }

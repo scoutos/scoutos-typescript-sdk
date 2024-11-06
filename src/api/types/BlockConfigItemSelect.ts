@@ -6,9 +6,9 @@ import * as Scout from "../index";
 
 export interface BlockConfigItemSelect {
     id: string;
-    displayName: string;
+    display_name: string;
     type: "select";
     options: Scout.SelectOptionItem[];
-    selectedOption?: number;
+    selected_option?: number;
     value?: string;
 }

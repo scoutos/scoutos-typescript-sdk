@@ -6,9 +6,9 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Scout from "../../../index";
 import urlJoin from "url-join";
-import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 import * as stream from "stream";
+import * as serializers from "../../../../serialization/index";
 
 export declare namespace Workflows {
     interface Options {
@@ -45,7 +45,7 @@ export class Workflows {
         request: Scout.WorkflowsListRequest = {},
         requestOptions?: Workflows.RequestOptions
     ): Promise<Scout.AppsServiceHandlersListWorkflowsResponse> {
-        const { sort, direction, startAt, limit, query } = request;
+        const { sort, direction, start_at: startAt, limit, query } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (sort != null) {
             _queryParams["sort"] = sort;
@@ -77,8 +77,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -90,27 +90,13 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersListWorkflowsResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body as Scout.AppsServiceHandlersListWorkflowsResponse;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -157,40 +143,26 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.WorkflowConfigInput.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: request,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersCreateWorkflowResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body as Scout.AppsServiceHandlersCreateWorkflowResponse;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -239,8 +211,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -251,27 +223,13 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersGetWorkflowResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body as Scout.AppsServiceHandlersGetWorkflowResponse;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -320,40 +278,26 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.WorkflowConfigInput.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: request,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersUpdateWorkflowResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body as Scout.AppsServiceHandlersUpdateWorkflowResponse;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -400,8 +344,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -412,27 +356,13 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersDeleteWorkflowResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body as Scout.AppsServiceHandlersDeleteWorkflowResponse;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -461,7 +391,7 @@ export class Workflows {
         request: Scout.WorkflowsRunStreamRequest,
         requestOptions?: Workflows.RequestOptions
     ): Promise<core.Stream<Scout.WorkflowRunEvent>> {
-        const { environment, revisionId, sessionId, ..._body } = request;
+        const { environment, revision_id: revisionId, session_id: sessionId, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (environment != null) {
             _queryParams["environment"] = environment;
@@ -485,18 +415,15 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
-            body: {
-                ...serializers.WorkflowsRunStreamRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
-                streaming: true,
-            },
+            body: { ..._body, streaming: true },
             responseType: "sse",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
@@ -525,15 +452,7 @@ export class Workflows {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -572,7 +491,7 @@ export class Workflows {
         request: Scout.WorkflowsRunRequest,
         requestOptions?: Workflows.RequestOptions
     ): Promise<Scout.WorkflowRunResponse> {
-        const { environment, revisionId, sessionId, ..._body } = request;
+        const { environment, revision_id: revisionId, session_id: sessionId, ..._body } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (environment != null) {
             _queryParams["environment"] = environment;
@@ -596,44 +515,27 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
-            body: {
-                ...serializers.WorkflowsRunRequest.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
-                streaming: false,
-            },
+            body: { ..._body, streaming: false },
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.WorkflowRunResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body as Scout.WorkflowRunResponse;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,

@@ -6,7 +6,6 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Scout from "../../../index";
 import urlJoin from "url-join";
-import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Usage {
@@ -42,7 +41,7 @@ export class Usage {
         request: Scout.UsageGetRequest = {},
         requestOptions?: Usage.RequestOptions
     ): Promise<Scout.ResponseModelUsage> {
-        const { startDate, endDate } = request;
+        const { start_date: startDate, end_date: endDate } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (startDate != null) {
             _queryParams["start_date"] = startDate;
@@ -62,8 +61,8 @@ export class Usage {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -75,27 +74,13 @@ export class Usage {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.ResponseModelUsage.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body as Scout.ResponseModelUsage;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,

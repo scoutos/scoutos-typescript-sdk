@@ -4,8 +4,8 @@
 
 export interface BlockConfigItemBoolean {
     id: string;
-    displayName: string;
+    display_name: string;
     type: "boolean";
-    defaultValue?: boolean;
+    default_value?: boolean;
     value?: boolean;
 }

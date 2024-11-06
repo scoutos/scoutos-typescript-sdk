@@ -6,6 +6,6 @@ import * as Scout from "../index";
 
 export interface AppsServiceHandlersListCopilotsResponse {
     data: Scout.Copilot[];
-    nextCursor?: Date;
-    hasMore: boolean;
+    next_cursor?: string;
+    has_more: boolean;
 }

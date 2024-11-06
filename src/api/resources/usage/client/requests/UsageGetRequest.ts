@@ -10,9 +10,9 @@ export interface UsageGetRequest {
     /**
      * Start date for the usage data
      */
-    startDate?: string;
+    start_date?: string;
     /**
      * End date for the usage data
      */
-    endDate?: string;
+    end_date?: string;
 }

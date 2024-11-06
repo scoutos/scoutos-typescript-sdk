@@ -6,7 +6,7 @@ import * as Scout from "../index";
 
 export interface EnvironmentDeploymentConfig {
     /** Revision ID to direct traffic to */
-    revisionId?: string;
-    revisionLookup: Scout.EnvironmentDeploymentConfigRevisionLookup;
+    revision_id?: string;
+    revision_lookup: Scout.EnvironmentDeploymentConfigRevisionLookup;
     traffic?: number;
 }

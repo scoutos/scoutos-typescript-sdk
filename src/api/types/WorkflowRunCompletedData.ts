@@ -3,9 +3,9 @@
  */
 
 export interface WorkflowRunCompletedData {
-    workflowId: string;
-    workflowRunId: string;
+    workflow_id: string;
+    workflow_run_id: string;
     output: Record<string, unknown>;
-    sessionId: string;
-    workflowConfig?: Record<string, unknown>;
+    session_id: string;
+    workflow_config?: Record<string, unknown>;
 }

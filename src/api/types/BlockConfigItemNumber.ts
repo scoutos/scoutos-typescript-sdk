@@ -6,10 +6,10 @@ import * as Scout from "../index";
 
 export interface BlockConfigItemNumber {
     id: string;
-    displayName: string;
+    display_name: string;
     type: "number";
-    defaultValue?: Scout.BlockConfigItemNumberDefaultValue;
-    minimumValue?: Scout.BlockConfigItemNumberMinimumValue;
-    maximumValue?: Scout.BlockConfigItemNumberMaximumValue;
+    default_value?: Scout.BlockConfigItemNumberDefaultValue;
+    minimum_value?: Scout.BlockConfigItemNumberMinimumValue;
+    maximum_value?: Scout.BlockConfigItemNumberMaximumValue;
     value?: Scout.BlockConfigItemNumberValue;
 }

@@ -3,5 +3,5 @@
  */
 
 export interface EdgeUi {
-    edgeType?: string;
+    edge_type?: string;
 }

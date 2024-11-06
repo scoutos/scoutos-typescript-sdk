@@ -6,5 +6,5 @@ import * as Scout from "../index";
 
 export interface Usage {
     usage: Scout.BlockRunUsage[];
-    totalCost: number;
+    total_cost: number;
 }

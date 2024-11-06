@@ -5,9 +5,9 @@
 import * as Scout from "../index";
 
 export interface WorkflowRun {
-    stopReason: Scout.WorkflowRunStopReason;
+    stop_reason: Scout.WorkflowRunStopReason;
     state?: Record<string, Scout.WorkflowRunStateValue | undefined>;
     errors?: string[];
-    sessionId: string;
-    workflowRunId: string;
+    session_id: string;
+    workflow_run_id: string;
 }

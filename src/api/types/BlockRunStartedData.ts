@@ -3,12 +3,12 @@
  */
 
 export interface BlockRunStartedData {
-    workflowId: string;
-    workflowRunId: string;
-    blockId?: string;
+    workflow_id: string;
+    workflow_run_id: string;
+    block_id?: string;
     config: Record<string, unknown>;
     metadata?: Record<string, unknown>;
     state: Record<string, unknown>;
-    sessionId: string;
-    blockType?: string;
+    session_id: string;
+    block_type?: string;
 }

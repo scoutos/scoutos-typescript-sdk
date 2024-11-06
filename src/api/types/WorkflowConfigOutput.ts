@@ -5,9 +5,9 @@
 import * as Scout from "../index";
 
 export interface WorkflowConfigOutput {
-    workflowDisplayName?: string;
-    workflowSchemaVersion?: string;
-    workflowImgUrl?: string;
-    workflowDescription?: string;
+    workflow_display_name?: string;
+    workflow_schema_version?: string;
+    workflow_img_url?: string;
+    workflow_description?: string;
     blocks?: Scout.BlockOutput[];
 }

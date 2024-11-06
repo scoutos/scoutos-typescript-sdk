@@ -6,6 +6,6 @@ import * as Scout from "../index";
 
 export interface AppsServiceHandlersListWorkflowsResponse {
     data: Scout.Workflow[];
-    nextCursor?: Date;
-    hasMore: boolean;
+    next_cursor?: string;
+    has_more: boolean;
 }

@@ -7,6 +7,6 @@ import * as Scout from "../index";
 export interface DocumentDataOutput {
     id?: string;
     columns?: Record<string, unknown>;
-    displayName?: string;
+    display_name?: string;
     content?: Scout.DocumentDataOutputContent;
 }

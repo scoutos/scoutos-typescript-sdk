@@ -5,10 +5,10 @@
 import * as Scout from "../index";
 
 export interface ColumnTypeItemSelect {
-    columnId?: string;
-    columnDisplayName?: string;
-    columnType: "select";
+    column_id?: string;
+    column_display_name?: string;
+    column_type: "select";
     options: Scout.SelectOptionItem[];
-    selectedOption?: number;
-    dataType?: "string";
+    selected_option?: number;
+    data_type?: "string";
 }

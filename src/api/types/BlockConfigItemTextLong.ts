@@ -6,8 +6,8 @@ import * as Scout from "../index";
 
 export interface BlockConfigItemTextLong {
     id: string;
-    displayName: string;
+    display_name: string;
     type: "text-long";
-    defaultValue?: string;
+    default_value?: string;
     value?: Scout.BlockConfigItemTextLongValue;
 }

@@ -5,6 +5,6 @@
 import * as Scout from "../index";
 
 export interface Dependency {
-    blockId: string;
+    block_id: string;
     ui?: Scout.EdgeUi;
 }

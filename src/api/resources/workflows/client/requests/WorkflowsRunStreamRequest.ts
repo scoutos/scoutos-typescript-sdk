@@ -8,8 +8,8 @@ import * as Scout from "../../../../index";
  * @example
  *     {
  *         environment: "string",
- *         revisionId: "string",
- *         sessionId: "string",
+ *         revision_id: "string",
+ *         session_id: "string",
  *         inputs: {
  *             "string": true
  *         }
@@ -25,7 +25,7 @@ export interface WorkflowsRunStreamRequest {
      * - `console`: The console environment, runs latest changes on a workflow.
      */
     environment?: string;
-    revisionId?: string;
-    sessionId?: string;
+    revision_id?: string;
+    session_id?: string;
     inputs?: Record<string, Scout.WorkflowsRunStreamRequestInputsValue>;
 }

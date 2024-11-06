@@ -6,7 +6,6 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Scout from "../../../index";
 import urlJoin from "url-join";
-import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Environments {
@@ -54,8 +53,8 @@ export class Environments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -66,27 +65,13 @@ export class Environments {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersGetWorkflowEnvironmentsResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body as Scout.AppsServiceHandlersGetWorkflowEnvironmentsResponse;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -125,7 +110,7 @@ export class Environments {
      *         name: "name",
      *         description: "description",
      *         deployments: [{
-     *                 revisionLookup: Scout.EnvironmentDeploymentConfigRevisionLookup.Latest
+     *                 revision_lookup: Scout.EnvironmentDeploymentConfigRevisionLookup.Latest
      *             }]
      *     })
      */
@@ -145,40 +130,26 @@ export class Environments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.0",
-                "User-Agent": "scoutos/0.5.0",
+                "X-Fern-SDK-Version": "0.5.1",
+                "User-Agent": "scoutos/0.5.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.UpdateRequestBody.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: request,
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersUpdateWorkflowEnvironmentResponse.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return _response.body as Scout.AppsServiceHandlersUpdateWorkflowEnvironmentResponse;
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        })
-                    );
+                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,

@@ -5,9 +5,9 @@
 import * as Scout from "../index";
 
 export interface ColumnTypeItemNumber {
-    columnId?: string;
-    columnDisplayName?: string;
-    columnType: "number";
+    column_id?: string;
+    column_display_name?: string;
+    column_type: "number";
     number: Scout.NumberConfig;
-    dataType?: "number";
+    data_type?: "number";
 }

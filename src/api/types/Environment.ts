@@ -5,11 +5,11 @@
 import * as Scout from "../index";
 
 export interface Environment {
-    environmentId: string;
-    environmentConfig: Scout.EnvironmentConfig;
-    createdAt: Date;
-    createdBy: Scout.Identity;
-    lastUpdatedAt: Date;
-    lastUpdatedBy: Scout.Identity;
+    environment_id: string;
+    environment_config: Scout.EnvironmentConfig;
+    created_at: string;
+    created_by: Scout.Identity;
+    last_updated_at: string;
+    last_updated_by: Scout.Identity;
     deployments: Scout.EnvironmentDeploymentDocument[];
 }

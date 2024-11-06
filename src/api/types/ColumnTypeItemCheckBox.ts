@@ -3,9 +3,9 @@
  */
 
 export interface ColumnTypeItemCheckBox {
-    columnId?: string;
-    columnDisplayName?: string;
-    columnType: "checkbox";
+    column_id?: string;
+    column_display_name?: string;
+    column_type: "checkbox";
     checkbox?: boolean;
-    dataType?: "boolean";
+    data_type?: "boolean";
 }

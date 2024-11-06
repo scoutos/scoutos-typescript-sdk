@@ -3,9 +3,9 @@
  */
 
 export interface WorkflowRunFailedData {
-    workflowId: string;
-    workflowRunId: string;
+    workflow_id: string;
+    workflow_run_id: string;
     message: string;
-    sessionId: string;
-    workflowConfig?: Record<string, unknown>;
+    session_id: string;
+    workflow_config?: Record<string, unknown>;
 }

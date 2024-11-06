@@ -3,5 +3,5 @@
  */
 
 export interface ApiKeyIdentity {
-    apiKey?: Record<string, unknown>;
+    api_key?: Record<string, unknown>;
 }

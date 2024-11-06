@@ -295,8 +295,8 @@ await client.workflows.delete("workflow_id");
 ```typescript
 await client.workflows.runStream("string", {
     environment: "string",
-    revisionId: "string",
-    sessionId: "string",
+    revision_id: "string",
+    session_id: "string",
     inputs: {
         string: true,
     },
@@ -497,7 +497,7 @@ await client.environments.update("workflow_id", "environment_id", {
     description: "description",
     deployments: [
         {
-            revisionLookup: Scout.EnvironmentDeploymentConfigRevisionLookup.Latest,
+            revision_lookup: Scout.EnvironmentDeploymentConfigRevisionLookup.Latest,
         },
     ],
 });
@@ -794,7 +794,7 @@ await client.usage.get();
 
 ```typescript
 await client.workflowLogs.get({
-    workflowId: "workflow_id",
+    workflow_id: "workflow_id",
 });
 ```
 

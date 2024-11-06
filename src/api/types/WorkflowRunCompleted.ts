@@ -5,11 +5,11 @@
 import * as Scout from "../index";
 
 export interface WorkflowRunCompleted {
-    organizationId: string;
+    organization_id: string;
     /** The unique identifier of the event */
     id?: string;
     /** Identifies the root cause of the event. If not set, it defaults to the event id. */
-    correlationId?: string;
+    correlation_id?: string;
     name: "workflow_run_completed";
     version?: Scout.EventVersion;
     environment: Scout.WorkflowRunCompletedEnvironment;

@@ -3,9 +3,9 @@
  */
 
 export interface ColumnTypeItemUrl {
-    columnId?: string;
-    columnDisplayName?: string;
-    columnType: "url";
+    column_id?: string;
+    column_display_name?: string;
+    column_type: "url";
     url?: string;
-    dataType?: "string";
+    data_type?: "string";
 }

@@ -5,12 +5,12 @@
 import * as Scout from "../index";
 
 export interface BlockStateUpdatedData {
-    workflowId: string;
-    workflowRunId: string;
-    blockId?: string;
+    workflow_id: string;
+    workflow_run_id: string;
+    block_id?: string;
     /** The block archetype ID */
-    blockType: string;
-    updateData: Record<string, unknown>;
+    block_type: string;
+    update_data: Record<string, unknown>;
     /** If `complete` represents a full replacement of state, versus `partial` that indicates data must be _merged_. */
-    updateType?: Scout.BlockStateUpdatedDataUpdateType;
+    update_type?: Scout.BlockStateUpdatedDataUpdateType;
 }

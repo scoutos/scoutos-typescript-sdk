@@ -5,8 +5,8 @@
 import * as Scout from "../index";
 
 export interface CollectionConfigOutput {
-    collectionDisplayName?: string;
-    collectionImgUrl?: string;
-    collectionDescription?: string;
+    collection_display_name?: string;
+    collection_img_url?: string;
+    collection_description?: string;
     columns?: Scout.CollectionConfigOutputColumnsItem[];
 }

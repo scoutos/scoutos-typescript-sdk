@@ -18,7 +18,7 @@ export interface WorkflowsRunRequest {
      * - `console`: The console environment, runs latest changes on a workflow.
      */
     environment?: string;
-    revisionId?: string;
-    sessionId?: string;
+    revision_id?: string;
+    session_id?: string;
     inputs?: Record<string, Scout.WorkflowsRunRequestInputsValue>;
 }

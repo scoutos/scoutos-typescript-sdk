@@ -5,12 +5,12 @@
 import * as Scout from "../index";
 
 export interface Workflow {
-    workflowConfig: Scout.WorkflowConfigOutput;
-    lastUpdatedAt: Date;
-    createdAt: Date;
-    createdBy: Scout.Identity;
-    lastUpdatedBy: Scout.Identity;
-    revisionId: string;
-    workflowId: string;
-    isDraft?: boolean;
+    workflow_config: Scout.WorkflowConfigOutput;
+    last_updated_at: string;
+    created_at: string;
+    created_by: Scout.Identity;
+    last_updated_by: Scout.Identity;
+    revision_id: string;
+    workflow_id: string;
+    is_draft?: boolean;
 }

@@ -4,8 +4,8 @@
 
 export interface BlockConfigItemTextShort {
     id: string;
-    displayName: string;
+    display_name: string;
     type: "text-short";
-    defaultValue?: string;
+    default_value?: string;
     value?: string;
 }

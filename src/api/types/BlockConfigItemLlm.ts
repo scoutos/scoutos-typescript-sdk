@@ -6,7 +6,7 @@ import * as Scout from "../index";
 
 export interface BlockConfigItemLlm {
     id: string;
-    displayName: string;
+    display_name: string;
     type: "prompt";
     value?: Scout.Prompt[];
 }

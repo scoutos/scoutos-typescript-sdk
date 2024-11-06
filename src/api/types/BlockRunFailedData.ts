@@ -3,15 +3,15 @@
  */
 
 export interface BlockRunFailedData {
-    workflowId: string;
-    workflowRunId: string;
-    blockId?: string;
+    workflow_id: string;
+    workflow_run_id: string;
+    block_id?: string;
     cost?: number;
     config: Record<string, unknown>;
     /** The reason why the job failed */
     message: string;
     metadata?: Record<string, unknown>;
     state: Record<string, unknown>;
-    sessionId: string;
-    blockType?: string;
+    session_id: string;
+    block_type?: string;
 }

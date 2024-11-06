@@ -3,9 +3,9 @@
  */
 
 export interface ColumnTypeItemTextLong {
-    columnId?: string;
-    columnDisplayName?: string;
-    columnType: "text-long";
-    defaultValue?: string;
-    dataType?: "string";
+    column_id?: string;
+    column_display_name?: string;
+    column_type: "text-long";
+    default_value?: string;
+    data_type?: "string";
 }

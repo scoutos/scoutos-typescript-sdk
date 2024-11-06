@@ -5,12 +5,12 @@
 import * as Scout from "../index";
 
 export interface Copilot {
-    copilotConfig: Scout.CopilotConfig;
-    lastUpdatedAt: Date;
-    createdAt: Date;
-    createdBy: Scout.Identity;
-    lastUpdatedBy: Scout.Identity;
-    revisionId: string;
-    copilotId: string;
-    isDraft?: boolean;
+    copilot_config: Scout.CopilotConfig;
+    last_updated_at: string;
+    created_at: string;
+    created_by: Scout.Identity;
+    last_updated_by: Scout.Identity;
+    revision_id: string;
+    copilot_id: string;
+    is_draft?: boolean;
 }

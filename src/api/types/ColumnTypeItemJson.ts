@@ -3,9 +3,9 @@
  */
 
 export interface ColumnTypeItemJson {
-    columnId?: string;
-    columnDisplayName?: string;
-    columnType: "json";
-    defaultValue?: string;
-    dataType?: "json";
+    column_id?: string;
+    column_display_name?: string;
+    column_type: "json";
+    default_value?: string;
+    data_type?: "json";
 }

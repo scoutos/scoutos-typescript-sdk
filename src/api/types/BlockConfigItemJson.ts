@@ -4,8 +4,8 @@
 
 export interface BlockConfigItemJson {
     id: string;
-    displayName: string;
+    display_name: string;
     type: "json";
-    defaultValue?: string;
+    default_value?: string;
     value?: string;
 }

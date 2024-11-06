@@ -18,7 +18,7 @@ export interface WorkflowsListRequest {
     /**
      * created_at to start at
      */
-    startAt?: string;
+    start_at?: string;
     /**
      * Limit of records to return
      */

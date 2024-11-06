@@ -5,13 +5,13 @@
 import * as Scout from "../index";
 
 export interface CopilotConfig {
-    workflowId?: string;
-    imgUrl?: string;
-    displayName?: string;
+    workflow_id?: string;
+    img_url?: string;
+    display_name?: string;
     mode?: Scout.CopilotConfigMode;
     colors?: Record<string, string>;
     fab?: Record<string, Scout.CopilotConfigFabValue | undefined>;
-    messagePlaceholder?: string;
-    initialActivity?: unknown[];
-    allowedOrigins?: string;
+    message_placeholder?: string;
+    initial_activity?: unknown[];
+    allowed_origins?: string;
 }

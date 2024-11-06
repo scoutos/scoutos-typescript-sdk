@@ -5,14 +5,14 @@
 import * as Scout from "../index";
 
 export interface BlockOutput {
-    blockArchetypeId: string;
-    blockConfig?: Scout.BlockOutputBlockConfigItem[];
-    blockDisplayName: string;
-    blockId: string;
-    blockInputs?: Record<string, unknown>;
-    blockIsOutput?: boolean;
+    block_archetype_id: string;
+    block_config?: Scout.BlockOutputBlockConfigItem[];
+    block_display_name: string;
+    block_id: string;
+    block_inputs?: Record<string, unknown>;
+    block_is_output?: boolean;
     dependencies?: Scout.Dependency[];
-    inputSchema?: Record<string, unknown>;
-    outputSchema?: unknown[];
+    input_schema?: Record<string, unknown>;
+    output_schema?: unknown[];
     ui?: Scout.NodeUi;
 }

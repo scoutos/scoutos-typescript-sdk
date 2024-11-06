@@ -5,11 +5,11 @@
 import * as Scout from "../index";
 
 export interface BlockStateUpdated {
-    organizationId: string;
+    organization_id: string;
     /** The unique identifier of the event */
     id?: string;
     /** Identifies the root cause of the event. If not set, it defaults to the event id. */
-    correlationId?: string;
+    correlation_id?: string;
     name: "block_state_updated";
     version?: Scout.EventVersion;
     environment: Scout.BlockStateUpdatedEnvironment;

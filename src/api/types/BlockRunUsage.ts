@@ -3,11 +3,11 @@
  */
 
 export interface BlockRunUsage {
-    organizationId?: string;
-    workflowRunType?: string;
-    blockArchetypeId?: string;
-    executionDate?: string;
-    totalCost: number;
-    totalExecutionDurationMs?: number;
-    displayName?: string;
+    organization_id?: string;
+    workflow_run_type?: string;
+    block_archetype_id?: string;
+    execution_date?: string;
+    total_cost: number;
+    total_execution_duration_ms?: number;
+    display_name?: string;
 }

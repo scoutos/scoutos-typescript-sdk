@@ -5,7 +5,7 @@
 import * as Scout from "../index";
 
 export interface NumberConfig {
-    defaultValue?: Scout.NumberConfigDefaultValue;
-    minValue?: Scout.NumberConfigMinValue;
-    maxValue?: Scout.NumberConfigMaxValue;
+    default_value?: Scout.NumberConfigDefaultValue;
+    min_value?: Scout.NumberConfigMinValue;
+    max_value?: Scout.NumberConfigMaxValue;
 }

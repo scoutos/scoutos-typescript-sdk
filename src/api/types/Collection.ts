@@ -5,11 +5,11 @@
 import * as Scout from "../index";
 
 export interface Collection {
-    collectionConfig: Scout.CollectionConfigOutput;
-    lastUpdatedAt: Date;
-    createdAt: Date;
-    createdBy: Scout.Identity;
-    lastUpdatedBy: Scout.Identity;
-    revisionId: string;
-    collectionId: string;
+    collection_config: Scout.CollectionConfigOutput;
+    last_updated_at: string;
+    created_at: string;
+    created_by: Scout.Identity;
+    last_updated_by: Scout.Identity;
+    revision_id: string;
+    collection_id: string;
 }

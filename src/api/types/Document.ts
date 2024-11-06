@@ -7,8 +7,8 @@ import * as Scout from "../index";
 export interface Document {
     document_id?: string;
     data: Scout.DocumentDataOutput;
-    created_at?: string;
-    last_updated_at?: string;
+    created_at?: Date;
+    last_updated_at?: Date;
     created_by: Scout.Identity;
     last_updated_by: Scout.Identity;
 }

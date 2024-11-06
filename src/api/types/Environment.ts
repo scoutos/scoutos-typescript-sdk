@@ -7,9 +7,9 @@ import * as Scout from "../index";
 export interface Environment {
     environment_id: string;
     environment_config: Scout.EnvironmentConfig;
-    created_at: string;
+    created_at: Date;
     created_by: Scout.Identity;
-    last_updated_at: string;
+    last_updated_at: Date;
     last_updated_by: Scout.Identity;
     deployments: Scout.EnvironmentDeploymentDocument[];
 }

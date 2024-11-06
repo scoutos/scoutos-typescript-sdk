@@ -7,6 +7,7 @@ import * as core from "../../../../core";
 import * as Scout from "../../../index";
 import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
+import * as serializers from "../../../../serialization/index";
 
 export declare namespace WorkflowLogs {
     interface Options {
@@ -88,8 +89,8 @@ export class WorkflowLogs {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -107,7 +108,15 @@ export class WorkflowLogs {
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,

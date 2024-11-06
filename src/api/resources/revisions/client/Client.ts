@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Scout from "../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Revisions {
@@ -31,7 +32,7 @@ export class Revisions {
     /**
      * List all app revisions in the organization
      *
-     * @param {string} workflowId
+     * @param {string} workflow_id
      * @param {Revisions.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -40,21 +41,21 @@ export class Revisions {
      *     await client.revisions.list("workflow_id")
      */
     public async list(
-        workflowId: string,
+        workflow_id: string,
         requestOptions?: Revisions.RequestOptions
     ): Promise<Scout.AppsServiceHandlersListWorkflowRevisionsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflowId)}/revisions`
+                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -65,13 +66,27 @@ export class Revisions {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.AppsServiceHandlersListWorkflowRevisionsResponse;
+            return serializers.AppsServiceHandlersListWorkflowRevisionsResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -96,8 +111,8 @@ export class Revisions {
     }
 
     /**
-     * @param {string} workflowId
-     * @param {string} revisionId
+     * @param {string} workflow_id
+     * @param {string} revision_id
      * @param {Revisions.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -106,22 +121,22 @@ export class Revisions {
      *     await client.revisions.update("workflow_id", "revision_id")
      */
     public async update(
-        workflowId: string,
-        revisionId: string,
+        workflow_id: string,
+        revision_id: string,
         requestOptions?: Revisions.RequestOptions
     ): Promise<Scout.AppsServiceHandlersPromoteWorkflowRevisionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflowId)}/revisions/${encodeURIComponent(revisionId)}/promote`
+                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions/${encodeURIComponent(revision_id)}/promote`
             ),
             method: "PUT",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -132,13 +147,27 @@ export class Revisions {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.AppsServiceHandlersPromoteWorkflowRevisionResponse;
+            return serializers.AppsServiceHandlersPromoteWorkflowRevisionResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -163,8 +192,8 @@ export class Revisions {
     }
 
     /**
-     * @param {string} workflowId
-     * @param {string} revisionId
+     * @param {string} workflow_id
+     * @param {string} revision_id
      * @param {Revisions.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -173,22 +202,22 @@ export class Revisions {
      *     await client.revisions.delete("workflow_id", "revision_id")
      */
     public async delete(
-        workflowId: string,
-        revisionId: string,
+        workflow_id: string,
+        revision_id: string,
         requestOptions?: Revisions.RequestOptions
     ): Promise<Scout.AppsServiceHandlersDeleteWorkflowRevisionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflowId)}/revisions/${encodeURIComponent(revisionId)}`
+                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions/${encodeURIComponent(revision_id)}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -199,13 +228,27 @@ export class Revisions {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.AppsServiceHandlersDeleteWorkflowRevisionResponse;
+            return serializers.AppsServiceHandlersDeleteWorkflowRevisionResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,

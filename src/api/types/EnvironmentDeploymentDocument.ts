@@ -8,6 +8,6 @@ export interface EnvironmentDeploymentDocument {
     deployment_id: string;
     environment_id: string;
     deployment_config: Scout.EnvironmentDeploymentConfig;
-    created_at: string;
+    created_at: Date;
     created_by: Scout.Identity;
 }

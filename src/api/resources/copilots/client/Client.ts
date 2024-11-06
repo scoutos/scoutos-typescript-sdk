@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Scout from "../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Copilots {
@@ -75,8 +76,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -88,13 +89,27 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.AppsServiceHandlersListCopilotsResponse;
+            return serializers.AppsServiceHandlersListCopilotsResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -141,26 +156,40 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: request,
+            body: serializers.CopilotConfig.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.AppsServiceHandlersCreateCopilotResponse;
+            return serializers.AppsServiceHandlersCreateCopilotResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -187,7 +216,7 @@ export class Copilots {
     /**
      * Fetch app configuration by ID.
      *
-     * @param {string} copilotId
+     * @param {string} copilot_id
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -196,21 +225,21 @@ export class Copilots {
      *     await client.copilots.get("copilot_id")
      */
     public async get(
-        copilotId: string,
+        copilot_id: string,
         requestOptions?: Copilots.RequestOptions
     ): Promise<Scout.AppsServiceHandlersGetCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/copilots/${encodeURIComponent(copilotId)}`
+                `v2/copilots/${encodeURIComponent(copilot_id)}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -221,13 +250,27 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.AppsServiceHandlersGetCopilotResponse;
+            return serializers.AppsServiceHandlersGetCopilotResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -252,7 +295,7 @@ export class Copilots {
     }
 
     /**
-     * @param {string} copilotId
+     * @param {string} copilot_id
      * @param {Scout.CopilotConfig} request
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -262,40 +305,54 @@ export class Copilots {
      *     await client.copilots.update("copilot_id", {})
      */
     public async update(
-        copilotId: string,
+        copilot_id: string,
         request: Scout.CopilotConfig,
         requestOptions?: Copilots.RequestOptions
     ): Promise<Scout.AppsServiceHandlersUpdateCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/copilots/${encodeURIComponent(copilotId)}`
+                `v2/copilots/${encodeURIComponent(copilot_id)}`
             ),
             method: "PUT",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: request,
+            body: serializers.CopilotConfig.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.AppsServiceHandlersUpdateCopilotResponse;
+            return serializers.AppsServiceHandlersUpdateCopilotResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -320,7 +377,7 @@ export class Copilots {
     }
 
     /**
-     * @param {string} copilotId
+     * @param {string} copilot_id
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -329,21 +386,21 @@ export class Copilots {
      *     await client.copilots.delete("copilot_id")
      */
     public async delete(
-        copilotId: string,
+        copilot_id: string,
         requestOptions?: Copilots.RequestOptions
     ): Promise<Scout.AppsServiceHandlersDeleteCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/copilots/${encodeURIComponent(copilotId)}`
+                `v2/copilots/${encodeURIComponent(copilot_id)}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -354,13 +411,27 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.AppsServiceHandlersDeleteCopilotResponse;
+            return serializers.AppsServiceHandlersDeleteCopilotResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,

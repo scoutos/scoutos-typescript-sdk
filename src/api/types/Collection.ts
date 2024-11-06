@@ -6,8 +6,8 @@ import * as Scout from "../index";
 
 export interface Collection {
     collection_config: Scout.CollectionConfigOutput;
-    last_updated_at: string;
-    created_at: string;
+    last_updated_at: Date;
+    created_at: Date;
     created_by: Scout.Identity;
     last_updated_by: Scout.Identity;
     revision_id: string;

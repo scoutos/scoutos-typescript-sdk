@@ -6,6 +6,7 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Scout from "../../../index";
 import urlJoin from "url-join";
+import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Documents {
@@ -29,8 +30,8 @@ export class Documents {
     constructor(protected readonly _options: Documents.Options = {}) {}
 
     /**
-     * @param {string} collectionId
-     * @param {string} documentId
+     * @param {string} collection_id
+     * @param {string} document_id
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -39,22 +40,22 @@ export class Documents {
      *     await client.documents.get("collection_id", "document_id")
      */
     public async get(
-        collectionId: string,
-        documentId: string,
+        collection_id: string,
+        document_id: string,
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.EvalServiceHandlersGetDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collectionId)}/documents/${encodeURIComponent(documentId)}`
+                `v2/collections/${encodeURIComponent(collection_id)}/documents/${encodeURIComponent(document_id)}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -65,13 +66,27 @@ export class Documents {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.EvalServiceHandlersGetDocumentResponse;
+            return serializers.EvalServiceHandlersGetDocumentResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -96,7 +111,7 @@ export class Documents {
     }
 
     /**
-     * @param {string} collectionId
+     * @param {string} collection_id
      * @param {Scout.DocumentsCreateRequest} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -106,40 +121,54 @@ export class Documents {
      *     await client.documents.create("collection_id", {})
      */
     public async create(
-        collectionId: string,
+        collection_id: string,
         request: Scout.DocumentsCreateRequest,
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.EvalServiceHandlersCreateDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collectionId)}/documents`
+                `v2/collections/${encodeURIComponent(collection_id)}/documents`
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: request,
+            body: serializers.DocumentsCreateRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.EvalServiceHandlersCreateDocumentResponse;
+            return serializers.EvalServiceHandlersCreateDocumentResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -164,8 +193,8 @@ export class Documents {
     }
 
     /**
-     * @param {string} collectionId
-     * @param {string} documentId
+     * @param {string} collection_id
+     * @param {string} document_id
      * @param {Scout.DocumentDataInput} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -175,41 +204,55 @@ export class Documents {
      *     await client.documents.update("collection_id", "document_id", {})
      */
     public async update(
-        collectionId: string,
-        documentId: string,
+        collection_id: string,
+        document_id: string,
         request: Scout.DocumentDataInput,
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.EvalServiceHandlersUpdateDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collectionId)}/documents/${encodeURIComponent(documentId)}`
+                `v2/collections/${encodeURIComponent(collection_id)}/documents/${encodeURIComponent(document_id)}`
             ),
             method: "PUT",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: request,
+            body: serializers.DocumentDataInput.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.EvalServiceHandlersUpdateDocumentResponse;
+            return serializers.EvalServiceHandlersUpdateDocumentResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,
@@ -236,8 +279,8 @@ export class Documents {
     /**
      * Delete a document given a document_id.
      *
-     * @param {string} collectionId
-     * @param {string} documentId
+     * @param {string} collection_id
+     * @param {string} document_id
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -246,22 +289,22 @@ export class Documents {
      *     await client.documents.delete("collection_id", "document_id")
      */
     public async delete(
-        collectionId: string,
-        documentId: string,
+        collection_id: string,
+        document_id: string,
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.EvalServiceHandlersDeleteDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collectionId)}/documents/${encodeURIComponent(documentId)}`
+                `v2/collections/${encodeURIComponent(collection_id)}/documents/${encodeURIComponent(document_id)}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.1",
-                "User-Agent": "scoutos/0.5.1",
+                "X-Fern-SDK-Version": "0.5.2",
+                "User-Agent": "scoutos/0.5.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -272,13 +315,27 @@ export class Documents {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body as Scout.EvalServiceHandlersDeleteDocumentResponse;
+            return serializers.EvalServiceHandlersDeleteDocumentResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
         }
 
         if (_response.error.reason === "status-code") {
             switch (_response.error.statusCode) {
                 case 422:
-                    throw new Scout.UnprocessableEntityError(_response.error.body as Scout.HttpValidationError);
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
                 default:
                     throw new errors.ScoutError({
                         statusCode: _response.error.statusCode,

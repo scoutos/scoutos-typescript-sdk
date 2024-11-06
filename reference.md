@@ -113,7 +113,7 @@ await client.workflows.create({});
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">get</a>(workflowId) -> Scout.AppsServiceHandlersGetWorkflowResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">get</a>(workflow_id) -> Scout.AppsServiceHandlersGetWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -157,7 +157,7 @@ await client.workflows.get("workflow_id");
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -176,7 +176,7 @@ await client.workflows.get("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">update</a>(workflowId, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">update</a>(workflow_id, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -205,7 +205,7 @@ await client.workflows.update("workflow_id", {});
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -232,7 +232,7 @@ await client.workflows.update("workflow_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">delete</a>(workflowId) -> Scout.AppsServiceHandlersDeleteWorkflowResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">delete</a>(workflow_id) -> Scout.AppsServiceHandlersDeleteWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -261,7 +261,7 @@ await client.workflows.delete("workflow_id");
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -280,7 +280,7 @@ await client.workflows.delete("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">runStream</a>(workflowId, { ...params }) -> core.Stream<Scout.WorkflowRunEvent></code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">runStream</a>(workflow_id, { ...params }) -> core.Stream<Scout.WorkflowRunEvent></code></summary>
 <dl>
 <dd>
 
@@ -316,7 +316,7 @@ await client.workflows.runStream("string", {
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -343,7 +343,7 @@ await client.workflows.runStream("string", {
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">run</a>(workflowId, { ...params }) -> Scout.WorkflowRunResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">run</a>(workflow_id, { ...params }) -> Scout.WorkflowRunResponse</code></summary>
 <dl>
 <dd>
 
@@ -372,7 +372,7 @@ await client.workflows.run("workflow_id", {});
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -401,7 +401,7 @@ await client.workflows.run("workflow_id", {});
 
 ## Environments
 
-<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">list</a>(workflowId) -> Scout.AppsServiceHandlersGetWorkflowEnvironmentsResponse</code></summary>
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">list</a>(workflow_id) -> Scout.AppsServiceHandlersGetWorkflowEnvironmentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -445,7 +445,7 @@ await client.environments.list("workflow_id");
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -464,7 +464,7 @@ await client.environments.list("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">update</a>(workflowId, environmentId, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowEnvironmentResponse</code></summary>
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">update</a>(workflow_id, environment_id, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowEnvironmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -516,7 +516,7 @@ await client.environments.update("workflow_id", "environment_id", {
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -524,7 +524,7 @@ await client.environments.update("workflow_id", "environment_id", {
 <dl>
 <dd>
 
-**environmentId:** `string`
+**environment_id:** `string`
 
 </dd>
 </dl>
@@ -553,7 +553,7 @@ await client.environments.update("workflow_id", "environment_id", {
 
 ## Revisions
 
-<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">list</a>(workflowId) -> Scout.AppsServiceHandlersListWorkflowRevisionsResponse</code></summary>
+<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">list</a>(workflow_id) -> Scout.AppsServiceHandlersListWorkflowRevisionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -597,7 +597,7 @@ await client.revisions.list("workflow_id");
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -616,7 +616,7 @@ await client.revisions.list("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">update</a>(workflowId, revisionId) -> Scout.AppsServiceHandlersPromoteWorkflowRevisionResponse</code></summary>
+<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">update</a>(workflow_id, revision_id) -> Scout.AppsServiceHandlersPromoteWorkflowRevisionResponse</code></summary>
 <dl>
 <dd>
 
@@ -645,7 +645,7 @@ await client.revisions.update("workflow_id", "revision_id");
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -653,7 +653,7 @@ await client.revisions.update("workflow_id", "revision_id");
 <dl>
 <dd>
 
-**revisionId:** `string`
+**revision_id:** `string`
 
 </dd>
 </dl>
@@ -672,7 +672,7 @@ await client.revisions.update("workflow_id", "revision_id");
 </dl>
 </details>
 
-<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">delete</a>(workflowId, revisionId) -> Scout.AppsServiceHandlersDeleteWorkflowRevisionResponse</code></summary>
+<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">delete</a>(workflow_id, revision_id) -> Scout.AppsServiceHandlersDeleteWorkflowRevisionResponse</code></summary>
 <dl>
 <dd>
 
@@ -701,7 +701,7 @@ await client.revisions.delete("workflow_id", "revision_id");
 <dl>
 <dd>
 
-**workflowId:** `string`
+**workflow_id:** `string`
 
 </dd>
 </dl>
@@ -709,7 +709,7 @@ await client.revisions.delete("workflow_id", "revision_id");
 <dl>
 <dd>
 
-**revisionId:** `string`
+**revision_id:** `string`
 
 </dd>
 </dl>
@@ -943,7 +943,7 @@ await client.copilots.create({});
 </dl>
 </details>
 
-<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">get</a>(copilotId) -> Scout.AppsServiceHandlersGetCopilotResponse</code></summary>
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">get</a>(copilot_id) -> Scout.AppsServiceHandlersGetCopilotResponse</code></summary>
 <dl>
 <dd>
 
@@ -987,7 +987,7 @@ await client.copilots.get("copilot_id");
 <dl>
 <dd>
 
-**copilotId:** `string`
+**copilot_id:** `string`
 
 </dd>
 </dl>
@@ -1006,7 +1006,7 @@ await client.copilots.get("copilot_id");
 </dl>
 </details>
 
-<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">update</a>(copilotId, { ...params }) -> Scout.AppsServiceHandlersUpdateCopilotResponse</code></summary>
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">update</a>(copilot_id, { ...params }) -> Scout.AppsServiceHandlersUpdateCopilotResponse</code></summary>
 <dl>
 <dd>
 
@@ -1035,7 +1035,7 @@ await client.copilots.update("copilot_id", {});
 <dl>
 <dd>
 
-**copilotId:** `string`
+**copilot_id:** `string`
 
 </dd>
 </dl>
@@ -1062,7 +1062,7 @@ await client.copilots.update("copilot_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">delete</a>(copilotId) -> Scout.AppsServiceHandlersDeleteCopilotResponse</code></summary>
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">delete</a>(copilot_id) -> Scout.AppsServiceHandlersDeleteCopilotResponse</code></summary>
 <dl>
 <dd>
 
@@ -1091,7 +1091,7 @@ await client.copilots.delete("copilot_id");
 <dl>
 <dd>
 
-**copilotId:** `string`
+**copilot_id:** `string`
 
 </dd>
 </dl>
@@ -1112,7 +1112,7 @@ await client.copilots.delete("copilot_id");
 
 ## Collections
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">get</a>(collectionId) -> Scout.EvalServiceHandlersGetCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">get</a>(collection_id) -> Scout.EvalServiceHandlersGetCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1141,7 +1141,7 @@ await client.collections.get("collection_id");
 <dl>
 <dd>
 
-**collectionId:** `string`
+**collection_id:** `string`
 
 </dd>
 </dl>
@@ -1208,7 +1208,7 @@ await client.collections.create({});
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">update</a>(collectionId, { ...params }) -> Scout.EvalServiceHandlersUpdateCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">update</a>(collection_id, { ...params }) -> Scout.EvalServiceHandlersUpdateCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1237,7 +1237,7 @@ await client.collections.update("collection_id", {});
 <dl>
 <dd>
 
-**collectionId:** `string`
+**collection_id:** `string`
 
 </dd>
 </dl>
@@ -1264,7 +1264,7 @@ await client.collections.update("collection_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">delete</a>(collectionId) -> Scout.EvalServiceHandlersDeleteCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">delete</a>(collection_id) -> Scout.EvalServiceHandlersDeleteCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1308,7 +1308,7 @@ await client.collections.delete("collection_id");
 <dl>
 <dd>
 
-**collectionId:** `string`
+**collection_id:** `string`
 
 </dd>
 </dl>
@@ -1329,7 +1329,7 @@ await client.collections.delete("collection_id");
 
 ## Documents
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">get</a>(collectionId, documentId) -> Scout.EvalServiceHandlersGetDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">get</a>(collection_id, document_id) -> Scout.EvalServiceHandlersGetDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -1358,7 +1358,7 @@ await client.documents.get("collection_id", "document_id");
 <dl>
 <dd>
 
-**collectionId:** `string`
+**collection_id:** `string`
 
 </dd>
 </dl>
@@ -1366,7 +1366,7 @@ await client.documents.get("collection_id", "document_id");
 <dl>
 <dd>
 
-**documentId:** `string`
+**document_id:** `string`
 
 </dd>
 </dl>
@@ -1385,7 +1385,7 @@ await client.documents.get("collection_id", "document_id");
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">create</a>(collectionId, { ...params }) -> Scout.EvalServiceHandlersCreateDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">create</a>(collection_id, { ...params }) -> Scout.EvalServiceHandlersCreateDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -1414,7 +1414,7 @@ await client.documents.create("collection_id", {});
 <dl>
 <dd>
 
-**collectionId:** `string`
+**collection_id:** `string`
 
 </dd>
 </dl>
@@ -1441,7 +1441,7 @@ await client.documents.create("collection_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">update</a>(collectionId, documentId, { ...params }) -> Scout.EvalServiceHandlersUpdateDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">update</a>(collection_id, document_id, { ...params }) -> Scout.EvalServiceHandlersUpdateDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -1470,7 +1470,7 @@ await client.documents.update("collection_id", "document_id", {});
 <dl>
 <dd>
 
-**collectionId:** `string`
+**collection_id:** `string`
 
 </dd>
 </dl>
@@ -1478,7 +1478,7 @@ await client.documents.update("collection_id", "document_id", {});
 <dl>
 <dd>
 
-**documentId:** `string`
+**document_id:** `string`
 
 </dd>
 </dl>
@@ -1505,7 +1505,7 @@ await client.documents.update("collection_id", "document_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">delete</a>(collectionId, documentId) -> Scout.EvalServiceHandlersDeleteDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">delete</a>(collection_id, document_id) -> Scout.EvalServiceHandlersDeleteDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -1549,7 +1549,7 @@ await client.documents.delete("collection_id", "document_id");
 <dl>
 <dd>
 
-**collectionId:** `string`
+**collection_id:** `string`
 
 </dd>
 </dl>
@@ -1557,7 +1557,7 @@ await client.documents.delete("collection_id", "document_id");
 <dl>
 <dd>
 
-**documentId:** `string`
+**document_id:** `string`
 
 </dd>
 </dl>

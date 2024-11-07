@@ -5,13 +5,19 @@
 import * as serializers from "../../../index";
 import * as Scout from "../../../../api/index";
 import * as core from "../../../../core";
-import { DocumentDataInput } from "../../../types/DocumentDataInput";
+import { DocumentsCreateRequestZeroValue } from "./DocumentsCreateRequestZeroValue";
+import { DocumentsCreateRequestItemValue } from "./DocumentsCreateRequestItemValue";
 
 export const DocumentsCreateRequest: core.serialization.Schema<
     serializers.DocumentsCreateRequest.Raw,
     Scout.DocumentsCreateRequest
-> = core.serialization.undiscriminatedUnion([DocumentDataInput, core.serialization.list(DocumentDataInput)]);
+> = core.serialization.undiscriminatedUnion([
+    core.serialization.record(core.serialization.string(), DocumentsCreateRequestZeroValue),
+    core.serialization.list(core.serialization.record(core.serialization.string(), DocumentsCreateRequestItemValue)),
+]);
 
 export declare namespace DocumentsCreateRequest {
-    type Raw = DocumentDataInput.Raw | DocumentDataInput.Raw[];
+    type Raw =
+        | Record<string, DocumentsCreateRequestZeroValue.Raw>
+        | Record<string, DocumentsCreateRequestItemValue.Raw>[];
 }

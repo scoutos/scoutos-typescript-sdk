@@ -11,6 +11,7 @@ import { Usage } from "./api/resources/usage/client/Client";
 import { WorkflowLogs } from "./api/resources/workflowLogs/client/Client";
 import { Copilots } from "./api/resources/copilots/client/Client";
 import { Collections } from "./api/resources/collections/client/Client";
+import { Tables } from "./api/resources/tables/client/Client";
 import { Documents } from "./api/resources/documents/client/Client";
 
 export declare namespace ScoutClient {
@@ -73,6 +74,12 @@ export class ScoutClient {
 
     public get collections(): Collections {
         return (this._collections ??= new Collections(this._options));
+    }
+
+    protected _tables: Tables | undefined;
+
+    public get tables(): Tables {
+        return (this._tables ??= new Tables(this._options));
     }
 
     protected _documents: Documents | undefined;

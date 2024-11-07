@@ -31,31 +31,35 @@ export class Documents {
 
     /**
      * @param {string} collection_id
+     * @param {string} table_id
      * @param {string} document_id
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.documents.get("collection_id", "document_id")
+     *     await client.documents.get("collection_id", "table_id", "document_id")
      */
     public async get(
         collection_id: string,
+        table_id: string,
         document_id: string,
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.EvalServiceHandlersGetDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/documents/${encodeURIComponent(document_id)}`
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(
+                    table_id
+                )}/documents/${encodeURIComponent(document_id)}`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.2",
-                "User-Agent": "scoutos/0.5.2",
+                "X-Fern-SDK-Version": "0.6.0",
+                "User-Agent": "scoutos/0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -112,31 +116,35 @@ export class Documents {
 
     /**
      * @param {string} collection_id
+     * @param {string} table_id
      * @param {Scout.DocumentsCreateRequest} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.documents.create("collection_id", {})
+     *     await client.documents.create("collection_id", "table_id", {
+     *         "key": true
+     *     })
      */
     public async create(
         collection_id: string,
+        table_id: string,
         request: Scout.DocumentsCreateRequest,
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.EvalServiceHandlersCreateDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/documents`
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/documents`
             ),
             method: "POST",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.2",
-                "User-Agent": "scoutos/0.5.2",
+                "X-Fern-SDK-Version": "0.6.0",
+                "User-Agent": "scoutos/0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -195,38 +203,44 @@ export class Documents {
     /**
      * @param {string} collection_id
      * @param {string} document_id
-     * @param {Scout.DocumentDataInput} request
+     * @param {string} table_id
+     * @param {Record<string, Scout.DocumentsUpdateRequestValue>} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.documents.update("collection_id", "document_id", {})
+     *     await client.documents.update("collection_id", "document_id", "table_id", {
+     *         "key": true
+     *     })
      */
     public async update(
         collection_id: string,
         document_id: string,
-        request: Scout.DocumentDataInput,
+        table_id: string,
+        request: Record<string, Scout.DocumentsUpdateRequestValue>,
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.EvalServiceHandlersUpdateDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/documents/${encodeURIComponent(document_id)}`
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(
+                    table_id
+                )}/documents/${encodeURIComponent(document_id)}`
             ),
             method: "PUT",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.2",
-                "User-Agent": "scoutos/0.5.2",
+                "X-Fern-SDK-Version": "0.6.0",
+                "User-Agent": "scoutos/0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.DocumentDataInput.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.documents.update.Request.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -280,31 +294,35 @@ export class Documents {
      * Delete a document given a document_id.
      *
      * @param {string} collection_id
+     * @param {string} table_id
      * @param {string} document_id
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.documents.delete("collection_id", "document_id")
+     *     await client.documents.delete("collection_id", "table_id", "document_id")
      */
     public async delete(
         collection_id: string,
+        table_id: string,
         document_id: string,
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.EvalServiceHandlersDeleteDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/documents/${encodeURIComponent(document_id)}`
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(
+                    table_id
+                )}/documents/${encodeURIComponent(document_id)}`
             ),
             method: "DELETE",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.2",
-                "User-Agent": "scoutos/0.5.2",
+                "X-Fern-SDK-Version": "0.6.0",
+                "User-Agent": "scoutos/0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

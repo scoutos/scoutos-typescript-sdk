@@ -5,26 +5,28 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { DocumentDataOutput } from "./DocumentDataOutput";
+import { DocumentDataValue } from "./DocumentDataValue";
 import { Identity } from "./Identity";
 
 export const Document: core.serialization.ObjectSchema<serializers.Document.Raw, Scout.Document> =
     core.serialization.object({
         document_id: core.serialization.string().optional(),
-        data: DocumentDataOutput,
+        data: core.serialization.record(core.serialization.string(), DocumentDataValue).optional(),
         created_at: core.serialization.date().optional(),
         last_updated_at: core.serialization.date().optional(),
         created_by: Identity,
         last_updated_by: Identity,
+        revision_id: core.serialization.string().optional(),
     });
 
 export declare namespace Document {
     interface Raw {
         document_id?: string | null;
-        data: DocumentDataOutput.Raw;
+        data?: Record<string, DocumentDataValue.Raw> | null;
         created_at?: string | null;
         last_updated_at?: string | null;
         created_by: Identity.Raw;
         last_updated_by: Identity.Raw;
+        revision_id?: string | null;
     }
 }

@@ -4,4 +4,6 @@
 
 import * as Scout from "../../../index";
 
-export type DocumentsCreateRequest = Scout.DocumentDataInput | Scout.DocumentDataInput[];
+export type DocumentsCreateRequest =
+    | Record<string, Scout.DocumentsCreateRequestZeroValue>
+    | Record<string, Scout.DocumentsCreateRequestItemValue>[];

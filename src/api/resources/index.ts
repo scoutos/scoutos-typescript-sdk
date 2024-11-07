@@ -8,6 +8,7 @@ export * as usage from "./usage";
 export * as workflowLogs from "./workflowLogs";
 export * as copilots from "./copilots";
 export * as collections from "./collections";
+export * as tables from "./tables";
 export * from "./workflows/client/requests";
 export * from "./environments/client/requests";
 export * from "./usage/client/requests";

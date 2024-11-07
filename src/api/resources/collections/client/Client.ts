@@ -52,8 +52,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.2",
-                "User-Agent": "scoutos/0.5.2",
+                "X-Fern-SDK-Version": "0.6.0",
+                "User-Agent": "scoutos/0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -109,7 +109,7 @@ export class Collections {
     }
 
     /**
-     * @param {Scout.CollectionConfigInput} request
+     * @param {Scout.CollectionConfig} request
      * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -118,7 +118,7 @@ export class Collections {
      *     await client.collections.create({})
      */
     public async create(
-        request: Scout.CollectionConfigInput,
+        request: Scout.CollectionConfig,
         requestOptions?: Collections.RequestOptions
     ): Promise<Scout.EvalServiceHandlersCreateCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -131,14 +131,14 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.2",
-                "User-Agent": "scoutos/0.5.2",
+                "X-Fern-SDK-Version": "0.6.0",
+                "User-Agent": "scoutos/0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.CollectionConfigInput.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.CollectionConfig.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -190,7 +190,7 @@ export class Collections {
 
     /**
      * @param {string} collection_id
-     * @param {Scout.CollectionConfigInput} request
+     * @param {Scout.CollectionConfig} request
      * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -200,7 +200,7 @@ export class Collections {
      */
     public async update(
         collection_id: string,
-        request: Scout.CollectionConfigInput,
+        request: Scout.CollectionConfig,
         requestOptions?: Collections.RequestOptions
     ): Promise<Scout.EvalServiceHandlersUpdateCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -213,14 +213,14 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.2",
-                "User-Agent": "scoutos/0.5.2",
+                "X-Fern-SDK-Version": "0.6.0",
+                "User-Agent": "scoutos/0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.CollectionConfigInput.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.CollectionConfig.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -295,8 +295,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.5.2",
-                "User-Agent": "scoutos/0.5.2",
+                "X-Fern-SDK-Version": "0.6.0",
+                "User-Agent": "scoutos/0.6.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

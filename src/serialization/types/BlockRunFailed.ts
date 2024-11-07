@@ -14,7 +14,7 @@ export const BlockRunFailed: core.serialization.ObjectSchema<serializers.BlockRu
         organization_id: core.serialization.string(),
         id: core.serialization.string().optional(),
         correlation_id: core.serialization.string().optional(),
-        name: core.serialization.stringLiteral("block_run_failed"),
+        name: core.serialization.stringLiteral("block_run_failed").optional(),
         version: EventVersion.optional(),
         environment: BlockRunFailedEnvironment,
         timestamp: core.serialization.string().optional(),
@@ -26,7 +26,7 @@ export declare namespace BlockRunFailed {
         organization_id: string;
         id?: string | null;
         correlation_id?: string | null;
-        name: "block_run_failed";
+        name?: "block_run_failed" | null;
         version?: EventVersion.Raw | null;
         environment: BlockRunFailedEnvironment.Raw;
         timestamp?: string | null;

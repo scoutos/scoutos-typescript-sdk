@@ -30,30 +30,26 @@ export class Collections {
     constructor(protected readonly _options: Collections.Options = {}) {}
 
     /**
-     * @param {string} collection_id
      * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
      *
-     * @throws {@link Scout.UnprocessableEntityError}
-     *
      * @example
-     *     await client.collections.get("collection_id")
+     *     await client.collections.list()
      */
-    public async get(
-        collection_id: string,
+    public async list(
         requestOptions?: Collections.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersGetCollectionResponse> {
+    ): Promise<Scout.EvalServiceHandlersGetCollectionsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}`
+                "v2/collections"
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.1",
-                "User-Agent": "scoutos/0.6.1",
+                "X-Fern-SDK-Version": "0.6.2",
+                "User-Agent": "scoutos/0.6.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -64,7 +60,74 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersGetCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.EvalServiceHandlersGetCollectionsResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError();
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.CollectionConfig} request
+     * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.collections.create({})
+     */
+    public async create(
+        request: Scout.CollectionConfig,
+        requestOptions?: Collections.RequestOptions
+    ): Promise<Scout.EvalServiceHandlersCreateCollectionResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
+                "v2/collections"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.6.2",
+                "User-Agent": "scoutos/0.6.2",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.CollectionConfig.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.EvalServiceHandlersCreateCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -109,42 +172,41 @@ export class Collections {
     }
 
     /**
-     * @param {Scout.CollectionConfig} request
+     * @param {string} collection_id
      * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.collections.create({})
+     *     await client.collections.get("collection_id")
      */
-    public async create(
-        request: Scout.CollectionConfig,
+    public async get(
+        collection_id: string,
         requestOptions?: Collections.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersCreateCollectionResponse> {
+    ): Promise<Scout.EvalServiceHandlersGetCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/collections"
+                `v2/collections/${encodeURIComponent(collection_id)}`
             ),
-            method: "POST",
+            method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.1",
-                "User-Agent": "scoutos/0.6.1",
+                "X-Fern-SDK-Version": "0.6.2",
+                "User-Agent": "scoutos/0.6.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.CollectionConfig.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersCreateCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.EvalServiceHandlersGetCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -213,8 +275,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.1",
-                "User-Agent": "scoutos/0.6.1",
+                "X-Fern-SDK-Version": "0.6.2",
+                "User-Agent": "scoutos/0.6.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -295,8 +357,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.1",
-                "User-Agent": "scoutos/0.6.1",
+                "X-Fern-SDK-Version": "0.6.2",
+                "User-Agent": "scoutos/0.6.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

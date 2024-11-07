@@ -1112,7 +1112,7 @@ await client.copilots.delete("copilot_id");
 
 ## Collections
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">get</a>(collection_id) -> Scout.EvalServiceHandlersGetCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>() -> Scout.EvalServiceHandlersGetCollectionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1125,7 +1125,7 @@ await client.copilots.delete("copilot_id");
 <dd>
 
 ```typescript
-await client.collections.get("collection_id");
+await client.collections.list();
 ```
 
 </dd>
@@ -1137,14 +1137,6 @@ await client.collections.get("collection_id");
 
 <dl>
 <dd>
-
-<dl>
-<dd>
-
-**collection_id:** `string`
-
-</dd>
-</dl>
 
 <dl>
 <dd>
@@ -1190,6 +1182,54 @@ await client.collections.create({});
 <dd>
 
 **request:** `Scout.CollectionConfig`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Collections.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">get</a>(collection_id) -> Scout.EvalServiceHandlersGetCollectionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.collections.get("collection_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string`
 
 </dd>
 </dl>
@@ -1329,7 +1369,7 @@ await client.collections.delete("collection_id");
 
 ## Tables
 
-<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">get</a>(collection_id, table_id) -> Scout.EvalServiceHandlersGetTableResponse</code></summary>
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">list</a>(collection_id) -> Scout.EvalServiceHandlersGetTablesResponse</code></summary>
 <dl>
 <dd>
 
@@ -1342,7 +1382,7 @@ await client.collections.delete("collection_id");
 <dd>
 
 ```typescript
-await client.tables.get("collection_id", "table_id");
+await client.tables.list("collection_id");
 ```
 
 </dd>
@@ -1359,14 +1399,6 @@ await client.tables.get("collection_id", "table_id");
 <dd>
 
 **collection_id:** `string`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**table_id:** `string`
 
 </dd>
 </dl>
@@ -1423,6 +1455,62 @@ await client.tables.create("collection_id", {});
 <dd>
 
 **request:** `Scout.TableConfigInput`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Tables.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">get</a>(collection_id, table_id) -> Scout.EvalServiceHandlersGetTableResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tables.get("collection_id", "table_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `string`
 
 </dd>
 </dl>
@@ -1578,7 +1666,7 @@ await client.tables.delete("collection_id", "table_id");
 
 ## Documents
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">get</a>(collection_id, table_id, document_id) -> Scout.EvalServiceHandlersGetDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">list</a>(collection_id, table_id) -> Scout.EvalServiceHandlersGetDocumentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1591,7 +1679,7 @@ await client.tables.delete("collection_id", "table_id");
 <dd>
 
 ```typescript
-await client.documents.get("collection_id", "table_id", "document_id");
+await client.documents.list("collection_id", "table_id");
 ```
 
 </dd>
@@ -1616,14 +1704,6 @@ await client.documents.get("collection_id", "table_id", "document_id");
 <dd>
 
 **table_id:** `string`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**document_id:** `string`
 
 </dd>
 </dl>
@@ -1690,6 +1770,70 @@ await client.documents.create("collection_id", "table_id", {
 <dd>
 
 **request:** `Scout.DocumentsCreateRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Documents.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">get</a>(collection_id, table_id, document_id) -> Scout.EvalServiceHandlersGetDocumentResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.documents.get("collection_id", "table_id", "document_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**document_id:** `string`
 
 </dd>
 </dl>

@@ -90,6 +90,7 @@ export * from "./AppsServiceHandlersUpdateWorkflowResponse";
 export * from "./AppsServiceHandlersUpdateWorkflowEnvironmentResponse";
 export * from "./Message";
 export * from "./MessageChunk";
+export * from "./WorkflowRunStreamResponse";
 export * from "./CheckBoxColumn";
 export * from "./Collection";
 export * from "./CollectionConfig";

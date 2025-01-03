@@ -780,7 +780,7 @@ await client.usage.get();
 
 ## WorkflowLogs
 
-<details><summary><code>client.workflowLogs.<a href="/src/api/resources/workflowLogs/client/Client.ts">get</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>client.workflowLogs.<a href="/src/api/resources/workflowLogs/client/Client.ts">listLogs</a>({ ...params }) -> core.Stream<Scout.WorkflowLogsListLogsResponse></code></summary>
 <dl>
 <dd>
 
@@ -793,8 +793,14 @@ await client.usage.get();
 <dd>
 
 ```typescript
-await client.workflowLogs.get({
-    workflow_id: "workflow_id",
+await client.workflowLogs.listLogs({
+    workflow_id: "string",
+    start_date: "string",
+    end_date: "string",
+    limit: 1,
+    session_id: "string",
+    status: "string",
+    cursor: "string",
 });
 ```
 
@@ -811,7 +817,7 @@ await client.workflowLogs.get({
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowLogsGetRequest`
+**request:** `Scout.WorkflowLogsListLogsRequest`
 
 </dd>
 </dl>

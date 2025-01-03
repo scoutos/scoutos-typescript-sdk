@@ -6,8 +6,9 @@ import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Scout from "../../../index";
 import urlJoin from "url-join";
-import * as errors from "../../../../errors/index";
+import * as stream from "stream";
 import * as serializers from "../../../../serialization/index";
+import * as errors from "../../../../errors/index";
 
 export declare namespace WorkflowLogs {
     interface Options {
@@ -29,21 +30,10 @@ export declare namespace WorkflowLogs {
 export class WorkflowLogs {
     constructor(protected readonly _options: WorkflowLogs.Options = {}) {}
 
-    /**
-     * @param {Scout.WorkflowLogsGetRequest} request
-     * @param {WorkflowLogs.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Scout.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.workflowLogs.get({
-     *         workflow_id: "workflow_id"
-     *     })
-     */
-    public async get(
-        request: Scout.WorkflowLogsGetRequest,
+    public async listLogs(
+        request: Scout.WorkflowLogsListLogsRequest,
         requestOptions?: WorkflowLogs.RequestOptions
-    ): Promise<unknown> {
+    ): Promise<core.Stream<Scout.WorkflowLogsListLogsResponse>> {
         const {
             workflow_id: workflowId,
             start_date: startDate,
@@ -79,7 +69,7 @@ export class WorkflowLogs {
             _queryParams["cursor"] = cursor;
         }
 
-        const _response = await (this._options.fetcher ?? core.fetcher)({
+        const _response = await (this._options.fetcher ?? core.fetcher)<stream.Readable>({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
                 "v2/run_logs"
@@ -89,20 +79,37 @@ export class WorkflowLogs {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.0",
-                "User-Agent": "scoutos/0.7.0",
+                "X-Fern-SDK-Version": "0.7.1",
+                "User-Agent": "scoutos/0.7.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
             requestType: "json",
+            responseType: "sse",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return _response.body;
+            return new core.Stream({
+                stream: _response.body,
+                parse: async (data) => {
+                    return serializers.WorkflowLogsListLogsResponse.parseOrThrow(data, {
+                        unrecognizedObjectKeys: "passthrough",
+                        allowUnrecognizedUnionMembers: true,
+                        allowUnrecognizedEnumValues: true,
+                        skipValidation: true,
+                        breadcrumbsPrefix: ["response"],
+                    });
+                },
+                signal: requestOptions?.abortSignal,
+                eventShape: {
+                    type: "sse",
+                    streamTerminator: "[DONE]",
+                },
+            });
         }
 
         if (_response.error.reason === "status-code") {

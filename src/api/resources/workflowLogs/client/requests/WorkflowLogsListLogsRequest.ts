@@ -5,10 +5,16 @@
 /**
  * @example
  *     {
- *         workflow_id: "workflow_id"
+ *         workflow_id: "string",
+ *         start_date: "string",
+ *         end_date: "string",
+ *         limit: 1,
+ *         session_id: "string",
+ *         status: "string",
+ *         cursor: "string"
  *     }
  */
-export interface WorkflowLogsGetRequest {
+export interface WorkflowLogsListLogsRequest {
     workflow_id: string;
     start_date?: string;
     end_date?: string;

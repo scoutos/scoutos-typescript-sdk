@@ -1,1 +1,1 @@
-export { type WorkflowLogsGetRequest } from "./WorkflowLogsGetRequest";
+export { type WorkflowLogsListLogsRequest } from "./WorkflowLogsListLogsRequest";

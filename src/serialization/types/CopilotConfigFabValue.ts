@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const CopilotConfigFabValue: core.serialization.Schema<
     serializers.CopilotConfigFabValue.Raw,
     Scout.CopilotConfigFabValue
-> = core.serialization.undiscriminatedUnion([core.serialization.string(), core.serialization.number()]);
+> = core.serialization.undiscriminatedUnion([core.serialization.number(), core.serialization.string()]);
 
 export declare namespace CopilotConfigFabValue {
-    type Raw = string | number;
+    type Raw = number | string;
 }

@@ -11,9 +11,11 @@ export interface WorkflowRunFailed {
     /** Identifies the root cause of the event. If not set, it defaults to the event id. */
     correlation_id?: string;
     name?: "workflow_run_failed";
-    version?: Scout.EventVersion;
     environment: Scout.WorkflowRunFailedEnvironment;
     /** The timestamp of the event as UTC ISO 8601 string */
     timestamp?: string;
     data: Scout.WorkflowRunFailedData;
+    price: string;
+    event_type: string;
+    version: Scout.EventVersion;
 }

@@ -44,7 +44,7 @@ export class Workflows {
     public async list(
         request: Scout.WorkflowsListRequest = {},
         requestOptions?: Workflows.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersListWorkflowsResponse> {
+    ): Promise<Scout.SrcHandlersListWorkflowsResponse> {
         const { sort, direction, start_at: startAt, limit, query } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (sort != null) {
@@ -77,8 +77,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -90,7 +90,7 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersListWorkflowsResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersListWorkflowsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -146,7 +146,7 @@ export class Workflows {
     public async create(
         request: Scout.WorkflowConfigInput,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersCreateWorkflowResponse> {
+    ): Promise<Scout.SrcHandlersCreateWorkflowResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -157,8 +157,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -170,7 +170,7 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersCreateWorkflowResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersCreateWorkflowResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -228,7 +228,7 @@ export class Workflows {
     public async get(
         workflow_id: string,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersGetWorkflowResponse> {
+    ): Promise<Scout.SrcHandlersGetWorkflowResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -239,8 +239,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -251,7 +251,7 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersGetWorkflowResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersGetWorkflowResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -309,7 +309,7 @@ export class Workflows {
         workflow_id: string,
         request: Scout.WorkflowConfigInput,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersUpdateWorkflowResponse> {
+    ): Promise<Scout.SrcHandlersUpdateWorkflowResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -320,8 +320,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -333,7 +333,7 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersUpdateWorkflowResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersUpdateWorkflowResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -389,7 +389,7 @@ export class Workflows {
     public async delete(
         workflow_id: string,
         requestOptions?: Workflows.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersDeleteWorkflowResponse> {
+    ): Promise<Scout.SrcHandlersDeleteWorkflowResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -400,8 +400,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -412,7 +412,7 @@ export class Workflows {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersDeleteWorkflowResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersDeleteWorkflowResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -485,8 +485,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -596,8 +596,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -4,8 +4,8 @@
 
 import * as Scout from "../index";
 
-export interface AppsServiceHandlersListCopilotsResponse {
-    data: Scout.Copilot[];
+export interface SrcHandlersListWorkflowsResponse {
+    data: Scout.Workflow[];
     next_cursor?: Date;
     has_more: boolean;
 }

@@ -43,7 +43,7 @@ export class Revisions {
     public async list(
         workflow_id: string,
         requestOptions?: Revisions.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersListWorkflowRevisionsResponse> {
+    ): Promise<Scout.SrcHandlersListWorkflowRevisionsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -54,8 +54,8 @@ export class Revisions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -66,7 +66,7 @@ export class Revisions {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersListWorkflowRevisionsResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersListWorkflowRevisionsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -124,7 +124,7 @@ export class Revisions {
         workflow_id: string,
         revision_id: string,
         requestOptions?: Revisions.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersPromoteWorkflowRevisionResponse> {
+    ): Promise<Scout.SrcHandlersPromoteWorkflowRevisionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -135,8 +135,8 @@ export class Revisions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -147,7 +147,7 @@ export class Revisions {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersPromoteWorkflowRevisionResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersPromoteWorkflowRevisionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -205,7 +205,7 @@ export class Revisions {
         workflow_id: string,
         revision_id: string,
         requestOptions?: Revisions.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersDeleteWorkflowRevisionResponse> {
+    ): Promise<Scout.SrcHandlersDeleteWorkflowRevisionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -216,8 +216,8 @@ export class Revisions {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -228,7 +228,7 @@ export class Revisions {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersDeleteWorkflowRevisionResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersDeleteWorkflowRevisionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

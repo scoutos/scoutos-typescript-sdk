@@ -5,9 +5,9 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { EventVersion } from "./EventVersion";
 import { BlockRunStartedEnvironment } from "./BlockRunStartedEnvironment";
 import { BlockRunStartedData } from "./BlockRunStartedData";
+import { EventVersion } from "./EventVersion";
 
 export const BlockRunStarted: core.serialization.ObjectSchema<serializers.BlockRunStarted.Raw, Scout.BlockRunStarted> =
     core.serialization.object({
@@ -15,10 +15,12 @@ export const BlockRunStarted: core.serialization.ObjectSchema<serializers.BlockR
         id: core.serialization.string().optional(),
         correlation_id: core.serialization.string().optional(),
         name: core.serialization.stringLiteral("block_run_started").optional(),
-        version: EventVersion.optional(),
         environment: BlockRunStartedEnvironment,
         timestamp: core.serialization.string().optional(),
         data: BlockRunStartedData,
+        price: core.serialization.string(),
+        event_type: core.serialization.string(),
+        version: EventVersion,
     });
 
 export declare namespace BlockRunStarted {
@@ -27,9 +29,11 @@ export declare namespace BlockRunStarted {
         id?: string | null;
         correlation_id?: string | null;
         name?: "block_run_started" | null;
-        version?: EventVersion.Raw | null;
         environment: BlockRunStartedEnvironment.Raw;
         timestamp?: string | null;
         data: BlockRunStartedData.Raw;
+        price: string;
+        event_type: string;
+        version: EventVersion.Raw;
     }
 }

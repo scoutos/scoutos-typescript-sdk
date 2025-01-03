@@ -4,6 +4,6 @@
 
 import * as Scout from "../index";
 
-export interface AppsServiceHandlersUpdateCopilotResponse {
+export interface SrcHandlersCreateCopilotResponse {
     data?: Scout.Copilot;
 }

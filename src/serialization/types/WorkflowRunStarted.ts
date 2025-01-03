@@ -5,9 +5,9 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { EventVersion } from "./EventVersion";
 import { WorkflowRunStartedEnvironment } from "./WorkflowRunStartedEnvironment";
 import { WorkflowRunStartedData } from "./WorkflowRunStartedData";
+import { EventVersion } from "./EventVersion";
 
 export const WorkflowRunStarted: core.serialization.ObjectSchema<
     serializers.WorkflowRunStarted.Raw,
@@ -17,10 +17,12 @@ export const WorkflowRunStarted: core.serialization.ObjectSchema<
     id: core.serialization.string().optional(),
     correlation_id: core.serialization.string().optional(),
     name: core.serialization.stringLiteral("workflow_run_started").optional(),
-    version: EventVersion.optional(),
     environment: WorkflowRunStartedEnvironment,
     timestamp: core.serialization.string().optional(),
     data: WorkflowRunStartedData,
+    price: core.serialization.string(),
+    event_type: core.serialization.string(),
+    version: EventVersion,
 });
 
 export declare namespace WorkflowRunStarted {
@@ -29,9 +31,11 @@ export declare namespace WorkflowRunStarted {
         id?: string | null;
         correlation_id?: string | null;
         name?: "workflow_run_started" | null;
-        version?: EventVersion.Raw | null;
         environment: WorkflowRunStartedEnvironment.Raw;
         timestamp?: string | null;
         data: WorkflowRunStartedData.Raw;
+        price: string;
+        event_type: string;
+        version: EventVersion.Raw;
     }
 }

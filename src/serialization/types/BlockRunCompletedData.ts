@@ -18,6 +18,7 @@ export const BlockRunCompletedData: core.serialization.ObjectSchema<
     metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     state: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
     session_id: core.serialization.string(),
+    price: core.serialization.number(),
     block_type: core.serialization.string().optional(),
 });
 
@@ -31,6 +32,7 @@ export declare namespace BlockRunCompletedData {
         metadata?: Record<string, unknown> | null;
         state: Record<string, unknown>;
         session_id: string;
+        price: number;
         block_type?: string | null;
     }
 }

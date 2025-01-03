@@ -12,4 +12,5 @@ export interface WorkflowRunStartedData {
     session_id?: string;
     state?: Record<string, unknown>;
     workflow_config?: Record<string, unknown>;
+    price: number;
 }

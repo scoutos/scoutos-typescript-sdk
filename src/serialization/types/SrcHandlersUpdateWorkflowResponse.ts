@@ -7,14 +7,14 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { Workflow } from "./Workflow";
 
-export const AppsServiceHandlersPromoteWorkflowRevisionResponse: core.serialization.ObjectSchema<
-    serializers.AppsServiceHandlersPromoteWorkflowRevisionResponse.Raw,
-    Scout.AppsServiceHandlersPromoteWorkflowRevisionResponse
+export const SrcHandlersUpdateWorkflowResponse: core.serialization.ObjectSchema<
+    serializers.SrcHandlersUpdateWorkflowResponse.Raw,
+    Scout.SrcHandlersUpdateWorkflowResponse
 > = core.serialization.object({
     data: Workflow.optional(),
 });
 
-export declare namespace AppsServiceHandlersPromoteWorkflowRevisionResponse {
+export declare namespace SrcHandlersUpdateWorkflowResponse {
     interface Raw {
         data?: Workflow.Raw | null;
     }

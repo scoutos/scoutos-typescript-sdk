@@ -11,5 +11,6 @@ export interface BlockRunCompletedData {
     metadata?: Record<string, unknown>;
     state: Record<string, unknown>;
     session_id: string;
+    price: number;
     block_type?: string;
 }

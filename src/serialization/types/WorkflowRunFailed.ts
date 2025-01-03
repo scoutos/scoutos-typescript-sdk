@@ -5,9 +5,9 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { EventVersion } from "./EventVersion";
 import { WorkflowRunFailedEnvironment } from "./WorkflowRunFailedEnvironment";
 import { WorkflowRunFailedData } from "./WorkflowRunFailedData";
+import { EventVersion } from "./EventVersion";
 
 export const WorkflowRunFailed: core.serialization.ObjectSchema<
     serializers.WorkflowRunFailed.Raw,
@@ -17,10 +17,12 @@ export const WorkflowRunFailed: core.serialization.ObjectSchema<
     id: core.serialization.string().optional(),
     correlation_id: core.serialization.string().optional(),
     name: core.serialization.stringLiteral("workflow_run_failed").optional(),
-    version: EventVersion.optional(),
     environment: WorkflowRunFailedEnvironment,
     timestamp: core.serialization.string().optional(),
     data: WorkflowRunFailedData,
+    price: core.serialization.string(),
+    event_type: core.serialization.string(),
+    version: EventVersion,
 });
 
 export declare namespace WorkflowRunFailed {
@@ -29,9 +31,11 @@ export declare namespace WorkflowRunFailed {
         id?: string | null;
         correlation_id?: string | null;
         name?: "workflow_run_failed" | null;
-        version?: EventVersion.Raw | null;
         environment: WorkflowRunFailedEnvironment.Raw;
         timestamp?: string | null;
         data: WorkflowRunFailedData.Raw;
+        price: string;
+        event_type: string;
+        version: EventVersion.Raw;
     }
 }

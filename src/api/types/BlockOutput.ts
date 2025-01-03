@@ -15,4 +15,5 @@ export interface BlockOutput {
     input_schema?: Record<string, unknown>;
     output_schema?: unknown[];
     ui?: Scout.NodeUi;
+    trigger_config?: Record<string, unknown>;
 }

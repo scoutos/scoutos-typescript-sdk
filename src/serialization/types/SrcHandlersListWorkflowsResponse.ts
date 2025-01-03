@@ -5,20 +5,20 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { Copilot } from "./Copilot";
+import { Workflow } from "./Workflow";
 
-export const AppsServiceHandlersListCopilotsResponse: core.serialization.ObjectSchema<
-    serializers.AppsServiceHandlersListCopilotsResponse.Raw,
-    Scout.AppsServiceHandlersListCopilotsResponse
+export const SrcHandlersListWorkflowsResponse: core.serialization.ObjectSchema<
+    serializers.SrcHandlersListWorkflowsResponse.Raw,
+    Scout.SrcHandlersListWorkflowsResponse
 > = core.serialization.object({
-    data: core.serialization.list(Copilot),
+    data: core.serialization.list(Workflow),
     next_cursor: core.serialization.date().optional(),
     has_more: core.serialization.boolean(),
 });
 
-export declare namespace AppsServiceHandlersListCopilotsResponse {
+export declare namespace SrcHandlersListWorkflowsResponse {
     interface Raw {
-        data: Copilot.Raw[];
+        data: Workflow.Raw[];
         next_cursor?: string | null;
         has_more: boolean;
     }

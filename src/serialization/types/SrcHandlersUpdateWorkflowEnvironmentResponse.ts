@@ -6,14 +6,14 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 
-export const AppsServiceHandlersUpdateWorkflowEnvironmentResponse: core.serialization.ObjectSchema<
-    serializers.AppsServiceHandlersUpdateWorkflowEnvironmentResponse.Raw,
-    Scout.AppsServiceHandlersUpdateWorkflowEnvironmentResponse
+export const SrcHandlersUpdateWorkflowEnvironmentResponse: core.serialization.ObjectSchema<
+    serializers.SrcHandlersUpdateWorkflowEnvironmentResponse.Raw,
+    Scout.SrcHandlersUpdateWorkflowEnvironmentResponse
 > = core.serialization.object({
     success: core.serialization.boolean(),
 });
 
-export declare namespace AppsServiceHandlersUpdateWorkflowEnvironmentResponse {
+export declare namespace SrcHandlersUpdateWorkflowEnvironmentResponse {
     interface Raw {
         success: boolean;
     }

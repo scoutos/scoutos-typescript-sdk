@@ -6,14 +6,14 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 
-export const AppsServiceHandlersDeleteWorkflowResponse: core.serialization.ObjectSchema<
-    serializers.AppsServiceHandlersDeleteWorkflowResponse.Raw,
-    Scout.AppsServiceHandlersDeleteWorkflowResponse
+export const SrcHandlersDeleteCopilotResponse: core.serialization.ObjectSchema<
+    serializers.SrcHandlersDeleteCopilotResponse.Raw,
+    Scout.SrcHandlersDeleteCopilotResponse
 > = core.serialization.object({
     detail: core.serialization.string(),
 });
 
-export declare namespace AppsServiceHandlersDeleteWorkflowResponse {
+export declare namespace SrcHandlersDeleteCopilotResponse {
     interface Raw {
         detail: string;
     }

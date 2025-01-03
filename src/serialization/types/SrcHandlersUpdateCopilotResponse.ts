@@ -7,14 +7,14 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { Copilot } from "./Copilot";
 
-export const AppsServiceHandlersCreateCopilotResponse: core.serialization.ObjectSchema<
-    serializers.AppsServiceHandlersCreateCopilotResponse.Raw,
-    Scout.AppsServiceHandlersCreateCopilotResponse
+export const SrcHandlersUpdateCopilotResponse: core.serialization.ObjectSchema<
+    serializers.SrcHandlersUpdateCopilotResponse.Raw,
+    Scout.SrcHandlersUpdateCopilotResponse
 > = core.serialization.object({
     data: Copilot.optional(),
 });
 
-export declare namespace AppsServiceHandlersCreateCopilotResponse {
+export declare namespace SrcHandlersUpdateCopilotResponse {
     interface Raw {
         data?: Copilot.Raw | null;
     }

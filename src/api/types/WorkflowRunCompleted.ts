@@ -11,9 +11,11 @@ export interface WorkflowRunCompleted {
     /** Identifies the root cause of the event. If not set, it defaults to the event id. */
     correlation_id?: string;
     name?: "workflow_run_completed";
-    version?: Scout.EventVersion;
     environment: Scout.WorkflowRunCompletedEnvironment;
     /** The timestamp of the event as UTC ISO 8601 string */
     timestamp?: string;
     data: Scout.WorkflowRunCompletedData;
+    price: string;
+    event_type: string;
+    version: Scout.EventVersion;
 }

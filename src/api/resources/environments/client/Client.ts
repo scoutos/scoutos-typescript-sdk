@@ -43,7 +43,7 @@ export class Environments {
     public async list(
         workflow_id: string,
         requestOptions?: Environments.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersGetWorkflowEnvironmentsResponse> {
+    ): Promise<Scout.SrcHandlersGetWorkflowEnvironmentsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -54,8 +54,8 @@ export class Environments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -66,7 +66,7 @@ export class Environments {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersGetWorkflowEnvironmentsResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersGetWorkflowEnvironmentsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -134,7 +134,7 @@ export class Environments {
         environment_id: string,
         request: Scout.UpdateRequestBody,
         requestOptions?: Environments.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersUpdateWorkflowEnvironmentResponse> {
+    ): Promise<Scout.SrcHandlersUpdateWorkflowEnvironmentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -145,8 +145,8 @@ export class Environments {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -158,7 +158,7 @@ export class Environments {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersUpdateWorkflowEnvironmentResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersUpdateWorkflowEnvironmentResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

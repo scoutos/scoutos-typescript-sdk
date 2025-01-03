@@ -5,9 +5,9 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { EventVersion } from "./EventVersion";
 import { BlockStateUpdatedEnvironment } from "./BlockStateUpdatedEnvironment";
 import { BlockStateUpdatedData } from "./BlockStateUpdatedData";
+import { EventVersion } from "./EventVersion";
 
 export const BlockStateUpdated: core.serialization.ObjectSchema<
     serializers.BlockStateUpdated.Raw,
@@ -17,10 +17,12 @@ export const BlockStateUpdated: core.serialization.ObjectSchema<
     id: core.serialization.string().optional(),
     correlation_id: core.serialization.string().optional(),
     name: core.serialization.stringLiteral("block_state_updated").optional(),
-    version: EventVersion.optional(),
     environment: BlockStateUpdatedEnvironment,
     timestamp: core.serialization.string().optional(),
     data: BlockStateUpdatedData,
+    price: core.serialization.string(),
+    event_type: core.serialization.string(),
+    version: EventVersion,
 });
 
 export declare namespace BlockStateUpdated {
@@ -29,9 +31,11 @@ export declare namespace BlockStateUpdated {
         id?: string | null;
         correlation_id?: string | null;
         name?: "block_state_updated" | null;
-        version?: EventVersion.Raw | null;
         environment: BlockStateUpdatedEnvironment.Raw;
         timestamp?: string | null;
         data: BlockStateUpdatedData.Raw;
+        price: string;
+        event_type: string;
+        version: EventVersion.Raw;
     }
 }

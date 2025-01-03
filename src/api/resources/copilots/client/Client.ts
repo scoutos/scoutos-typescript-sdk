@@ -43,7 +43,7 @@ export class Copilots {
     public async list(
         request: Scout.CopilotsListRequest = {},
         requestOptions?: Copilots.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersListCopilotsResponse> {
+    ): Promise<Scout.SrcHandlersListCopilotsResponse> {
         const { sort, direction, start_at: startAt, limit, query } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (sort != null) {
@@ -76,8 +76,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -89,7 +89,7 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersListCopilotsResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersListCopilotsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -145,7 +145,7 @@ export class Copilots {
     public async create(
         request: Scout.CopilotConfig,
         requestOptions?: Copilots.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersCreateCopilotResponse> {
+    ): Promise<Scout.SrcHandlersCreateCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -156,8 +156,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -169,7 +169,7 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersCreateCopilotResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersCreateCopilotResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -227,7 +227,7 @@ export class Copilots {
     public async get(
         copilot_id: string,
         requestOptions?: Copilots.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersGetCopilotResponse> {
+    ): Promise<Scout.SrcHandlersGetCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -238,8 +238,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -250,7 +250,7 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersGetCopilotResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersGetCopilotResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -308,7 +308,7 @@ export class Copilots {
         copilot_id: string,
         request: Scout.CopilotConfig,
         requestOptions?: Copilots.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersUpdateCopilotResponse> {
+    ): Promise<Scout.SrcHandlersUpdateCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -319,8 +319,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -332,7 +332,7 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersUpdateCopilotResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersUpdateCopilotResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -388,7 +388,7 @@ export class Copilots {
     public async delete(
         copilot_id: string,
         requestOptions?: Copilots.RequestOptions
-    ): Promise<Scout.AppsServiceHandlersDeleteCopilotResponse> {
+    ): Promise<Scout.SrcHandlersDeleteCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -399,8 +399,8 @@ export class Copilots {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.6.3",
-                "User-Agent": "scoutos/0.6.3",
+                "X-Fern-SDK-Version": "0.7.0",
+                "User-Agent": "scoutos/0.7.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -411,7 +411,7 @@ export class Copilots {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.AppsServiceHandlersDeleteCopilotResponse.parseOrThrow(_response.body, {
+            return serializers.SrcHandlersDeleteCopilotResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

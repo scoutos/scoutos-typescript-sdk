@@ -2,7 +2,7 @@
 
 ## Workflows
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">list</a>({ ...params }) -> Scout.AppsServiceHandlersListWorkflowsResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">list</a>({ ...params }) -> Scout.SrcHandlersListWorkflowsResponse</code></summary>
 <dl>
 <dd>
 
@@ -65,7 +65,7 @@ await client.workflows.list();
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">create</a>({ ...params }) -> Scout.AppsServiceHandlersCreateWorkflowResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">create</a>({ ...params }) -> Scout.SrcHandlersCreateWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -113,7 +113,7 @@ await client.workflows.create({});
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">get</a>(workflow_id) -> Scout.AppsServiceHandlersGetWorkflowResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">get</a>(workflow_id) -> Scout.SrcHandlersGetWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -176,7 +176,7 @@ await client.workflows.get("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">update</a>(workflow_id, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">update</a>(workflow_id, { ...params }) -> Scout.SrcHandlersUpdateWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -232,7 +232,7 @@ await client.workflows.update("workflow_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">delete</a>(workflow_id) -> Scout.AppsServiceHandlersDeleteWorkflowResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">delete</a>(workflow_id) -> Scout.SrcHandlersDeleteWorkflowResponse</code></summary>
 <dl>
 <dd>
 
@@ -401,7 +401,7 @@ await client.workflows.run("workflow_id", {});
 
 ## Environments
 
-<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">list</a>(workflow_id) -> Scout.AppsServiceHandlersGetWorkflowEnvironmentsResponse</code></summary>
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">list</a>(workflow_id) -> Scout.SrcHandlersGetWorkflowEnvironmentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -464,7 +464,7 @@ await client.environments.list("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">update</a>(workflow_id, environment_id, { ...params }) -> Scout.AppsServiceHandlersUpdateWorkflowEnvironmentResponse</code></summary>
+<details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">update</a>(workflow_id, environment_id, { ...params }) -> Scout.SrcHandlersUpdateWorkflowEnvironmentResponse</code></summary>
 <dl>
 <dd>
 
@@ -553,7 +553,7 @@ await client.environments.update("workflow_id", "environment_id", {
 
 ## Revisions
 
-<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">list</a>(workflow_id) -> Scout.AppsServiceHandlersListWorkflowRevisionsResponse</code></summary>
+<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">list</a>(workflow_id) -> Scout.SrcHandlersListWorkflowRevisionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -616,7 +616,7 @@ await client.revisions.list("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">update</a>(workflow_id, revision_id) -> Scout.AppsServiceHandlersPromoteWorkflowRevisionResponse</code></summary>
+<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">update</a>(workflow_id, revision_id) -> Scout.SrcHandlersPromoteWorkflowRevisionResponse</code></summary>
 <dl>
 <dd>
 
@@ -672,7 +672,7 @@ await client.revisions.update("workflow_id", "revision_id");
 </dl>
 </details>
 
-<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">delete</a>(workflow_id, revision_id) -> Scout.AppsServiceHandlersDeleteWorkflowRevisionResponse</code></summary>
+<details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">delete</a>(workflow_id, revision_id) -> Scout.SrcHandlersDeleteWorkflowRevisionResponse</code></summary>
 <dl>
 <dd>
 
@@ -832,7 +832,7 @@ await client.workflowLogs.get({
 
 ## Copilots
 
-<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">list</a>({ ...params }) -> Scout.AppsServiceHandlersListCopilotsResponse</code></summary>
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">list</a>({ ...params }) -> Scout.SrcHandlersListCopilotsResponse</code></summary>
 <dl>
 <dd>
 
@@ -895,7 +895,7 @@ await client.copilots.list();
 </dl>
 </details>
 
-<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">create</a>({ ...params }) -> Scout.AppsServiceHandlersCreateCopilotResponse</code></summary>
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">create</a>({ ...params }) -> Scout.SrcHandlersCreateCopilotResponse</code></summary>
 <dl>
 <dd>
 
@@ -943,7 +943,7 @@ await client.copilots.create({});
 </dl>
 </details>
 
-<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">get</a>(copilot_id) -> Scout.AppsServiceHandlersGetCopilotResponse</code></summary>
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">get</a>(copilot_id) -> Scout.SrcHandlersGetCopilotResponse</code></summary>
 <dl>
 <dd>
 
@@ -1006,7 +1006,7 @@ await client.copilots.get("copilot_id");
 </dl>
 </details>
 
-<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">update</a>(copilot_id, { ...params }) -> Scout.AppsServiceHandlersUpdateCopilotResponse</code></summary>
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">update</a>(copilot_id, { ...params }) -> Scout.SrcHandlersUpdateCopilotResponse</code></summary>
 <dl>
 <dd>
 
@@ -1062,7 +1062,7 @@ await client.copilots.update("copilot_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">delete</a>(copilot_id) -> Scout.AppsServiceHandlersDeleteCopilotResponse</code></summary>
+<details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">delete</a>(copilot_id) -> Scout.SrcHandlersDeleteCopilotResponse</code></summary>
 <dl>
 <dd>
 

@@ -7,14 +7,14 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { Workflow } from "./Workflow";
 
-export const AppsServiceHandlersListWorkflowRevisionsResponse: core.serialization.ObjectSchema<
-    serializers.AppsServiceHandlersListWorkflowRevisionsResponse.Raw,
-    Scout.AppsServiceHandlersListWorkflowRevisionsResponse
+export const SrcHandlersListWorkflowRevisionsResponse: core.serialization.ObjectSchema<
+    serializers.SrcHandlersListWorkflowRevisionsResponse.Raw,
+    Scout.SrcHandlersListWorkflowRevisionsResponse
 > = core.serialization.object({
     data: core.serialization.list(Workflow),
 });
 
-export declare namespace AppsServiceHandlersListWorkflowRevisionsResponse {
+export declare namespace SrcHandlersListWorkflowRevisionsResponse {
     interface Raw {
         data: Workflow.Raw[];
     }

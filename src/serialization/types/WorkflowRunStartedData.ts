@@ -18,6 +18,7 @@ export const WorkflowRunStartedData: core.serialization.ObjectSchema<
     session_id: core.serialization.string().optional(),
     state: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     workflow_config: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+    price: core.serialization.number(),
 });
 
 export declare namespace WorkflowRunStartedData {
@@ -29,5 +30,6 @@ export declare namespace WorkflowRunStartedData {
         session_id?: string | null;
         state?: Record<string, unknown> | null;
         workflow_config?: Record<string, unknown> | null;
+        price: number;
     }
 }

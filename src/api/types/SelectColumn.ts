@@ -10,6 +10,7 @@ export interface SelectColumn {
     column_type: "select";
     data_type?: "string";
     hidden?: boolean;
-    options: Scout.SelectOptionItem[];
+    /** Available options for selection */
+    options?: Scout.SelectOptionItem[];
     selected_option?: number;
 }

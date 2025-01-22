@@ -6,7 +6,7 @@ export interface JsonColumn {
     column_id?: string;
     column_display_name?: string;
     column_type: "json";
-    data_type?: "json";
+    data_type?: "string";
     hidden?: boolean;
     default?: string;
 }

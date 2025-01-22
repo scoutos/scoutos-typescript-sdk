@@ -14,7 +14,7 @@ export const SelectColumn: core.serialization.ObjectSchema<serializers.SelectCol
         column_type: core.serialization.stringLiteral("select"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
-        options: core.serialization.list(SelectOptionItem),
+        options: core.serialization.list(SelectOptionItem).optional(),
         selected_option: core.serialization.number().optional(),
     });
 
@@ -25,7 +25,7 @@ export declare namespace SelectColumn {
         column_type: "select";
         data_type?: "string" | null;
         hidden?: boolean | null;
-        options: SelectOptionItem.Raw[];
+        options?: SelectOptionItem.Raw[] | null;
         selected_option?: number | null;
     }
 }

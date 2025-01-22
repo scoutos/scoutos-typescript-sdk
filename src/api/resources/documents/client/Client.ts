@@ -43,7 +43,7 @@ export class Documents {
         collection_id: string,
         table_id: string,
         requestOptions?: Documents.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersGetDocumentsResponse> {
+    ): Promise<Scout.CollectionServiceHandlersGetDocumentsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -54,8 +54,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -66,7 +66,7 @@ export class Documents {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersGetDocumentsResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersGetDocumentsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -128,7 +128,7 @@ export class Documents {
         table_id: string,
         request: Scout.DocumentsCreateRequest,
         requestOptions?: Documents.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersCreateDocumentResponse> {
+    ): Promise<Scout.CollectionServiceHandlersCreateDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -139,8 +139,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -152,7 +152,7 @@ export class Documents {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersCreateDocumentResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersCreateDocumentResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -212,7 +212,7 @@ export class Documents {
         table_id: string,
         document_id: string,
         requestOptions?: Documents.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersGetDocumentResponse> {
+    ): Promise<Scout.CollectionServiceHandlersGetDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -225,8 +225,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -237,7 +237,7 @@ export class Documents {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersGetDocumentResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersGetDocumentResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -301,7 +301,7 @@ export class Documents {
         table_id: string,
         request: Record<string, Scout.DocumentsUpdateRequestValue>,
         requestOptions?: Documents.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersUpdateDocumentResponse> {
+    ): Promise<Scout.CollectionServiceHandlersUpdateDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -314,8 +314,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -327,7 +327,7 @@ export class Documents {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersUpdateDocumentResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersUpdateDocumentResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -372,8 +372,6 @@ export class Documents {
     }
 
     /**
-     * Delete a document given a document_id.
-     *
      * @param {string} collection_id
      * @param {string} table_id
      * @param {string} document_id
@@ -389,7 +387,7 @@ export class Documents {
         table_id: string,
         document_id: string,
         requestOptions?: Documents.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersDeleteDocumentResponse> {
+    ): Promise<Scout.CollectionServiceHandlersDeleteDocumentsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -402,8 +400,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -414,7 +412,95 @@ export class Documents {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersDeleteDocumentResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersDeleteDocumentsResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError();
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Delete documents given a list of document ids.
+     *
+     * @param {string} collection_id
+     * @param {string} table_id
+     * @param {string[]} request
+     * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.documents.deleteBatch("collection_id", "table_id", ["string"])
+     */
+    public async deleteBatch(
+        collection_id: string,
+        table_id: string,
+        request: string[],
+        requestOptions?: Documents.RequestOptions
+    ): Promise<Scout.CollectionServiceHandlersDeleteDocumentsResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(
+                    table_id
+                )}/documents/delete`
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.documents.deleteBatch.Request.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.CollectionServiceHandlersDeleteDocumentsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

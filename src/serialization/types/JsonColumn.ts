@@ -11,7 +11,7 @@ export const JsonColumn: core.serialization.ObjectSchema<serializers.JsonColumn.
         column_id: core.serialization.string().optional(),
         column_display_name: core.serialization.string().optional(),
         column_type: core.serialization.stringLiteral("json"),
-        data_type: core.serialization.stringLiteral("json").optional(),
+        data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
         default: core.serialization.string().optional(),
     });
@@ -21,7 +21,7 @@ export declare namespace JsonColumn {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: "json";
-        data_type?: "json" | null;
+        data_type?: "string" | null;
         hidden?: boolean | null;
         default?: string | null;
     }

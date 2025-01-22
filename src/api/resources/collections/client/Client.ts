@@ -37,7 +37,7 @@ export class Collections {
      */
     public async list(
         requestOptions?: Collections.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersGetCollectionsResponse> {
+    ): Promise<Scout.CollectionServiceHandlersGetCollectionsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -48,8 +48,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -60,7 +60,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersGetCollectionsResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersGetCollectionsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -103,7 +103,7 @@ export class Collections {
     public async create(
         request: Scout.CollectionConfig,
         requestOptions?: Collections.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersCreateCollectionResponse> {
+    ): Promise<Scout.CollectionServiceHandlersCreateCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -114,8 +114,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -127,7 +127,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersCreateCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersCreateCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -183,7 +183,7 @@ export class Collections {
     public async get(
         collection_id: string,
         requestOptions?: Collections.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersGetCollectionResponse> {
+    ): Promise<Scout.CollectionServiceHandlersGetCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -194,8 +194,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -206,7 +206,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersGetCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersGetCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -264,7 +264,7 @@ export class Collections {
         collection_id: string,
         request: Scout.CollectionConfig,
         requestOptions?: Collections.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersUpdateCollectionResponse> {
+    ): Promise<Scout.CollectionServiceHandlersUpdateCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -275,8 +275,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -288,7 +288,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersUpdateCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersUpdateCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -346,7 +346,7 @@ export class Collections {
     public async delete(
         collection_id: string,
         requestOptions?: Collections.RequestOptions
-    ): Promise<Scout.EvalServiceHandlersDeleteCollectionResponse> {
+    ): Promise<Scout.CollectionServiceHandlersDeleteCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -357,8 +357,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.7.1",
-                "User-Agent": "scoutos/0.7.1",
+                "X-Fern-SDK-Version": "0.8.1",
+                "User-Agent": "scoutos/0.8.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -369,7 +369,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.EvalServiceHandlersDeleteCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.CollectionServiceHandlersDeleteCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

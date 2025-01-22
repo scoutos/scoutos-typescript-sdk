@@ -1118,7 +1118,7 @@ await client.copilots.delete("copilot_id");
 
 ## Collections
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>() -> Scout.EvalServiceHandlersGetCollectionsResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>() -> Scout.CollectionServiceHandlersGetCollectionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1158,7 +1158,7 @@ await client.collections.list();
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">create</a>({ ...params }) -> Scout.EvalServiceHandlersCreateCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">create</a>({ ...params }) -> Scout.CollectionServiceHandlersCreateCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1206,7 +1206,7 @@ await client.collections.create({});
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">get</a>(collection_id) -> Scout.EvalServiceHandlersGetCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">get</a>(collection_id) -> Scout.CollectionServiceHandlersGetCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1254,7 +1254,7 @@ await client.collections.get("collection_id");
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">update</a>(collection_id, { ...params }) -> Scout.EvalServiceHandlersUpdateCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">update</a>(collection_id, { ...params }) -> Scout.CollectionServiceHandlersUpdateCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1310,7 +1310,7 @@ await client.collections.update("collection_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">delete</a>(collection_id) -> Scout.EvalServiceHandlersDeleteCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">delete</a>(collection_id) -> Scout.CollectionServiceHandlersDeleteCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -1375,7 +1375,7 @@ await client.collections.delete("collection_id");
 
 ## Tables
 
-<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">list</a>(collection_id) -> Scout.EvalServiceHandlersGetTablesResponse</code></summary>
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">list</a>(collection_id) -> Scout.CollectionServiceHandlersGetTablesResponse</code></summary>
 <dl>
 <dd>
 
@@ -1423,7 +1423,7 @@ await client.tables.list("collection_id");
 </dl>
 </details>
 
-<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">create</a>(collection_id, { ...params }) -> Scout.EvalServiceHandlersCreateTableResponse</code></summary>
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">create</a>(collection_id, { ...params }) -> Scout.CollectionServiceHandlersCreateTableResponse</code></summary>
 <dl>
 <dd>
 
@@ -1479,7 +1479,7 @@ await client.tables.create("collection_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">get</a>(collection_id, table_id) -> Scout.EvalServiceHandlersGetTableResponse</code></summary>
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">get</a>(collection_id, table_id) -> Scout.CollectionServiceHandlersGetTableResponse</code></summary>
 <dl>
 <dd>
 
@@ -1535,7 +1535,7 @@ await client.tables.get("collection_id", "table_id");
 </dl>
 </details>
 
-<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">update</a>(collection_id, table_id, { ...params }) -> Scout.EvalServiceHandlersUpdateTableResponse</code></summary>
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">update</a>(collection_id, table_id, { ...params }) -> Scout.CollectionServiceHandlersUpdateTableResponse</code></summary>
 <dl>
 <dd>
 
@@ -1599,7 +1599,7 @@ await client.tables.update("collection_id", "table_id", {});
 </dl>
 </details>
 
-<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">delete</a>(collection_id, table_id) -> Scout.EvalServiceHandlersDeleteTableResponse</code></summary>
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">delete</a>(collection_id, table_id) -> Scout.CollectionServiceHandlersDeleteTableResponse</code></summary>
 <dl>
 <dd>
 
@@ -1670,9 +1670,92 @@ await client.tables.delete("collection_id", "table_id");
 </dl>
 </details>
 
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">sync</a>(collection_id, table_id, { ...params }) -> Scout.CollectionServiceHandlersTableSyncResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sync a table with a list of documents.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tables.sync("collection_id", "table_id", [
+    {
+        key: "value",
+    },
+]);
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Record<string, unknown>[]`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Tables.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 ## Documents
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">list</a>(collection_id, table_id) -> Scout.EvalServiceHandlersGetDocumentsResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">list</a>(collection_id, table_id) -> Scout.CollectionServiceHandlersGetDocumentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1728,7 +1811,7 @@ await client.documents.list("collection_id", "table_id");
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">create</a>(collection_id, table_id, { ...params }) -> Scout.EvalServiceHandlersCreateDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">create</a>(collection_id, table_id, { ...params }) -> Scout.CollectionServiceHandlersCreateDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -1794,7 +1877,7 @@ await client.documents.create("collection_id", "table_id", {
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">get</a>(collection_id, table_id, document_id) -> Scout.EvalServiceHandlersGetDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">get</a>(collection_id, table_id, document_id) -> Scout.CollectionServiceHandlersGetDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -1858,7 +1941,7 @@ await client.documents.get("collection_id", "table_id", "document_id");
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">update</a>(collection_id, document_id, table_id, { ...params }) -> Scout.EvalServiceHandlersUpdateDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">update</a>(collection_id, document_id, table_id, { ...params }) -> Scout.CollectionServiceHandlersUpdateDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -1932,24 +2015,9 @@ await client.documents.update("collection_id", "document_id", "table_id", {
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">delete</a>(collection_id, table_id, document_id) -> Scout.EvalServiceHandlersDeleteDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">delete</a>(collection_id, table_id, document_id) -> Scout.CollectionServiceHandlersDeleteDocumentsResponse</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Delete a document given a document_id.
-
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -1993,6 +2061,85 @@ await client.documents.delete("collection_id", "table_id", "document_id");
 <dd>
 
 **document_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Documents.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">deleteBatch</a>(collection_id, table_id, { ...params }) -> Scout.CollectionServiceHandlersDeleteDocumentsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Delete documents given a list of document ids.
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.documents.deleteBatch("collection_id", "table_id", ["string"]);
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `string[]`
 
 </dd>
 </dl>

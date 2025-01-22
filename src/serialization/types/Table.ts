@@ -16,6 +16,7 @@ export const Table: core.serialization.ObjectSchema<serializers.Table.Raw, Scout
     last_updated_by: Identity,
     revision_id: core.serialization.string(),
     table_id: core.serialization.string(),
+    index_id: core.serialization.string().optional(),
 });
 
 export declare namespace Table {
@@ -27,5 +28,6 @@ export declare namespace Table {
         last_updated_by: Identity.Raw;
         revision_id: string;
         table_id: string;
+        index_id?: string | null;
     }
 }

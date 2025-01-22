@@ -12,4 +12,5 @@ export interface Table {
     last_updated_by: Scout.Identity;
     revision_id: string;
     table_id: string;
+    index_id?: string;
 }

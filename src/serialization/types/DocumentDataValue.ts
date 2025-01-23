@@ -8,13 +8,13 @@ import * as core from "../../core";
 
 export const DocumentDataValue: core.serialization.Schema<serializers.DocumentDataValue.Raw, Scout.DocumentDataValue> =
     core.serialization.undiscriminatedUnion([
+        core.serialization.string(),
+        core.serialization.number(),
+        core.serialization.number(),
         core.serialization.boolean(),
         core.serialization.record(core.serialization.string(), core.serialization.unknown()),
-        core.serialization.number(),
-        core.serialization.number(),
-        core.serialization.string(),
     ]);
 
 export declare namespace DocumentDataValue {
-    type Raw = boolean | Record<string, unknown> | number | number | string;
+    type Raw = string | number | number | boolean | Record<string, unknown>;
 }

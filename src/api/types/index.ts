@@ -107,8 +107,6 @@ export * from "./NumberColumnMaxValue";
 export * from "./NumberColumn";
 export * from "./SelectColumn";
 export * from "./Table";
-export * from "./TableConfigInputSchemaItem";
-export * from "./TableConfigInput";
 export * from "./TableConfigOutputSchemaItem";
 export * from "./TableConfigOutput";
 export * from "./TextLongColumn";

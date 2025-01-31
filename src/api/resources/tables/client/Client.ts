@@ -52,8 +52,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.2",
-                "User-Agent": "scoutos/0.8.2",
+                "X-Fern-SDK-Version": "0.8.3",
+                "User-Agent": "scoutos/0.8.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -116,11 +116,11 @@ export class Tables {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.tables.create("collection_id", {})
+     *     await client.tables.create("collection_id")
      */
     public async create(
         collection_id: string,
-        request: Scout.TableConfigInput,
+        request: Scout.TableConfigInput = {},
         requestOptions?: Tables.RequestOptions
     ): Promise<Scout.CollectionServiceHandlersCreateTableResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -133,8 +133,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.2",
-                "User-Agent": "scoutos/0.8.2",
+                "X-Fern-SDK-Version": "0.8.3",
+                "User-Agent": "scoutos/0.8.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -215,8 +215,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.2",
-                "User-Agent": "scoutos/0.8.2",
+                "X-Fern-SDK-Version": "0.8.3",
+                "User-Agent": "scoutos/0.8.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -274,18 +274,18 @@ export class Tables {
     /**
      * @param {string} collection_id
      * @param {string} table_id
-     * @param {Scout.TableConfigInput} request
+     * @param {Scout.TableData} request
      * @param {Tables.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.tables.update("collection_id", "table_id", {})
+     *     await client.tables.update("collection_id", "table_id")
      */
     public async update(
         collection_id: string,
         table_id: string,
-        request: Scout.TableConfigInput,
+        request: Scout.TableData = {},
         requestOptions?: Tables.RequestOptions
     ): Promise<Scout.CollectionServiceHandlersUpdateTableResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -298,14 +298,14 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.2",
-                "User-Agent": "scoutos/0.8.2",
+                "X-Fern-SDK-Version": "0.8.3",
+                "User-Agent": "scoutos/0.8.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
             requestType: "json",
-            body: serializers.TableConfigInput.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.TableData.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -382,8 +382,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.2",
-                "User-Agent": "scoutos/0.8.2",
+                "X-Fern-SDK-Version": "0.8.3",
+                "User-Agent": "scoutos/0.8.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -469,8 +469,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.2",
-                "User-Agent": "scoutos/0.8.2",
+                "X-Fern-SDK-Version": "0.8.3",
+                "User-Agent": "scoutos/0.8.3",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

@@ -1436,7 +1436,7 @@ await client.tables.list("collection_id");
 <dd>
 
 ```typescript
-await client.tables.create("collection_id", {});
+await client.tables.create("collection_id");
 ```
 
 </dd>
@@ -1548,7 +1548,7 @@ await client.tables.get("collection_id", "table_id");
 <dd>
 
 ```typescript
-await client.tables.update("collection_id", "table_id", {});
+await client.tables.update("collection_id", "table_id");
 ```
 
 </dd>
@@ -1580,7 +1580,7 @@ await client.tables.update("collection_id", "table_id", {});
 <dl>
 <dd>
 
-**request:** `Scout.TableConfigInput`
+**request:** `Scout.TableData`
 
 </dd>
 </dl>

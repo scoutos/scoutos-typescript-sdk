@@ -2,6 +2,56 @@
 
 ## Workflows
 
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">createRevision</a>({ ...params }) -> Scout.SrcHandlersCreateWorkflowRevisionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.createRevision({
+    body: {},
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.WorkflowsCreateRevisionRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workflows.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">list</a>({ ...params }) -> Scout.SrcHandlersListWorkflowsResponse</code></summary>
 <dl>
 <dd>
@@ -78,7 +128,9 @@ await client.workflows.list();
 <dd>
 
 ```typescript
-await client.workflows.create({});
+await client.workflows.create({
+    body: {},
+});
 ```
 
 </dd>
@@ -94,7 +146,7 @@ await client.workflows.create({});
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowConfigInput`
+**request:** `Scout.WorkflowsCreateRequest`
 
 </dd>
 </dl>
@@ -381,6 +433,56 @@ await client.workflows.run("workflow_id", {});
 <dd>
 
 **request:** `Scout.WorkflowsRunRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Workflows.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">runWithConfig</a>({ ...params }) -> Scout.WorkflowsRunWithConfigResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.runWithConfig({
+    workflow_config: {},
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.SrcHandlersWorkflowsExecuteWithConfigReqBody`
 
 </dd>
 </dl>

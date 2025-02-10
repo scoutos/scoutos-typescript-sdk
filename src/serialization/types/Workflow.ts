@@ -11,6 +11,7 @@ import { Identity } from "./Identity";
 export const Workflow: core.serialization.ObjectSchema<serializers.Workflow.Raw, Scout.Workflow> =
     core.serialization.object({
         workflow_config: WorkflowConfigOutput,
+        workflow_key: core.serialization.string().optional(),
         last_updated_at: core.serialization.date(),
         created_at: core.serialization.date(),
         created_by: Identity,
@@ -23,6 +24,7 @@ export const Workflow: core.serialization.ObjectSchema<serializers.Workflow.Raw,
 export declare namespace Workflow {
     interface Raw {
         workflow_config: WorkflowConfigOutput.Raw;
+        workflow_key?: string | null;
         last_updated_at: string;
         created_at: string;
         created_by: Identity.Raw;

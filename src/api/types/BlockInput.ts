@@ -16,4 +16,6 @@ export interface BlockInput {
     output_schema?: unknown[];
     ui?: Scout.NodeUi;
     trigger_config?: Record<string, unknown>;
+    /** If true, will continue down the branch of the failed block */
+    ignore_error?: boolean;
 }

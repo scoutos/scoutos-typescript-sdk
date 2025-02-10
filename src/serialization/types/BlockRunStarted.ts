@@ -14,7 +14,7 @@ export const BlockRunStarted: core.serialization.ObjectSchema<serializers.BlockR
         organization_id: core.serialization.string(),
         id: core.serialization.string().optional(),
         correlation_id: core.serialization.string().optional(),
-        name: core.serialization.stringLiteral("block_run_started").optional(),
+        name: core.serialization.stringLiteral("block_run_started"),
         environment: BlockRunStartedEnvironment,
         timestamp: core.serialization.string().optional(),
         data: BlockRunStartedData,
@@ -28,7 +28,7 @@ export declare namespace BlockRunStarted {
         organization_id: string;
         id?: string | null;
         correlation_id?: string | null;
-        name?: "block_run_started" | null;
+        name: "block_run_started";
         environment: BlockRunStartedEnvironment.Raw;
         timestamp?: string | null;
         data: BlockRunStartedData.Raw;

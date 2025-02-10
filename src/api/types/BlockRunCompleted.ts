@@ -10,7 +10,7 @@ export interface BlockRunCompleted {
     id?: string;
     /** Identifies the root cause of the event. If not set, it defaults to the event id. */
     correlation_id?: string;
-    name?: "block_run_completed";
+    name: "block_run_completed";
     environment: Scout.BlockRunCompletedEnvironment;
     /** The timestamp of the event as UTC ISO 8601 string */
     timestamp?: string;

@@ -6,6 +6,7 @@ import * as Scout from "../index";
 
 export interface Workflow {
     workflow_config: Scout.WorkflowConfigOutput;
+    workflow_key?: string;
     last_updated_at: Date;
     created_at: Date;
     created_by: Scout.Identity;

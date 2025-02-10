@@ -5,8 +5,8 @@
 import * as environments from "../../../../environments";
 import * as core from "../../../../core";
 import * as Scout from "../../../index";
-import urlJoin from "url-join";
 import * as serializers from "../../../../serialization/index";
+import urlJoin from "url-join";
 import * as errors from "../../../../errors/index";
 import * as stream from "stream";
 
@@ -29,6 +29,99 @@ export declare namespace Workflows {
 
 export class Workflows {
     constructor(protected readonly _options: Workflows.Options = {}) {}
+
+    /**
+     * @param {Scout.WorkflowsCreateRevisionRequest} request
+     * @param {Workflows.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.workflows.createRevision({
+     *         body: {}
+     *     })
+     */
+    public async createRevision(
+        request: Scout.WorkflowsCreateRevisionRequest,
+        requestOptions?: Workflows.RequestOptions
+    ): Promise<Scout.SrcHandlersCreateWorkflowRevisionResponse> {
+        const { workflow_id: workflowId, workflow_key: workflowKey, body: _body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (workflowId != null) {
+            _queryParams["workflow_id"] = workflowId;
+        }
+
+        if (workflowKey != null) {
+            _queryParams["workflow_key"] = workflowKey;
+        }
+
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
+                "v2/workflows/revisions"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.8.3",
+                "User-Agent": "scoutos/0.8.3",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            body: serializers.WorkflowConfigInput.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcHandlersCreateWorkflowRevisionResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError();
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
 
     /**
      * List all workflows in the organization
@@ -135,18 +228,26 @@ export class Workflows {
     }
 
     /**
-     * @param {Scout.WorkflowConfigInput} request
+     * @param {Scout.WorkflowsCreateRequest} request
      * @param {Workflows.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.workflows.create({})
+     *     await client.workflows.create({
+     *         body: {}
+     *     })
      */
     public async create(
-        request: Scout.WorkflowConfigInput,
+        request: Scout.WorkflowsCreateRequest,
         requestOptions?: Workflows.RequestOptions
     ): Promise<Scout.SrcHandlersCreateWorkflowResponse> {
+        const { workflow_key: workflowKey, body: _body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (workflowKey != null) {
+            _queryParams["workflow_key"] = workflowKey;
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -163,8 +264,9 @@ export class Workflows {
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
-            body: serializers.WorkflowConfigInput.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.WorkflowConfigInput.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -614,6 +716,105 @@ export class Workflows {
         });
         if (_response.ok) {
             return serializers.WorkflowRunResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        })
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError();
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.SrcHandlersWorkflowsExecuteWithConfigReqBody} request
+     * @param {Workflows.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.workflows.runWithConfig({
+     *         workflow_config: {}
+     *     })
+     */
+    public async runWithConfig(
+        request: Scout.SrcHandlersWorkflowsExecuteWithConfigReqBody,
+        requestOptions?: Workflows.RequestOptions
+    ): Promise<Scout.WorkflowsRunWithConfigResponse> {
+        const { environment, revision_id: revisionId, session_id: sessionId, ..._body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (environment != null) {
+            _queryParams["environment"] = environment;
+        }
+
+        if (revisionId != null) {
+            _queryParams["revision_id"] = revisionId;
+        }
+
+        if (sessionId != null) {
+            _queryParams["session_id"] = sessionId;
+        }
+
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
+                "v2/workflows/execute"
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.8.3",
+                "User-Agent": "scoutos/0.8.3",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            body: serializers.SrcHandlersWorkflowsExecuteWithConfigReqBody.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.WorkflowsRunWithConfigResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

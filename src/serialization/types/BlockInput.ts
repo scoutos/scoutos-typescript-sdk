@@ -22,6 +22,7 @@ export const BlockInput: core.serialization.ObjectSchema<serializers.BlockInput.
         output_schema: core.serialization.list(core.serialization.unknown()).optional(),
         ui: NodeUi.optional(),
         trigger_config: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
+        ignore_error: core.serialization.boolean().optional(),
     });
 
 export declare namespace BlockInput {
@@ -37,5 +38,6 @@ export declare namespace BlockInput {
         output_schema?: unknown[] | null;
         ui?: NodeUi.Raw | null;
         trigger_config?: Record<string, unknown> | null;
+        ignore_error?: boolean | null;
     }
 }

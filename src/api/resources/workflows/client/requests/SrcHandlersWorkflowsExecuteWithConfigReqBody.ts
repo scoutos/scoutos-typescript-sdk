@@ -22,6 +22,7 @@ export interface SrcHandlersWorkflowsExecuteWithConfigReqBody {
     environment?: string;
     revision_id?: string;
     session_id?: string;
+    workflow_key?: string;
     inputs?: Record<string, Scout.SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue>;
     streaming?: boolean;
     workflow_config: Scout.WorkflowConfigInput;

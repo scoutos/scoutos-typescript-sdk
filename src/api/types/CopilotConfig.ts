@@ -9,8 +9,10 @@ export interface CopilotConfig {
     img_url?: string;
     display_name?: string;
     mode?: Scout.CopilotConfigMode;
+    code_theme?: Scout.CopilotConfigCodeTheme;
     colors?: Record<string, string>;
     fab?: Record<string, Scout.CopilotConfigFabValue | undefined>;
+    loading_text?: string;
     message_placeholder?: string;
     initial_activity?: unknown[];
     allowed_origins?: string;

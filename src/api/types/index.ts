@@ -34,6 +34,7 @@ export * from "./BlockStateUpdatedDataUpdateType";
 export * from "./BlockStateUpdatedData";
 export * from "./Copilot";
 export * from "./CopilotConfigMode";
+export * from "./CopilotConfigCodeTheme";
 export * from "./CopilotConfigFabValue";
 export * from "./CopilotConfig";
 export * from "./Dependency";

@@ -12,6 +12,7 @@ export const SrcHandlersWorkflowsExecuteWithConfigReqBody: core.serialization.Sc
     serializers.SrcHandlersWorkflowsExecuteWithConfigReqBody.Raw,
     Omit<Scout.SrcHandlersWorkflowsExecuteWithConfigReqBody, "environment" | "revision_id" | "session_id">
 > = core.serialization.object({
+    workflow_key: core.serialization.string().optional(),
     inputs: core.serialization
         .record(core.serialization.string(), SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue)
         .optional(),
@@ -21,6 +22,7 @@ export const SrcHandlersWorkflowsExecuteWithConfigReqBody: core.serialization.Sc
 
 export declare namespace SrcHandlersWorkflowsExecuteWithConfigReqBody {
     interface Raw {
+        workflow_key?: string | null;
         inputs?: Record<string, SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue.Raw> | null;
         streaming?: boolean | null;
         workflow_config: WorkflowConfigInput.Raw;

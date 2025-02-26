@@ -52,8 +52,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.5",
-                "User-Agent": "scoutos/0.8.5",
+                "X-Fern-SDK-Version": "0.9.0",
+                "User-Agent": "scoutos/0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -133,8 +133,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.5",
-                "User-Agent": "scoutos/0.8.5",
+                "X-Fern-SDK-Version": "0.9.0",
+                "User-Agent": "scoutos/0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -204,19 +204,19 @@ export class Tables {
         collection_id: string,
         table_id: string,
         requestOptions?: Tables.RequestOptions
-    ): Promise<Scout.CollectionServiceHandlersGetTableResponse> {
+    ): Promise<Scout.TablesGetResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}`
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/schema`
             ),
             method: "GET",
             headers: {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.5",
-                "User-Agent": "scoutos/0.8.5",
+                "X-Fern-SDK-Version": "0.9.0",
+                "User-Agent": "scoutos/0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -227,7 +227,7 @@ export class Tables {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersGetTableResponse.parseOrThrow(_response.body, {
+            return serializers.TablesGetResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -298,8 +298,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.5",
-                "User-Agent": "scoutos/0.8.5",
+                "X-Fern-SDK-Version": "0.9.0",
+                "User-Agent": "scoutos/0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -356,7 +356,7 @@ export class Tables {
     }
 
     /**
-     * Delete a table given a table_id.
+     * Delete a table given a collection_id and table_id.
      *
      * @param {string} collection_id
      * @param {string} table_id
@@ -382,8 +382,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.5",
-                "User-Agent": "scoutos/0.8.5",
+                "X-Fern-SDK-Version": "0.9.0",
+                "User-Agent": "scoutos/0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -469,8 +469,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.8.5",
-                "User-Agent": "scoutos/0.8.5",
+                "X-Fern-SDK-Version": "0.9.0",
+                "User-Agent": "scoutos/0.9.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

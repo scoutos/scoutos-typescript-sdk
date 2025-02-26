@@ -12,10 +12,14 @@ export const CollectionServiceHandlersGetCollectionsResponse: core.serialization
     Scout.CollectionServiceHandlersGetCollectionsResponse
 > = core.serialization.object({
     data: core.serialization.list(Collection).optional(),
+    has_more: core.serialization.boolean().optional(),
+    next_cursor: core.serialization.date().optional(),
 });
 
 export declare namespace CollectionServiceHandlersGetCollectionsResponse {
     interface Raw {
         data?: Collection.Raw[] | null;
+        has_more?: boolean | null;
+        next_cursor?: string | null;
     }
 }

@@ -12,6 +12,7 @@ export const Document: core.serialization.ObjectSchema<serializers.Document.Raw,
     core.serialization.object({
         document_id: core.serialization.string().optional(),
         data: core.serialization.record(core.serialization.string(), DocumentDataValue).optional(),
+        document_data_id: core.serialization.string().optional(),
         created_at: core.serialization.date().optional(),
         last_updated_at: core.serialization.date().optional(),
         created_by: Identity,
@@ -23,6 +24,7 @@ export declare namespace Document {
     interface Raw {
         document_id?: string | null;
         data?: Record<string, DocumentDataValue.Raw> | null;
+        document_data_id?: string | null;
         created_at?: string | null;
         last_updated_at?: string | null;
         created_by: Identity.Raw;

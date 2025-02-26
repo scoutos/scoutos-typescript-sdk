@@ -1220,7 +1220,7 @@ await client.copilots.delete("copilot_id");
 
 ## Collections
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>() -> Scout.CollectionServiceHandlersGetCollectionsResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>({ ...params }) -> Scout.CollectionServiceHandlersGetCollectionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1245,6 +1245,14 @@ await client.collections.list();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.CollectionsListRequest`
+
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -1581,7 +1589,7 @@ await client.tables.create("collection_id");
 </dl>
 </details>
 
-<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">get</a>(collection_id, table_id) -> Scout.CollectionServiceHandlersGetTableResponse</code></summary>
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">get</a>(collection_id, table_id) -> Scout.TablesGetResponse</code></summary>
 <dl>
 <dd>
 
@@ -1713,7 +1721,7 @@ await client.tables.update("collection_id", "table_id");
 <dl>
 <dd>
 
-Delete a table given a table_id.
+Delete a table given a collection_id and table_id.
 
 </dd>
 </dl>

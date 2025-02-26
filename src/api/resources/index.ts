@@ -16,4 +16,5 @@ export * from "./environments/client/requests";
 export * from "./usage/client/requests";
 export * from "./workflowLogs/client/requests";
 export * from "./copilots/client/requests";
+export * from "./collections/client/requests";
 export * from "./tables/client/requests";

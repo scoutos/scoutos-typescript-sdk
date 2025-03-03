@@ -1589,7 +1589,7 @@ await client.tables.create("collection_id");
 </dl>
 </details>
 
-<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">get</a>(collection_id, table_id) -> Scout.TablesGetResponse</code></summary>
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">get</a>(collection_id, table_id) -> Scout.CollectionServiceHandlersGetTableResponse</code></summary>
 <dl>
 <dd>
 
@@ -1738,6 +1738,62 @@ Delete a table given a collection_id and table_id.
 
 ```typescript
 await client.tables.delete("collection_id", "table_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Tables.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">getSchema</a>(collection_id, table_id) -> Scout.TablesGetSchemaResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tables.getSchema("collection_id", "table_id");
 ```
 
 </dd>

@@ -8,9 +8,11 @@ import * as core from "../../../../core";
 import { CollectionServiceHandlersGetTableResponse } from "../../../types/CollectionServiceHandlersGetTableResponse";
 import { SchemaResponse } from "../../../types/SchemaResponse";
 
-export const TablesGetResponse: core.serialization.Schema<serializers.TablesGetResponse.Raw, Scout.TablesGetResponse> =
-    core.serialization.undiscriminatedUnion([CollectionServiceHandlersGetTableResponse, SchemaResponse]);
+export const TablesGetSchemaResponse: core.serialization.Schema<
+    serializers.TablesGetSchemaResponse.Raw,
+    Scout.TablesGetSchemaResponse
+> = core.serialization.undiscriminatedUnion([CollectionServiceHandlersGetTableResponse, SchemaResponse]);
 
-export declare namespace TablesGetResponse {
+export declare namespace TablesGetSchemaResponse {
     type Raw = CollectionServiceHandlersGetTableResponse.Raw | SchemaResponse.Raw;
 }

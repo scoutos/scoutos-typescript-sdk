@@ -4,4 +4,4 @@
 
 import * as Scout from "../../../index";
 
-export type TablesGetResponse = Scout.CollectionServiceHandlersGetTableResponse | Scout.SchemaResponse;
+export type TablesGetSchemaResponse = Scout.CollectionServiceHandlersGetTableResponse | Scout.SchemaResponse;

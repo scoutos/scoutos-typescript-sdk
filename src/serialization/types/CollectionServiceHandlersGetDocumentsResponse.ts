@@ -12,10 +12,16 @@ export const CollectionServiceHandlersGetDocumentsResponse: core.serialization.O
     Scout.CollectionServiceHandlersGetDocumentsResponse
 > = core.serialization.object({
     data: core.serialization.list(Document).optional(),
+    next_cursor: core.serialization.string().optional(),
+    has_more: core.serialization.boolean().optional(),
+    total_count: core.serialization.number().optional(),
 });
 
 export declare namespace CollectionServiceHandlersGetDocumentsResponse {
     interface Raw {
         data?: Document.Raw[] | null;
+        next_cursor?: string | null;
+        has_more?: boolean | null;
+        total_count?: number | null;
     }
 }

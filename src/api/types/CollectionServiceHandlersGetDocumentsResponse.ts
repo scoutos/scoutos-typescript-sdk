@@ -6,4 +6,7 @@ import * as Scout from "../index";
 
 export interface CollectionServiceHandlersGetDocumentsResponse {
     data?: Scout.Document[];
+    next_cursor?: string;
+    has_more?: boolean;
+    total_count?: number;
 }

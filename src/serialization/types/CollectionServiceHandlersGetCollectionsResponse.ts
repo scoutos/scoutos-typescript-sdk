@@ -13,7 +13,7 @@ export const CollectionServiceHandlersGetCollectionsResponse: core.serialization
 > = core.serialization.object({
     data: core.serialization.list(Collection).optional(),
     has_more: core.serialization.boolean().optional(),
-    next_cursor: core.serialization.date().optional(),
+    next_cursor: core.serialization.string().optional(),
 });
 
 export declare namespace CollectionServiceHandlersGetCollectionsResponse {

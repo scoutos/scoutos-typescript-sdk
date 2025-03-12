@@ -32,6 +32,7 @@ export class Documents {
     /**
      * @param {string} collection_id
      * @param {string} table_id
+     * @param {Scout.DocumentsListRequest} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -42,8 +43,19 @@ export class Documents {
     public async list(
         collection_id: string,
         table_id: string,
+        request: Scout.DocumentsListRequest = {},
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.CollectionServiceHandlersGetDocumentsResponse> {
+        const { limit, cursor } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (limit != null) {
+            _queryParams["limit"] = limit.toString();
+        }
+
+        if (cursor != null) {
+            _queryParams["cursor"] = cursor;
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -54,12 +66,13 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.9.1",
-                "User-Agent": "scoutos/0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
+                "User-Agent": "scoutos/0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
@@ -120,7 +133,9 @@ export class Documents {
      *
      * @example
      *     await client.documents.create("collection_id", "table_id", {
-     *         "key": true
+     *         body: {
+     *             "key": true
+     *         }
      *     })
      */
     public async create(
@@ -128,7 +143,13 @@ export class Documents {
         table_id: string,
         request: Scout.DocumentsCreateRequest,
         requestOptions?: Documents.RequestOptions
-    ): Promise<Scout.CollectionServiceHandlersCreateDocumentResponse> {
+    ): Promise<Scout.DocumentResponse> {
+        const { await_completion: awaitCompletion, body: _body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        if (awaitCompletion != null) {
+            _queryParams["await_completion"] = awaitCompletion.toString();
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
@@ -139,20 +160,21 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.9.1",
-                "User-Agent": "scoutos/0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
+                "User-Agent": "scoutos/0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
             contentType: "application/json",
+            queryParameters: _queryParams,
             requestType: "json",
-            body: serializers.DocumentsCreateRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            body: serializers.DocumentsCreateRequestBody.jsonOrThrow(_body, { unrecognizedObjectKeys: "strip" }),
             timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
             maxRetries: requestOptions?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersCreateDocumentResponse.parseOrThrow(_response.body, {
+            return serializers.DocumentResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -225,8 +247,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.9.1",
-                "User-Agent": "scoutos/0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
+                "User-Agent": "scoutos/0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -314,8 +336,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.9.1",
-                "User-Agent": "scoutos/0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
+                "User-Agent": "scoutos/0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -400,8 +422,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.9.1",
-                "User-Agent": "scoutos/0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
+                "User-Agent": "scoutos/0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -487,8 +509,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.9.1",
-                "User-Agent": "scoutos/0.9.1",
+                "X-Fern-SDK-Version": "0.10.0",
+                "User-Agent": "scoutos/0.10.0",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

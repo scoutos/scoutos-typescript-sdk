@@ -11,7 +11,7 @@ import { Identity } from "./Identity";
 export const Document: core.serialization.ObjectSchema<serializers.Document.Raw, Scout.Document> =
     core.serialization.object({
         document_id: core.serialization.string().optional(),
-        data: core.serialization.record(core.serialization.string(), DocumentDataValue).optional(),
+        data: core.serialization.record(core.serialization.string(), DocumentDataValue.optional()).optional(),
         document_data_id: core.serialization.string().optional(),
         created_at: core.serialization.date().optional(),
         last_updated_at: core.serialization.date().optional(),
@@ -23,7 +23,7 @@ export const Document: core.serialization.ObjectSchema<serializers.Document.Raw,
 export declare namespace Document {
     interface Raw {
         document_id?: string | null;
-        data?: Record<string, DocumentDataValue.Raw> | null;
+        data?: Record<string, DocumentDataValue.Raw | null | undefined> | null;
         document_data_id?: string | null;
         created_at?: string | null;
         last_updated_at?: string | null;

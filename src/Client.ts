@@ -13,6 +13,8 @@ import { Copilots } from "./api/resources/copilots/client/Client";
 import { Collections } from "./api/resources/collections/client/Client";
 import { Tables } from "./api/resources/tables/client/Client";
 import { Documents } from "./api/resources/documents/client/Client";
+import { Sources } from "./api/resources/sources/client/Client";
+import { Syncs } from "./api/resources/syncs/client/Client";
 
 export declare namespace ScoutClient {
     interface Options {
@@ -86,5 +88,17 @@ export class ScoutClient {
 
     public get documents(): Documents {
         return (this._documents ??= new Documents(this._options));
+    }
+
+    protected _sources: Sources | undefined;
+
+    public get sources(): Sources {
+        return (this._sources ??= new Sources(this._options));
+    }
+
+    protected _syncs: Syncs | undefined;
+
+    public get syncs(): Syncs {
+        return (this._syncs ??= new Syncs(this._options));
     }
 }

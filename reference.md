@@ -1921,7 +1921,7 @@ await client.tables.sync("collection_id", "table_id", [
 
 ## Documents
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">list</a>(collection_id, table_id) -> Scout.CollectionServiceHandlersGetDocumentsResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">list</a>(collection_id, table_id, { ...params }) -> Scout.CollectionServiceHandlersGetDocumentsResponse</code></summary>
 <dl>
 <dd>
 
@@ -1966,6 +1966,14 @@ await client.documents.list("collection_id", "table_id");
 <dl>
 <dd>
 
+**request:** `Scout.DocumentsListRequest`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **requestOptions:** `Documents.RequestOptions`
 
 </dd>
@@ -1977,7 +1985,7 @@ await client.documents.list("collection_id", "table_id");
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">create</a>(collection_id, table_id, { ...params }) -> Scout.CollectionServiceHandlersCreateDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">create</a>(collection_id, table_id, { ...params }) -> Scout.DocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -1991,7 +1999,9 @@ await client.documents.list("collection_id", "table_id");
 
 ```typescript
 await client.documents.create("collection_id", "table_id", {
-    key: true,
+    body: {
+        key: true,
+    },
 });
 ```
 
@@ -2314,6 +2324,393 @@ await client.documents.deleteBatch("collection_id", "table_id", ["string"]);
 <dd>
 
 **requestOptions:** `Documents.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Sources
+
+<details><summary><code>client.sources.<a href="/src/api/resources/sources/client/Client.ts">list</a>() -> Scout.CollectionServiceHandlersListSourceArchetypesResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.sources.list();
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `Sources.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+## Syncs
+
+<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">get</a>(sync_id) -> Scout.CollectionServiceHandlersGetSyncResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.syncs.get("sync_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sync_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Syncs.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">update</a>(sync_id, { ...params }) -> Scout.CollectionServiceHandlersUpdateSyncResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.syncs.update("sync_id", {
+    sync_config: {
+        source_settings: {
+            source_archetype_id: "com.notion.notion",
+        },
+        destination: {
+            destination_type: "collections.v2",
+            collection_id: "collection_id",
+            table_id: "table_id",
+        },
+        mapping: {},
+    },
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sync_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Scout.RequestBody`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Syncs.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">delete</a>(sync_id) -> Scout.CollectionServiceHandlersDeleteSyncResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.syncs.delete("sync_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sync_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Syncs.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">list</a>(collection_id, table_id) -> Scout.CollectionServiceHandlersListCollectionSyncsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List Sources by Destination, specifically given a collection and table
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.syncs.list("collection_id", "table_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Syncs.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">create</a>({ ...params }) -> Scout.CollectionServiceHandlersCreateSyncResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.syncs.create({
+    sync_config: {
+        source_settings: {
+            source_archetype_id: "com.notion.notion",
+        },
+        destination: {
+            destination_type: "collections.v2",
+            collection_id: "collection_id",
+            table_id: "table_id",
+        },
+        mapping: {},
+    },
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.RequestBody`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Syncs.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">execute</a>(sync_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.syncs.execute("sync_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**sync_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Syncs.RequestOptions`
 
 </dd>
 </dl>

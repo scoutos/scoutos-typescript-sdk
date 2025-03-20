@@ -15,4 +15,8 @@ export interface CollectionsListRequest {
      * Limit of records to return
      */
     limit?: number;
+    /**
+     * Search query
+     */
+    query?: string;
 }

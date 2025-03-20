@@ -15,4 +15,8 @@ export interface DocumentsListRequest {
      * Cursor to fetch next set of records
      */
     cursor?: string;
+    /**
+     * Search query
+     */
+    query?: string;
 }

@@ -46,7 +46,7 @@ export class Documents {
         request: Scout.DocumentsListRequest = {},
         requestOptions?: Documents.RequestOptions
     ): Promise<Scout.CollectionServiceHandlersGetDocumentsResponse> {
-        const { limit, cursor } = request;
+        const { limit, cursor, query } = request;
         const _queryParams: Record<string, string | string[] | object | object[]> = {};
         if (limit != null) {
             _queryParams["limit"] = limit.toString();
@@ -54,6 +54,10 @@ export class Documents {
 
         if (cursor != null) {
             _queryParams["cursor"] = cursor;
+        }
+
+        if (query != null) {
+            _queryParams["query"] = query;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -66,8 +70,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.0",
-                "User-Agent": "scoutos/0.10.0",
+                "X-Fern-SDK-Version": "0.10.1",
+                "User-Agent": "scoutos/0.10.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -160,8 +164,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.0",
-                "User-Agent": "scoutos/0.10.0",
+                "X-Fern-SDK-Version": "0.10.1",
+                "User-Agent": "scoutos/0.10.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -247,8 +251,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.0",
-                "User-Agent": "scoutos/0.10.0",
+                "X-Fern-SDK-Version": "0.10.1",
+                "User-Agent": "scoutos/0.10.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -336,8 +340,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.0",
-                "User-Agent": "scoutos/0.10.0",
+                "X-Fern-SDK-Version": "0.10.1",
+                "User-Agent": "scoutos/0.10.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -422,8 +426,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.0",
-                "User-Agent": "scoutos/0.10.0",
+                "X-Fern-SDK-Version": "0.10.1",
+                "User-Agent": "scoutos/0.10.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },
@@ -509,8 +513,8 @@ export class Documents {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.0",
-                "User-Agent": "scoutos/0.10.0",
+                "X-Fern-SDK-Version": "0.10.1",
+                "User-Agent": "scoutos/0.10.1",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
             },

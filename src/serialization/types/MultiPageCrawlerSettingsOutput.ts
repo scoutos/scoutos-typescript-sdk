@@ -16,7 +16,6 @@ export const MultiPageCrawlerSettingsOutput: core.serialization.ObjectSchema<
     text_extractor: MultiPageCrawlerSettingsOutputTextExtractor.optional(),
     allow: core.serialization.string().optional(),
     deny: core.serialization.string().optional(),
-    exclude_patterns: core.serialization.string().optional(),
     strip: core.serialization.string().optional(),
     strip_urls: core.serialization.boolean().optional(),
     allowed_domains: core.serialization.string().optional(),
@@ -30,7 +29,6 @@ export declare namespace MultiPageCrawlerSettingsOutput {
         text_extractor?: MultiPageCrawlerSettingsOutputTextExtractor.Raw | null;
         allow?: string | null;
         deny?: string | null;
-        exclude_patterns?: string | null;
         strip?: string | null;
         strip_urls?: boolean | null;
         allowed_domains?: string | null;

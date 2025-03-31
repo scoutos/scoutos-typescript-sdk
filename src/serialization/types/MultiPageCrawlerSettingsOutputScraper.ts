@@ -14,5 +14,5 @@ export const MultiPageCrawlerSettingsOutputScraper: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([Http, Playwright]);
 
 export declare namespace MultiPageCrawlerSettingsOutputScraper {
-    type Raw = Http.Raw | Playwright.Raw;
+    export type Raw = Http.Raw | Playwright.Raw;
 }

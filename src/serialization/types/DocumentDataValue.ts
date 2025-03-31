@@ -16,5 +16,5 @@ export const DocumentDataValue: core.serialization.Schema<serializers.DocumentDa
     ]);
 
 export declare namespace DocumentDataValue {
-    type Raw = string | number | number | boolean | Record<string, unknown>;
+    export type Raw = string | number | number | boolean | Record<string, unknown>;
 }

@@ -11,19 +11,23 @@ import * as errors from "../../../../errors/index";
 import * as stream from "stream";
 
 export declare namespace Workflows {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ScoutEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -43,10 +47,10 @@ export class Workflows {
      */
     public async createRevision(
         request: Scout.WorkflowsCreateRevisionRequest,
-        requestOptions?: Workflows.RequestOptions
+        requestOptions?: Workflows.RequestOptions,
     ): Promise<Scout.SrcHandlersCreateWorkflowRevisionResponse> {
         const { workflow_id: workflowId, workflow_key: workflowKey, body: _body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (workflowId != null) {
             _queryParams["workflow_id"] = workflowId;
         }
@@ -57,8 +61,10 @@ export class Workflows {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/workflows/revisions"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/workflows/revisions",
             ),
             method: "POST",
             headers: {
@@ -69,6 +75,7 @@ export class Workflows {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -98,7 +105,7 @@ export class Workflows {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -115,7 +122,7 @@ export class Workflows {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /v2/workflows/revisions.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -136,10 +143,10 @@ export class Workflows {
      */
     public async list(
         request: Scout.WorkflowsListRequest = {},
-        requestOptions?: Workflows.RequestOptions
+        requestOptions?: Workflows.RequestOptions,
     ): Promise<Scout.SrcHandlersListWorkflowsResponse> {
         const { sort, direction, start_at: startAt, limit, query } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (sort != null) {
             _queryParams["sort"] = sort;
         }
@@ -162,8 +169,10 @@ export class Workflows {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/workflows"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/workflows",
             ),
             method: "GET",
             headers: {
@@ -174,6 +183,7 @@ export class Workflows {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -202,7 +212,7 @@ export class Workflows {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -219,7 +229,7 @@ export class Workflows {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/workflows.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -240,18 +250,20 @@ export class Workflows {
      */
     public async create(
         request: Scout.WorkflowsCreateRequest,
-        requestOptions?: Workflows.RequestOptions
+        requestOptions?: Workflows.RequestOptions,
     ): Promise<Scout.SrcHandlersCreateWorkflowResponse> {
         const { workflow_key: workflowKey, body: _body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (workflowKey != null) {
             _queryParams["workflow_key"] = workflowKey;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/workflows"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/workflows",
             ),
             method: "POST",
             headers: {
@@ -262,6 +274,7 @@ export class Workflows {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -291,7 +304,7 @@ export class Workflows {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -308,7 +321,7 @@ export class Workflows {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /v2/workflows.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -329,12 +342,14 @@ export class Workflows {
      */
     public async get(
         workflow_id: string,
-        requestOptions?: Workflows.RequestOptions
+        requestOptions?: Workflows.RequestOptions,
     ): Promise<Scout.SrcHandlersGetWorkflowResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}`,
             ),
             method: "GET",
             headers: {
@@ -345,6 +360,7 @@ export class Workflows {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -372,7 +388,7 @@ export class Workflows {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -389,7 +405,7 @@ export class Workflows {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/workflows/{workflow_id}.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -410,12 +426,14 @@ export class Workflows {
     public async update(
         workflow_id: string,
         request: Scout.WorkflowConfigInput,
-        requestOptions?: Workflows.RequestOptions
+        requestOptions?: Workflows.RequestOptions,
     ): Promise<Scout.SrcHandlersUpdateWorkflowResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}`,
             ),
             method: "PUT",
             headers: {
@@ -426,6 +444,7 @@ export class Workflows {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -454,7 +473,7 @@ export class Workflows {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -471,7 +490,7 @@ export class Workflows {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling PUT /v2/workflows/{workflow_id}.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -490,12 +509,14 @@ export class Workflows {
      */
     public async delete(
         workflow_id: string,
-        requestOptions?: Workflows.RequestOptions
+        requestOptions?: Workflows.RequestOptions,
     ): Promise<Scout.SrcHandlersDeleteWorkflowResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}`,
             ),
             method: "DELETE",
             headers: {
@@ -506,6 +527,7 @@ export class Workflows {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -533,7 +555,7 @@ export class Workflows {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -550,7 +572,7 @@ export class Workflows {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling DELETE /v2/workflows/{workflow_id}.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -561,10 +583,10 @@ export class Workflows {
     public async runStream(
         workflow_id: string,
         request: Scout.WorkflowsRunStreamRequest,
-        requestOptions?: Workflows.RequestOptions
+        requestOptions?: Workflows.RequestOptions,
     ): Promise<core.Stream<Scout.WorkflowRunStreamResponse>> {
         const { environment, revision_id: revisionId, session_id: sessionId, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (environment != null) {
             _queryParams["environment"] = environment;
         }
@@ -579,8 +601,10 @@ export class Workflows {
 
         const _response = await (this._options.fetcher ?? core.fetcher)<stream.Readable>({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}/execute`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}/execute`,
             ),
             method: "POST",
             headers: {
@@ -591,6 +615,7 @@ export class Workflows {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -634,7 +659,7 @@ export class Workflows {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -651,7 +676,9 @@ export class Workflows {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /v2/workflows/{workflow_id}/execute.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -672,10 +699,10 @@ export class Workflows {
     public async run(
         workflow_id: string,
         request: Scout.WorkflowsRunRequest,
-        requestOptions?: Workflows.RequestOptions
+        requestOptions?: Workflows.RequestOptions,
     ): Promise<Scout.WorkflowRunResponse> {
         const { environment, revision_id: revisionId, session_id: sessionId, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (environment != null) {
             _queryParams["environment"] = environment;
         }
@@ -690,8 +717,10 @@ export class Workflows {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}/execute`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}/execute`,
             ),
             method: "POST",
             headers: {
@@ -702,6 +731,7 @@ export class Workflows {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -734,7 +764,7 @@ export class Workflows {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -751,7 +781,9 @@ export class Workflows {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /v2/workflows/{workflow_id}/execute.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -772,10 +804,10 @@ export class Workflows {
      */
     public async runWithConfig(
         request: Scout.SrcHandlersWorkflowsExecuteWithConfigReqBody,
-        requestOptions?: Workflows.RequestOptions
+        requestOptions?: Workflows.RequestOptions,
     ): Promise<Scout.WorkflowsRunWithConfigResponse> {
         const { environment, revision_id: revisionId, session_id: sessionId, ..._body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (environment != null) {
             _queryParams["environment"] = environment;
         }
@@ -790,8 +822,10 @@ export class Workflows {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/workflows/execute"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/workflows/execute",
             ),
             method: "POST",
             headers: {
@@ -802,6 +836,7 @@ export class Workflows {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -833,7 +868,7 @@ export class Workflows {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -850,7 +885,7 @@ export class Workflows {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /v2/workflows/execute.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -862,7 +897,8 @@ export class Workflows {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
         if (bearer == null) {
             throw new errors.ScoutError({
-                message: "Please specify SCOUT_API_KEY when instantiating the client.",
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
             });
         }
 

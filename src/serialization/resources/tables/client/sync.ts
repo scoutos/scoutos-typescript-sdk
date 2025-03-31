@@ -9,5 +9,5 @@ export const Request: core.serialization.Schema<serializers.tables.sync.Request.
     core.serialization.list(core.serialization.record(core.serialization.string(), core.serialization.unknown()));
 
 export declare namespace Request {
-    type Raw = Record<string, unknown>[];
+    export type Raw = Record<string, unknown>[];
 }

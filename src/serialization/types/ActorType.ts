@@ -10,5 +10,5 @@ export const ActorType: core.serialization.Schema<serializers.ActorType.Raw, Sco
     core.serialization.enum_(["external", "scoutos"]);
 
 export declare namespace ActorType {
-    type Raw = "external" | "scoutos";
+    export type Raw = "external" | "scoutos";
 }

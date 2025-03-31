@@ -14,7 +14,7 @@ export const SrcHandlersUpdateWorkflowEnvironmentResponse: core.serialization.Ob
 });
 
 export declare namespace SrcHandlersUpdateWorkflowEnvironmentResponse {
-    interface Raw {
+    export interface Raw {
         success: boolean;
     }
 }

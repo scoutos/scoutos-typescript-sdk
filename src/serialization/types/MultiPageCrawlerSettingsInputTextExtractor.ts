@@ -15,5 +15,5 @@ export const MultiPageCrawlerSettingsInputTextExtractor: core.serialization.Sche
 > = core.serialization.undiscriminatedUnion([Custom, Readability, TrafilaturaInput]);
 
 export declare namespace MultiPageCrawlerSettingsInputTextExtractor {
-    type Raw = Custom.Raw | Readability.Raw | TrafilaturaInput.Raw;
+    export type Raw = Custom.Raw | Readability.Raw | TrafilaturaInput.Raw;
 }

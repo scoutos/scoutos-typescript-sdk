@@ -14,7 +14,7 @@ export const SrcHandlersDeleteWorkflowResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace SrcHandlersDeleteWorkflowResponse {
-    interface Raw {
+    export interface Raw {
         detail: string;
     }
 }

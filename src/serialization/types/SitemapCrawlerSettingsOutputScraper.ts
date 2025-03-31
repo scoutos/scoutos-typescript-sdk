@@ -14,5 +14,5 @@ export const SitemapCrawlerSettingsOutputScraper: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([Http, Playwright]);
 
 export declare namespace SitemapCrawlerSettingsOutputScraper {
-    type Raw = Http.Raw | Playwright.Raw;
+    export type Raw = Http.Raw | Playwright.Raw;
 }

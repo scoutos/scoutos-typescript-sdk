@@ -21,7 +21,7 @@ export const Document: core.serialization.ObjectSchema<serializers.Document.Raw,
     });
 
 export declare namespace Document {
-    interface Raw {
+    export interface Raw {
         document_id?: string | null;
         data?: Record<string, DocumentDataValue.Raw | null | undefined> | null;
         document_data_id?: string | null;

@@ -9,5 +9,5 @@ export const Request: core.serialization.Schema<serializers.documents.deleteBatc
     core.serialization.list(core.serialization.string());
 
 export declare namespace Request {
-    type Raw = string[];
+    export type Raw = string[];
 }

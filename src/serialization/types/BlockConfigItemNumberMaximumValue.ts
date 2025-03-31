@@ -12,5 +12,5 @@ export const BlockConfigItemNumberMaximumValue: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([core.serialization.number(), core.serialization.number()]);
 
 export declare namespace BlockConfigItemNumberMaximumValue {
-    type Raw = number | number;
+    export type Raw = number | number;
 }

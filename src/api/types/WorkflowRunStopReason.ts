@@ -3,7 +3,6 @@
  */
 
 export type WorkflowRunStopReason = "workflow_run_completed" | "workflow_run_failed";
-
 export const WorkflowRunStopReason = {
     WorkflowRunCompleted: "workflow_run_completed",
     WorkflowRunFailed: "workflow_run_failed",

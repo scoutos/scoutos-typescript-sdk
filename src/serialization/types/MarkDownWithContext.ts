@@ -14,7 +14,7 @@ export const MarkDownWithContext: core.serialization.ObjectSchema<
 });
 
 export declare namespace MarkDownWithContext {
-    interface Raw {
+    export interface Raw {
         type: "markdown_with_context";
     }
 }

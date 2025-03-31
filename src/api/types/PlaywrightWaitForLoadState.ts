@@ -6,7 +6,6 @@
  * Determines when the scraper considers navigation to be finished.
  */
 export type PlaywrightWaitForLoadState = "load" | "domcontentloaded" | "networkidle";
-
 export const PlaywrightWaitForLoadState = {
     Load: "load",
     Domcontentloaded: "domcontentloaded",

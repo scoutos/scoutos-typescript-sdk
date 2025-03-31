@@ -13,7 +13,7 @@ export const RequestBody: core.serialization.ObjectSchema<serializers.RequestBod
     });
 
 export declare namespace RequestBody {
-    interface Raw {
+    export interface Raw {
         sync_config: SyncConfigInput.Raw;
     }
 }

@@ -18,7 +18,7 @@ export const ColumnTypeBase: core.serialization.ObjectSchema<serializers.ColumnT
     });
 
 export declare namespace ColumnTypeBase {
-    interface Raw {
+    export interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: ColumnType.Raw;

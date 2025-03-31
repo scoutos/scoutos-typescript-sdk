@@ -3,7 +3,6 @@
  */
 
 export type IdentityTypes = "user" | "api_key";
-
 export const IdentityTypes = {
     User: "user",
     ApiKey: "api_key",

@@ -10,7 +10,7 @@ import * as Scout from "../../../../index";
  *         name: "name",
  *         description: "description",
  *         deployments: [{
- *                 revision_lookup: Scout.EnvironmentDeploymentConfigRevisionLookup.Latest
+ *                 revision_lookup: "latest"
  *             }]
  *     }
  */

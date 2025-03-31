@@ -3,7 +3,6 @@
  */
 
 export type WorkflowRunCompletedEnvironment = "development" | "preview" | "production" | "test";
-
 export const WorkflowRunCompletedEnvironment = {
     Development: "development",
     Preview: "preview",

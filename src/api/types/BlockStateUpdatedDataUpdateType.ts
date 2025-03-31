@@ -6,7 +6,6 @@
  * If `complete` represents a full replacement of state, versus `partial` that indicates data must be _merged_.
  */
 export type BlockStateUpdatedDataUpdateType = "complete" | "partial";
-
 export const BlockStateUpdatedDataUpdateType = {
     Complete: "complete",
     Partial: "partial",

@@ -12,5 +12,5 @@ export const NumberColumnMinValue: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([core.serialization.number(), core.serialization.number()]);
 
 export declare namespace NumberColumnMinValue {
-    type Raw = number | number;
+    export type Raw = number | number;
 }

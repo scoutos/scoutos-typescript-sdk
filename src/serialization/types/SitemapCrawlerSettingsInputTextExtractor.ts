@@ -15,5 +15,5 @@ export const SitemapCrawlerSettingsInputTextExtractor: core.serialization.Schema
 > = core.serialization.undiscriminatedUnion([Custom, Readability, TrafilaturaInput]);
 
 export declare namespace SitemapCrawlerSettingsInputTextExtractor {
-    type Raw = Custom.Raw | Readability.Raw | TrafilaturaInput.Raw;
+    export type Raw = Custom.Raw | Readability.Raw | TrafilaturaInput.Raw;
 }

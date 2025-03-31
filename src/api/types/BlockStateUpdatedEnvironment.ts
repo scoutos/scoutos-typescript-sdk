@@ -3,7 +3,6 @@
  */
 
 export type BlockStateUpdatedEnvironment = "development" | "preview" | "production" | "test";
-
 export const BlockStateUpdatedEnvironment = {
     Development: "development",
     Preview: "preview",

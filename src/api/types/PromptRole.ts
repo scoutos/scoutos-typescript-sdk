@@ -3,7 +3,6 @@
  */
 
 export type PromptRole = "assistant" | "user" | "system";
-
 export const PromptRole = {
     Assistant: "assistant",
     User: "user",

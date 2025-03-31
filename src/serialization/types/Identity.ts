@@ -15,7 +15,7 @@ export const Identity: core.serialization.ObjectSchema<serializers.Identity.Raw,
     });
 
 export declare namespace Identity {
-    interface Raw {
+    export interface Raw {
         type: IdentityTypes.Raw;
         details: IdentityDetails.Raw;
     }

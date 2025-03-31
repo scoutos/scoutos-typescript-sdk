@@ -10,19 +10,23 @@ import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Syncs {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ScoutEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -40,12 +44,14 @@ export class Syncs {
      */
     public async get(
         sync_id: string,
-        requestOptions?: Syncs.RequestOptions
+        requestOptions?: Syncs.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersGetSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/syncs/${encodeURIComponent(sync_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/syncs/${encodeURIComponent(sync_id)}`,
             ),
             method: "GET",
             headers: {
@@ -56,6 +62,7 @@ export class Syncs {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -83,7 +90,7 @@ export class Syncs {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -100,7 +107,7 @@ export class Syncs {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/syncs/{sync_id}.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -133,12 +140,14 @@ export class Syncs {
     public async update(
         sync_id: string,
         request: Scout.RequestBody,
-        requestOptions?: Syncs.RequestOptions
+        requestOptions?: Syncs.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersUpdateSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/syncs/${encodeURIComponent(sync_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/syncs/${encodeURIComponent(sync_id)}`,
             ),
             method: "PUT",
             headers: {
@@ -149,6 +158,7 @@ export class Syncs {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -177,7 +187,7 @@ export class Syncs {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -194,7 +204,7 @@ export class Syncs {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling PUT /v2/syncs/{sync_id}.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -213,12 +223,14 @@ export class Syncs {
      */
     public async delete(
         sync_id: string,
-        requestOptions?: Syncs.RequestOptions
+        requestOptions?: Syncs.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersDeleteSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/syncs/${encodeURIComponent(sync_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/syncs/${encodeURIComponent(sync_id)}`,
             ),
             method: "DELETE",
             headers: {
@@ -229,6 +241,7 @@ export class Syncs {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -256,7 +269,7 @@ export class Syncs {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -273,7 +286,7 @@ export class Syncs {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling DELETE /v2/syncs/{sync_id}.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -296,12 +309,14 @@ export class Syncs {
     public async list(
         collection_id: string,
         table_id: string,
-        requestOptions?: Syncs.RequestOptions
+        requestOptions?: Syncs.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersListCollectionSyncsResponseModel> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/syncs`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/syncs`,
             ),
             method: "GET",
             headers: {
@@ -312,6 +327,7 @@ export class Syncs {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -339,7 +355,7 @@ export class Syncs {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -356,7 +372,9 @@ export class Syncs {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /v2/collections/{collection_id}/tables/{table_id}/syncs.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -387,12 +405,14 @@ export class Syncs {
      */
     public async create(
         request: Scout.RequestBody,
-        requestOptions?: Syncs.RequestOptions
+        requestOptions?: Syncs.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersCreateSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/syncs"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/syncs",
             ),
             method: "POST",
             headers: {
@@ -403,6 +423,7 @@ export class Syncs {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -431,7 +452,7 @@ export class Syncs {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -448,7 +469,7 @@ export class Syncs {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /v2/syncs.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -468,8 +489,10 @@ export class Syncs {
     public async execute(sync_id: string, requestOptions?: Syncs.RequestOptions): Promise<unknown> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/syncs/${encodeURIComponent(sync_id)}/execute`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/syncs/${encodeURIComponent(sync_id)}/execute`,
             ),
             method: "POST",
             headers: {
@@ -480,6 +503,7 @@ export class Syncs {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -501,7 +525,7 @@ export class Syncs {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -518,7 +542,7 @@ export class Syncs {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /v2/syncs/{sync_id}/execute.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -530,7 +554,8 @@ export class Syncs {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
         if (bearer == null) {
             throw new errors.ScoutError({
-                message: "Please specify SCOUT_API_KEY when instantiating the client.",
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
             });
         }
 

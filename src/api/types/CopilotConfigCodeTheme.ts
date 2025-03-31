@@ -3,7 +3,6 @@
  */
 
 export type CopilotConfigCodeTheme = "light" | "dark" | "none";
-
 export const CopilotConfigCodeTheme = {
     Light: "light",
     Dark: "dark",

@@ -3,7 +3,6 @@
  */
 
 export type BlockRunCompletedEnvironment = "development" | "preview" | "production" | "test";
-
 export const BlockRunCompletedEnvironment = {
     Development: "development",
     Preview: "preview",

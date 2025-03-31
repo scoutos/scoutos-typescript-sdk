@@ -15,7 +15,7 @@ export const CollectionServiceHandlersListSourceArchetypesResponseModel: core.se
 });
 
 export declare namespace CollectionServiceHandlersListSourceArchetypesResponseModel {
-    interface Raw {
+    export interface Raw {
         sources: SourceArchetype.Raw[];
     }
 }

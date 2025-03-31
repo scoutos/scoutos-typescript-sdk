@@ -10,19 +10,23 @@ import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Copilots {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ScoutEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -42,10 +46,10 @@ export class Copilots {
      */
     public async list(
         request: Scout.CopilotsListRequest = {},
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<Scout.SrcHandlersListCopilotsResponse> {
         const { sort, direction, start_at: startAt, limit, query } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (sort != null) {
             _queryParams["sort"] = sort;
         }
@@ -68,8 +72,10 @@ export class Copilots {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/copilots"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/copilots",
             ),
             method: "GET",
             headers: {
@@ -80,6 +86,7 @@ export class Copilots {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -108,7 +115,7 @@ export class Copilots {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -125,7 +132,7 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/copilots.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -144,12 +151,14 @@ export class Copilots {
      */
     public async create(
         request: Scout.CopilotConfig,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<Scout.SrcHandlersCreateCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                "v2/copilots"
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/copilots",
             ),
             method: "POST",
             headers: {
@@ -160,6 +169,7 @@ export class Copilots {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -188,7 +198,7 @@ export class Copilots {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -205,7 +215,7 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /v2/copilots.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -226,12 +236,14 @@ export class Copilots {
      */
     public async get(
         copilot_id: string,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<Scout.SrcHandlersGetCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/copilots/${encodeURIComponent(copilot_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/copilots/${encodeURIComponent(copilot_id)}`,
             ),
             method: "GET",
             headers: {
@@ -242,6 +254,7 @@ export class Copilots {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -269,7 +282,7 @@ export class Copilots {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -286,7 +299,7 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/copilots/{copilot_id}.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -307,12 +320,14 @@ export class Copilots {
     public async update(
         copilot_id: string,
         request: Scout.CopilotConfig,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<Scout.SrcHandlersUpdateCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/copilots/${encodeURIComponent(copilot_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/copilots/${encodeURIComponent(copilot_id)}`,
             ),
             method: "PUT",
             headers: {
@@ -323,6 +338,7 @@ export class Copilots {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -351,7 +367,7 @@ export class Copilots {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -368,7 +384,7 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling PUT /v2/copilots/{copilot_id}.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -387,12 +403,14 @@ export class Copilots {
      */
     public async delete(
         copilot_id: string,
-        requestOptions?: Copilots.RequestOptions
+        requestOptions?: Copilots.RequestOptions,
     ): Promise<Scout.SrcHandlersDeleteCopilotResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/copilots/${encodeURIComponent(copilot_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/copilots/${encodeURIComponent(copilot_id)}`,
             ),
             method: "DELETE",
             headers: {
@@ -403,6 +421,7 @@ export class Copilots {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -430,7 +449,7 @@ export class Copilots {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -447,7 +466,7 @@ export class Copilots {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling DELETE /v2/copilots/{copilot_id}.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -459,7 +478,8 @@ export class Copilots {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
         if (bearer == null) {
             throw new errors.ScoutError({
-                message: "Please specify SCOUT_API_KEY when instantiating the client.",
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
             });
         }
 

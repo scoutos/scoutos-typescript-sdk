@@ -13,7 +13,7 @@ export const SchemaResponse: core.serialization.ObjectSchema<serializers.SchemaR
     });
 
 export declare namespace SchemaResponse {
-    interface Raw {
+    export interface Raw {
         data: ColumnTypeBase.Raw[];
     }
 }

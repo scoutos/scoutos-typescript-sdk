@@ -12,5 +12,5 @@ export const NumberColumnDefault: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([core.serialization.number(), core.serialization.number()]);
 
 export declare namespace NumberColumnDefault {
-    type Raw = number | number;
+    export type Raw = number | number;
 }

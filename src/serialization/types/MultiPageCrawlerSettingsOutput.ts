@@ -24,7 +24,7 @@ export const MultiPageCrawlerSettingsOutput: core.serialization.ObjectSchema<
 });
 
 export declare namespace MultiPageCrawlerSettingsOutput {
-    interface Raw {
+    export interface Raw {
         scraper?: MultiPageCrawlerSettingsOutputScraper.Raw | null;
         text_extractor?: MultiPageCrawlerSettingsOutputTextExtractor.Raw | null;
         allow?: string | null;

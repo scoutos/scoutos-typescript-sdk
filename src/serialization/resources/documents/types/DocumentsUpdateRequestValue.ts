@@ -17,5 +17,5 @@ export const DocumentsUpdateRequestValue: core.serialization.Schema<
 ]);
 
 export declare namespace DocumentsUpdateRequestValue {
-    type Raw = boolean | number | number | string;
+    export type Raw = boolean | number | number | string;
 }

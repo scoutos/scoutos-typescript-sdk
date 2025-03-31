@@ -23,7 +23,7 @@ export const SyncConfigOutputSourceSettings: core.serialization.Schema<
 ]);
 
 export declare namespace SyncConfigOutputSourceSettings {
-    type Raw =
+    export type Raw =
         | SourceSyncNotionSettings.Raw
         | SourceSyncCrawlSettingsOutput.Raw
         | SourceSyncPageCrawlSettingsOutput.Raw

@@ -12,5 +12,5 @@ export const BlockConfigItemNumberDefaultValue: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([core.serialization.number(), core.serialization.number()]);
 
 export declare namespace BlockConfigItemNumberDefaultValue {
-    type Raw = number | number;
+    export type Raw = number | number;
 }

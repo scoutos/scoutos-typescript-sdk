@@ -25,7 +25,7 @@ export const SitemapCrawlerSettingsOutput: core.serialization.ObjectSchema<
 });
 
 export declare namespace SitemapCrawlerSettingsOutput {
-    interface Raw {
+    export interface Raw {
         scraper?: SitemapCrawlerSettingsOutputScraper.Raw | null;
         text_extractor?: SitemapCrawlerSettingsOutputTextExtractor.Raw | null;
         allow?: string | null;

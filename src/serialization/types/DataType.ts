@@ -13,5 +13,5 @@ export const DataType: core.serialization.Schema<serializers.DataType.Raw, Scout
 ]);
 
 export declare namespace DataType {
-    type Raw = "boolean" | "string" | "number";
+    export type Raw = "boolean" | "string" | "number";
 }

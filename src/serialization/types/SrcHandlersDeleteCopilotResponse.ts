@@ -14,7 +14,7 @@ export const SrcHandlersDeleteCopilotResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace SrcHandlersDeleteCopilotResponse {
-    interface Raw {
+    export interface Raw {
         detail: string;
     }
 }

@@ -12,5 +12,5 @@ export const EnvironmentDeploymentConfigRevisionLookup: core.serialization.Schem
 > = core.serialization.enum_(["latest", "revision_id"]);
 
 export declare namespace EnvironmentDeploymentConfigRevisionLookup {
-    type Raw = "latest" | "revision_id";
+    export type Raw = "latest" | "revision_id";
 }

@@ -16,7 +16,7 @@ export const RecursiveSplitterConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace RecursiveSplitterConfig {
-    interface Raw {
+    export interface Raw {
         type: "recursive";
         chunk_size?: number | null;
         chunk_overlap?: number | null;

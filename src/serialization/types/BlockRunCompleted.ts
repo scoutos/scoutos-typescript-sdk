@@ -26,7 +26,7 @@ export const BlockRunCompleted: core.serialization.ObjectSchema<
 });
 
 export declare namespace BlockRunCompleted {
-    interface Raw {
+    export interface Raw {
         organization_id: string;
         id?: string | null;
         correlation_id?: string | null;

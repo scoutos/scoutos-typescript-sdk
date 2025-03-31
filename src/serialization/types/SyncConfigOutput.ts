@@ -21,7 +21,7 @@ export const SyncConfigOutput: core.serialization.ObjectSchema<
 });
 
 export declare namespace SyncConfigOutput {
-    interface Raw {
+    export interface Raw {
         source_settings: SyncConfigOutputSourceSettings.Raw;
         destination: CollectionDestination.Raw;
         mapping: Mapping.Raw;

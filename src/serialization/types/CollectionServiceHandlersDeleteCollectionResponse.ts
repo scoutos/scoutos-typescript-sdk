@@ -14,7 +14,7 @@ export const CollectionServiceHandlersDeleteCollectionResponse: core.serializati
 });
 
 export declare namespace CollectionServiceHandlersDeleteCollectionResponse {
-    interface Raw {
+    export interface Raw {
         detail: string;
     }
 }

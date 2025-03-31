@@ -14,5 +14,5 @@ export const SinglePageCrawlerSettingsInputScraper: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([Http, Playwright]);
 
 export declare namespace SinglePageCrawlerSettingsInputScraper {
-    type Raw = Http.Raw | Playwright.Raw;
+    export type Raw = Http.Raw | Playwright.Raw;
 }

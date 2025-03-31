@@ -14,7 +14,7 @@ export const Prompt: core.serialization.ObjectSchema<serializers.Prompt.Raw, Sco
 });
 
 export declare namespace Prompt {
-    interface Raw {
+    export interface Raw {
         id: string;
         role: PromptRole.Raw;
         content: string;

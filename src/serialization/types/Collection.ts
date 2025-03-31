@@ -20,7 +20,7 @@ export const Collection: core.serialization.ObjectSchema<serializers.Collection.
     });
 
 export declare namespace Collection {
-    interface Raw {
+    export interface Raw {
         collection_config: CollectionConfig.Raw;
         last_updated_at: string;
         created_at: string;

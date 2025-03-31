@@ -21,7 +21,7 @@ export const Copilot: core.serialization.ObjectSchema<serializers.Copilot.Raw, S
     });
 
 export declare namespace Copilot {
-    interface Raw {
+    export interface Raw {
         copilot_config: CopilotConfig.Raw;
         last_updated_at: string;
         created_at: string;

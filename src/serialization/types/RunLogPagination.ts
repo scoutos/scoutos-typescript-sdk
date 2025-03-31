@@ -16,7 +16,7 @@ export const RunLogPagination: core.serialization.ObjectSchema<
 });
 
 export declare namespace RunLogPagination {
-    interface Raw {
+    export interface Raw {
         final: boolean;
         next_cursor?: string | null;
         has_more: boolean;

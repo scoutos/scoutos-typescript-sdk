@@ -12,5 +12,5 @@ export const BlockRunStartedEnvironment: core.serialization.Schema<
 > = core.serialization.enum_(["development", "preview", "production", "test"]);
 
 export declare namespace BlockRunStartedEnvironment {
-    type Raw = "development" | "preview" | "production" | "test";
+    export type Raw = "development" | "preview" | "production" | "test";
 }

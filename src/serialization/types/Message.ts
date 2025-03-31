@@ -13,7 +13,7 @@ export const Message: core.serialization.ObjectSchema<serializers.Message.Raw, S
     });
 
 export declare namespace Message {
-    interface Raw {
+    export interface Raw {
         id?: string | null;
         outputs?: Record<string, unknown> | null;
     }

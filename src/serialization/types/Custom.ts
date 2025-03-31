@@ -14,7 +14,7 @@ export const Custom: core.serialization.ObjectSchema<serializers.Custom.Raw, Sco
 });
 
 export declare namespace Custom {
-    interface Raw {
+    export interface Raw {
         text_extractor_type: "custom";
         selectors?: string | null;
         exclude_selectors?: string | null;

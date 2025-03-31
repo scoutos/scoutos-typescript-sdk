@@ -12,5 +12,5 @@ export const CopilotConfigCodeTheme: core.serialization.Schema<
 > = core.serialization.enum_(["light", "dark", "none"]);
 
 export declare namespace CopilotConfigCodeTheme {
-    type Raw = "light" | "dark" | "none";
+    export type Raw = "light" | "dark" | "none";
 }

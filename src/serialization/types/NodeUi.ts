@@ -12,7 +12,7 @@ export const NodeUi: core.serialization.ObjectSchema<serializers.NodeUi.Raw, Sco
 });
 
 export declare namespace NodeUi {
-    interface Raw {
+    export interface Raw {
         position?: Position.Raw | null;
     }
 }

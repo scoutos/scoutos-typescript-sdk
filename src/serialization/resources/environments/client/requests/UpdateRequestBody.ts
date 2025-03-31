@@ -15,7 +15,7 @@ export const UpdateRequestBody: core.serialization.Schema<serializers.UpdateRequ
     });
 
 export declare namespace UpdateRequestBody {
-    interface Raw {
+    export interface Raw {
         name: string;
         description: string;
         deployments: EnvironmentDeploymentConfig.Raw[];

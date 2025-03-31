@@ -17,7 +17,7 @@ export const TextShortColumn: core.serialization.ObjectSchema<serializers.TextSh
     });
 
 export declare namespace TextShortColumn {
-    interface Raw {
+    export interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: "text-short";

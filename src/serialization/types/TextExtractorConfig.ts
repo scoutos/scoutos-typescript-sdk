@@ -25,7 +25,7 @@ export const TextExtractorConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace TextExtractorConfig {
-    interface Raw {
+    export interface Raw {
         favor?: Favor.Raw | null;
         favor_recall?: boolean | null;
         favor_precision?: boolean | null;

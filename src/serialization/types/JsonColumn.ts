@@ -17,7 +17,7 @@ export const JsonColumn: core.serialization.ObjectSchema<serializers.JsonColumn.
     });
 
 export declare namespace JsonColumn {
-    interface Raw {
+    export interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: "json";

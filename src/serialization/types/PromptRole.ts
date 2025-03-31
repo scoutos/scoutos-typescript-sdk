@@ -10,5 +10,5 @@ export const PromptRole: core.serialization.Schema<serializers.PromptRole.Raw, S
     core.serialization.enum_(["assistant", "user", "system"]);
 
 export declare namespace PromptRole {
-    type Raw = "assistant" | "user" | "system";
+    export type Raw = "assistant" | "user" | "system";
 }

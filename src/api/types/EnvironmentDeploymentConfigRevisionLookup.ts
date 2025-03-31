@@ -3,7 +3,6 @@
  */
 
 export type EnvironmentDeploymentConfigRevisionLookup = "latest" | "revision_id";
-
 export const EnvironmentDeploymentConfigRevisionLookup = {
     Latest: "latest",
     RevisionId: "revision_id",

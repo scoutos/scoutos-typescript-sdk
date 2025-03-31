@@ -20,7 +20,7 @@ export const BlockConfigItemSelect: core.serialization.ObjectSchema<
 });
 
 export declare namespace BlockConfigItemSelect {
-    interface Raw {
+    export interface Raw {
         id: string;
         display_name: string;
         type: "select";

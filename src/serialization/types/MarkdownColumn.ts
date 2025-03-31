@@ -17,7 +17,7 @@ export const MarkdownColumn: core.serialization.ObjectSchema<serializers.Markdow
     });
 
 export declare namespace MarkdownColumn {
-    interface Raw {
+    export interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: "markdown";

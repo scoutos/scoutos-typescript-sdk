@@ -14,7 +14,7 @@ export const Playwright: core.serialization.ObjectSchema<serializers.Playwright.
     });
 
 export declare namespace Playwright {
-    interface Raw {
+    export interface Raw {
         scraper_type: "playwright";
         wait_for_load_state?: PlaywrightWaitForLoadState.Raw | null;
     }

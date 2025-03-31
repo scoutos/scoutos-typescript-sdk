@@ -15,7 +15,7 @@ export const EnvironmentConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace EnvironmentConfig {
-    interface Raw {
+    export interface Raw {
         name: string;
         description: string;
     }

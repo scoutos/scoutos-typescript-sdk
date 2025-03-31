@@ -3,7 +3,6 @@
  */
 
 export type BlockRunStartedEnvironment = "development" | "preview" | "production" | "test";
-
 export const BlockRunStartedEnvironment = {
     Development: "development",
     Preview: "preview",

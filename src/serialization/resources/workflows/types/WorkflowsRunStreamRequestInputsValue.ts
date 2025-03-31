@@ -19,5 +19,5 @@ export const WorkflowsRunStreamRequestInputsValue: core.serialization.Schema<
 ]);
 
 export declare namespace WorkflowsRunStreamRequestInputsValue {
-    type Raw = boolean | Record<string, unknown> | number | number | unknown[] | string;
+    export type Raw = boolean | Record<string, unknown> | number | number | unknown[] | string;
 }

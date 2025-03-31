@@ -11,7 +11,7 @@ export const Http: core.serialization.ObjectSchema<serializers.Http.Raw, Scout.H
 });
 
 export declare namespace Http {
-    interface Raw {
+    export interface Raw {
         scraper_type: "http";
     }
 }

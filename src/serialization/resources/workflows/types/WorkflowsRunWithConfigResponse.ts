@@ -14,5 +14,5 @@ export const WorkflowsRunWithConfigResponse: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([WorkflowsRunWithConfigResponseZero, WorkflowRunResponse]);
 
 export declare namespace WorkflowsRunWithConfigResponse {
-    type Raw = WorkflowsRunWithConfigResponseZero.Raw | WorkflowRunResponse.Raw;
+    export type Raw = WorkflowsRunWithConfigResponseZero.Raw | WorkflowRunResponse.Raw;
 }

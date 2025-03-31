@@ -13,7 +13,7 @@ export const Usage: core.serialization.ObjectSchema<serializers.Usage.Raw, Scout
 });
 
 export declare namespace Usage {
-    interface Raw {
+    export interface Raw {
         usage: BlockRunUsage.Raw[];
         total_cost: number;
     }

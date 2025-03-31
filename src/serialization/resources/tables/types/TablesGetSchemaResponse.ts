@@ -14,5 +14,5 @@ export const TablesGetSchemaResponse: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([CollectionServiceHandlersGetTableResponse, SchemaResponse]);
 
 export declare namespace TablesGetSchemaResponse {
-    type Raw = CollectionServiceHandlersGetTableResponse.Raw | SchemaResponse.Raw;
+    export type Raw = CollectionServiceHandlersGetTableResponse.Raw | SchemaResponse.Raw;
 }

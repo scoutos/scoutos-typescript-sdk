@@ -3,7 +3,6 @@
  */
 
 export type Favor = "precision" | "recall";
-
 export const Favor = {
     Precision: "precision",
     Recall: "recall",

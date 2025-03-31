@@ -24,7 +24,7 @@ export const SinglePageCrawlerSettingsInput: core.serialization.ObjectSchema<
 });
 
 export declare namespace SinglePageCrawlerSettingsInput {
-    interface Raw {
+    export interface Raw {
         scraper?: SinglePageCrawlerSettingsInputScraper.Raw | null;
         text_extractor?: SinglePageCrawlerSettingsInputTextExtractor.Raw | null;
         allow?: string | null;

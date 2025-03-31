@@ -18,7 +18,7 @@ export const BlockConfigItemBoolean: core.serialization.ObjectSchema<
 });
 
 export declare namespace BlockConfigItemBoolean {
-    interface Raw {
+    export interface Raw {
         id: string;
         display_name: string;
         type: "boolean";

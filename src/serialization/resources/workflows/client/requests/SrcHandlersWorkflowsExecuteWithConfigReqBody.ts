@@ -21,7 +21,7 @@ export const SrcHandlersWorkflowsExecuteWithConfigReqBody: core.serialization.Sc
 });
 
 export declare namespace SrcHandlersWorkflowsExecuteWithConfigReqBody {
-    interface Raw {
+    export interface Raw {
         workflow_key?: string | null;
         inputs?: Record<string, SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue.Raw> | null;
         streaming?: boolean | null;

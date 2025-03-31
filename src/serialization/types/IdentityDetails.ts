@@ -12,5 +12,5 @@ export const IdentityDetails: core.serialization.Schema<serializers.IdentityDeta
     core.serialization.undiscriminatedUnion([UserIdentity, ApiKeyIdentity]);
 
 export declare namespace IdentityDetails {
-    type Raw = UserIdentity.Raw | ApiKeyIdentity.Raw;
+    export type Raw = UserIdentity.Raw | ApiKeyIdentity.Raw;
 }

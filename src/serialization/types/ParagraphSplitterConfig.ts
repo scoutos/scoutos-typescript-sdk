@@ -17,7 +17,7 @@ export const ParagraphSplitterConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace ParagraphSplitterConfig {
-    interface Raw {
+    export interface Raw {
         type: "paragraph";
         chunk_size?: number | null;
         chunk_overlap?: number | null;

@@ -23,7 +23,7 @@ export const SourceSyncWebsiteSettingsSplitter: core.serialization.Schema<
 ]);
 
 export declare namespace SourceSyncWebsiteSettingsSplitter {
-    type Raw =
+    export type Raw =
         | MarkdownSplitterConfig.Raw
         | RecursiveSplitterConfig.Raw
         | SentenceSplitterConfig.Raw

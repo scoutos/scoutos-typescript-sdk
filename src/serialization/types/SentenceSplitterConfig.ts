@@ -17,7 +17,7 @@ export const SentenceSplitterConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace SentenceSplitterConfig {
-    interface Raw {
+    export interface Raw {
         type: "sentence";
         chunk_size?: number | null;
         chunk_overlap?: number | null;

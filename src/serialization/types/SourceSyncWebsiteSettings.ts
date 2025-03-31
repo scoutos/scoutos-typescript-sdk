@@ -37,7 +37,7 @@ export const SourceSyncWebsiteSettings: core.serialization.ObjectSchema<
 });
 
 export declare namespace SourceSyncWebsiteSettings {
-    interface Raw {
+    export interface Raw {
         selectors?: string[] | null;
         exclude_selectors?: string[] | null;
         strip?: string[] | null;

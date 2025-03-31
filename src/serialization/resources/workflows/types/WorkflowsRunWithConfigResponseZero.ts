@@ -27,7 +27,7 @@ export const WorkflowsRunWithConfigResponseZero: core.serialization.Schema<
 ]);
 
 export declare namespace WorkflowsRunWithConfigResponseZero {
-    type Raw =
+    export type Raw =
         | WorkflowRunStarted.Raw
         | WorkflowRunCompleted.Raw
         | WorkflowRunFailed.Raw

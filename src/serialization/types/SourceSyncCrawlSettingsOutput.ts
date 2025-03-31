@@ -17,7 +17,7 @@ export const SourceSyncCrawlSettingsOutput: core.serialization.ObjectSchema<
 });
 
 export declare namespace SourceSyncCrawlSettingsOutput {
-    interface Raw {
+    export interface Raw {
         source_archetype_id: "com.scoutos.crawl";
         start_urls: string;
         crawler_settings?: MultiPageCrawlerSettingsOutput.Raw | null;

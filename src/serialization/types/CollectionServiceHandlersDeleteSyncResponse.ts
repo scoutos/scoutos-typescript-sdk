@@ -15,7 +15,7 @@ export const CollectionServiceHandlersDeleteSyncResponse: core.serialization.Obj
 });
 
 export declare namespace CollectionServiceHandlersDeleteSyncResponse {
-    interface Raw {
+    export interface Raw {
         detail: string;
         status_code: number;
     }

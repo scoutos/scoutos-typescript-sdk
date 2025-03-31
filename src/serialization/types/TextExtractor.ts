@@ -10,5 +10,5 @@ export const TextExtractor: core.serialization.Schema<serializers.TextExtractor.
     core.serialization.enum_(["readability", "trafilatura", "custom"]);
 
 export declare namespace TextExtractor {
-    type Raw = "readability" | "trafilatura" | "custom";
+    export type Raw = "readability" | "trafilatura" | "custom";
 }

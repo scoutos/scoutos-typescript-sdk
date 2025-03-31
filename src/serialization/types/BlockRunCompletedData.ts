@@ -23,7 +23,7 @@ export const BlockRunCompletedData: core.serialization.ObjectSchema<
 });
 
 export declare namespace BlockRunCompletedData {
-    interface Raw {
+    export interface Raw {
         workflow_id: string;
         workflow_run_id: string;
         block_id?: string | null;

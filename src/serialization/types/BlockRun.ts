@@ -24,7 +24,7 @@ export const BlockRun: core.serialization.ObjectSchema<serializers.BlockRun.Raw,
     });
 
 export declare namespace BlockRun {
-    interface Raw {
+    export interface Raw {
         block_archetype_id: string;
         block_type: string;
         block_id: string;

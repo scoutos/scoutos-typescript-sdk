@@ -27,7 +27,7 @@ export const BlockInputBlockConfigItem: core.serialization.Schema<
 ]);
 
 export declare namespace BlockInputBlockConfigItem {
-    type Raw =
+    export type Raw =
         | BlockConfigItemBoolean.Raw
         | BlockConfigItemJson.Raw
         | BlockConfigItemNumber.Raw

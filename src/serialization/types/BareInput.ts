@@ -14,7 +14,7 @@ export const BareInput: core.serialization.ObjectSchema<serializers.BareInput.Ra
     });
 
 export declare namespace BareInput {
-    interface Raw {
+    export interface Raw {
         trafilatura_type: "bare";
         trafilatura_extractor_config?: TextExtractorConfig.Raw | null;
     }

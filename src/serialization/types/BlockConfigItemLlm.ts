@@ -18,7 +18,7 @@ export const BlockConfigItemLlm: core.serialization.ObjectSchema<
 });
 
 export declare namespace BlockConfigItemLlm {
-    interface Raw {
+    export interface Raw {
         id: string;
         display_name: string;
         type: "prompt";

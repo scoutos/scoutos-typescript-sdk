@@ -10,19 +10,23 @@ import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Revisions {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ScoutEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -42,12 +46,14 @@ export class Revisions {
      */
     public async list(
         workflow_id: string,
-        requestOptions?: Revisions.RequestOptions
+        requestOptions?: Revisions.RequestOptions,
     ): Promise<Scout.SrcHandlersListWorkflowRevisionsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions`,
             ),
             method: "GET",
             headers: {
@@ -58,6 +64,7 @@ export class Revisions {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -85,7 +92,7 @@ export class Revisions {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -102,7 +109,9 @@ export class Revisions {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /v2/workflows/{workflow_id}/revisions.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -123,12 +132,14 @@ export class Revisions {
     public async update(
         workflow_id: string,
         revision_id: string,
-        requestOptions?: Revisions.RequestOptions
+        requestOptions?: Revisions.RequestOptions,
     ): Promise<Scout.SrcHandlersPromoteWorkflowRevisionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions/${encodeURIComponent(revision_id)}/promote`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions/${encodeURIComponent(revision_id)}/promote`,
             ),
             method: "PUT",
             headers: {
@@ -139,6 +150,7 @@ export class Revisions {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -166,7 +178,7 @@ export class Revisions {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -183,7 +195,9 @@ export class Revisions {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling PUT /v2/workflows/{workflow_id}/revisions/{revision_id}/promote.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -204,12 +218,14 @@ export class Revisions {
     public async delete(
         workflow_id: string,
         revision_id: string,
-        requestOptions?: Revisions.RequestOptions
+        requestOptions?: Revisions.RequestOptions,
     ): Promise<Scout.SrcHandlersDeleteWorkflowRevisionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions/${encodeURIComponent(revision_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions/${encodeURIComponent(revision_id)}`,
             ),
             method: "DELETE",
             headers: {
@@ -220,6 +236,7 @@ export class Revisions {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -247,7 +264,7 @@ export class Revisions {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -264,7 +281,9 @@ export class Revisions {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling DELETE /v2/workflows/{workflow_id}/revisions/{revision_id}.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -276,7 +295,8 @@ export class Revisions {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
         if (bearer == null) {
             throw new errors.ScoutError({
-                message: "Please specify SCOUT_API_KEY when instantiating the client.",
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
             });
         }
 

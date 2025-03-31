@@ -18,5 +18,5 @@ export const DocumentsCreateRequestBodyOneValue: core.serialization.Schema<
 ]);
 
 export declare namespace DocumentsCreateRequestBodyOneValue {
-    type Raw = boolean | Record<string, unknown> | number | number | string;
+    export type Raw = boolean | Record<string, unknown> | number | number | string;
 }

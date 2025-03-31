@@ -19,7 +19,7 @@ export const BlockConfigItemTextLong: core.serialization.ObjectSchema<
 });
 
 export declare namespace BlockConfigItemTextLong {
-    interface Raw {
+    export interface Raw {
         id: string;
         display_name: string;
         type: "text-long";

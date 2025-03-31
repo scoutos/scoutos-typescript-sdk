@@ -16,5 +16,5 @@ export const TrafilaturaOutputTrafilaturaType: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([BareOutput, Baseline, DefaultOutput, Html2Text]);
 
 export declare namespace TrafilaturaOutputTrafilaturaType {
-    type Raw = BareOutput.Raw | Baseline.Raw | DefaultOutput.Raw | Html2Text.Raw;
+    export type Raw = BareOutput.Raw | Baseline.Raw | DefaultOutput.Raw | Html2Text.Raw;
 }

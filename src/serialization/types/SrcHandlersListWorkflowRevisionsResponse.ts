@@ -15,7 +15,7 @@ export const SrcHandlersListWorkflowRevisionsResponse: core.serialization.Object
 });
 
 export declare namespace SrcHandlersListWorkflowRevisionsResponse {
-    interface Raw {
+    export interface Raw {
         data: Workflow.Raw[];
     }
 }

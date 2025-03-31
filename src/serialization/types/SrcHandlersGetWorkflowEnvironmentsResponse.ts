@@ -15,7 +15,7 @@ export const SrcHandlersGetWorkflowEnvironmentsResponse: core.serialization.Obje
 });
 
 export declare namespace SrcHandlersGetWorkflowEnvironmentsResponse {
-    interface Raw {
+    export interface Raw {
         data: Environment.Raw[];
     }
 }

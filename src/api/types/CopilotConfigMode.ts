@@ -3,7 +3,6 @@
  */
 
 export type CopilotConfigMode = "light" | "dark";
-
 export const CopilotConfigMode = {
     Light: "light",
     Dark: "dark",

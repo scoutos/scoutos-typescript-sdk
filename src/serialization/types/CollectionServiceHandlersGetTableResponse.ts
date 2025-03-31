@@ -15,7 +15,7 @@ export const CollectionServiceHandlersGetTableResponse: core.serialization.Objec
 });
 
 export declare namespace CollectionServiceHandlersGetTableResponse {
-    interface Raw {
+    export interface Raw {
         data?: Table.Raw | null;
     }
 }

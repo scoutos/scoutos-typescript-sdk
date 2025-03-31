@@ -13,7 +13,7 @@ export const Schedule: core.serialization.ObjectSchema<serializers.Schedule.Raw,
     });
 
 export declare namespace Schedule {
-    interface Raw {
+    export interface Raw {
         frequency: string;
         enabled: boolean;
     }

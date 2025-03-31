@@ -14,7 +14,7 @@ export const BareOutput: core.serialization.ObjectSchema<serializers.BareOutput.
     });
 
 export declare namespace BareOutput {
-    interface Raw {
+    export interface Raw {
         trafilatura_type: "bare";
         trafilatura_extractor_config?: TextExtractorConfig.Raw | null;
     }

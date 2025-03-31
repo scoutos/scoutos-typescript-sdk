@@ -15,7 +15,7 @@ export const SrcHandlersCreateCopilotResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace SrcHandlersCreateCopilotResponse {
-    interface Raw {
+    export interface Raw {
         data?: Copilot.Raw | null;
     }
 }

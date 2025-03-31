@@ -14,5 +14,5 @@ export const WorkflowLogsListLogsResponse: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([RunLog, RunLogPagination]);
 
 export declare namespace WorkflowLogsListLogsResponse {
-    type Raw = RunLog.Raw | RunLogPagination.Raw;
+    export type Raw = RunLog.Raw | RunLogPagination.Raw;
 }

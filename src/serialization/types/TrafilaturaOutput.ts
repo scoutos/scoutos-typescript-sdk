@@ -16,7 +16,7 @@ export const TrafilaturaOutput: core.serialization.ObjectSchema<
 });
 
 export declare namespace TrafilaturaOutput {
-    interface Raw {
+    export interface Raw {
         text_extractor_type: "trafilatura";
         trafilatura_type: TrafilaturaOutputTrafilaturaType.Raw;
     }

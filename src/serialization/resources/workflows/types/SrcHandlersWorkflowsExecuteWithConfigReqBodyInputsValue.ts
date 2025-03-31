@@ -19,5 +19,5 @@ export const SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue: core.seria
 ]);
 
 export declare namespace SrcHandlersWorkflowsExecuteWithConfigReqBodyInputsValue {
-    type Raw = boolean | Record<string, unknown> | number | number | unknown[] | string;
+    export type Raw = boolean | Record<string, unknown> | number | number | unknown[] | string;
 }

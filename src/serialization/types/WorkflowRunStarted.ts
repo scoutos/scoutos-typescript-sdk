@@ -26,7 +26,7 @@ export const WorkflowRunStarted: core.serialization.ObjectSchema<
 });
 
 export declare namespace WorkflowRunStarted {
-    interface Raw {
+    export interface Raw {
         organization_id: string;
         id?: string | null;
         correlation_id?: string | null;

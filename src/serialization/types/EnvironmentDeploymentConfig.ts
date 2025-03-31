@@ -17,7 +17,7 @@ export const EnvironmentDeploymentConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace EnvironmentDeploymentConfig {
-    interface Raw {
+    export interface Raw {
         revision_id?: string | null;
         revision_lookup: EnvironmentDeploymentConfigRevisionLookup.Raw;
         traffic?: number | null;

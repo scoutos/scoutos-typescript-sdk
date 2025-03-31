@@ -17,7 +17,7 @@ export const SourceSyncSitemapSettingsOutput: core.serialization.ObjectSchema<
 });
 
 export declare namespace SourceSyncSitemapSettingsOutput {
-    interface Raw {
+    export interface Raw {
         source_archetype_id: "com.scoutos.sitemap";
         sitemap_url: string;
         crawler_settings?: SitemapCrawlerSettingsOutput.Raw | null;

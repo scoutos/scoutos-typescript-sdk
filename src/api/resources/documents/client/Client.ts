@@ -10,19 +10,23 @@ import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Documents {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ScoutEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -44,10 +48,10 @@ export class Documents {
         collection_id: string,
         table_id: string,
         request: Scout.DocumentsListRequest = {},
-        requestOptions?: Documents.RequestOptions
+        requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersGetDocumentsResponse> {
         const { limit, cursor, query } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (limit != null) {
             _queryParams["limit"] = limit.toString();
         }
@@ -62,8 +66,10 @@ export class Documents {
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/documents`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/documents`,
             ),
             method: "GET",
             headers: {
@@ -74,6 +80,7 @@ export class Documents {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -102,7 +109,7 @@ export class Documents {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -119,7 +126,9 @@ export class Documents {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /v2/collections/{collection_id}/tables/{table_id}/documents.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -146,18 +155,20 @@ export class Documents {
         collection_id: string,
         table_id: string,
         request: Scout.DocumentsCreateRequest,
-        requestOptions?: Documents.RequestOptions
+        requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.DocumentResponse> {
         const { await_completion: awaitCompletion, body: _body } = request;
-        const _queryParams: Record<string, string | string[] | object | object[]> = {};
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (awaitCompletion != null) {
             _queryParams["await_completion"] = awaitCompletion.toString();
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/documents`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/documents`,
             ),
             method: "POST",
             headers: {
@@ -168,6 +179,7 @@ export class Documents {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             queryParameters: _queryParams,
@@ -197,7 +209,7 @@ export class Documents {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -214,7 +226,9 @@ export class Documents {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /v2/collections/{collection_id}/tables/{table_id}/documents.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -237,14 +251,14 @@ export class Documents {
         collection_id: string,
         table_id: string,
         document_id: string,
-        requestOptions?: Documents.RequestOptions
+        requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersGetDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(
-                    table_id
-                )}/documents/${encodeURIComponent(document_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/documents/${encodeURIComponent(document_id)}`,
             ),
             method: "GET",
             headers: {
@@ -255,6 +269,7 @@ export class Documents {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -282,7 +297,7 @@ export class Documents {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -299,7 +314,9 @@ export class Documents {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /v2/collections/{collection_id}/tables/{table_id}/documents/{document_id}.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -326,14 +343,14 @@ export class Documents {
         document_id: string,
         table_id: string,
         request: Record<string, Scout.DocumentsUpdateRequestValue>,
-        requestOptions?: Documents.RequestOptions
+        requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersUpdateDocumentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(
-                    table_id
-                )}/documents/${encodeURIComponent(document_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/documents/${encodeURIComponent(document_id)}`,
             ),
             method: "PUT",
             headers: {
@@ -344,6 +361,7 @@ export class Documents {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -372,7 +390,7 @@ export class Documents {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -389,7 +407,9 @@ export class Documents {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling PUT /v2/collections/{collection_id}/tables/{table_id}/documents/{document_id}.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -412,14 +432,14 @@ export class Documents {
         collection_id: string,
         table_id: string,
         document_id: string,
-        requestOptions?: Documents.RequestOptions
+        requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersDeleteDocumentsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(
-                    table_id
-                )}/documents/${encodeURIComponent(document_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/documents/${encodeURIComponent(document_id)}`,
             ),
             method: "DELETE",
             headers: {
@@ -430,6 +450,7 @@ export class Documents {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -457,7 +478,7 @@ export class Documents {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -474,7 +495,9 @@ export class Documents {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling DELETE /v2/collections/{collection_id}/tables/{table_id}/documents/{document_id}.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -499,14 +522,14 @@ export class Documents {
         collection_id: string,
         table_id: string,
         request: string[],
-        requestOptions?: Documents.RequestOptions
+        requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.CollectionServiceHandlersDeleteDocumentsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(
-                    table_id
-                )}/documents/delete`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/documents/delete`,
             ),
             method: "POST",
             headers: {
@@ -517,6 +540,7 @@ export class Documents {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -545,7 +569,7 @@ export class Documents {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -562,7 +586,9 @@ export class Documents {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /v2/collections/{collection_id}/tables/{table_id}/documents/delete.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -574,7 +600,8 @@ export class Documents {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
         if (bearer == null) {
             throw new errors.ScoutError({
-                message: "Please specify SCOUT_API_KEY when instantiating the client.",
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
             });
         }
 

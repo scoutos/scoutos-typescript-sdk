@@ -18,7 +18,7 @@ export const TableConfigOutput: core.serialization.ObjectSchema<
 });
 
 export declare namespace TableConfigOutput {
-    interface Raw {
+    export interface Raw {
         table_display_name?: string | null;
         table_img_url?: string | null;
         table_description?: string | null;

@@ -14,7 +14,7 @@ export const DefaultOutput: core.serialization.ObjectSchema<serializers.DefaultO
     });
 
 export declare namespace DefaultOutput {
-    interface Raw {
+    export interface Raw {
         trafilatura_type: "default";
         trafilatura_extractor_config?: TextExtractorConfig.Raw | null;
     }

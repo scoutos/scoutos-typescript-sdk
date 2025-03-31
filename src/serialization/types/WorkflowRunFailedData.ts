@@ -18,7 +18,7 @@ export const WorkflowRunFailedData: core.serialization.ObjectSchema<
 });
 
 export declare namespace WorkflowRunFailedData {
-    interface Raw {
+    export interface Raw {
         workflow_id: string;
         workflow_run_id: string;
         message: string;

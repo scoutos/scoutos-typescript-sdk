@@ -3,7 +3,6 @@
  */
 
 export type ActorType = "external" | "scoutos";
-
 export const ActorType = {
     External: "external",
     Scoutos: "scoutos",

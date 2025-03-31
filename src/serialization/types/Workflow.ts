@@ -22,7 +22,7 @@ export const Workflow: core.serialization.ObjectSchema<serializers.Workflow.Raw,
     });
 
 export declare namespace Workflow {
-    interface Raw {
+    export interface Raw {
         workflow_config: WorkflowConfigOutput.Raw;
         workflow_key?: string | null;
         last_updated_at: string;

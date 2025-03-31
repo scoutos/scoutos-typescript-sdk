@@ -10,5 +10,5 @@ export const IdentityTypes: core.serialization.Schema<serializers.IdentityTypes.
     core.serialization.enum_(["user", "api_key"]);
 
 export declare namespace IdentityTypes {
-    type Raw = "user" | "api_key";
+    export type Raw = "user" | "api_key";
 }

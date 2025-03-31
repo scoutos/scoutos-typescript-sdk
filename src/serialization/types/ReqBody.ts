@@ -10,5 +10,5 @@ export const ReqBody: core.serialization.ObjectSchema<serializers.ReqBody.Raw, S
     core.serialization.object({});
 
 export declare namespace ReqBody {
-    interface Raw {}
+    export interface Raw {}
 }

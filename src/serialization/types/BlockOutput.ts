@@ -26,7 +26,7 @@ export const BlockOutput: core.serialization.ObjectSchema<serializers.BlockOutpu
     });
 
 export declare namespace BlockOutput {
-    interface Raw {
+    export interface Raw {
         block_archetype_id: string;
         block_config?: BlockOutputBlockConfigItem.Raw[] | null;
         block_display_name: string;

@@ -3,7 +3,6 @@
  */
 
 export type BlockRunFailedEnvironment = "development" | "preview" | "production" | "test";
-
 export const BlockRunFailedEnvironment = {
     Development: "development",
     Preview: "preview",

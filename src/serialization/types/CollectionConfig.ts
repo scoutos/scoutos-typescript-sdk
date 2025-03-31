@@ -16,7 +16,7 @@ export const CollectionConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace CollectionConfig {
-    interface Raw {
+    export interface Raw {
         collection_display_name?: string | null;
         collection_img_url?: string | null;
         collection_description?: string | null;

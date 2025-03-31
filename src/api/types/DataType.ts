@@ -3,7 +3,6 @@
  */
 
 export type DataType = "boolean" | "string" | "number";
-
 export const DataType = {
     Boolean: "boolean",
     String: "string",

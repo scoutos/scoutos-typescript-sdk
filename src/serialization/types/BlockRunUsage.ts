@@ -18,7 +18,7 @@ export const BlockRunUsage: core.serialization.ObjectSchema<serializers.BlockRun
     });
 
 export declare namespace BlockRunUsage {
-    interface Raw {
+    export interface Raw {
         organization_id?: string | null;
         workflow_run_type?: string | null;
         block_archetype_id?: string | null;

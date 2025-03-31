@@ -17,7 +17,7 @@ export const TextLongColumn: core.serialization.ObjectSchema<serializers.TextLon
     });
 
 export declare namespace TextLongColumn {
-    interface Raw {
+    export interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: "text-long";

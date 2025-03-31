@@ -12,5 +12,5 @@ export const Favor: core.serialization.Schema<serializers.Favor.Raw, Scout.Favor
 ]);
 
 export declare namespace Favor {
-    type Raw = "precision" | "recall";
+    export type Raw = "precision" | "recall";
 }

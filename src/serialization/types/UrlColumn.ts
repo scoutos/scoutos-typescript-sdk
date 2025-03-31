@@ -17,7 +17,7 @@ export const UrlColumn: core.serialization.ObjectSchema<serializers.UrlColumn.Ra
     });
 
 export declare namespace UrlColumn {
-    interface Raw {
+    export interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: "url";

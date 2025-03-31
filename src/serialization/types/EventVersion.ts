@@ -10,5 +10,5 @@ export const EventVersion: core.serialization.Schema<serializers.EventVersion.Ra
     core.serialization.string();
 
 export declare namespace EventVersion {
-    type Raw = string;
+    export type Raw = string;
 }

@@ -15,5 +15,5 @@ export const SinglePageCrawlerSettingsInputTextExtractor: core.serialization.Sch
 > = core.serialization.undiscriminatedUnion([Custom, Readability, TrafilaturaInput]);
 
 export declare namespace SinglePageCrawlerSettingsInputTextExtractor {
-    type Raw = Custom.Raw | Readability.Raw | TrafilaturaInput.Raw;
+    export type Raw = Custom.Raw | Readability.Raw | TrafilaturaInput.Raw;
 }

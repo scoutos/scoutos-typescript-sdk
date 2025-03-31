@@ -12,5 +12,5 @@ export const WorkflowRunStopReason: core.serialization.Schema<
 > = core.serialization.enum_(["workflow_run_completed", "workflow_run_failed"]);
 
 export declare namespace WorkflowRunStopReason {
-    type Raw = "workflow_run_completed" | "workflow_run_failed";
+    export type Raw = "workflow_run_completed" | "workflow_run_failed";
 }

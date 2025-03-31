@@ -14,7 +14,7 @@ export const Dependency: core.serialization.ObjectSchema<serializers.Dependency.
     });
 
 export declare namespace Dependency {
-    interface Raw {
+    export interface Raw {
         block_id: string;
         ui?: EdgeUi.Raw | null;
     }

@@ -19,7 +19,7 @@ export const WorkflowConfigOutput: core.serialization.ObjectSchema<
 });
 
 export declare namespace WorkflowConfigOutput {
-    interface Raw {
+    export interface Raw {
         workflow_display_name?: string | null;
         workflow_schema_version?: string | null;
         workflow_img_url?: string | null;

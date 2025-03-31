@@ -29,7 +29,7 @@ export const TableDataSchemaItem: core.serialization.Schema<
 ]);
 
 export declare namespace TableDataSchemaItem {
-    type Raw =
+    export type Raw =
         | CheckBoxColumn.Raw
         | JsonColumn.Raw
         | MarkdownColumn.Raw

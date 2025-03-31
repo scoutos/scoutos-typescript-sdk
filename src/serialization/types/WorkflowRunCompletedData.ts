@@ -18,7 +18,7 @@ export const WorkflowRunCompletedData: core.serialization.ObjectSchema<
 });
 
 export declare namespace WorkflowRunCompletedData {
-    interface Raw {
+    export interface Raw {
         workflow_id: string;
         workflow_run_id: string;
         output: Record<string, unknown>;

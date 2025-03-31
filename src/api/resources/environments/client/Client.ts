@@ -10,19 +10,23 @@ import * as serializers from "../../../../serialization/index";
 import * as errors from "../../../../errors/index";
 
 export declare namespace Environments {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ScoutEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
@@ -42,12 +46,14 @@ export class Environments {
      */
     public async list(
         workflow_id: string,
-        requestOptions?: Environments.RequestOptions
+        requestOptions?: Environments.RequestOptions,
     ): Promise<Scout.SrcHandlersGetWorkflowEnvironmentsResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}/environments`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}/environments`,
             ),
             method: "GET",
             headers: {
@@ -58,6 +64,7 @@ export class Environments {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -85,7 +92,7 @@ export class Environments {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -102,7 +109,9 @@ export class Environments {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /v2/workflows/{workflow_id}/environments.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -125,7 +134,7 @@ export class Environments {
      *         name: "name",
      *         description: "description",
      *         deployments: [{
-     *                 revision_lookup: Scout.EnvironmentDeploymentConfigRevisionLookup.Latest
+     *                 revision_lookup: "latest"
      *             }]
      *     })
      */
@@ -133,12 +142,14 @@ export class Environments {
         workflow_id: string,
         environment_id: string,
         request: Scout.UpdateRequestBody,
-        requestOptions?: Environments.RequestOptions
+        requestOptions?: Environments.RequestOptions,
     ): Promise<Scout.SrcHandlersUpdateWorkflowEnvironmentResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
-                (await core.Supplier.get(this._options.environment)) ?? environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}/environments/${encodeURIComponent(environment_id)}`
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}/environments/${encodeURIComponent(environment_id)}`,
             ),
             method: "PUT",
             headers: {
@@ -149,6 +160,7 @@ export class Environments {
                 "User-Agent": "scoutos/0.10.2",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
             },
             contentType: "application/json",
             requestType: "json",
@@ -177,7 +189,7 @@ export class Environments {
                             allowUnrecognizedEnumValues: true,
                             skipValidation: true,
                             breadcrumbsPrefix: ["response"],
-                        })
+                        }),
                     );
                 default:
                     throw new errors.ScoutError({
@@ -194,7 +206,9 @@ export class Environments {
                     body: _response.error.rawBody,
                 });
             case "timeout":
-                throw new errors.ScoutTimeoutError();
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling PUT /v2/workflows/{workflow_id}/environments/{environment_id}.",
+                );
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,
@@ -206,7 +220,8 @@ export class Environments {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
         if (bearer == null) {
             throw new errors.ScoutError({
-                message: "Please specify SCOUT_API_KEY when instantiating the client.",
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
             });
         }
 

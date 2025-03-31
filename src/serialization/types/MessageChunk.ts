@@ -10,5 +10,5 @@ export const MessageChunk: core.serialization.Schema<serializers.MessageChunk.Ra
     core.serialization.record(core.serialization.string(), core.serialization.unknown());
 
 export declare namespace MessageChunk {
-    type Raw = Record<string, unknown>;
+    export type Raw = Record<string, unknown>;
 }

@@ -18,7 +18,7 @@ export const WorkflowRun: core.serialization.ObjectSchema<serializers.WorkflowRu
     });
 
 export declare namespace WorkflowRun {
-    interface Raw {
+    export interface Raw {
         stop_reason: WorkflowRunStopReason.Raw;
         state?: Record<string, WorkflowRunStateValue.Raw | null | undefined> | null;
         errors?: string[] | null;

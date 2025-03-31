@@ -18,7 +18,7 @@ export const BlockConfigItemTextShort: core.serialization.ObjectSchema<
 });
 
 export declare namespace BlockConfigItemTextShort {
-    interface Raw {
+    export interface Raw {
         id: string;
         display_name: string;
         type: "text-short";

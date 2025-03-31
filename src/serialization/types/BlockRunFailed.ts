@@ -24,7 +24,7 @@ export const BlockRunFailed: core.serialization.ObjectSchema<serializers.BlockRu
     });
 
 export declare namespace BlockRunFailed {
-    interface Raw {
+    export interface Raw {
         organization_id: string;
         id?: string | null;
         correlation_id?: string | null;

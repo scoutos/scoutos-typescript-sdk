@@ -19,7 +19,7 @@ export const Sync: core.serialization.ObjectSchema<serializers.Sync.Raw, Scout.S
 });
 
 export declare namespace Sync {
-    interface Raw {
+    export interface Raw {
         sync_config: SyncConfigOutput.Raw;
         sync_id: string;
         trigger_id?: string | null;

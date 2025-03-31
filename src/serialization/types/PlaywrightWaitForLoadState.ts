@@ -12,5 +12,5 @@ export const PlaywrightWaitForLoadState: core.serialization.Schema<
 > = core.serialization.enum_(["load", "domcontentloaded", "networkidle"]);
 
 export declare namespace PlaywrightWaitForLoadState {
-    type Raw = "load" | "domcontentloaded" | "networkidle";
+    export type Raw = "load" | "domcontentloaded" | "networkidle";
 }

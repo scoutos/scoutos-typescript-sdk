@@ -19,7 +19,7 @@ export const SelectColumn: core.serialization.ObjectSchema<serializers.SelectCol
     });
 
 export declare namespace SelectColumn {
-    interface Raw {
+    export interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: "select";

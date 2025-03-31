@@ -18,7 +18,7 @@ export const SourceArchetype: core.serialization.ObjectSchema<serializers.Source
     });
 
 export declare namespace SourceArchetype {
-    interface Raw {
+    export interface Raw {
         archetype_id: string;
         display_name: string;
         description?: string | null;

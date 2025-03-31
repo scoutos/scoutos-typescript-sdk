@@ -29,7 +29,7 @@ export const TableConfigInputSchemaItem: core.serialization.Schema<
 ]);
 
 export declare namespace TableConfigInputSchemaItem {
-    type Raw =
+    export type Raw =
         | CheckBoxColumn.Raw
         | JsonColumn.Raw
         | MarkdownColumn.Raw

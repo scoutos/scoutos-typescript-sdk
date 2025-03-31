@@ -16,7 +16,7 @@ export const MarkdownSplitterConfig: core.serialization.ObjectSchema<
 });
 
 export declare namespace MarkdownSplitterConfig {
-    interface Raw {
+    export interface Raw {
         type: "markdown";
         chunk_size?: number | null;
         chunk_overlap?: number | null;

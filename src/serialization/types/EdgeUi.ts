@@ -11,7 +11,7 @@ export const EdgeUi: core.serialization.ObjectSchema<serializers.EdgeUi.Raw, Sco
 });
 
 export declare namespace EdgeUi {
-    interface Raw {
+    export interface Raw {
         edge_type?: string | null;
     }
 }

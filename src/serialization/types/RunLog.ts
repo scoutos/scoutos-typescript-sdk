@@ -24,7 +24,7 @@ export const RunLog: core.serialization.ObjectSchema<serializers.RunLog.Raw, Sco
 });
 
 export declare namespace RunLog {
-    interface Raw {
+    export interface Raw {
         workflow_display_name: string;
         workflow_run_id: string;
         workflow_id: string;

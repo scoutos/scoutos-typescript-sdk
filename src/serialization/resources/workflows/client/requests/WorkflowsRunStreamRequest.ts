@@ -15,7 +15,7 @@ export const WorkflowsRunStreamRequest: core.serialization.Schema<
 });
 
 export declare namespace WorkflowsRunStreamRequest {
-    interface Raw {
+    export interface Raw {
         inputs?: Record<string, WorkflowsRunStreamRequestInputsValue.Raw> | null;
     }
 }

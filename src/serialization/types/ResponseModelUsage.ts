@@ -15,7 +15,7 @@ export const ResponseModelUsage: core.serialization.ObjectSchema<
 });
 
 export declare namespace ResponseModelUsage {
-    interface Raw {
+    export interface Raw {
         data: Usage.Raw;
     }
 }

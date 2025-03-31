@@ -3,7 +3,6 @@
  */
 
 export type ColumnType = "checkbox" | "json" | "number" | "select" | "text-long" | "text-short" | "url" | "markdown";
-
 export const ColumnType = {
     Checkbox: "checkbox",
     Json: "json",

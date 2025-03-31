@@ -15,7 +15,7 @@ export const SourceSyncNotionSettings: core.serialization.ObjectSchema<
 });
 
 export declare namespace SourceSyncNotionSettings {
-    interface Raw {
+    export interface Raw {
         source_archetype_id: "com.notion.notion";
         api_key?: string | null;
     }

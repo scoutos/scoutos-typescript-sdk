@@ -17,7 +17,7 @@ export const SourceSyncPageCrawlSettingsInput: core.serialization.ObjectSchema<
 });
 
 export declare namespace SourceSyncPageCrawlSettingsInput {
-    interface Raw {
+    export interface Raw {
         source_archetype_id: "com.scoutos.page_crawl";
         start_urls: string;
         crawler_settings?: SinglePageCrawlerSettingsInput.Raw | null;

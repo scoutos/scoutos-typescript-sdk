@@ -3,7 +3,6 @@
  */
 
 export type TextExtractor = "readability" | "trafilatura" | "custom";
-
 export const TextExtractor = {
     Readability: "readability",
     Trafilatura: "trafilatura",

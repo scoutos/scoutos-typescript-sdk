@@ -17,7 +17,7 @@ export const CheckBoxColumn: core.serialization.ObjectSchema<serializers.CheckBo
     });
 
 export declare namespace CheckBoxColumn {
-    interface Raw {
+    export interface Raw {
         column_id?: string | null;
         column_display_name?: string | null;
         column_type: "checkbox";

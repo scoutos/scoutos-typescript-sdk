@@ -20,7 +20,7 @@ export const Table: core.serialization.ObjectSchema<serializers.Table.Raw, Scout
 });
 
 export declare namespace Table {
-    interface Raw {
+    export interface Raw {
         table_config: TableConfigOutput.Raw;
         created_at?: string | null;
         last_updated_at?: string | null;

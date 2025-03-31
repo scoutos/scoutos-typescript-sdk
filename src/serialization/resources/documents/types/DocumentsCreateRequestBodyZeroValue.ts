@@ -18,5 +18,5 @@ export const DocumentsCreateRequestBodyZeroValue: core.serialization.Schema<
 ]);
 
 export declare namespace DocumentsCreateRequestBodyZeroValue {
-    type Raw = boolean | Record<string, unknown> | number | number | string;
+    export type Raw = boolean | Record<string, unknown> | number | number | string;
 }

@@ -15,7 +15,7 @@ export const UserIdentity: core.serialization.ObjectSchema<serializers.UserIdent
     });
 
 export declare namespace UserIdentity {
-    interface Raw {
+    export interface Raw {
         user_id: string;
         org_id: string;
         scout_organization_id: string;

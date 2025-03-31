@@ -345,7 +345,7 @@ await client.workflows.delete("workflow_id");
 <dd>
 
 ```typescript
-await client.workflows.runStream("string", {
+const response = await client.workflows.runStream("string", {
     environment: "string",
     revision_id: "string",
     session_id: "string",
@@ -353,6 +353,9 @@ await client.workflows.runStream("string", {
         string: true,
     },
 });
+for await (const item of response) {
+    console.log(item);
+}
 ```
 
 </dd>
@@ -599,7 +602,7 @@ await client.environments.update("workflow_id", "environment_id", {
     description: "description",
     deployments: [
         {
-            revision_lookup: Scout.EnvironmentDeploymentConfigRevisionLookup.Latest,
+            revision_lookup: "latest",
         },
     ],
 });
@@ -895,7 +898,7 @@ await client.usage.get();
 <dd>
 
 ```typescript
-await client.workflowLogs.listLogs({
+const response = await client.workflowLogs.listLogs({
     workflow_id: "string",
     start_date: "string",
     end_date: "string",
@@ -904,6 +907,9 @@ await client.workflowLogs.listLogs({
     status: "string",
     cursor: "string",
 });
+for await (const item of response) {
+    console.log(item);
+}
 ```
 
 </dd>

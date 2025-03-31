@@ -16,7 +16,7 @@ export const DocumentResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace DocumentResponse {
-    interface Raw {
+    export interface Raw {
         data: Document.Raw[];
         status?: string | null;
     }

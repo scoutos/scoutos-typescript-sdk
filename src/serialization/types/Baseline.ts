@@ -12,7 +12,7 @@ export const Baseline: core.serialization.ObjectSchema<serializers.Baseline.Raw,
     });
 
 export declare namespace Baseline {
-    interface Raw {
+    export interface Raw {
         trafilatura_type: "baseline";
     }
 }

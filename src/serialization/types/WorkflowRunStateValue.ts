@@ -18,5 +18,5 @@ export const WorkflowRunStateValue: core.serialization.Schema<
 ]);
 
 export declare namespace WorkflowRunStateValue {
-    type Raw = unknown[] | string | number | number | Record<string, unknown>;
+    export type Raw = unknown[] | string | number | number | Record<string, unknown>;
 }

@@ -12,5 +12,5 @@ export const BlockStateUpdatedDataUpdateType: core.serialization.Schema<
 > = core.serialization.enum_(["complete", "partial"]);
 
 export declare namespace BlockStateUpdatedDataUpdateType {
-    type Raw = "complete" | "partial";
+    export type Raw = "complete" | "partial";
 }

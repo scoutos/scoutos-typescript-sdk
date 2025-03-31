@@ -10,5 +10,5 @@ export const ColumnType: core.serialization.Schema<serializers.ColumnType.Raw, S
     core.serialization.enum_(["checkbox", "json", "number", "select", "text-long", "text-short", "url", "markdown"]);
 
 export declare namespace ColumnType {
-    type Raw = "checkbox" | "json" | "number" | "select" | "text-long" | "text-short" | "url" | "markdown";
+    export type Raw = "checkbox" | "json" | "number" | "select" | "text-long" | "text-short" | "url" | "markdown";
 }

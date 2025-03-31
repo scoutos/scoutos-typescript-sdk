@@ -16,7 +16,7 @@ export const CollectionDestination: core.serialization.ObjectSchema<
 });
 
 export declare namespace CollectionDestination {
-    interface Raw {
+    export interface Raw {
         destination_type: "collections.v2";
         collection_id: string;
         table_id: string;

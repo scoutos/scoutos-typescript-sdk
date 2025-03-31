@@ -15,7 +15,7 @@ export const CollectionServiceHandlersListCollectionSyncsResponseModel: core.ser
 });
 
 export declare namespace CollectionServiceHandlersListCollectionSyncsResponseModel {
-    interface Raw {
+    export interface Raw {
         syncs: Sync.Raw[];
     }
 }

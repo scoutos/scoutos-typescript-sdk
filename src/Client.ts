@@ -17,86 +17,80 @@ import { Sources } from "./api/resources/sources/client/Client";
 import { Syncs } from "./api/resources/syncs/client/Client";
 
 export declare namespace ScoutClient {
-    interface Options {
+    export interface Options {
         environment?: core.Supplier<environments.ScoutEnvironment | string>;
+        /** Specify a custom URL to connect the client to. */
+        baseUrl?: core.Supplier<string>;
         apiKey?: core.Supplier<core.BearerToken | undefined>;
         fetcher?: core.FetchFunction;
     }
 
-    interface RequestOptions {
+    export interface RequestOptions {
         /** The maximum time to wait for a response in seconds. */
         timeoutInSeconds?: number;
         /** The number of times to retry the request. Defaults to 2. */
         maxRetries?: number;
         /** A hook to abort the request. */
         abortSignal?: AbortSignal;
+        /** Additional headers to include in the request. */
+        headers?: Record<string, string>;
     }
 }
 
 export class ScoutClient {
-    constructor(protected readonly _options: ScoutClient.Options = {}) {}
-
     protected _workflows: Workflows | undefined;
+    protected _environments: Environments | undefined;
+    protected _revisions: Revisions | undefined;
+    protected _usage: Usage | undefined;
+    protected _workflowLogs: WorkflowLogs | undefined;
+    protected _copilots: Copilots | undefined;
+    protected _collections: Collections | undefined;
+    protected _tables: Tables | undefined;
+    protected _documents: Documents | undefined;
+    protected _sources: Sources | undefined;
+    protected _syncs: Syncs | undefined;
+
+    constructor(protected readonly _options: ScoutClient.Options = {}) {}
 
     public get workflows(): Workflows {
         return (this._workflows ??= new Workflows(this._options));
     }
 
-    protected _environments: Environments | undefined;
-
     public get environments(): Environments {
         return (this._environments ??= new Environments(this._options));
     }
-
-    protected _revisions: Revisions | undefined;
 
     public get revisions(): Revisions {
         return (this._revisions ??= new Revisions(this._options));
     }
 
-    protected _usage: Usage | undefined;
-
     public get usage(): Usage {
         return (this._usage ??= new Usage(this._options));
     }
-
-    protected _workflowLogs: WorkflowLogs | undefined;
 
     public get workflowLogs(): WorkflowLogs {
         return (this._workflowLogs ??= new WorkflowLogs(this._options));
     }
 
-    protected _copilots: Copilots | undefined;
-
     public get copilots(): Copilots {
         return (this._copilots ??= new Copilots(this._options));
     }
-
-    protected _collections: Collections | undefined;
 
     public get collections(): Collections {
         return (this._collections ??= new Collections(this._options));
     }
 
-    protected _tables: Tables | undefined;
-
     public get tables(): Tables {
         return (this._tables ??= new Tables(this._options));
     }
-
-    protected _documents: Documents | undefined;
 
     public get documents(): Documents {
         return (this._documents ??= new Documents(this._options));
     }
 
-    protected _sources: Sources | undefined;
-
     public get sources(): Sources {
         return (this._sources ??= new Sources(this._options));
     }
-
-    protected _syncs: Syncs | undefined;
 
     public get syncs(): Syncs {
         return (this._syncs ??= new Syncs(this._options));

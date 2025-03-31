@@ -15,7 +15,7 @@ export const CollectionServiceHandlersUpdateCollectionResponse: core.serializati
 });
 
 export declare namespace CollectionServiceHandlersUpdateCollectionResponse {
-    interface Raw {
+    export interface Raw {
         data?: Collection.Raw | null;
     }
 }

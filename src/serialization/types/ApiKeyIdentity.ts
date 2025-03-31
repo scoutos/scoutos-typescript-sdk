@@ -12,7 +12,7 @@ export const ApiKeyIdentity: core.serialization.ObjectSchema<serializers.ApiKeyI
     });
 
 export declare namespace ApiKeyIdentity {
-    interface Raw {
+    export interface Raw {
         api_key?: Record<string, unknown> | null;
     }
 }

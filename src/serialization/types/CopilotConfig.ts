@@ -25,7 +25,7 @@ export const CopilotConfig: core.serialization.ObjectSchema<serializers.CopilotC
     });
 
 export declare namespace CopilotConfig {
-    interface Raw {
+    export interface Raw {
         workflow_id?: string | null;
         img_url?: string | null;
         display_name?: string | null;

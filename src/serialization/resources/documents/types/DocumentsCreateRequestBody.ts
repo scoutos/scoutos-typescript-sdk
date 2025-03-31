@@ -16,15 +16,15 @@ export const DocumentsCreateRequestBody: core.serialization.Schema<
     core.serialization.record(core.serialization.string(), DocumentsCreateRequestBodyZeroValue),
     core.serialization.record(core.serialization.string(), DocumentsCreateRequestBodyOneValue.optional()),
     core.serialization.list(
-        core.serialization.record(core.serialization.string(), DocumentsCreateRequestBodyItemValue)
+        core.serialization.record(core.serialization.string(), DocumentsCreateRequestBodyItemValue),
     ),
     core.serialization.list(
-        core.serialization.record(core.serialization.string(), DocumentsCreateRequestBodyItemValue.optional())
+        core.serialization.record(core.serialization.string(), DocumentsCreateRequestBodyItemValue.optional()),
     ),
 ]);
 
 export declare namespace DocumentsCreateRequestBody {
-    type Raw =
+    export type Raw =
         | Record<string, DocumentsCreateRequestBodyZeroValue.Raw>
         | Record<string, DocumentsCreateRequestBodyOneValue.Raw | null | undefined>
         | Record<string, DocumentsCreateRequestBodyItemValue.Raw>[]

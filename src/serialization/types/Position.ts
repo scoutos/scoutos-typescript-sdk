@@ -13,7 +13,7 @@ export const Position: core.serialization.ObjectSchema<serializers.Position.Raw,
     });
 
 export declare namespace Position {
-    interface Raw {
+    export interface Raw {
         x: number;
         y: number;
     }

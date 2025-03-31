@@ -13,5 +13,5 @@ export const Request: core.serialization.Schema<
 > = core.serialization.record(core.serialization.string(), DocumentsUpdateRequestValue);
 
 export declare namespace Request {
-    type Raw = Record<string, DocumentsUpdateRequestValue.Raw>;
+    export type Raw = Record<string, DocumentsUpdateRequestValue.Raw>;
 }

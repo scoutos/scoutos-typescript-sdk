@@ -22,7 +22,7 @@ export const WorkflowRunStartedData: core.serialization.ObjectSchema<
 });
 
 export declare namespace WorkflowRunStartedData {
-    interface Raw {
+    export interface Raw {
         actor?: Actor.Raw | null;
         workflow_id: string;
         workflow_run_id?: string | null;

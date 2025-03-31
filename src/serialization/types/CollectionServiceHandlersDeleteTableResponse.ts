@@ -14,7 +14,7 @@ export const CollectionServiceHandlersDeleteTableResponse: core.serialization.Ob
 });
 
 export declare namespace CollectionServiceHandlersDeleteTableResponse {
-    interface Raw {
+    export interface Raw {
         detail: string;
     }
 }

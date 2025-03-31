@@ -27,7 +27,7 @@ export const WorkflowRunStreamResponse: core.serialization.Schema<
 ]);
 
 export declare namespace WorkflowRunStreamResponse {
-    type Raw =
+    export type Raw =
         | WorkflowRunStarted.Raw
         | WorkflowRunCompleted.Raw
         | WorkflowRunFailed.Raw

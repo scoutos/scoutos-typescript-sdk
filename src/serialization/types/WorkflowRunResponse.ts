@@ -16,7 +16,7 @@ export const WorkflowRunResponse: core.serialization.ObjectSchema<
 });
 
 export declare namespace WorkflowRunResponse {
-    interface Raw {
+    export interface Raw {
         run: WorkflowRun.Raw;
         workflow_id: string;
     }

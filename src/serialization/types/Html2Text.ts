@@ -12,7 +12,7 @@ export const Html2Text: core.serialization.ObjectSchema<serializers.Html2Text.Ra
     });
 
 export declare namespace Html2Text {
-    interface Raw {
+    export interface Raw {
         trafilatura_type: "html2text";
     }
 }

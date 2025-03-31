@@ -13,5 +13,5 @@ export const BlockConfigItemTextLongValue: core.serialization.Schema<
 > = core.serialization.undiscriminatedUnion([core.serialization.string(), core.serialization.list(Prompt)]);
 
 export declare namespace BlockConfigItemTextLongValue {
-    type Raw = string | Prompt.Raw[];
+    export type Raw = string | Prompt.Raw[];
 }

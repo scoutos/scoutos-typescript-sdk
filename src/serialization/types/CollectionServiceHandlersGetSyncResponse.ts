@@ -15,7 +15,7 @@ export const CollectionServiceHandlersGetSyncResponse: core.serialization.Object
 });
 
 export declare namespace CollectionServiceHandlersGetSyncResponse {
-    interface Raw {
+    export interface Raw {
         data: Sync.Raw;
     }
 }

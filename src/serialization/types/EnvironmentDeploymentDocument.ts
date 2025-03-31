@@ -20,7 +20,7 @@ export const EnvironmentDeploymentDocument: core.serialization.ObjectSchema<
 });
 
 export declare namespace EnvironmentDeploymentDocument {
-    interface Raw {
+    export interface Raw {
         deployment_id: string;
         environment_id: string;
         deployment_config: EnvironmentDeploymentConfig.Raw;

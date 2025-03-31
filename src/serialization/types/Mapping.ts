@@ -14,7 +14,7 @@ export const Mapping: core.serialization.ObjectSchema<serializers.Mapping.Raw, S
     });
 
 export declare namespace Mapping {
-    interface Raw {
+    export interface Raw {
         fields?: Record<string, unknown>[] | null;
     }
 }

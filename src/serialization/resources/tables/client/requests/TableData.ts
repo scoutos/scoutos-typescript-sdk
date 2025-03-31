@@ -17,7 +17,7 @@ export const TableData: core.serialization.Schema<serializers.TableData.Raw, Sco
     });
 
 export declare namespace TableData {
-    interface Raw {
+    export interface Raw {
         table_display_name?: string | null;
         table_img_url?: string | null;
         table_description?: string | null;

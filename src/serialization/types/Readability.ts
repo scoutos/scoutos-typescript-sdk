@@ -12,7 +12,7 @@ export const Readability: core.serialization.ObjectSchema<serializers.Readabilit
     });
 
 export declare namespace Readability {
-    interface Raw {
+    export interface Raw {
         text_extractor_type: "readability";
     }
 }

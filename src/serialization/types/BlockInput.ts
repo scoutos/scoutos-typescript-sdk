@@ -26,7 +26,7 @@ export const BlockInput: core.serialization.ObjectSchema<serializers.BlockInput.
     });
 
 export declare namespace BlockInput {
-    interface Raw {
+    export interface Raw {
         block_archetype_id: string;
         block_config?: BlockInputBlockConfigItem.Raw[] | null;
         block_display_name: string;

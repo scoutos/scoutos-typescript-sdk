@@ -18,7 +18,7 @@ export const CollectionServiceHandlersGetDocumentsResponse: core.serialization.O
 });
 
 export declare namespace CollectionServiceHandlersGetDocumentsResponse {
-    interface Raw {
+    export interface Raw {
         data?: Document.Raw[] | null;
         next_cursor?: string | null;
         has_more?: boolean | null;

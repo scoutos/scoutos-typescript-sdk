@@ -71,8 +71,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.3",
-                "User-Agent": "scoutos/0.10.3",
+                "X-Fern-SDK-Version": "0.10.4",
+                "User-Agent": "scoutos/0.10.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -145,7 +145,7 @@ export class Workflows {
         request: Scout.WorkflowsListRequest = {},
         requestOptions?: Workflows.RequestOptions,
     ): Promise<Scout.SrcHandlersListWorkflowsResponse> {
-        const { sort, direction, start_at: startAt, limit, query } = request;
+        const { sort, direction, start_at: startAt, limit, query, tags } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (sort != null) {
             _queryParams["sort"] = sort;
@@ -167,6 +167,10 @@ export class Workflows {
             _queryParams["query"] = query;
         }
 
+        if (tags != null) {
+            _queryParams["tags"] = tags;
+        }
+
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -179,8 +183,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.3",
-                "User-Agent": "scoutos/0.10.3",
+                "X-Fern-SDK-Version": "0.10.4",
+                "User-Agent": "scoutos/0.10.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -270,8 +274,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.3",
-                "User-Agent": "scoutos/0.10.3",
+                "X-Fern-SDK-Version": "0.10.4",
+                "User-Agent": "scoutos/0.10.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -356,8 +360,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.3",
-                "User-Agent": "scoutos/0.10.3",
+                "X-Fern-SDK-Version": "0.10.4",
+                "User-Agent": "scoutos/0.10.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -440,8 +444,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.3",
-                "User-Agent": "scoutos/0.10.3",
+                "X-Fern-SDK-Version": "0.10.4",
+                "User-Agent": "scoutos/0.10.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -523,8 +527,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.3",
-                "User-Agent": "scoutos/0.10.3",
+                "X-Fern-SDK-Version": "0.10.4",
+                "User-Agent": "scoutos/0.10.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -611,8 +615,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.3",
-                "User-Agent": "scoutos/0.10.3",
+                "X-Fern-SDK-Version": "0.10.4",
+                "User-Agent": "scoutos/0.10.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -727,8 +731,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.3",
-                "User-Agent": "scoutos/0.10.3",
+                "X-Fern-SDK-Version": "0.10.4",
+                "User-Agent": "scoutos/0.10.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -832,8 +836,8 @@ export class Workflows {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.3",
-                "User-Agent": "scoutos/0.10.3",
+                "X-Fern-SDK-Version": "0.10.4",
+                "User-Agent": "scoutos/0.10.4",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

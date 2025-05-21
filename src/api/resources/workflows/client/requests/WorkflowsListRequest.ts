@@ -27,4 +27,8 @@ export interface WorkflowsListRequest {
      * Search query
      */
     query?: string;
+    /**
+     * Filter by tags
+     */
+    tags?: string;
 }

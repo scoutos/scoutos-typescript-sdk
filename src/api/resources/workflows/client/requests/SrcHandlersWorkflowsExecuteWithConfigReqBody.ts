@@ -13,7 +13,6 @@ import * as Scout from "../../../../index";
 export interface SrcHandlersWorkflowsExecuteWithConfigReqBody {
     /**
      * Specifies the execution environment for the workflow. The available environments include:
-     *
      * - `production`: The production environment, where workflows are executed under live conditions.
      * - `staging`: A staging environment used for testing prior to production deployment.
      * - `development`: A development environment used for testing new changes.

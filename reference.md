@@ -345,14 +345,7 @@ await client.workflows.delete("workflow_id");
 <dd>
 
 ```typescript
-const response = await client.workflows.runStream("string", {
-    environment: "string",
-    revision_id: "string",
-    session_id: "string",
-    inputs: {
-        string: true,
-    },
-});
+const response = await client.workflows.runStream("workflow_id", {});
 for await (const item of response) {
     console.log(item);
 }
@@ -899,13 +892,7 @@ await client.usage.get();
 
 ```typescript
 const response = await client.workflowLogs.listLogs({
-    workflow_id: "string",
-    start_date: "string",
-    end_date: "string",
-    limit: 1,
-    session_id: "string",
-    status: "string",
-    cursor: "string",
+    workflow_id: "workflow_id",
 });
 for await (const item of response) {
     console.log(item);

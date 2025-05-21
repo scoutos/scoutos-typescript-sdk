@@ -10,7 +10,7 @@ export interface BlockInput {
     block_display_name: string;
     block_id: string;
     block_inputs?: Record<string, unknown>;
-    block_is_output?: boolean;
+    is_output?: boolean;
     dependencies?: Scout.Dependency[];
     input_schema?: Record<string, unknown>;
     output_schema?: unknown[];

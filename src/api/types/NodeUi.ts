@@ -5,5 +5,6 @@
 import * as Scout from "../index";
 
 export interface NodeUi {
+    dimensions?: Scout.Dimensions;
     position?: Scout.Position;
 }

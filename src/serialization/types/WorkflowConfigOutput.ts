@@ -6,6 +6,8 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { BlockOutput } from "./BlockOutput";
+import { WorkflowNoteOutput } from "./WorkflowNoteOutput";
+import { PlaceholderOutput } from "./PlaceholderOutput";
 
 export const WorkflowConfigOutput: core.serialization.ObjectSchema<
     serializers.WorkflowConfigOutput.Raw,
@@ -16,6 +18,10 @@ export const WorkflowConfigOutput: core.serialization.ObjectSchema<
     workflow_img_url: core.serialization.string().optional(),
     workflow_description: core.serialization.string().optional(),
     blocks: core.serialization.list(BlockOutput).optional(),
+    notes: core.serialization.list(WorkflowNoteOutput).optional(),
+    placeholders: core.serialization.list(PlaceholderOutput).optional(),
+    tags: core.serialization.list(core.serialization.string()).optional(),
+    is_tool: core.serialization.boolean().optional(),
 });
 
 export declare namespace WorkflowConfigOutput {
@@ -25,5 +31,9 @@ export declare namespace WorkflowConfigOutput {
         workflow_img_url?: string | null;
         workflow_description?: string | null;
         blocks?: BlockOutput.Raw[] | null;
+        notes?: WorkflowNoteOutput.Raw[] | null;
+        placeholders?: PlaceholderOutput.Raw[] | null;
+        tags?: string[] | null;
+        is_tool?: boolean | null;
     }
 }

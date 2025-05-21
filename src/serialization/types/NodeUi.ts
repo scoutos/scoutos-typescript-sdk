@@ -5,14 +5,17 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
+import { Dimensions } from "./Dimensions";
 import { Position } from "./Position";
 
 export const NodeUi: core.serialization.ObjectSchema<serializers.NodeUi.Raw, Scout.NodeUi> = core.serialization.object({
+    dimensions: Dimensions.optional(),
     position: Position.optional(),
 });
 
 export declare namespace NodeUi {
     export interface Raw {
+        dimensions?: Dimensions.Raw | null;
         position?: Position.Raw | null;
     }
 }

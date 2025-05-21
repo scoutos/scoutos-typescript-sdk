@@ -10,4 +10,8 @@ export interface WorkflowConfigInput {
     workflow_img_url?: string;
     workflow_description?: string;
     blocks?: Scout.BlockInput[];
+    notes?: Scout.WorkflowNoteInput[];
+    placeholders?: Scout.PlaceholderInput[];
+    tags?: string[];
+    is_tool?: boolean;
 }

@@ -13,11 +13,13 @@ export const WorkflowRunResponse: core.serialization.ObjectSchema<
 > = core.serialization.object({
     run: WorkflowRun,
     workflow_id: core.serialization.string(),
+    output_block_id: core.serialization.string().optional(),
 });
 
 export declare namespace WorkflowRunResponse {
     export interface Raw {
         run: WorkflowRun.Raw;
         workflow_id: string;
+        output_block_id?: string | null;
     }
 }

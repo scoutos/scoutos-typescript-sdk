@@ -10,4 +10,8 @@ export interface WorkflowConfigOutput {
     workflow_img_url?: string;
     workflow_description?: string;
     blocks?: Scout.BlockOutput[];
+    notes?: Scout.WorkflowNoteOutput[];
+    placeholders?: Scout.PlaceholderOutput[];
+    tags?: string[];
+    is_tool?: boolean;
 }

@@ -16,7 +16,7 @@ export const BlockInput: core.serialization.ObjectSchema<serializers.BlockInput.
         block_display_name: core.serialization.string(),
         block_id: core.serialization.string(),
         block_inputs: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
-        block_is_output: core.serialization.boolean().optional(),
+        is_output: core.serialization.boolean().optional(),
         dependencies: core.serialization.list(Dependency).optional(),
         input_schema: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
         output_schema: core.serialization.list(core.serialization.unknown()).optional(),
@@ -32,7 +32,7 @@ export declare namespace BlockInput {
         block_display_name: string;
         block_id: string;
         block_inputs?: Record<string, unknown> | null;
-        block_is_output?: boolean | null;
+        is_output?: boolean | null;
         dependencies?: Dependency.Raw[] | null;
         input_schema?: Record<string, unknown> | null;
         output_schema?: unknown[] | null;

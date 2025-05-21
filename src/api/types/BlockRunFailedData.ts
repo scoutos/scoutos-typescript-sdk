@@ -13,5 +13,7 @@ export interface BlockRunFailedData {
     metadata?: Record<string, unknown>;
     state: Record<string, unknown>;
     session_id: string;
+    /** The status code of the error */
+    status_code?: number;
     block_type?: string;
 }

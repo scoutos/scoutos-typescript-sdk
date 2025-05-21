@@ -6,19 +6,11 @@ import * as Scout from "../../../../index";
 
 /**
  * @example
- *     {
- *         environment: "string",
- *         revision_id: "string",
- *         session_id: "string",
- *         inputs: {
- *             "string": true
- *         }
- *     }
+ *     {}
  */
 export interface WorkflowsRunStreamRequest {
     /**
      * Specifies the execution environment for the workflow. The available environments include:
-     *
      * - `production`: The production environment, where workflows are executed under live conditions.
      * - `staging`: A staging environment used for testing prior to production deployment.
      * - `development`: A development environment used for testing new changes.

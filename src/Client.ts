@@ -4,12 +4,21 @@
 
 import * as environments from "./environments";
 import * as core from "./core";
+import * as Scout from "./api/index";
+import urlJoin from "url-join";
+import * as serializers from "./serialization/index";
+import * as errors from "./errors/index";
+import * as fs from "fs";
+import { Blob } from "buffer";
 import { Workflows } from "./api/resources/workflows/client/Client";
 import { Environments } from "./api/resources/environments/client/Client";
 import { Revisions } from "./api/resources/revisions/client/Client";
 import { Usage } from "./api/resources/usage/client/Client";
 import { WorkflowLogs } from "./api/resources/workflowLogs/client/Client";
 import { Copilots } from "./api/resources/copilots/client/Client";
+import { Triggers } from "./api/resources/triggers/client/Client";
+import { Integrations } from "./api/resources/integrations/client/Client";
+import { Organizations } from "./api/resources/organizations/client/Client";
 import { Collections } from "./api/resources/collections/client/Client";
 import { Tables } from "./api/resources/tables/client/Client";
 import { Documents } from "./api/resources/documents/client/Client";
@@ -44,6 +53,9 @@ export class ScoutClient {
     protected _usage: Usage | undefined;
     protected _workflowLogs: WorkflowLogs | undefined;
     protected _copilots: Copilots | undefined;
+    protected _triggers: Triggers | undefined;
+    protected _integrations: Integrations | undefined;
+    protected _organizations: Organizations | undefined;
     protected _collections: Collections | undefined;
     protected _tables: Tables | undefined;
     protected _documents: Documents | undefined;
@@ -76,6 +88,18 @@ export class ScoutClient {
         return (this._copilots ??= new Copilots(this._options));
     }
 
+    public get triggers(): Triggers {
+        return (this._triggers ??= new Triggers(this._options));
+    }
+
+    public get integrations(): Integrations {
+        return (this._integrations ??= new Integrations(this._options));
+    }
+
+    public get organizations(): Organizations {
+        return (this._organizations ??= new Organizations(this._options));
+    }
+
     public get collections(): Collections {
         return (this._collections ??= new Collections(this._options));
     }
@@ -94,5 +118,4621 @@ export class ScoutClient {
 
     public get syncs(): Syncs {
         return (this._syncs ??= new Syncs(this._options));
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.infoHandlerInfoGet()
+     */
+    public async infoHandlerInfoGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesRootGetInfoResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "info",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesRootGetInfoResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /info.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getInfoV2TriggersInfoGet()
+     */
+    public async getInfoV2TriggersInfoGet(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/triggers/info",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/triggers/info.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getInfoV2IndexInfoGet()
+     */
+    public async getInfoV2IndexInfoGet(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/index/info",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/index/info.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getInfoV2WorkflowsInfoGet()
+     */
+    public async getInfoV2WorkflowsInfoGet(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/workflows/info",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/workflows/info.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getInfoV2CollectionsInfoGet()
+     */
+    public async getInfoV2CollectionsInfoGet(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/collections/info",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/collections/info.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {File | fs.ReadStream | Blob} file
+     * @param {Scout.BodyParseFileV2FilesParsePost} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.parseFileV2FilesParsePost(fs.createReadStream("/path/to/your/file"), {})
+     */
+    public async parseFileV2FilesParsePost(
+        file: File | fs.ReadStream | Blob,
+        request: Scout.BodyParseFileV2FilesParsePost,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesCollectionParseFileResponse> {
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (request.return_text != null) {
+            _queryParams["return_text"] = request.return_text.toString();
+        }
+
+        const _request = await core.newFormData();
+        await _request.appendFile("file", file);
+        const _maybeEncodedRequest = await _request.getRequest();
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/files/parse",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ..._maybeEncodedRequest.headers,
+                ...requestOptions?.headers,
+            },
+            queryParameters: _queryParams,
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesCollectionParseFileResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /v2/files/parse.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Get all integrations for an organization
+     *
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getIntegrationsIntegrationsGet()
+     */
+    public async getIntegrationsIntegrationsGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.IntegrationWithConnections[]> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "integrations",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.getIntegrationsIntegrationsGet.Response.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /integrations.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Get a specific integration for an organization by its ID.
+     *
+     * @param {string} integration_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.getIntegrationIntegrationsIntegrationIdGet("integration_id")
+     */
+    public async getIntegrationIntegrationsIntegrationIdGet(
+        integration_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.IntegrationWithConnections> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `integrations/${encodeURIComponent(integration_id)}`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.IntegrationWithConnections.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /integrations/{integration_id}.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Get all integrations for an organization
+     *
+     * @param {string} integration_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.getIntegrationConnectionsIntegrationsIntegrationIdConnectionsGet("integration_id")
+     */
+    public async getIntegrationConnectionsIntegrationsIntegrationIdConnectionsGet(
+        integration_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.IntegrationConnection[]> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `integrations/${encodeURIComponent(integration_id)}/connections`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.getIntegrationConnectionsIntegrationsIntegrationIdConnectionsGet.Response.parseOrThrow(
+                _response.body,
+                {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                },
+            );
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /integrations/{integration_id}/connections.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} integration_id
+     * @param {Scout.ConnectIntegrationRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.connectIntegrationIntegrationsIntegrationIdConnectPost("integration_id", {
+     *         auth_type: "api_key"
+     *     })
+     */
+    public async connectIntegrationIntegrationsIntegrationIdConnectPost(
+        integration_id: string,
+        request: Scout.ConnectIntegrationRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.CreateIntegrationsResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `integrations/${encodeURIComponent(integration_id)}/connect`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.ConnectIntegrationRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.CreateIntegrationsResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /integrations/{integration_id}/connect.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.SlackMessageRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleSendMessageIntegrationsSlackSendPost({
+     *         channel_id: "channel_id",
+     *         text: "text"
+     *     })
+     */
+    public async handleSendMessageIntegrationsSlackSendPost(
+        request: Scout.SlackMessageRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Record<string, unknown>> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "integrations/slack/send",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.SlackMessageRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.handleSendMessageIntegrationsSlackSendPost.Response.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /integrations/slack/send.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.SlackReactionRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleAddReactionIntegrationsSlackReactPost({
+     *         channel_id: "channel_id",
+     *         emoji_name: "emoji_name"
+     *     })
+     */
+    public async handleAddReactionIntegrationsSlackReactPost(
+        request: Scout.SlackReactionRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Record<string, unknown>> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "integrations/slack/react",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.SlackReactionRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.handleAddReactionIntegrationsSlackReactPost.Response.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /integrations/slack/react.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.HandleGetThreadIntegrationsSlackThreadGetRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleGetThreadIntegrationsSlackThreadGet({
+     *         channel_id: "channel_id",
+     *         thread_id: "thread_id"
+     *     })
+     */
+    public async handleGetThreadIntegrationsSlackThreadGet(
+        request: Scout.HandleGetThreadIntegrationsSlackThreadGetRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Record<string, unknown>> {
+        const { channel_id: channelId, thread_id: threadId, integration_id: integrationId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        _queryParams["channel_id"] = channelId;
+        _queryParams["thread_id"] = threadId;
+        if (integrationId != null) {
+            _queryParams["integration_id"] = integrationId;
+        }
+
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "integrations/slack/thread",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.handleGetThreadIntegrationsSlackThreadGet.Response.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /integrations/slack/thread.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Handles the request to get Slack team info
+     *
+     * @param {Scout.HandleGetTeamInfoIntegrationsSlackTeamGetRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleGetTeamInfoIntegrationsSlackTeamGet({
+     *         team_id: "team_id"
+     *     })
+     */
+    public async handleGetTeamInfoIntegrationsSlackTeamGet(
+        request: Scout.HandleGetTeamInfoIntegrationsSlackTeamGetRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Record<string, unknown>> {
+        const { team_id: teamId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        _queryParams["team_id"] = teamId;
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "integrations/slack/team",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.handleGetTeamInfoIntegrationsSlackTeamGet.Response.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /integrations/slack/team.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.HandleListChannelsIntegrationsSlackChannelsGetRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleListChannelsIntegrationsSlackChannelsGet()
+     */
+    public async handleListChannelsIntegrationsSlackChannelsGet(
+        request: Scout.HandleListChannelsIntegrationsSlackChannelsGetRequest = {},
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Record<string, unknown>> {
+        const { team_id: teamId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (teamId != null) {
+            if (Array.isArray(teamId)) {
+                _queryParams["team_id"] = teamId.map((item) => item);
+            } else {
+                _queryParams["team_id"] = teamId;
+            }
+        }
+
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "integrations/slack/channels",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.handleListChannelsIntegrationsSlackChannelsGet.Response.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /integrations/slack/channels.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Migrate integration tokens from Neon to Firestore with KMS encryption.
+     *
+     * This endpoint accepts a list of organization IDs and migrates their Slack and Notion tokens.
+     * It fetches tokens from the Neon database and stores them in Firestore,
+     * encrypting the tokens using KMS.
+     *
+     * NOTE: Not a public endpoint - used for internal database migration
+     *
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.handleMigrateIntegrationsIntegrationsMigratePost()
+     */
+    public async handleMigrateIntegrationsIntegrationsMigratePost(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Record<string, unknown>> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "integrations/migrate",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.handleMigrateIntegrationsIntegrationsMigratePost.Response.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /integrations/migrate.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Handle Notion OAuth token upsert
+     *
+     * Args:
+     *     request: The FastAPI request object
+     *     body: The request body containing the access token and metadata
+     *
+     * Returns:
+     *     Response indicating success
+     *
+     * Raises:
+     *     HTTPException: If there's an error during the process
+     *
+     * @param {Scout.NotionOAuthRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleNotionOauthIntegrationsNotionOauthPost({
+     *         access_token: "access_token",
+     *         metadata: {
+     *             "key": "value"
+     *         }
+     *     })
+     */
+    public async handleNotionOauthIntegrationsNotionOauthPost(
+        request: Scout.NotionOAuthRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "integrations/notion/oauth",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.NotionOAuthRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /integrations/notion/oauth.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.exchangeMcpAuthMcpAuthorizationPost({
+     *         code: "code",
+     *         state: "state",
+     *         url: "url",
+     *         name: "name",
+     *         integration_id: "integration_id"
+     *     })
+     */
+    public async exchangeMcpAuthMcpAuthorizationPost(
+        request: Scout.SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "mcp/authorization",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.SrcAppHttpRoutesIntegrationMcpExchangeMcpAuthPayload.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /mcp/authorization.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.SrcAppHttpRoutesIntegrationMcpConnectMcpPayload} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.connectMcpMcpConnectPost({
+     *         url: "url",
+     *         name: "name",
+     *         integration_id: "integration_id"
+     *     })
+     */
+    public async connectMcpMcpConnectPost(
+        request: Scout.SrcAppHttpRoutesIntegrationMcpConnectMcpPayload,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "mcp/connect",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.SrcAppHttpRoutesIntegrationMcpConnectMcpPayload.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /mcp/connect.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} connection_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.deleteMcpConnectionMcpServersConnectionIdDelete("connection_id")
+     */
+    public async deleteMcpConnectionMcpServersConnectionIdDelete(
+        connection_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `mcp/servers/${encodeURIComponent(connection_id)}`,
+            ),
+            method: "DELETE",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling DELETE /mcp/servers/{connection_id}.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getMcpServersMcpServersGet()
+     */
+    public async getMcpServersMcpServersGet(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "mcp/servers",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /mcp/servers.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getInfoInboxInfoGet()
+     */
+    public async getInfoInboxInfoGet(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "inbox/info",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /inbox/info.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Process an interaction request through the environment.
+     *
+     * Args:
+     *     request: The FastAPI request
+     *     session_id: The ID of the session
+     *     interaction_request: The interaction request data
+     *
+     * Returns:
+     *     Span with the results of the interaction attached to its attributes
+     *
+     * @param {Scout.HandleGetSessionsInboxSessionsGetRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleGetSessionsInboxSessionsGet()
+     */
+    public async handleGetSessionsInboxSessionsGet(
+        request: Scout.HandleGetSessionsInboxSessionsGetRequest = {},
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const { search } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (search != null) {
+            _queryParams["search"] = search;
+        }
+
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "inbox/sessions",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /inbox/sessions.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Process an interaction request through the environment.
+     *
+     * Args:
+     *     request: The FastAPI request
+     *     session_id: The ID of the session
+     *     interaction_request: The interaction request data
+     *
+     * Returns:
+     *     Span with the results of the interaction attached to its attributes
+     *
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.handleGetNotificationsInboxNotificationsGet()
+     */
+    public async handleGetNotificationsInboxNotificationsGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "inbox/notifications",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /inbox/notifications.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} session_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleGetSessionByIdInboxSessionIdGet("session_id")
+     */
+    public async handleGetSessionByIdInboxSessionIdGet(
+        session_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `inbox/${encodeURIComponent(session_id)}`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /inbox/{session_id}.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} session_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.handleTranscribeInboxSessionIdTranscribePost("session_id")
+     */
+    public async handleTranscribeInboxSessionIdTranscribePost(
+        session_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `inbox/${encodeURIComponent(session_id)}/transcribe`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /inbox/{session_id}/transcribe.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {File[] | fs.ReadStream[] | Blob[]} files
+     * @param {string} session_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.uploadPrivateFilesInboxSessionIdFilesPost([fs.createReadStream("/path/to/your/file")], "session_id")
+     */
+    public async uploadPrivateFilesInboxSessionIdFilesPost(
+        files: File[] | fs.ReadStream[] | Blob[],
+        session_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.FilesResponse[]> {
+        const _request = await core.newFormData();
+        for (const _file of files) {
+            await _request.appendFile("files", _file);
+        }
+
+        const _maybeEncodedRequest = await _request.getRequest();
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `inbox/${encodeURIComponent(session_id)}/files`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ..._maybeEncodedRequest.headers,
+                ...requestOptions?.headers,
+            },
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.uploadPrivateFilesInboxSessionIdFilesPost.Response.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /inbox/{session_id}/files.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Process an interaction request through the environment.
+     *
+     * Args:
+     *     request: The FastAPI request
+     *     session_id: The ID of the session
+     *     interaction_request: The interaction request data
+     *
+     * Returns:
+     *     Span with the results of the interaction attached to its attributes
+     *
+     * @param {string} session_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleGetSessionMessagesInboxSessionIdMessagesGet("session_id")
+     */
+    public async handleGetSessionMessagesInboxSessionIdMessagesGet(
+        session_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `inbox/${encodeURIComponent(session_id)}/messages`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /inbox/{session_id}/messages.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Process an interaction request through the environment.
+     *
+     * Args:
+     *     request: The FastAPI request
+     *     session_id: The ID of the session
+     *     interaction_request: The interaction request data
+     *
+     * Returns:
+     *     Span with the results of the interaction attached to its attributes
+     *
+     * @param {string} session_id
+     * @param {Scout.SrcAppHttpRoutesInboxHandleMessageInteractionRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleMessageInboxSessionIdMessagesPost("session_id", {
+     *         messages: [{
+     *                 content: "content",
+     *                 content_type: "text/plain"
+     *             }],
+     *         participants: [{
+     *                 id: "id"
+     *             }]
+     *     })
+     */
+    public async handleMessageInboxSessionIdMessagesPost(
+        session_id: string,
+        request: Scout.SrcAppHttpRoutesInboxHandleMessageInteractionRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `inbox/${encodeURIComponent(session_id)}/messages`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.SrcAppHttpRoutesInboxHandleMessageInteractionRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /inbox/{session_id}/messages.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Process an interaction request through the environment.
+     *
+     * Args:
+     *     request: The FastAPI request
+     *     session_id: The ID of the session
+     *     interaction_request: The interaction request data
+     *
+     * Returns:
+     *     Span with the results of the interaction attached to its attributes
+     *
+     * @param {string} session_id
+     * @param {Scout.Participant[]} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handlePostSessionParticipantInboxSessionsSessionIdParticipantsPost("session_id", [{
+     *             id: "id",
+     *             type: "scout_user"
+     *         }])
+     */
+    public async handlePostSessionParticipantInboxSessionsSessionIdParticipantsPost(
+        session_id: string,
+        request: Scout.Participant[],
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `inbox/sessions/${encodeURIComponent(session_id)}/participants`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.handlePostSessionParticipantInboxSessionsSessionIdParticipantsPost.Request.jsonOrThrow(
+                request,
+                { unrecognizedObjectKeys: "strip" },
+            ),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /inbox/sessions/{session_id}/participants.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Cancel ongoing agent response for a session.
+     *
+     * Args:
+     *     request: The FastAPI request
+     *     session_id: The ID of the session to cancel
+     *
+     * Returns:
+     *     CancelResponse with cancellation status
+     *
+     * @param {string} session_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.handleCancelSessionInboxSessionIdCancelPost("session_id")
+     */
+    public async handleCancelSessionInboxSessionIdCancelPost(
+        session_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.CancelResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `inbox/${encodeURIComponent(session_id)}/cancel`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.CancelResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /inbox/{session_id}/cancel.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getInfoMoneyGet()
+     */
+    public async getInfoMoneyGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesBillingGetInfoGetInfoResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "money",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesBillingGetInfoGetInfoResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /money.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getBillingAccountsGet()
+     */
+    public async getBillingAccountsGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesBillingGetBillingResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "accounts",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesBillingGetBillingResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /accounts.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.GetUsageAccountsUsageGetRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.getUsageAccountsUsageGet()
+     */
+    public async getUsageAccountsUsageGet(
+        request: Scout.GetUsageAccountsUsageGetRequest = {},
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.Result> {
+        const { start_date: startDate, end_date: endDate } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (startDate != null) {
+            _queryParams["start_date"] = startDate;
+        }
+
+        if (endDate != null) {
+            _queryParams["end_date"] = endDate;
+        }
+
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "accounts/usage",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.Result.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /accounts/usage.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getInvoicesAccountsInvoicesGet()
+     */
+    public async getInvoicesAccountsInvoicesGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesBillingGetInvoicesResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "accounts/invoices",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesBillingGetInvoicesResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /accounts/invoices.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.createPortalSessionAccountsPortalGet()
+     */
+    public async createPortalSessionAccountsPortalGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesBillingCreatePortalSessionResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "accounts/portal",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesBillingCreatePortalSessionResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /accounts/portal.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getWorkflowUsageAccountsUsageWorkflowsGet()
+     */
+    public async getWorkflowUsageAccountsUsageWorkflowsGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Record<string, unknown>> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "accounts/usage/workflows",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.getWorkflowUsageAccountsUsageWorkflowsGet.Response.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /accounts/usage/workflows.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * This endpoint will pull any org facing notifications for the app to display
+     * Mostly billing related so far
+     *
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getNotificationsNotificationsGet()
+     */
+    public async getNotificationsNotificationsGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesBillingGetNotificationsResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "notifications",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesBillingGetNotificationsResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /notifications.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.Plan} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.changeBillingPlanAccountsPlanPut({
+     *         name: "plan_1",
+     *         interval_type: "monthly"
+     *     })
+     */
+    public async changeBillingPlanAccountsPlanPut(
+        request: Scout.Plan,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesBillingChangeBillingPlanResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "accounts/plan",
+            ),
+            method: "PUT",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: {
+                ...serializers.Plan.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+                interval_type: "monthly",
+            },
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesBillingChangeBillingPlanResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling PUT /accounts/plan.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.stripeWebhookHooksStripePost()
+     */
+    public async stripeWebhookHooksStripePost(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "hooks/stripe",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /hooks/stripe.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.renewPlansCronsRenewPlansPost()
+     */
+    public async renewPlansCronsRenewPlansPost(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesBillingRenewPlansResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "crons/renew_plans",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesBillingRenewPlansResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /crons/renew_plans.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.dailyBillingTasksCronsFreePlanUsagePost()
+     */
+    public async dailyBillingTasksCronsFreePlanUsagePost(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesBillingFreePlanUsageResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "crons/free_plan_usage",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesBillingFreePlanUsageResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /crons/free_plan_usage.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.billingHourlyCronsBillingHourlyPost()
+     */
+    public async billingHourlyCronsBillingHourlyPost(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesBillingBillingHourlyResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "crons/billing_hourly",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesBillingBillingHourlyResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /crons/billing_hourly.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} trace_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.listSpansTracesTraceIdSpansGet("trace_id")
+     */
+    public async listSpansTracesTraceIdSpansGet(
+        trace_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `traces/${encodeURIComponent(trace_id)}/spans`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /traces/{trace_id}/spans.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Manually seed default agent personas for a new organization.
+     *
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.seedAgentsOnboardingSeedAgentsPost()
+     */
+    public async seedAgentsOnboardingSeedAgentsPost(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "onboarding/seed-agents",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /onboarding/seed-agents.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Send follow-up emails to users who registered on specific days.
+     *
+     * This endpoint is designed to be called by cron jobs or manual triggers
+     * to send onboarding follow-up emails.
+     *
+     * @param {Scout.FollowupEmailRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.sendFollowupEmailsOnboardingFollowupEmailsPost(undefined)
+     */
+    public async sendFollowupEmailsOnboardingFollowupEmailsPost(
+        request?: Scout.FollowupEmailRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesOnboardingFollowupEmailsResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "onboarding/followup-emails",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body:
+                request != null
+                    ? serializers.sendFollowupEmailsOnboardingFollowupEmailsPost.Request.jsonOrThrow(request, {
+                          unrecognizedObjectKeys: "strip",
+                      })
+                    : undefined,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesOnboardingFollowupEmailsResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /onboarding/followup-emails.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Get the current authenticated user's information.
+     *
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.findMeMeGet()
+     */
+    public async findMeMeGet(
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesOnboardingHandleGetMeResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "me",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesOnboardingHandleGetMeResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /me.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Update the current authenticated user's information.
+     *
+     * @param {Scout.UserUpdate} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.updateMeMePut()
+     */
+    public async updateMeMePut(
+        request: Scout.UserUpdate = {},
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesOnboardingHandleUpdateMeResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "me",
+            ),
+            method: "PUT",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.UserUpdate.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesOnboardingHandleUpdateMeResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling PUT /me.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.listTagsTagsGet()
+     */
+    public async listTagsTagsGet(requestOptions?: ScoutClient.RequestOptions): Promise<Scout.ListTagsResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "tags",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.ListTagsResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /tags.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {Scout.SrcAppHttpRoutesTagsCreateTagPayload} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.createTagTagsPost({
+     *         name: "name"
+     *     })
+     */
+    public async createTagTagsPost(
+        request: Scout.SrcAppHttpRoutesTagsCreateTagPayload,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.CreateTagResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "tags",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.SrcAppHttpRoutesTagsCreateTagPayload.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.CreateTagResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /tags.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} tag_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.getTagTagsTagIdGet("tag_id")
+     */
+    public async getTagTagsTagIdGet(tag_id: string, requestOptions?: ScoutClient.RequestOptions): Promise<Scout.Tag> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `tags/${encodeURIComponent(tag_id)}`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.Tag.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /tags/{tag_id}.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} tag_id
+     * @param {Scout.SrcAppHttpRoutesTagsUpdateTagPayload} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.updateTagTagsTagIdPut("tag_id")
+     */
+    public async updateTagTagsTagIdPut(
+        tag_id: string,
+        request: Scout.SrcAppHttpRoutesTagsUpdateTagPayload = {},
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<Scout.UpdateTagResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `tags/${encodeURIComponent(tag_id)}`,
+            ),
+            method: "PUT",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.SrcAppHttpRoutesTagsUpdateTagPayload.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.UpdateTagResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling PUT /tags/{tag_id}.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} agent_id
+     * @param {string | undefined} session_id
+     * @param {Scout.SrcAppHttpRoutesWorldInteractInteractionRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.interactHandlerWorldAgentIdSessionIdInteractPost("agent_id", undefined, {
+     *         messages: [{
+     *                 content: "content"
+     *             }]
+     *     })
+     */
+    public async interactHandlerWorldAgentIdSessionIdInteractPost(
+        agent_id: string,
+        session_id: string | undefined,
+        request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `world/${encodeURIComponent(agent_id)}/${encodeURIComponent(session_id)}/_interact`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.SrcAppHttpRoutesWorldInteractInteractionRequest.jsonOrThrow(request, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /world/{agent_id}/{session_id}/_interact.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} agent_id
+     * @param {Scout.InteractHandlerWorldAgentIdInteractPostRequest} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.interactHandlerWorldAgentIdInteractPost("agent_id", {
+     *         body: {
+     *             messages: [{
+     *                     content: "content"
+     *                 }]
+     *         }
+     *     })
+     */
+    public async interactHandlerWorldAgentIdInteractPost(
+        agent_id: string,
+        request: Scout.InteractHandlerWorldAgentIdInteractPostRequest,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const { session_id: sessionId, body: _body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (sessionId != null) {
+            _queryParams["session_id"] = sessionId;
+        }
+
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `world/${encodeURIComponent(agent_id)}/_interact`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            queryParameters: _queryParams,
+            requestType: "json",
+            body: serializers.SrcAppHttpRoutesWorldInteractInteractionRequest.jsonOrThrow(_body, {
+                unrecognizedObjectKeys: "strip",
+            }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /world/{agent_id}/_interact.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.listAgentsAgentsGet()
+     */
+    public async listAgentsAgentsGet(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "agents",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /agents.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {File | fs.ReadStream | Blob | undefined} agent_image
+     * @param {Scout.BodyUpsertAgentAgentsPost} request
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.upsertAgentAgentsPost(fs.createReadStream("/path/to/your/file"), {
+     *         agent: "agent",
+     *         revision: "revision"
+     *     })
+     */
+    public async upsertAgentAgentsPost(
+        agent_image: File | fs.ReadStream | Blob | undefined,
+        request: Scout.BodyUpsertAgentAgentsPost,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _request = await core.newFormData();
+        _request.append("agent", request.agent);
+        if (request.agent_id != null) {
+            _request.append("agent_id", request.agent_id);
+        }
+
+        if (request.activate != null) {
+            _request.append("activate", request.activate.toString());
+        }
+
+        _request.append("revision", request.revision);
+        if (agent_image != null) {
+            await _request.appendFile("agent_image", agent_image);
+        }
+
+        const _maybeEncodedRequest = await _request.getRequest();
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "agents",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ..._maybeEncodedRequest.headers,
+                ...requestOptions?.headers,
+            },
+            requestType: "file",
+            duplex: _maybeEncodedRequest.duplex,
+            body: _maybeEncodedRequest.body,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /agents.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Retrieve an agent and its active revision by agent_id.
+     * Verifies that the agent belongs to the actor's organization.
+     *
+     * @param {string} agent_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.getActiveAgentAgentsAgentIdActiveGet("agent_id")
+     */
+    public async getActiveAgentAgentsAgentIdActiveGet(
+        agent_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `agents/${encodeURIComponent(agent_id)}/active`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /agents/{agent_id}/active.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * Get available tools for the organization.
+     *
+     * Args:
+     *     request: The FastAPI request
+     *
+     * Returns:
+     *     Span with the list of available tools attached to its attributes
+     *
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.getToolsAgentsToolsGet()
+     */
+    public async getToolsAgentsToolsGet(requestOptions?: ScoutClient.RequestOptions): Promise<Scout.ToolsResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "agents/tools",
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.ToolsResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /agents/tools.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} agent_id
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.deleteAgentAgentsAgentIdDelete("agent_id")
+     */
+    public async deleteAgentAgentsAgentIdDelete(
+        agent_id: string,
+        requestOptions?: ScoutClient.RequestOptions,
+    ): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `agents/${encodeURIComponent(agent_id)}`,
+            ),
+            method: "DELETE",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling DELETE /agents/{agent_id}.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.expireBlobsExpireBlobsPost()
+     */
+    public async expireBlobsExpireBlobsPost(requestOptions?: ScoutClient.RequestOptions): Promise<unknown> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "_expire_blobs",
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return _response.body;
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.ScoutError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+            });
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling POST /_expire_blobs.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    protected async _getAuthorizationHeader(): Promise<string> {
+        const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
+        if (bearer == null) {
+            throw new errors.ScoutError({
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
+            });
+        }
+
+        return `Bearer ${bearer}`;
     }
 }

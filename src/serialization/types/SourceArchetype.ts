@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
+import { SourceArchetypeIntegrationVersion } from "./SourceArchetypeIntegrationVersion";
 
 export const SourceArchetype: core.serialization.ObjectSchema<serializers.SourceArchetype.Raw, Scout.SourceArchetype> =
     core.serialization.object({
@@ -15,6 +16,7 @@ export const SourceArchetype: core.serialization.ObjectSchema<serializers.Source
         img_url: core.serialization.string().optional(),
         input_schema: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
         integrated_service_id: core.serialization.string().optional(),
+        integration_version: SourceArchetypeIntegrationVersion.optional(),
     });
 
 export declare namespace SourceArchetype {
@@ -26,5 +28,6 @@ export declare namespace SourceArchetype {
         img_url?: string | null;
         input_schema: Record<string, unknown>;
         integrated_service_id?: string | null;
+        integration_version?: SourceArchetypeIntegrationVersion.Raw | null;
     }
 }

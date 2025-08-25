@@ -6,7 +6,7 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { SyncConfigOutput } from "./SyncConfigOutput";
-import { Identity } from "./Identity";
+import { LegacyIdentity } from "./LegacyIdentity";
 
 export const Sync: core.serialization.ObjectSchema<serializers.Sync.Raw, Scout.Sync> = core.serialization.object({
     sync_config: SyncConfigOutput,
@@ -14,8 +14,8 @@ export const Sync: core.serialization.ObjectSchema<serializers.Sync.Raw, Scout.S
     trigger_id: core.serialization.string().optional(),
     last_updated_at: core.serialization.date(),
     created_at: core.serialization.date(),
-    created_by: Identity,
-    last_updated_by: Identity,
+    created_by: LegacyIdentity,
+    last_updated_by: LegacyIdentity,
 });
 
 export declare namespace Sync {
@@ -25,7 +25,7 @@ export declare namespace Sync {
         trigger_id?: string | null;
         last_updated_at: string;
         created_at: string;
-        created_by: Identity.Raw;
-        last_updated_by: Identity.Raw;
+        created_by: LegacyIdentity.Raw;
+        last_updated_by: LegacyIdentity.Raw;
     }
 }

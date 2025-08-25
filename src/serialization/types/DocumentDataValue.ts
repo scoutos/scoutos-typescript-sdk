@@ -13,8 +13,10 @@ export const DocumentDataValue: core.serialization.Schema<serializers.DocumentDa
         core.serialization.number(),
         core.serialization.boolean(),
         core.serialization.record(core.serialization.string(), core.serialization.unknown()),
+        core.serialization.list(core.serialization.unknown()),
+        core.serialization.date(),
     ]);
 
 export declare namespace DocumentDataValue {
-    export type Raw = string | number | number | boolean | Record<string, unknown>;
+    export type Raw = string | number | number | boolean | Record<string, unknown> | unknown[] | string;
 }

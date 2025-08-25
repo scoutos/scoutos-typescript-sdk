@@ -15,8 +15,9 @@ export const DocumentsCreateRequestBodyItemValue: core.serialization.Schema<
     core.serialization.number(),
     core.serialization.number(),
     core.serialization.string(),
+    core.serialization.list(core.serialization.unknown()),
 ]);
 
 export declare namespace DocumentsCreateRequestBodyItemValue {
-    export type Raw = boolean | Record<string, unknown> | number | number | string;
+    export type Raw = boolean | Record<string, unknown> | number | number | string | unknown[];
 }

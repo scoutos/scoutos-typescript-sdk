@@ -34,6 +34,94 @@ export class Syncs {
     constructor(protected readonly _options: Syncs.Options = {}) {}
 
     /**
+     * List Sources by Destination, specifically given a collection and table
+     *
+     * @param {string} collection_id
+     * @param {string} table_id
+     * @param {Syncs.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.syncs.list("collection_id", "table_id")
+     */
+    public async list(
+        collection_id: string,
+        table_id: string,
+        requestOptions?: Syncs.RequestOptions,
+    ): Promise<Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/syncs`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /v2/collections/{collection_id}/tables/{table_id}/syncs.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
      * @param {string} sync_id
      * @param {Syncs.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -45,7 +133,7 @@ export class Syncs {
     public async get(
         sync_id: string,
         requestOptions?: Syncs.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersGetSyncResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionGetSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -58,8 +146,8 @@ export class Syncs {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -71,7 +159,7 @@ export class Syncs {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersGetSyncResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionGetSyncResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -126,7 +214,7 @@ export class Syncs {
      *     await client.syncs.update("sync_id", {
      *         sync_config: {
      *             source_settings: {
-     *                 source_archetype_id: "com.notion.notion"
+     *                 source_archetype_id: "com.google.drive"
      *             },
      *             destination: {
      *                 destination_type: "collections.v2",
@@ -141,7 +229,7 @@ export class Syncs {
         sync_id: string,
         request: Scout.RequestBody,
         requestOptions?: Syncs.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersUpdateSyncResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionUpdateSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -154,8 +242,8 @@ export class Syncs {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -168,7 +256,7 @@ export class Syncs {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersUpdateSyncResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionUpdateSyncResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -224,7 +312,7 @@ export class Syncs {
     public async delete(
         sync_id: string,
         requestOptions?: Syncs.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersDeleteSyncResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionDeleteSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -237,8 +325,8 @@ export class Syncs {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -250,7 +338,7 @@ export class Syncs {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersDeleteSyncResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionDeleteSyncResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -295,94 +383,6 @@ export class Syncs {
     }
 
     /**
-     * List Sources by Destination, specifically given a collection and table
-     *
-     * @param {string} collection_id
-     * @param {string} table_id
-     * @param {Syncs.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Scout.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.syncs.list("collection_id", "table_id")
-     */
-    public async list(
-        collection_id: string,
-        table_id: string,
-        requestOptions?: Syncs.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersListCollectionSyncsResponseModel> {
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: urlJoin(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ScoutEnvironment.Prod,
-                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/syncs`,
-            ),
-            method: "GET",
-            headers: {
-                Authorization: await this._getAuthorizationHeader(),
-                "X-Fern-Language": "JavaScript",
-                "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
-                "X-Fern-Runtime": core.RUNTIME.type,
-                "X-Fern-Runtime-Version": core.RUNTIME.version,
-                ...requestOptions?.headers,
-            },
-            contentType: "application/json",
-            requestType: "json",
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return serializers.CollectionServiceHandlersListCollectionSyncsResponseModel.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
-                            unrecognizedObjectKeys: "passthrough",
-                            allowUnrecognizedUnionMembers: true,
-                            allowUnrecognizedEnumValues: true,
-                            skipValidation: true,
-                            breadcrumbsPrefix: ["response"],
-                        }),
-                    );
-                default:
-                    throw new errors.ScoutError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ScoutError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                });
-            case "timeout":
-                throw new errors.ScoutTimeoutError(
-                    "Timeout exceeded when calling GET /v2/collections/{collection_id}/tables/{table_id}/syncs.",
-                );
-            case "unknown":
-                throw new errors.ScoutError({
-                    message: _response.error.errorMessage,
-                });
-        }
-    }
-
-    /**
      * @param {Scout.RequestBody} request
      * @param {Syncs.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -392,7 +392,7 @@ export class Syncs {
      *     await client.syncs.create({
      *         sync_config: {
      *             source_settings: {
-     *                 source_archetype_id: "com.notion.notion"
+     *                 source_archetype_id: "com.google.drive"
      *             },
      *             destination: {
      *                 destination_type: "collections.v2",
@@ -406,7 +406,7 @@ export class Syncs {
     public async create(
         request: Scout.RequestBody,
         requestOptions?: Syncs.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersCreateSyncResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionCreateSyncResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -419,8 +419,8 @@ export class Syncs {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -433,7 +433,7 @@ export class Syncs {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersCreateSyncResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionCreateSyncResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -499,8 +499,8 @@ export class Syncs {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,

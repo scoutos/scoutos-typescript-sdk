@@ -6,7 +6,8 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { DocumentDataValue } from "./DocumentDataValue";
-import { Identity } from "./Identity";
+import { DocumentCreatedBy } from "./DocumentCreatedBy";
+import { DocumentLastUpdatedBy } from "./DocumentLastUpdatedBy";
 
 export const Document: core.serialization.ObjectSchema<serializers.Document.Raw, Scout.Document> =
     core.serialization.object({
@@ -15,9 +16,10 @@ export const Document: core.serialization.ObjectSchema<serializers.Document.Raw,
         document_data_id: core.serialization.string().optional(),
         created_at: core.serialization.date().optional(),
         last_updated_at: core.serialization.date().optional(),
-        created_by: Identity,
-        last_updated_by: Identity,
+        created_by: DocumentCreatedBy,
+        last_updated_by: DocumentLastUpdatedBy,
         revision_id: core.serialization.string().optional(),
+        job_id: core.serialization.string().optional(),
     });
 
 export declare namespace Document {
@@ -27,8 +29,9 @@ export declare namespace Document {
         document_data_id?: string | null;
         created_at?: string | null;
         last_updated_at?: string | null;
-        created_by: Identity.Raw;
-        last_updated_by: Identity.Raw;
+        created_by: DocumentCreatedBy.Raw;
+        last_updated_by: DocumentLastUpdatedBy.Raw;
         revision_id?: string | null;
+        job_id?: string | null;
     }
 }

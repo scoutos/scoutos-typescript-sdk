@@ -6,9 +6,12 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { CheckBoxColumn } from "./CheckBoxColumn";
+import { DateTimeColumn } from "./DateTimeColumn";
 import { JsonColumn } from "./JsonColumn";
 import { MarkdownColumn } from "./MarkdownColumn";
+import { MultiSelectColumn } from "./MultiSelectColumn";
 import { NumberColumn } from "./NumberColumn";
+import { RelationColumn } from "./RelationColumn";
 import { SelectColumn } from "./SelectColumn";
 import { TextLongColumn } from "./TextLongColumn";
 import { TextShortColumn } from "./TextShortColumn";
@@ -19,9 +22,12 @@ export const TableConfigOutputSchemaItem: core.serialization.Schema<
     Scout.TableConfigOutputSchemaItem
 > = core.serialization.undiscriminatedUnion([
     CheckBoxColumn,
+    DateTimeColumn,
     JsonColumn,
     MarkdownColumn,
+    MultiSelectColumn,
     NumberColumn,
+    RelationColumn,
     SelectColumn,
     TextLongColumn,
     TextShortColumn,
@@ -31,9 +37,12 @@ export const TableConfigOutputSchemaItem: core.serialization.Schema<
 export declare namespace TableConfigOutputSchemaItem {
     export type Raw =
         | CheckBoxColumn.Raw
+        | DateTimeColumn.Raw
         | JsonColumn.Raw
         | MarkdownColumn.Raw
+        | MultiSelectColumn.Raw
         | NumberColumn.Raw
+        | RelationColumn.Raw
         | SelectColumn.Raw
         | TextLongColumn.Raw
         | TextShortColumn.Raw

@@ -45,8 +45,8 @@ export class Collections {
     public async list(
         request: Scout.CollectionsListRequest = {},
         requestOptions?: Collections.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersGetCollectionsResponse> {
-        const { start_at: startAt, limit, query } = request;
+    ): Promise<Scout.SrcAppHttpRoutesCollectionGetCollectionsResponse> {
+        const { start_at: startAt, limit, query, tags, sort } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (startAt != null) {
             _queryParams["start_at"] = startAt;
@@ -58,6 +58,14 @@ export class Collections {
 
         if (query != null) {
             _queryParams["query"] = query;
+        }
+
+        if (tags != null) {
+            _queryParams["tags"] = tags;
+        }
+
+        if (sort != null) {
+            _queryParams["sort"] = sort;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -72,8 +80,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -86,7 +94,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersGetCollectionsResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionGetCollectionsResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -142,7 +150,7 @@ export class Collections {
     public async create(
         request: Scout.CollectionConfig,
         requestOptions?: Collections.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersCreateCollectionResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionCreateCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -155,8 +163,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -169,7 +177,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersCreateCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionCreateCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -225,7 +233,7 @@ export class Collections {
     public async get(
         collection_id: string,
         requestOptions?: Collections.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersGetCollectionResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionGetCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -238,8 +246,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -251,7 +259,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersGetCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionGetCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -311,7 +319,7 @@ export class Collections {
         collection_id: string,
         request: Scout.CollectionConfig,
         requestOptions?: Collections.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersUpdateCollectionResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionUpdateCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -324,8 +332,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -338,7 +346,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersUpdateCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionUpdateCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -398,7 +406,7 @@ export class Collections {
     public async delete(
         collection_id: string,
         requestOptions?: Collections.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersDeleteCollectionResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionDeleteCollectionResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -411,8 +419,8 @@ export class Collections {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -424,7 +432,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersDeleteCollectionResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionDeleteCollectionResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -462,6 +470,614 @@ export class Collections {
             case "timeout":
                 throw new errors.ScoutTimeoutError(
                     "Timeout exceeded when calling DELETE /v2/collections/{collection_id}.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} collection_id
+     * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.collections.getViews("collection_id")
+     */
+    public async getViews(
+        collection_id: string,
+        requestOptions?: Collections.RequestOptions,
+    ): Promise<Scout.ViewStateResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/views`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.ViewStateResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /v2/collections/{collection_id}/views.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} collection_id
+     * @param {Scout.UpdateViewStateRequest} request
+     * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.collections.updateViews("collection_id", {
+     *         view_state: {
+     *             organization_id: "organization_id",
+     *             collection_id: "collection_id"
+     *         }
+     *     })
+     */
+    public async updateViews(
+        collection_id: string,
+        request: Scout.UpdateViewStateRequest,
+        requestOptions?: Collections.RequestOptions,
+    ): Promise<Scout.ViewStateResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/views`,
+            ),
+            method: "PUT",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.UpdateViewStateRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.ViewStateResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling PUT /v2/collections/{collection_id}/views.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} collection_id
+     * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.collections.deleteViews("collection_id")
+     */
+    public async deleteViews(
+        collection_id: string,
+        requestOptions?: Collections.RequestOptions,
+    ): Promise<Scout.ViewStateResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/views`,
+            ),
+            method: "DELETE",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.ViewStateResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling DELETE /v2/collections/{collection_id}/views.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} collection_id
+     * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.collections.listIndividualViews("collection_id")
+     */
+    public async listIndividualViews(
+        collection_id: string,
+        requestOptions?: Collections.RequestOptions,
+    ): Promise<Scout.ViewListResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/views/list`,
+            ),
+            method: "GET",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.ViewListResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /v2/collections/{collection_id}/views/list.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} collection_id
+     * @param {Scout.CreateViewRequest} request
+     * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.collections.createView("collection_id", {
+     *         name: "name"
+     *     })
+     */
+    public async createView(
+        collection_id: string,
+        request: Scout.CreateViewRequest,
+        requestOptions?: Collections.RequestOptions,
+    ): Promise<Scout.ViewResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/views/create`,
+            ),
+            method: "POST",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.CreateViewRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.ViewResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /v2/collections/{collection_id}/views/create.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} collection_id
+     * @param {string} view_id
+     * @param {Scout.UpdateViewRequest} request
+     * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.collections.updateView("collection_id", "view_id")
+     */
+    public async updateView(
+        collection_id: string,
+        view_id: string,
+        request: Scout.UpdateViewRequest = {},
+        requestOptions?: Collections.RequestOptions,
+    ): Promise<Scout.ViewResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/views/${encodeURIComponent(view_id)}`,
+            ),
+            method: "PUT",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            body: serializers.UpdateViewRequest.jsonOrThrow(request, { unrecognizedObjectKeys: "strip" }),
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.ViewResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling PUT /v2/collections/{collection_id}/views/{view_id}.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                });
+        }
+    }
+
+    /**
+     * @param {string} collection_id
+     * @param {string} view_id
+     * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.collections.deleteView("collection_id", "view_id")
+     */
+    public async deleteView(
+        collection_id: string,
+        view_id: string,
+        requestOptions?: Collections.RequestOptions,
+    ): Promise<Scout.DeleteViewResponse> {
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: urlJoin(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/views/${encodeURIComponent(view_id)}`,
+            ),
+            method: "DELETE",
+            headers: {
+                Authorization: await this._getAuthorizationHeader(),
+                "X-Fern-Language": "JavaScript",
+                "X-Fern-SDK-Name": "scoutos",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
+                "X-Fern-Runtime": core.RUNTIME.type,
+                "X-Fern-Runtime-Version": core.RUNTIME.version,
+                ...requestOptions?.headers,
+            },
+            contentType: "application/json",
+            requestType: "json",
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return serializers.DeleteViewResponse.parseOrThrow(_response.body, {
+                unrecognizedObjectKeys: "passthrough",
+                allowUnrecognizedUnionMembers: true,
+                allowUnrecognizedEnumValues: true,
+                skipValidation: true,
+                breadcrumbsPrefix: ["response"],
+            });
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        serializers.HttpValidationError.parseOrThrow(_response.error.body, {
+                            unrecognizedObjectKeys: "passthrough",
+                            allowUnrecognizedUnionMembers: true,
+                            allowUnrecognizedEnumValues: true,
+                            skipValidation: true,
+                            breadcrumbsPrefix: ["response"],
+                        }),
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling DELETE /v2/collections/{collection_id}/views/{view_id}.",
                 );
             case "unknown":
                 throw new errors.ScoutError({

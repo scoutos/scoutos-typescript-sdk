@@ -8,8 +8,8 @@ export interface Collection {
     collection_config: Scout.CollectionConfig;
     last_updated_at: Date;
     created_at: Date;
-    created_by: Scout.Identity;
-    last_updated_by: Scout.Identity;
+    created_by: Scout.LegacyIdentity;
+    last_updated_by: Scout.LegacyIdentity;
     collection_id: string;
     revision_id: string;
 }

@@ -9,4 +9,9 @@ export interface TableConfigOutput {
     table_img_url?: string;
     table_description?: string;
     schema?: Scout.TableConfigOutputSchemaItem[];
+    icon_emoji?: string;
+    icon_asset_url?: string;
+    icon_fill?: string;
+    singular_name?: string;
+    plural_name?: string;
 }

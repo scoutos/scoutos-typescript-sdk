@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
+import { MarkdownColumnAutomationConfig } from "./MarkdownColumnAutomationConfig";
 
 export const MarkdownColumn: core.serialization.ObjectSchema<serializers.MarkdownColumn.Raw, Scout.MarkdownColumn> =
     core.serialization.object({
@@ -13,6 +14,7 @@ export const MarkdownColumn: core.serialization.ObjectSchema<serializers.Markdow
         column_type: core.serialization.stringLiteral("markdown"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
+        automation_config: MarkdownColumnAutomationConfig.optional(),
         default: core.serialization.string().optional(),
     });
 
@@ -23,6 +25,7 @@ export declare namespace MarkdownColumn {
         column_type: "markdown";
         data_type?: "string" | null;
         hidden?: boolean | null;
+        automation_config?: MarkdownColumnAutomationConfig.Raw | null;
         default?: string | null;
     }
 }

@@ -9,9 +9,9 @@ import { DocumentsUpdateRequestValue } from "../types/DocumentsUpdateRequestValu
 
 export const Request: core.serialization.Schema<
     serializers.documents.update.Request.Raw,
-    Record<string, Scout.DocumentsUpdateRequestValue>
-> = core.serialization.record(core.serialization.string(), DocumentsUpdateRequestValue);
+    Record<string, Scout.DocumentsUpdateRequestValue | undefined>
+> = core.serialization.record(core.serialization.string(), DocumentsUpdateRequestValue.optional());
 
 export declare namespace Request {
-    export type Raw = Record<string, DocumentsUpdateRequestValue.Raw>;
+    export type Raw = Record<string, DocumentsUpdateRequestValue.Raw | null | undefined>;
 }

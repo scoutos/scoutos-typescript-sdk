@@ -6,17 +6,19 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { TableConfigOutput } from "./TableConfigOutput";
-import { Identity } from "./Identity";
+import { LegacyIdentity } from "./LegacyIdentity";
 
 export const Table: core.serialization.ObjectSchema<serializers.Table.Raw, Scout.Table> = core.serialization.object({
     table_config: TableConfigOutput,
     created_at: core.serialization.date().optional(),
     last_updated_at: core.serialization.date().optional(),
-    created_by: Identity,
-    last_updated_by: Identity,
+    created_by: LegacyIdentity,
+    last_updated_by: LegacyIdentity,
     revision_id: core.serialization.string(),
     table_id: core.serialization.string(),
     index_id: core.serialization.string().optional(),
+    collection_id: core.serialization.string().optional(),
+    documents_uploading: core.serialization.boolean().optional(),
 });
 
 export declare namespace Table {
@@ -24,10 +26,12 @@ export declare namespace Table {
         table_config: TableConfigOutput.Raw;
         created_at?: string | null;
         last_updated_at?: string | null;
-        created_by: Identity.Raw;
-        last_updated_by: Identity.Raw;
+        created_by: LegacyIdentity.Raw;
+        last_updated_by: LegacyIdentity.Raw;
         revision_id: string;
         table_id: string;
         index_id?: string | null;
+        collection_id?: string | null;
+        documents_uploading?: boolean | null;
     }
 }

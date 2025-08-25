@@ -10,8 +10,9 @@ export const DataType: core.serialization.Schema<serializers.DataType.Raw, Scout
     "boolean",
     "string",
     "number",
+    "datetime",
 ]);
 
 export declare namespace DataType {
-    export type Raw = "boolean" | "string" | "number";
+    export type Raw = "boolean" | "string" | "number" | "datetime";
 }

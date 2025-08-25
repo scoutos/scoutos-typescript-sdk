@@ -41,7 +41,7 @@ export class Sources {
      */
     public async list(
         requestOptions?: Sources.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersListSourceArchetypesResponseModel> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -54,8 +54,8 @@ export class Sources {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -67,13 +67,16 @@ export class Sources {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersListSourceArchetypesResponseModel.parseOrThrow(_response.body, {
-                unrecognizedObjectKeys: "passthrough",
-                allowUnrecognizedUnionMembers: true,
-                allowUnrecognizedEnumValues: true,
-                skipValidation: true,
-                breadcrumbsPrefix: ["response"],
-            });
+            return serializers.SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel.parseOrThrow(
+                _response.body,
+                {
+                    unrecognizedObjectKeys: "passthrough",
+                    allowUnrecognizedUnionMembers: true,
+                    allowUnrecognizedEnumValues: true,
+                    skipValidation: true,
+                    breadcrumbsPrefix: ["response"],
+                },
+            );
         }
 
         if (_response.error.reason === "status-code") {

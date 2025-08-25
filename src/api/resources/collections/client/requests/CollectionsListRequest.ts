@@ -19,4 +19,12 @@ export interface CollectionsListRequest {
      * Search query
      */
     query?: string;
+    /**
+     * Filter by tags
+     */
+    tags?: string;
+    /**
+     * Sort
+     */
+    sort?: string;
 }

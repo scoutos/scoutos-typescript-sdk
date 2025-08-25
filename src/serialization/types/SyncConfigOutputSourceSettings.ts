@@ -5,7 +5,8 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { SourceSyncNotionSettings } from "./SourceSyncNotionSettings";
+import { SourceSyncGoogleDriveSettings } from "./SourceSyncGoogleDriveSettings";
+import { SourceSyncNotionSettingsOutput } from "./SourceSyncNotionSettingsOutput";
 import { SourceSyncCrawlSettingsOutput } from "./SourceSyncCrawlSettingsOutput";
 import { SourceSyncPageCrawlSettingsOutput } from "./SourceSyncPageCrawlSettingsOutput";
 import { SourceSyncSitemapSettingsOutput } from "./SourceSyncSitemapSettingsOutput";
@@ -15,7 +16,8 @@ export const SyncConfigOutputSourceSettings: core.serialization.Schema<
     serializers.SyncConfigOutputSourceSettings.Raw,
     Scout.SyncConfigOutputSourceSettings
 > = core.serialization.undiscriminatedUnion([
-    SourceSyncNotionSettings,
+    SourceSyncGoogleDriveSettings,
+    SourceSyncNotionSettingsOutput,
     SourceSyncCrawlSettingsOutput,
     SourceSyncPageCrawlSettingsOutput,
     SourceSyncSitemapSettingsOutput,
@@ -24,7 +26,8 @@ export const SyncConfigOutputSourceSettings: core.serialization.Schema<
 
 export declare namespace SyncConfigOutputSourceSettings {
     export type Raw =
-        | SourceSyncNotionSettings.Raw
+        | SourceSyncGoogleDriveSettings.Raw
+        | SourceSyncNotionSettingsOutput.Raw
         | SourceSyncCrawlSettingsOutput.Raw
         | SourceSyncPageCrawlSettingsOutput.Raw
         | SourceSyncSitemapSettingsOutput.Raw

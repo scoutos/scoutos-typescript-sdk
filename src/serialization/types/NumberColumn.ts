@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
+import { NumberColumnAutomationConfig } from "./NumberColumnAutomationConfig";
 import { NumberColumnDefault } from "./NumberColumnDefault";
 import { NumberColumnMinValue } from "./NumberColumnMinValue";
 import { NumberColumnMaxValue } from "./NumberColumnMaxValue";
@@ -16,6 +17,7 @@ export const NumberColumn: core.serialization.ObjectSchema<serializers.NumberCol
         column_type: core.serialization.stringLiteral("number"),
         data_type: core.serialization.stringLiteral("number").optional(),
         hidden: core.serialization.boolean().optional(),
+        automation_config: NumberColumnAutomationConfig.optional(),
         default: NumberColumnDefault.optional(),
         min_value: NumberColumnMinValue.optional(),
         max_value: NumberColumnMaxValue.optional(),
@@ -28,6 +30,7 @@ export declare namespace NumberColumn {
         column_type: "number";
         data_type?: "number" | null;
         hidden?: boolean | null;
+        automation_config?: NumberColumnAutomationConfig.Raw | null;
         default?: NumberColumnDefault.Raw | null;
         min_value?: NumberColumnMinValue.Raw | null;
         max_value?: NumberColumnMaxValue.Raw | null;

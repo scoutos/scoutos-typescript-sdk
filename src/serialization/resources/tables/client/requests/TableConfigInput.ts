@@ -13,6 +13,11 @@ export const TableConfigInput: core.serialization.Schema<serializers.TableConfig
         table_img_url: core.serialization.string().optional(),
         table_description: core.serialization.string().optional(),
         schema: core.serialization.list(TableConfigInputSchemaItem).optional(),
+        icon_emoji: core.serialization.string().optional(),
+        icon_asset_url: core.serialization.string().optional(),
+        icon_fill: core.serialization.string().optional(),
+        singular_name: core.serialization.string().optional(),
+        plural_name: core.serialization.string().optional(),
     });
 
 export declare namespace TableConfigInput {
@@ -21,5 +26,10 @@ export declare namespace TableConfigInput {
         table_img_url?: string | null;
         table_description?: string | null;
         schema?: TableConfigInputSchemaItem.Raw[] | null;
+        icon_emoji?: string | null;
+        icon_asset_url?: string | null;
+        icon_fill?: string | null;
+        singular_name?: string | null;
+        plural_name?: string | null;
     }
 }

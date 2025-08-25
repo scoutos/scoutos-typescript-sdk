@@ -45,7 +45,7 @@ export class Tables {
     public async list(
         collection_id: string,
         requestOptions?: Tables.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersGetTablesResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionGetTablesResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -58,8 +58,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -71,7 +71,7 @@ export class Tables {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersGetTablesResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionGetTablesResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -131,7 +131,7 @@ export class Tables {
         collection_id: string,
         request: Scout.TableConfigInput = {},
         requestOptions?: Tables.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersCreateTableResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionCreateTableResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -144,8 +144,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -158,7 +158,7 @@ export class Tables {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersCreateTableResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionCreateTableResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -218,7 +218,7 @@ export class Tables {
         collection_id: string,
         table_id: string,
         requestOptions?: Tables.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersGetTableResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionGetTableResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -231,8 +231,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -244,7 +244,7 @@ export class Tables {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersGetTableResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionGetTableResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -306,7 +306,7 @@ export class Tables {
         table_id: string,
         request: Scout.TableData = {},
         requestOptions?: Tables.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersUpdateTableResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionUpdateTableResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -319,8 +319,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -333,7 +333,7 @@ export class Tables {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersUpdateTableResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionUpdateTableResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -395,7 +395,7 @@ export class Tables {
         collection_id: string,
         table_id: string,
         requestOptions?: Tables.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersDeleteTableResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionDeleteTableResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -408,8 +408,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -421,7 +421,7 @@ export class Tables {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersDeleteTableResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionDeleteTableResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -481,7 +481,7 @@ export class Tables {
         collection_id: string,
         table_id: string,
         requestOptions?: Tables.RequestOptions,
-    ): Promise<Scout.TablesGetSchemaResponse> {
+    ): Promise<Scout.SchemaResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -494,8 +494,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -507,7 +507,7 @@ export class Tables {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.TablesGetSchemaResponse.parseOrThrow(_response.body, {
+            return serializers.SchemaResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,
@@ -573,7 +573,7 @@ export class Tables {
         table_id: string,
         request: Record<string, unknown>[],
         requestOptions?: Tables.RequestOptions,
-    ): Promise<Scout.CollectionServiceHandlersTableSyncResponse> {
+    ): Promise<Scout.SrcAppHttpRoutesCollectionSyncTableResponse> {
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
                 (await core.Supplier.get(this._options.baseUrl)) ??
@@ -586,8 +586,8 @@ export class Tables {
                 Authorization: await this._getAuthorizationHeader(),
                 "X-Fern-Language": "JavaScript",
                 "X-Fern-SDK-Name": "scoutos",
-                "X-Fern-SDK-Version": "0.10.5",
-                "User-Agent": "scoutos/0.10.5",
+                "X-Fern-SDK-Version": "0.10.6",
+                "User-Agent": "scoutos/0.10.6",
                 "X-Fern-Runtime": core.RUNTIME.type,
                 "X-Fern-Runtime-Version": core.RUNTIME.version,
                 ...requestOptions?.headers,
@@ -600,7 +600,7 @@ export class Tables {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return serializers.CollectionServiceHandlersTableSyncResponse.parseOrThrow(_response.body, {
+            return serializers.SrcAppHttpRoutesCollectionSyncTableResponse.parseOrThrow(_response.body, {
                 unrecognizedObjectKeys: "passthrough",
                 allowUnrecognizedUnionMembers: true,
                 allowUnrecognizedEnumValues: true,

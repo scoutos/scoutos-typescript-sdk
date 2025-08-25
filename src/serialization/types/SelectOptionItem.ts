@@ -10,13 +10,15 @@ export const SelectOptionItem: core.serialization.ObjectSchema<
     serializers.SelectOptionItem.Raw,
     Scout.SelectOptionItem
 > = core.serialization.object({
-    id: core.serialization.string(),
+    id: core.serialization.string().optional(),
     name: core.serialization.string(),
+    color_hex: core.serialization.string().optional(),
 });
 
 export declare namespace SelectOptionItem {
     export interface Raw {
-        id: string;
+        id?: string | null;
         name: string;
+        color_hex?: string | null;
     }
 }

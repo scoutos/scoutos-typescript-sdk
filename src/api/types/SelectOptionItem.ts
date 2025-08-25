@@ -3,6 +3,7 @@
  */
 
 export interface SelectOptionItem {
-    id: string;
+    id?: string;
     name: string;
+    color_hex?: string;
 }

@@ -13,6 +13,11 @@ export const TableData: core.serialization.Schema<serializers.TableData.Raw, Sco
         table_img_url: core.serialization.string().optional(),
         table_description: core.serialization.string().optional(),
         schema: core.serialization.list(TableDataSchemaItem).optional(),
+        icon_emoji: core.serialization.string().optional(),
+        icon_asset_url: core.serialization.string().optional(),
+        icon_fill: core.serialization.string().optional(),
+        singular_name: core.serialization.string().optional(),
+        plural_name: core.serialization.string().optional(),
         index_id: core.serialization.string().optional(),
     });
 
@@ -22,6 +27,11 @@ export declare namespace TableData {
         table_img_url?: string | null;
         table_description?: string | null;
         schema?: TableDataSchemaItem.Raw[] | null;
+        icon_emoji?: string | null;
+        icon_asset_url?: string | null;
+        icon_fill?: string | null;
+        singular_name?: string | null;
+        plural_name?: string | null;
         index_id?: string | null;
     }
 }

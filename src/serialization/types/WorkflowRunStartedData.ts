@@ -5,13 +5,13 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { Actor } from "./Actor";
+import { WorkflowActor } from "./WorkflowActor";
 
 export const WorkflowRunStartedData: core.serialization.ObjectSchema<
     serializers.WorkflowRunStartedData.Raw,
     Scout.WorkflowRunStartedData
 > = core.serialization.object({
-    actor: Actor.optional(),
+    actor: WorkflowActor.optional(),
     workflow_id: core.serialization.string(),
     workflow_run_id: core.serialization.string().optional(),
     inputs: core.serialization.record(core.serialization.string(), core.serialization.unknown()),
@@ -23,7 +23,7 @@ export const WorkflowRunStartedData: core.serialization.ObjectSchema<
 
 export declare namespace WorkflowRunStartedData {
     export interface Raw {
-        actor?: Actor.Raw | null;
+        actor?: WorkflowActor.Raw | null;
         workflow_id: string;
         workflow_run_id?: string | null;
         inputs: Record<string, unknown>;

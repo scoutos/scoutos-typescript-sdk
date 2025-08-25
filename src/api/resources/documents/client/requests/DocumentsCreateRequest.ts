@@ -14,7 +14,11 @@ import * as Scout from "../../../../index";
  */
 export interface DocumentsCreateRequest {
     /**
-     * Whether to wait for document creation to complete
+     * The job id responsible for the document creation/update
+     */
+    job_id?: string;
+    /**
+     * Whether to wait for document creation/update to complete
      */
     await_completion?: boolean;
     body: Scout.DocumentsCreateRequestBody;

@@ -13,6 +13,7 @@ export const CollectionConfig: core.serialization.ObjectSchema<
     collection_display_name: core.serialization.string().optional(),
     collection_img_url: core.serialization.string().optional(),
     collection_description: core.serialization.string().optional(),
+    tags: core.serialization.list(core.serialization.string()).optional(),
 });
 
 export declare namespace CollectionConfig {
@@ -20,5 +21,6 @@ export declare namespace CollectionConfig {
         collection_display_name?: string | null;
         collection_img_url?: string | null;
         collection_description?: string | null;
+        tags?: string[] | null;
     }
 }

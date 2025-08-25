@@ -6,4 +6,5 @@ export interface CollectionConfig {
     collection_display_name?: string;
     collection_img_url?: string;
     collection_description?: string;
+    tags?: string[];
 }

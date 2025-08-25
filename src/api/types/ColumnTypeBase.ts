@@ -10,4 +10,6 @@ export interface ColumnTypeBase {
     column_type: Scout.ColumnType;
     data_type: Scout.DataType;
     hidden?: boolean;
+    /** Optional automation configuration to automatically calculate values for this column */
+    automation_config?: Scout.ColumnTypeBaseAutomationConfig;
 }

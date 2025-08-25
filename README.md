@@ -13,7 +13,7 @@ npm i -s scoutos
 
 ## Reference
 
-A full reference for this library is available [here](./reference.md).
+A full reference for this library is available [here](https://github.com/scoutos/scoutos-typescript-sdk/blob/HEAD/./reference.md).
 
 ## Usage
 
@@ -21,11 +21,10 @@ Instantiate and use the client with the following:
 
 ```typescript
 import { ScoutClient } from "scoutos";
+import * as fs from "fs";
 
 const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
-await client.workflows.createRevision({
-    body: {},
-});
+await client.parseFileV2FilesParsePost(fs.createReadStream("/path/to/your/file"), {});
 ```
 
 ## Request And Response Types
@@ -50,7 +49,7 @@ will be thrown.
 import { ScoutError } from "scoutos";
 
 try {
-    await client.workflows.createRevision(...);
+    await client.parseFileV2FilesParsePost(...);
 } catch (err) {
     if (err instanceof ScoutError) {
         console.log(err.statusCode);
@@ -67,7 +66,7 @@ try {
 If you would like to send additional headers as part of the request, use the `headers` request option.
 
 ```typescript
-const response = await client.workflows.createRevision(..., {
+const response = await client.parseFileV2FilesParsePost(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -89,7 +88,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.workflows.createRevision(..., {
+const response = await client.parseFileV2FilesParsePost(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -99,7 +98,7 @@ const response = await client.workflows.createRevision(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.workflows.createRevision(..., {
+const response = await client.parseFileV2FilesParsePost(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -110,7 +109,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.workflows.createRevision(..., {
+const response = await client.parseFileV2FilesParsePost(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request

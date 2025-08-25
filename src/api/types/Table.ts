@@ -8,9 +8,11 @@ export interface Table {
     table_config: Scout.TableConfigOutput;
     created_at?: Date;
     last_updated_at?: Date;
-    created_by: Scout.Identity;
-    last_updated_by: Scout.Identity;
+    created_by: Scout.LegacyIdentity;
+    last_updated_by: Scout.LegacyIdentity;
     revision_id: string;
     table_id: string;
     index_id?: string;
+    collection_id?: string;
+    documents_uploading?: boolean;
 }

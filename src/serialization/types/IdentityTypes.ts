@@ -7,8 +7,8 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 
 export const IdentityTypes: core.serialization.Schema<serializers.IdentityTypes.Raw, Scout.IdentityTypes> =
-    core.serialization.enum_(["user", "api_key"]);
+    core.serialization.enum_(["user", "api_key", "system"]);
 
 export declare namespace IdentityTypes {
-    export type Raw = "user" | "api_key";
+    export type Raw = "user" | "api_key" | "system";
 }

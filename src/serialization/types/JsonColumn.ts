@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
+import { JsonColumnAutomationConfig } from "./JsonColumnAutomationConfig";
 
 export const JsonColumn: core.serialization.ObjectSchema<serializers.JsonColumn.Raw, Scout.JsonColumn> =
     core.serialization.object({
@@ -13,6 +14,7 @@ export const JsonColumn: core.serialization.ObjectSchema<serializers.JsonColumn.
         column_type: core.serialization.stringLiteral("json"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
+        automation_config: JsonColumnAutomationConfig.optional(),
         default: core.serialization.string().optional(),
     });
 
@@ -23,6 +25,7 @@ export declare namespace JsonColumn {
         column_type: "json";
         data_type?: "string" | null;
         hidden?: boolean | null;
+        automation_config?: JsonColumnAutomationConfig.Raw | null;
         default?: string | null;
     }
 }

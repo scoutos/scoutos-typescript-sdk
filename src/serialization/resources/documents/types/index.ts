@@ -2,4 +2,8 @@ export * from "./DocumentsCreateRequestBodyZeroValue";
 export * from "./DocumentsCreateRequestBodyOneValue";
 export * from "./DocumentsCreateRequestBodyItemValue";
 export * from "./DocumentsCreateRequestBody";
+export * from "./DocumentsUpdateBatchRequestBodyZeroValue";
+export * from "./DocumentsUpdateBatchRequestBodyOneValue";
+export * from "./DocumentsUpdateBatchRequestBodyItemValue";
+export * from "./DocumentsUpdateBatchRequestBody";
 export * from "./DocumentsUpdateRequestValue";

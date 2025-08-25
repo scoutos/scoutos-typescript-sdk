@@ -6,9 +6,12 @@ import * as serializers from "../../../index";
 import * as Scout from "../../../../api/index";
 import * as core from "../../../../core";
 import { CheckBoxColumn } from "../../../types/CheckBoxColumn";
+import { DateTimeColumn } from "../../../types/DateTimeColumn";
 import { JsonColumn } from "../../../types/JsonColumn";
 import { MarkdownColumn } from "../../../types/MarkdownColumn";
+import { MultiSelectColumn } from "../../../types/MultiSelectColumn";
 import { NumberColumn } from "../../../types/NumberColumn";
+import { RelationColumn } from "../../../types/RelationColumn";
 import { SelectColumn } from "../../../types/SelectColumn";
 import { TextLongColumn } from "../../../types/TextLongColumn";
 import { TextShortColumn } from "../../../types/TextShortColumn";
@@ -19,9 +22,12 @@ export const TableConfigInputSchemaItem: core.serialization.Schema<
     Scout.TableConfigInputSchemaItem
 > = core.serialization.undiscriminatedUnion([
     CheckBoxColumn,
+    DateTimeColumn,
     JsonColumn,
     MarkdownColumn,
+    MultiSelectColumn,
     NumberColumn,
+    RelationColumn,
     SelectColumn,
     TextLongColumn,
     TextShortColumn,
@@ -31,9 +37,12 @@ export const TableConfigInputSchemaItem: core.serialization.Schema<
 export declare namespace TableConfigInputSchemaItem {
     export type Raw =
         | CheckBoxColumn.Raw
+        | DateTimeColumn.Raw
         | JsonColumn.Raw
         | MarkdownColumn.Raw
+        | MultiSelectColumn.Raw
         | NumberColumn.Raw
+        | RelationColumn.Raw
         | SelectColumn.Raw
         | TextLongColumn.Raw
         | TextShortColumn.Raw

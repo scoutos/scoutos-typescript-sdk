@@ -13,4 +13,9 @@ export interface TableConfigInput {
     table_img_url?: string;
     table_description?: string;
     schema?: Scout.TableConfigInputSchemaItem[];
+    icon_emoji?: string;
+    icon_asset_url?: string;
+    icon_fill?: string;
+    singular_name?: string;
+    plural_name?: string;
 }

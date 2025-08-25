@@ -5,6 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
+import { UrlColumnAutomationConfig } from "./UrlColumnAutomationConfig";
 
 export const UrlColumn: core.serialization.ObjectSchema<serializers.UrlColumn.Raw, Scout.UrlColumn> =
     core.serialization.object({
@@ -13,6 +14,7 @@ export const UrlColumn: core.serialization.ObjectSchema<serializers.UrlColumn.Ra
         column_type: core.serialization.stringLiteral("url"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
+        automation_config: UrlColumnAutomationConfig.optional(),
         default: core.serialization.string().optional(),
     });
 
@@ -23,6 +25,7 @@ export declare namespace UrlColumn {
         column_type: "url";
         data_type?: "string" | null;
         hidden?: boolean | null;
+        automation_config?: UrlColumnAutomationConfig.Raw | null;
         default?: string | null;
     }
 }

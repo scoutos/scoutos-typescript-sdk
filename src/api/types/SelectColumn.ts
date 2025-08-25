@@ -10,7 +10,8 @@ export interface SelectColumn {
     column_type: "select";
     data_type?: "string";
     hidden?: boolean;
+    /** Optional automation configuration to automatically calculate values for this column */
+    automation_config?: Scout.SelectColumnAutomationConfig;
     /** Available options for selection */
     options?: Scout.SelectOptionItem[];
-    selected_option?: number;
 }

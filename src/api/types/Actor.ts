@@ -5,6 +5,7 @@
 import * as Scout from "../index";
 
 export interface Actor {
-    id: string;
-    type: Scout.ActorType;
+    scout_organization_id: string;
+    identity: Scout.LegacyIdentity;
+    actor_identity: Scout.ActorIdentity;
 }

@@ -5,7 +5,7 @@
 import * as Scout from "../index";
 
 export interface WorkflowRunStartedData {
-    actor?: Scout.Actor;
+    actor?: Scout.WorkflowActor;
     workflow_id: string;
     workflow_run_id?: string;
     inputs: Record<string, unknown>;

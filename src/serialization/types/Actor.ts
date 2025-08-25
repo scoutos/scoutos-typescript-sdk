@@ -5,16 +5,19 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { ActorType } from "./ActorType";
+import { LegacyIdentity } from "./LegacyIdentity";
+import { ActorIdentity } from "./ActorIdentity";
 
 export const Actor: core.serialization.ObjectSchema<serializers.Actor.Raw, Scout.Actor> = core.serialization.object({
-    id: core.serialization.string(),
-    type: ActorType,
+    scout_organization_id: core.serialization.string(),
+    identity: LegacyIdentity,
+    actor_identity: ActorIdentity,
 });
 
 export declare namespace Actor {
     export interface Raw {
-        id: string;
-        type: ActorType.Raw;
+        scout_organization_id: string;
+        identity: LegacyIdentity.Raw;
+        actor_identity: ActorIdentity.Raw;
     }
 }

@@ -6,9 +6,12 @@ import * as Scout from "../index";
 
 export type TableConfigOutputSchemaItem =
     | Scout.CheckBoxColumn
+    | Scout.DateTimeColumn
     | Scout.JsonColumn
     | Scout.MarkdownColumn
+    | Scout.MultiSelectColumn
     | Scout.NumberColumn
+    | Scout.RelationColumn
     | Scout.SelectColumn
     | Scout.TextLongColumn
     | Scout.TextShortColumn

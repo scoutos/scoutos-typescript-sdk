@@ -10,7 +10,8 @@ export interface Document {
     document_data_id?: string;
     created_at?: Date;
     last_updated_at?: Date;
-    created_by: Scout.Identity;
-    last_updated_by: Scout.Identity;
+    created_by: Scout.DocumentCreatedBy;
+    last_updated_by: Scout.DocumentLastUpdatedBy;
     revision_id?: string;
+    job_id?: string;
 }

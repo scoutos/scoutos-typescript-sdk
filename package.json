@@ -1,6 +1,6 @@
 {
     "name": "scoutos",
-    "version": "0.10.5",
+    "version": "0.10.6",
     "private": false,
     "repository": "https://github.com/scoutos/scoutos-typescript-sdk",
     "main": "./index.js",
@@ -18,7 +18,8 @@
         "node-fetch": "^2.7.0",
         "qs": "^6.13.1",
         "readable-stream": "^4.5.2",
-        "js-base64": "3.7.7"
+        "js-base64": "3.7.7",
+        "form-data-encoder": "^4.0.2"
     },
     "devDependencies": {
         "@types/url-join": "4.0.1",

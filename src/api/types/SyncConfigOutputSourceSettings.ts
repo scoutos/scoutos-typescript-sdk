@@ -5,7 +5,8 @@
 import * as Scout from "../index";
 
 export type SyncConfigOutputSourceSettings =
-    | Scout.SourceSyncNotionSettings
+    | Scout.SourceSyncGoogleDriveSettings
+    | Scout.SourceSyncNotionSettingsOutput
     | Scout.SourceSyncCrawlSettingsOutput
     | Scout.SourceSyncPageCrawlSettingsOutput
     | Scout.SourceSyncSitemapSettingsOutput

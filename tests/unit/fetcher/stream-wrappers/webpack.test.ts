@@ -38,5 +38,5 @@ describe("test env compatibility", () => {
                 },
             );
         });
-    }, 180_000);
+    }, 60_000);
 });

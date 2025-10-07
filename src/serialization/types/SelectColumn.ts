@@ -15,7 +15,7 @@ export const SelectColumn: core.serialization.ObjectSchema<serializers.SelectCol
         column_type: core.serialization.stringLiteral("select"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: TypescriptAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig,
         options: core.serialization.list(SelectOptionItem).optional(),
     });
 
@@ -26,7 +26,7 @@ export declare namespace SelectColumn {
         column_type: "select";
         data_type?: "string" | null;
         hidden?: boolean | null;
-        automation_config?: TypescriptAutomationConfig.Raw | null;
+        automation_config: TypescriptAutomationConfig.Raw;
         options?: SelectOptionItem.Raw[] | null;
     }
 }

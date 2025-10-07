@@ -4,7 +4,11 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         limit: 1,
+ *         entity_type: "entity_type",
+ *         current_state: true
+ *     }
  */
 export interface ListEntitiesPulseEntitiesGetRequest {
     limit?: number;

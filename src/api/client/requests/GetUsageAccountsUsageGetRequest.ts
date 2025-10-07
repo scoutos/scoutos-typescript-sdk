@@ -4,7 +4,10 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         start_date: "start_date",
+ *         end_date: "end_date"
+ *     }
  */
 export interface GetUsageAccountsUsageGetRequest {
     start_date?: string;

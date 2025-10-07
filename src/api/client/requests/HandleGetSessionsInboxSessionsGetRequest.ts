@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         search: "search"
+ *     }
  */
 export interface HandleGetSessionsInboxSessionsGetRequest {
     search?: string;

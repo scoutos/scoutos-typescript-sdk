@@ -7,5 +7,5 @@ export interface FriendlyPaymentMethods {
     brand: string;
     last4: string;
     is_default: boolean;
-    description: string;
+    description?: string;
 }

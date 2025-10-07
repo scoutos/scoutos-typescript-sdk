@@ -20,8 +20,8 @@ export const BlockStateUpdated: core.serialization.ObjectSchema<
     environment: BlockStateUpdatedEnvironment,
     timestamp: core.serialization.string().optional(),
     data: BlockStateUpdatedData,
-    price: core.serialization.string(),
-    event_type: core.serialization.string(),
+    price: core.serialization.string().optional(),
+    event_type: core.serialization.string().optional(),
     version: EventVersion,
 });
 
@@ -34,8 +34,8 @@ export declare namespace BlockStateUpdated {
         environment: BlockStateUpdatedEnvironment.Raw;
         timestamp?: string | null;
         data: BlockStateUpdatedData.Raw;
-        price: string;
-        event_type: string;
+        price?: string | null;
+        event_type?: string | null;
         version: EventVersion.Raw;
     }
 }

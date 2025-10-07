@@ -42,6 +42,8 @@ export class Workflows {
      *
      * @example
      *     await client.workflows.createRevision({
+     *         workflow_id: "workflow_id",
+     *         workflow_key: "workflow_key",
      *         body: {}
      *     })
      */
@@ -139,7 +141,14 @@ export class Workflows {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.workflows.list()
+     *     await client.workflows.list({
+     *         sort: "sort",
+     *         direction: "direction",
+     *         start_at: "start_at",
+     *         limit: 1,
+     *         query: "query",
+     *         tags: "tags"
+     *     })
      */
     public async list(
         request: Scout.WorkflowsListRequest = {},
@@ -249,6 +258,7 @@ export class Workflows {
      *
      * @example
      *     await client.workflows.create({
+     *         workflow_key: "workflow_key",
      *         body: {}
      *     })
      */
@@ -698,7 +708,11 @@ export class Workflows {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.workflows.run("workflow_id", {})
+     *     await client.workflows.run("workflow_id", {
+     *         environment: "environment",
+     *         revision_id: "revision_id",
+     *         session_id: "session_id"
+     *     })
      */
     public async run(
         workflow_id: string,
@@ -803,6 +817,9 @@ export class Workflows {
      *
      * @example
      *     await client.workflows.runWithConfig({
+     *         environment: "environment",
+     *         revision_id: "revision_id",
+     *         session_id: "session_id",
      *         workflow_config: {}
      *     })
      */
@@ -897,15 +914,12 @@ export class Workflows {
         }
     }
 
-    protected async _getAuthorizationHeader(): Promise<string> {
+    protected async _getAuthorizationHeader(): Promise<string | undefined> {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
-        if (bearer == null) {
-            throw new errors.ScoutError({
-                message:
-                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
-            });
+        if (bearer != null) {
+            return `Bearer ${bearer}`;
         }
 
-        return `Bearer ${bearer}`;
+        return undefined;
     }
 }

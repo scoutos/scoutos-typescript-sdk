@@ -44,7 +44,10 @@ export class Triggers {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.triggers.list()
+     *     await client.triggers.list({
+     *         action_type: "workflow.execute",
+     *         workflow_id: "workflow_id"
+     *     })
      */
     public async list(
         request: Scout.TriggersListRequest = {},
@@ -534,7 +537,10 @@ export class Triggers {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.triggers.updateCronAuthHeaders()
+     *     await client.triggers.updateCronAuthHeaders({
+     *         dry_run: true,
+     *         test_org_id: "test_org_id"
+     *     })
      */
     public async updateCronAuthHeaders(
         request: Scout.TriggersUpdateCronAuthHeadersRequest = {},
@@ -622,15 +628,12 @@ export class Triggers {
         }
     }
 
-    protected async _getAuthorizationHeader(): Promise<string> {
+    protected async _getAuthorizationHeader(): Promise<string | undefined> {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
-        if (bearer == null) {
-            throw new errors.ScoutError({
-                message:
-                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
-            });
+        if (bearer != null) {
+            return `Bearer ${bearer}`;
         }
 
-        return `Bearer ${bearer}`;
+        return undefined;
     }
 }

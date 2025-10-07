@@ -7,6 +7,8 @@ import * as Scout from "../../../../index";
 /**
  * @example
  *     {
+ *         workflow_id: "workflow_id",
+ *         workflow_key: "workflow_key",
  *         body: {}
  *     }
  */

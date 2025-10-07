@@ -18,8 +18,8 @@ export const BlockRunFailed: core.serialization.ObjectSchema<serializers.BlockRu
         environment: BlockRunFailedEnvironment,
         timestamp: core.serialization.string().optional(),
         data: BlockRunFailedData,
-        price: core.serialization.string(),
-        event_type: core.serialization.string(),
+        price: core.serialization.string().optional(),
+        event_type: core.serialization.string().optional(),
         version: EventVersion,
     });
 
@@ -32,8 +32,8 @@ export declare namespace BlockRunFailed {
         environment: BlockRunFailedEnvironment.Raw;
         timestamp?: string | null;
         data: BlockRunFailedData.Raw;
-        price: string;
-        event_type: string;
+        price?: string | null;
+        event_type?: string | null;
         version: EventVersion.Raw;
     }
 }

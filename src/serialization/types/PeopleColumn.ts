@@ -15,7 +15,7 @@ export const PeopleColumn: core.serialization.ObjectSchema<serializers.PeopleCol
         column_type: core.serialization.stringLiteral("people"),
         data_type: core.serialization.stringLiteral("string[]").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: TypescriptAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig,
         allow_multiple: core.serialization.boolean().optional(),
         options: core.serialization.list(SelectOptionItem).optional(),
     });
@@ -27,7 +27,7 @@ export declare namespace PeopleColumn {
         column_type: "people";
         data_type?: "string[]" | null;
         hidden?: boolean | null;
-        automation_config?: TypescriptAutomationConfig.Raw | null;
+        automation_config: TypescriptAutomationConfig.Raw;
         allow_multiple?: boolean | null;
         options?: SelectOptionItem.Raw[] | null;
     }

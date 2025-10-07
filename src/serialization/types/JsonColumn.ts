@@ -14,7 +14,7 @@ export const JsonColumn: core.serialization.ObjectSchema<serializers.JsonColumn.
         column_type: core.serialization.stringLiteral("json"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: TypescriptAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig,
         default: core.serialization.string().optional(),
     });
 
@@ -25,7 +25,7 @@ export declare namespace JsonColumn {
         column_type: "json";
         data_type?: "string" | null;
         hidden?: boolean | null;
-        automation_config?: TypescriptAutomationConfig.Raw | null;
+        automation_config: TypescriptAutomationConfig.Raw;
         default?: string | null;
     }
 }

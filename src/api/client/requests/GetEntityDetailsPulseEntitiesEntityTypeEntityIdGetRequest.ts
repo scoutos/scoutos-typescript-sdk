@@ -4,7 +4,11 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         include_activities: true,
+ *         time_range: "time_range",
+ *         current_state: true
+ *     }
  */
 export interface GetEntityDetailsPulseEntitiesEntityTypeEntityIdGetRequest {
     include_activities?: boolean;

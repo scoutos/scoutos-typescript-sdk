@@ -4,7 +4,16 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         user_id: "user_id",
+ *         agent_ids: "agent_ids",
+ *         action_types: "action_types",
+ *         start_date: "start_date",
+ *         end_date: "end_date",
+ *         limit: 1,
+ *         include_children: true,
+ *         min_significance: 1.1
+ *     }
  */
 export interface GetPulseFeedPulseFeedGetRequest {
     user_id?: string;

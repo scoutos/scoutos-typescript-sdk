@@ -7,6 +7,10 @@ import * as Scout from "../../../../index";
 /**
  * @example
  *     {
+ *         job_id: "job_id",
+ *         sync_id: "sync_id",
+ *         await_completion: true,
+ *         mode: "merge",
  *         body: {
  *             "key": true
  *         }

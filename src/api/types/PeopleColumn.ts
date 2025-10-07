@@ -11,7 +11,7 @@ export interface PeopleColumn {
     data_type?: "string[]";
     hidden?: boolean;
     /** Optional automation configuration to automatically calculate values for this column */
-    automation_config?: Scout.TypescriptAutomationConfig;
+    automation_config: Scout.TypescriptAutomationConfig;
     allow_multiple?: boolean;
     /** Available options for selection */
     options?: Scout.SelectOptionItem[];

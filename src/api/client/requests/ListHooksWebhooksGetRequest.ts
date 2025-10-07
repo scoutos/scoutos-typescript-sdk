@@ -4,7 +4,10 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         target_type: "target_type",
+ *         target_id: "target_id"
+ *     }
  */
 export interface ListHooksWebhooksGetRequest {
     target_type?: string;

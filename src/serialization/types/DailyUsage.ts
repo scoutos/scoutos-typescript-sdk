@@ -12,7 +12,7 @@ export const DailyUsage: core.serialization.ObjectSchema<serializers.DailyUsage.
         name: UsageTypes,
         friendly_date: core.serialization.string(),
         price: core.serialization.number(),
-        display_name: core.serialization.string(),
+        display_name: core.serialization.string().optional(),
     });
 
 export declare namespace DailyUsage {
@@ -20,6 +20,6 @@ export declare namespace DailyUsage {
         name: UsageTypes.Raw;
         friendly_date: string;
         price: number;
-        display_name: string;
+        display_name?: string | null;
     }
 }

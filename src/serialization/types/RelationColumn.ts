@@ -14,7 +14,7 @@ export const RelationColumn: core.serialization.ObjectSchema<serializers.Relatio
         column_type: core.serialization.stringLiteral("relation"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: TypescriptAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig,
         target_table_id: core.serialization.string(),
         target_collection_id: core.serialization.string().optional(),
         display_field: core.serialization.string().optional(),
@@ -27,7 +27,7 @@ export declare namespace RelationColumn {
         column_type: "relation";
         data_type?: "string" | null;
         hidden?: boolean | null;
-        automation_config?: TypescriptAutomationConfig.Raw | null;
+        automation_config: TypescriptAutomationConfig.Raw;
         target_table_id: string;
         target_collection_id?: string | null;
         display_field?: string | null;

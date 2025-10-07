@@ -8,6 +8,7 @@
 export interface ExecuteToolResponse {
     /** Whether the execution was successful */
     success: boolean;
+    /** Result of the tool execution */
     result?: unknown;
     /** Error message if execution failed */
     error?: string;

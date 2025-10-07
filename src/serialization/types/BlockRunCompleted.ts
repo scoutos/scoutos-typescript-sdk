@@ -20,8 +20,8 @@ export const BlockRunCompleted: core.serialization.ObjectSchema<
     environment: BlockRunCompletedEnvironment,
     timestamp: core.serialization.string().optional(),
     data: BlockRunCompletedData,
-    price: core.serialization.string(),
-    event_type: core.serialization.string(),
+    price: core.serialization.string().optional(),
+    event_type: core.serialization.string().optional(),
     version: EventVersion,
 });
 
@@ -34,8 +34,8 @@ export declare namespace BlockRunCompleted {
         environment: BlockRunCompletedEnvironment.Raw;
         timestamp?: string | null;
         data: BlockRunCompletedData.Raw;
-        price: string;
-        event_type: string;
+        price?: string | null;
+        event_type?: string | null;
         version: EventVersion.Raw;
     }
 }

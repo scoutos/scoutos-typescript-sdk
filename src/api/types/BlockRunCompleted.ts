@@ -15,7 +15,7 @@ export interface BlockRunCompleted {
     /** The timestamp of the event as UTC ISO 8601 string */
     timestamp?: string;
     data: Scout.BlockRunCompletedData;
-    price: string;
-    event_type: string;
+    price?: string;
+    event_type?: string;
     version: Scout.EventVersion;
 }

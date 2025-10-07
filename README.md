@@ -24,7 +24,9 @@ import { ScoutClient } from "scoutos";
 import * as fs from "fs";
 
 const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
-await client.parseFileV2FilesParsePost(fs.createReadStream("/path/to/your/file"), {});
+await client.parseFileV2FilesParsePost(fs.createReadStream("/path/to/your/file"), {
+    return_text: true,
+});
 ```
 
 ## Request And Response Types

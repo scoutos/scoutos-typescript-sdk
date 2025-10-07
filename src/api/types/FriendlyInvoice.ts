@@ -9,6 +9,6 @@ export interface FriendlyInvoice {
     amount_due: number;
     friendly_plan: string;
     timestamp_start: number;
-    friendly_amount_due: string;
-    friendly_date: string;
+    friendly_amount_due?: string;
+    friendly_date?: string;
 }

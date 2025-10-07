@@ -16,7 +16,7 @@ export const ColumnTypeBase: core.serialization.ObjectSchema<serializers.ColumnT
         column_type: ColumnType,
         data_type: DataType,
         hidden: core.serialization.boolean().optional(),
-        automation_config: TypescriptAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig,
     });
 
 export declare namespace ColumnTypeBase {
@@ -26,6 +26,6 @@ export declare namespace ColumnTypeBase {
         column_type: ColumnType.Raw;
         data_type: DataType.Raw;
         hidden?: boolean | null;
-        automation_config?: TypescriptAutomationConfig.Raw | null;
+        automation_config: TypescriptAutomationConfig.Raw;
     }
 }

@@ -4,7 +4,14 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         start_at: "start_at",
+ *         limit: 1,
+ *         query: "query",
+ *         tags: "tags",
+ *         sort: "sort",
+ *         drive: true
+ *     }
  */
 export interface CollectionsListRequest {
     /**

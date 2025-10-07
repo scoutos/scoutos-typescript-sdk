@@ -6,7 +6,8 @@
  * @example
  *     {
  *         channel_id: "channel_id",
- *         thread_id: "thread_id"
+ *         thread_id: "thread_id",
+ *         integration_id: "integration_id"
  *     }
  */
 export interface HandleGetThreadIntegrationsSlackThreadGetRequest {

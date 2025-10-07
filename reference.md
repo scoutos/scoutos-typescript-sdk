@@ -69,6 +69,8 @@ await client.revokeAccessDriveRevokePost({
 
 ```typescript
 await client.workflows.createRevision({
+    workflow_id: "workflow_id",
+    workflow_key: "workflow_key",
     body: {},
 });
 ```
@@ -133,7 +135,14 @@ List all workflows in the organization
 <dd>
 
 ```typescript
-await client.workflows.list();
+await client.workflows.list({
+    sort: "sort",
+    direction: "direction",
+    start_at: "start_at",
+    limit: 1,
+    query: "query",
+    tags: "tags",
+});
 ```
 
 </dd>
@@ -182,6 +191,7 @@ await client.workflows.list();
 
 ```typescript
 await client.workflows.create({
+    workflow_key: "workflow_key",
     body: {},
 });
 ```
@@ -398,7 +408,11 @@ await client.workflows.delete("workflow_id");
 <dd>
 
 ```typescript
-const response = await client.workflows.runStream("workflow_id", {});
+const response = await client.workflows.runStream("workflow_id", {
+    environment: "environment",
+    revision_id: "revision_id",
+    session_id: "session_id",
+});
 for await (const item of response) {
     console.log(item);
 }
@@ -457,7 +471,11 @@ for await (const item of response) {
 <dd>
 
 ```typescript
-await client.workflows.run("workflow_id", {});
+await client.workflows.run("workflow_id", {
+    environment: "environment",
+    revision_id: "revision_id",
+    session_id: "session_id",
+});
 ```
 
 </dd>
@@ -514,6 +532,9 @@ await client.workflows.run("workflow_id", {});
 
 ```typescript
 await client.workflows.runWithConfig({
+    environment: "environment",
+    revision_id: "revision_id",
+    session_id: "session_id",
     workflow_config: {},
 });
 ```
@@ -894,7 +915,10 @@ await client.revisions.delete("workflow_id", "revision_id");
 <dd>
 
 ```typescript
-await client.usage.get();
+await client.usage.get({
+    start_date: "start_date",
+    end_date: "end_date",
+});
 ```
 
 </dd>
@@ -946,6 +970,12 @@ await client.usage.get();
 ```typescript
 const response = await client.workflowLogs.listLogs({
     workflow_id: "workflow_id",
+    start_date: "start_date",
+    end_date: "end_date",
+    limit: 1,
+    session_id: "session_id",
+    status: "status",
+    cursor: "cursor",
 });
 for await (const item of response) {
     console.log(item);
@@ -1014,7 +1044,13 @@ List all copilots in the organization
 <dd>
 
 ```typescript
-await client.copilots.list();
+await client.copilots.list({
+    sort: "sort",
+    direction: "direction",
+    start_at: "start_at",
+    limit: 1,
+    query: "query",
+});
 ```
 
 </dd>
@@ -1296,7 +1332,10 @@ to get Intellisense type-completion
 <dd>
 
 ```typescript
-await client.triggers.list();
+await client.triggers.list({
+    action_type: "workflow.execute",
+    workflow_id: "workflow_id",
+});
 ```
 
 </dd>
@@ -1608,7 +1647,10 @@ Only accessible to Scout internal organizations for security.
 <dd>
 
 ```typescript
-await client.triggers.updateCronAuthHeaders();
+await client.triggers.updateCronAuthHeaders({
+    dry_run: true,
+    test_org_id: "test_org_id",
+});
 ```
 
 </dd>
@@ -1675,7 +1717,9 @@ If service is 'all', returns integrations for all services.
 <dd>
 
 ```typescript
-await client.integrations.list("service");
+await client.integrations.list("service", {
+    fetch_icons: true,
+});
 ```
 
 </dd>
@@ -1854,7 +1898,14 @@ await client.organizations.deleteIntegration("integration_type", "integration_id
 <dd>
 
 ```typescript
-await client.collections.list();
+await client.collections.list({
+    start_at: "start_at",
+    limit: 1,
+    query: "query",
+    tags: "tags",
+    sort: "sort",
+    drive: true,
+});
 ```
 
 </dd>
@@ -2938,7 +2989,13 @@ await client.tables.sync("collection_id", "table_id", [
 <dd>
 
 ```typescript
-await client.documents.list("collection_id", "table_id");
+await client.documents.list("collection_id", "table_id", {
+    limit: 1,
+    cursor: "cursor",
+    query: "query",
+    offset: 1,
+    sort_by: "sort_by",
+});
 ```
 
 </dd>
@@ -3003,6 +3060,10 @@ await client.documents.list("collection_id", "table_id");
 
 ```typescript
 await client.documents.create("collection_id", "table_id", {
+    job_id: "job_id",
+    sync_id: "sync_id",
+    await_completion: true,
+    mode: "merge",
     body: {
         key: true,
     },
@@ -3071,6 +3132,10 @@ await client.documents.create("collection_id", "table_id", {
 
 ```typescript
 await client.documents.updateBatch("collection_id", "table_id", {
+    job_id: "job_id",
+    sync_id: "sync_id",
+    await_completion: true,
+    mode: "merge",
     body: {
         key: true,
     },
@@ -3189,7 +3254,7 @@ await client.documents.get("collection_id", "table_id", "document_id");
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">update</a>(collection_id, document_id, table_id, { ...params }) -> Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">update</a>(collection_id, table_id, document_id, { ...params }) -> Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -3202,7 +3267,7 @@ await client.documents.get("collection_id", "table_id", "document_id");
 <dd>
 
 ```typescript
-await client.documents.update("collection_id", "document_id", "table_id", {});
+await client.documents.update("collection_id", "table_id", "document_id", {});
 ```
 
 </dd>
@@ -3226,7 +3291,7 @@ await client.documents.update("collection_id", "document_id", "table_id", {});
 <dl>
 <dd>
 
-**document_id:** `string`
+**table_id:** `string`
 
 </dd>
 </dl>
@@ -3234,7 +3299,7 @@ await client.documents.update("collection_id", "document_id", "table_id", {});
 <dl>
 <dd>
 
-**table_id:** `string`
+**document_id:** `string`
 
 </dd>
 </dl>

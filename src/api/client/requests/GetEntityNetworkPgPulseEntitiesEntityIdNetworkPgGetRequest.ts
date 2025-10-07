@@ -4,7 +4,10 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         depth: 1,
+ *         min_interactions: 1
+ *     }
  */
 export interface GetEntityNetworkPgPulseEntitiesEntityIdNetworkPgGetRequest {
     /**

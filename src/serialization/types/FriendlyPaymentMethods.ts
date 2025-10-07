@@ -14,7 +14,7 @@ export const FriendlyPaymentMethods: core.serialization.ObjectSchema<
     brand: core.serialization.string(),
     last4: core.serialization.string(),
     is_default: core.serialization.boolean(),
-    description: core.serialization.string(),
+    description: core.serialization.string().optional(),
 });
 
 export declare namespace FriendlyPaymentMethods {
@@ -23,6 +23,6 @@ export declare namespace FriendlyPaymentMethods {
         brand: string;
         last4: string;
         is_default: boolean;
-        description: string;
+        description?: string | null;
     }
 }

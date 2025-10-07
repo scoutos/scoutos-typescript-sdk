@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         soft: true
+ *     }
  */
 export interface StoreDeletePulseStoreEntityIdDeleteRequest {
     soft?: boolean;

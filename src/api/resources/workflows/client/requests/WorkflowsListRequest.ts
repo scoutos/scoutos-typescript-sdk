@@ -4,7 +4,14 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         sort: "sort",
+ *         direction: "direction",
+ *         start_at: "start_at",
+ *         limit: 1,
+ *         query: "query",
+ *         tags: "tags"
+ *     }
  */
 export interface WorkflowsListRequest {
     /**

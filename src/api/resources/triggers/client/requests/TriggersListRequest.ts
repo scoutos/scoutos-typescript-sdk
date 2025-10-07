@@ -6,7 +6,10 @@ import * as Scout from "../../../../index";
 
 /**
  * @example
- *     {}
+ *     {
+ *         action_type: "workflow.execute",
+ *         workflow_id: "workflow_id"
+ *     }
  */
 export interface TriggersListRequest {
     /**

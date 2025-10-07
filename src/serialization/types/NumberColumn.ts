@@ -17,7 +17,7 @@ export const NumberColumn: core.serialization.ObjectSchema<serializers.NumberCol
         column_type: core.serialization.stringLiteral("number"),
         data_type: core.serialization.stringLiteral("number").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: TypescriptAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig,
         default: NumberColumnDefault.optional(),
         min_value: NumberColumnMinValue.optional(),
         max_value: NumberColumnMaxValue.optional(),
@@ -30,7 +30,7 @@ export declare namespace NumberColumn {
         column_type: "number";
         data_type?: "number" | null;
         hidden?: boolean | null;
-        automation_config?: TypescriptAutomationConfig.Raw | null;
+        automation_config: TypescriptAutomationConfig.Raw;
         default?: NumberColumnDefault.Raw | null;
         min_value?: NumberColumnMinValue.Raw | null;
         max_value?: NumberColumnMaxValue.Raw | null;

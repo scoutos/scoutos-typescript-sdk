@@ -4,7 +4,10 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         dry_run: true,
+ *         test_org_id: "test_org_id"
+ *     }
  */
 export interface TriggersUpdateCronAuthHeadersRequest {
     dry_run?: boolean;

@@ -20,8 +20,8 @@ export const WorkflowRunCompleted: core.serialization.ObjectSchema<
     environment: WorkflowRunCompletedEnvironment,
     timestamp: core.serialization.string().optional(),
     data: WorkflowRunCompletedData,
-    price: core.serialization.string(),
-    event_type: core.serialization.string(),
+    price: core.serialization.string().optional(),
+    event_type: core.serialization.string().optional(),
     version: EventVersion,
 });
 
@@ -34,8 +34,8 @@ export declare namespace WorkflowRunCompleted {
         environment: WorkflowRunCompletedEnvironment.Raw;
         timestamp?: string | null;
         data: WorkflowRunCompletedData.Raw;
-        price: string;
-        event_type: string;
+        price?: string | null;
+        event_type?: string | null;
         version: EventVersion.Raw;
     }
 }

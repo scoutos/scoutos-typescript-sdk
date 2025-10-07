@@ -14,7 +14,7 @@ export const DateTimeColumn: core.serialization.ObjectSchema<serializers.DateTim
         column_type: core.serialization.stringLiteral("datetime"),
         data_type: core.serialization.stringLiteral("datetime").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: TypescriptAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig,
         default: core.serialization.date().optional(),
     });
 
@@ -25,7 +25,7 @@ export declare namespace DateTimeColumn {
         column_type: "datetime";
         data_type?: "datetime" | null;
         hidden?: boolean | null;
-        automation_config?: TypescriptAutomationConfig.Raw | null;
+        automation_config: TypescriptAutomationConfig.Raw;
         default?: string | null;
     }
 }

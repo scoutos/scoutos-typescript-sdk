@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         return_text: true
+ *     }
  */
 export interface BodyParseFileV2FilesParsePost {
     return_text?: boolean;

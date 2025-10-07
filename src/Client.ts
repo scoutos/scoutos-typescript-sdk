@@ -421,7 +421,9 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.parseFileV2FilesParsePost(fs.createReadStream("/path/to/your/file"), {})
+     *     await client.parseFileV2FilesParsePost(fs.createReadStream("/path/to/your/file"), {
+     *         return_text: true
+     *     })
      */
     public async parseFileV2FilesParsePost(
         file: File | fs.ReadStream | Blob,
@@ -1018,7 +1020,8 @@ export class ScoutClient {
      * @example
      *     await client.handleGetThreadIntegrationsSlackThreadGet({
      *         channel_id: "channel_id",
-     *         thread_id: "thread_id"
+     *         thread_id: "thread_id",
+     *         integration_id: "integration_id"
      *     })
      */
     public async handleGetThreadIntegrationsSlackThreadGet(
@@ -1830,7 +1833,9 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.handleGetSessionsInboxSessionsGet()
+     *     await client.handleGetSessionsInboxSessionsGet({
+     *         search: "search"
+     *     })
      */
     public async handleGetSessionsInboxSessionsGet(
         request: Scout.HandleGetSessionsInboxSessionsGetRequest = {},
@@ -3101,7 +3106,10 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.listHooksWebhooksGet()
+     *     await client.listHooksWebhooksGet({
+     *         target_type: "target_type",
+     *         target_id: "target_id"
+     *     })
      */
     public async listHooksWebhooksGet(
         request: Scout.ListHooksWebhooksGetRequest = {},
@@ -3497,7 +3505,10 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.getUsageAccountsUsageGet()
+     *     await client.getUsageAccountsUsageGet({
+     *         start_date: "start_date",
+     *         end_date: "end_date"
+     *     })
      */
     public async getUsageAccountsUsageGet(
         request: Scout.GetUsageAccountsUsageGetRequest = {},
@@ -4282,7 +4293,10 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.listAgentSessionsObservabilityAgentsAgentIdSessionsGet("agent_id")
+     *     await client.listAgentSessionsObservabilityAgentsAgentIdSessionsGet("agent_id", {
+     *         start_date: "2024-01-15T09:30:00Z",
+     *         end_date: "2024-01-15T09:30:00Z"
+     *     })
      */
     public async listAgentSessionsObservabilityAgentsAgentIdSessionsGet(
         agent_id: string,
@@ -4373,7 +4387,13 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.listAgentSessionsSummaryObservabilityAgentsAgentIdSessionsSummaryGet("agent_id")
+     *     await client.listAgentSessionsSummaryObservabilityAgentsAgentIdSessionsSummaryGet("agent_id", {
+     *         start_date: "start_date",
+     *         end_date: "end_date",
+     *         limit: 1,
+     *         cursor: "cursor",
+     *         tool_filter: "tool_filter"
+     *     })
      */
     public async listAgentSessionsSummaryObservabilityAgentsAgentIdSessionsSummaryGet(
         agent_id: string,
@@ -4562,7 +4582,10 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.getAgentSessionAnalyticsObservabilityAgentsAgentIdAnalyticsGet("agent_id")
+     *     await client.getAgentSessionAnalyticsObservabilityAgentsAgentIdAnalyticsGet("agent_id", {
+     *         start_date: "2024-01-15T09:30:00Z",
+     *         end_date: "2024-01-15T09:30:00Z"
+     *     })
      */
     public async getAgentSessionAnalyticsObservabilityAgentsAgentIdAnalyticsGet(
         agent_id: string,
@@ -4658,7 +4681,10 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.getAgentToolUsageObservabilityAgentsAgentIdToolUsageGet("agent_id")
+     *     await client.getAgentToolUsageObservabilityAgentsAgentIdToolUsageGet("agent_id", {
+     *         start_date: "start_date",
+     *         end_date: "end_date"
+     *     })
      */
     public async getAgentToolUsageObservabilityAgentsAgentIdToolUsageGet(
         agent_id: string,
@@ -4754,7 +4780,10 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.getAgentDistinctToolsObservabilityAgentsAgentIdToolsGet("agent_id")
+     *     await client.getAgentDistinctToolsObservabilityAgentsAgentIdToolsGet("agent_id", {
+     *         start_date: "start_date",
+     *         end_date: "end_date"
+     *     })
      */
     public async getAgentDistinctToolsObservabilityAgentsAgentIdToolsGet(
         agent_id: string,
@@ -4848,7 +4877,16 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.getPulseFeedPulseFeedGet()
+     *     await client.getPulseFeedPulseFeedGet({
+     *         user_id: "user_id",
+     *         agent_ids: "agent_ids",
+     *         action_types: "action_types",
+     *         start_date: "start_date",
+     *         end_date: "end_date",
+     *         limit: 1,
+     *         include_children: true,
+     *         min_significance: 1.1
+     *     })
      */
     public async getPulseFeedPulseFeedGet(
         request: Scout.GetPulseFeedPulseFeedGetRequest = {},
@@ -5066,7 +5104,16 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.getEntityActivitiesPulseActivitiesGet()
+     *     await client.getEntityActivitiesPulseActivitiesGet({
+     *         entity_id: "entity_id",
+     *         entity_type: "entity_type",
+     *         involving_agent: "involving_agent",
+     *         on_object: "on_object",
+     *         of_type: "of_type",
+     *         with_outcome: "with_outcome",
+     *         since_days: 1,
+     *         limit: 1
+     *     })
      */
     public async getEntityActivitiesPulseActivitiesGet(
         request: Scout.GetEntityActivitiesPulseActivitiesGetRequest = {},
@@ -5391,7 +5438,10 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.storeGetTagsPulseStoreTagsGet()
+     *     await client.storeGetTagsPulseStoreTagsGet({
+     *         type: "type",
+     *         prefix: "prefix"
+     *     })
      */
     public async storeGetTagsPulseStoreTagsGet(
         request: Scout.StoreGetTagsPulseStoreTagsGetRequest = {},
@@ -5670,7 +5720,9 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.storeDeletePulseStoreEntityIdDelete("entity_id")
+     *     await client.storeDeletePulseStoreEntityIdDelete("entity_id", {
+     *         soft: true
+     *     })
      */
     public async storeDeletePulseStoreEntityIdDelete(
         entity_id: string,
@@ -6073,7 +6125,11 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.listEntitiesPulseEntitiesGet()
+     *     await client.listEntitiesPulseEntitiesGet({
+     *         limit: 1,
+     *         entity_type: "entity_type",
+     *         current_state: true
+     *     })
      */
     public async listEntitiesPulseEntitiesGet(
         request: Scout.ListEntitiesPulseEntitiesGetRequest = {},
@@ -6281,7 +6337,10 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.getEntityNetworkPulseEntitiesEntityIdNetworkGet("entity_id")
+     *     await client.getEntityNetworkPulseEntitiesEntityIdNetworkGet("entity_id", {
+     *         depth: 1,
+     *         min_interactions: 1
+     *     })
      */
     public async getEntityNetworkPulseEntitiesEntityIdNetworkGet(
         entity_id: string,
@@ -6378,7 +6437,10 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.getEntityNetworkPgPulseEntitiesEntityIdNetworkPgGet("entity_id")
+     *     await client.getEntityNetworkPgPulseEntitiesEntityIdNetworkPgGet("entity_id", {
+     *         depth: 1,
+     *         min_interactions: 1
+     *     })
      */
     public async getEntityNetworkPgPulseEntitiesEntityIdNetworkPgGet(
         entity_id: string,
@@ -6475,7 +6537,11 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.getEntityDetailsPulseEntitiesEntityTypeEntityIdGet("entity_type", "entity_id")
+     *     await client.getEntityDetailsPulseEntitiesEntityTypeEntityIdGet("entity_type", "entity_id", {
+     *         include_activities: true,
+     *         time_range: "time_range",
+     *         current_state: true
+     *     })
      */
     public async getEntityDetailsPulseEntitiesEntityTypeEntityIdGet(
         entity_type: string,
@@ -7917,7 +7983,7 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.sendFollowupEmailsOnboardingFollowupEmailsPost(undefined)
+     *     await client.sendFollowupEmailsOnboardingFollowupEmailsPost()
      */
     public async sendFollowupEmailsOnboardingFollowupEmailsPost(
         request?: Scout.FollowupEmailRequest,
@@ -9141,7 +9207,7 @@ export class ScoutClient {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.interactHandlerWorldAgentIdSessionIdInteractPost("agent_id", undefined, {
+     *     await client.interactHandlerWorldAgentIdSessionIdInteractPost("agent_id", "session_id", {
      *         messages: [{
      *                 content: "content"
      *             }]
@@ -9230,6 +9296,7 @@ export class ScoutClient {
      *
      * @example
      *     await client.interactHandlerWorldAgentIdInteractPost("agent_id", {
+     *         session_id: "session_id",
      *         body: {
      *             messages: [{
      *                     content: "content"
@@ -9373,7 +9440,7 @@ export class ScoutClient {
     }
 
     /**
-     * @param {File | fs.ReadStream | Blob | undefined} agent_image
+     * @param {File | fs.ReadStream | Blob} agent_image
      * @param {Scout.BodyUpsertAgentAgentsPost} request
      * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -9386,7 +9453,7 @@ export class ScoutClient {
      *     })
      */
     public async upsertAgentAgentsPost(
-        agent_image: File | fs.ReadStream | Blob | undefined,
+        agent_image: File | fs.ReadStream | Blob,
         request: Scout.BodyUpsertAgentAgentsPost,
         requestOptions?: ScoutClient.RequestOptions,
     ): Promise<unknown> {
@@ -9401,10 +9468,7 @@ export class ScoutClient {
         }
 
         _request.append("revision", request.revision);
-        if (agent_image != null) {
-            await _request.appendFile("agent_image", agent_image);
-        }
-
+        await _request.appendFile("agent_image", agent_image);
         const _maybeEncodedRequest = await _request.getRequest();
         const _response = await (this._options.fetcher ?? core.fetcher)({
             url: urlJoin(
@@ -10232,15 +10296,12 @@ export class ScoutClient {
         }
     }
 
-    protected async _getAuthorizationHeader(): Promise<string> {
+    protected async _getAuthorizationHeader(): Promise<string | undefined> {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
-        if (bearer == null) {
-            throw new errors.ScoutError({
-                message:
-                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
-            });
+        if (bearer != null) {
+            return `Bearer ${bearer}`;
         }
 
-        return `Bearer ${bearer}`;
+        return undefined;
     }
 }

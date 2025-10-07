@@ -7,6 +7,9 @@ import * as Scout from "../../../../index";
 /**
  * @example
  *     {
+ *         environment: "environment",
+ *         revision_id: "revision_id",
+ *         session_id: "session_id",
  *         workflow_config: {}
  *     }
  */

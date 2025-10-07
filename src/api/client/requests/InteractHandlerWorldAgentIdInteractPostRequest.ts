@@ -7,6 +7,7 @@ import * as Scout from "../../index";
 /**
  * @example
  *     {
+ *         session_id: "session_id",
  *         body: {
  *             messages: [{
  *                     content: "content"

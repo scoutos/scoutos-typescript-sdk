@@ -14,8 +14,8 @@ export const FriendlyInvoice: core.serialization.ObjectSchema<serializers.Friend
         amount_due: core.serialization.number(),
         friendly_plan: core.serialization.string(),
         timestamp_start: core.serialization.number(),
-        friendly_amount_due: core.serialization.string(),
-        friendly_date: core.serialization.string(),
+        friendly_amount_due: core.serialization.string().optional(),
+        friendly_date: core.serialization.string().optional(),
     });
 
 export declare namespace FriendlyInvoice {
@@ -26,7 +26,7 @@ export declare namespace FriendlyInvoice {
         amount_due: number;
         friendly_plan: string;
         timestamp_start: number;
-        friendly_amount_due: string;
-        friendly_date: string;
+        friendly_amount_due?: string | null;
+        friendly_date?: string | null;
     }
 }

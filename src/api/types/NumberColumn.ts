@@ -11,7 +11,7 @@ export interface NumberColumn {
     data_type?: "number";
     hidden?: boolean;
     /** Optional automation configuration to automatically calculate values for this column */
-    automation_config?: Scout.TypescriptAutomationConfig;
+    automation_config: Scout.TypescriptAutomationConfig;
     default?: Scout.NumberColumnDefault;
     min_value?: Scout.NumberColumnMinValue;
     max_value?: Scout.NumberColumnMaxValue;

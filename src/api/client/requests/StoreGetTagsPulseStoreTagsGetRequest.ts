@@ -4,7 +4,10 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         type: "type",
+ *         prefix: "prefix"
+ *     }
  */
 export interface StoreGetTagsPulseStoreTagsGetRequest {
     type?: string;

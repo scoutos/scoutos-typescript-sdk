@@ -4,7 +4,16 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         entity_id: "entity_id",
+ *         entity_type: "entity_type",
+ *         involving_agent: "involving_agent",
+ *         on_object: "on_object",
+ *         of_type: "of_type",
+ *         with_outcome: "with_outcome",
+ *         since_days: 1,
+ *         limit: 1
+ *     }
  */
 export interface GetEntityActivitiesPulseActivitiesGetRequest {
     /**

@@ -14,7 +14,7 @@ export const CheckBoxColumn: core.serialization.ObjectSchema<serializers.CheckBo
         column_type: core.serialization.stringLiteral("checkbox"),
         data_type: core.serialization.stringLiteral("boolean").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: TypescriptAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig,
         default: core.serialization.boolean().optional(),
     });
 
@@ -25,7 +25,7 @@ export declare namespace CheckBoxColumn {
         column_type: "checkbox";
         data_type?: "boolean" | null;
         hidden?: boolean | null;
-        automation_config?: TypescriptAutomationConfig.Raw | null;
+        automation_config: TypescriptAutomationConfig.Raw;
         default?: boolean | null;
     }
 }

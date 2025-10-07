@@ -42,7 +42,13 @@ export class Documents {
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.documents.list("collection_id", "table_id")
+     *     await client.documents.list("collection_id", "table_id", {
+     *         limit: 1,
+     *         cursor: "cursor",
+     *         query: "query",
+     *         offset: 1,
+     *         sort_by: "sort_by"
+     *     })
      */
     public async list(
         collection_id: string,
@@ -154,6 +160,10 @@ export class Documents {
      *
      * @example
      *     await client.documents.create("collection_id", "table_id", {
+     *         job_id: "job_id",
+     *         sync_id: "sync_id",
+     *         await_completion: true,
+     *         mode: "merge",
      *         body: {
      *             "key": true
      *         }
@@ -268,6 +278,10 @@ export class Documents {
      *
      * @example
      *     await client.documents.updateBatch("collection_id", "table_id", {
+     *         job_id: "job_id",
+     *         sync_id: "sync_id",
+     *         await_completion: true,
+     *         mode: "merge",
      *         body: {
      *             "key": true
      *         }
@@ -462,20 +476,20 @@ export class Documents {
 
     /**
      * @param {string} collection_id
-     * @param {string} document_id
      * @param {string} table_id
+     * @param {string} document_id
      * @param {Record<string, Scout.DocumentsUpdateRequestValue | undefined>} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.documents.update("collection_id", "document_id", "table_id", {})
+     *     await client.documents.update("collection_id", "table_id", "document_id", {})
      */
     public async update(
         collection_id: string,
-        document_id: string,
         table_id: string,
+        document_id: string,
         request: Record<string, Scout.DocumentsUpdateRequestValue | undefined>,
         requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse> {
@@ -730,15 +744,12 @@ export class Documents {
         }
     }
 
-    protected async _getAuthorizationHeader(): Promise<string> {
+    protected async _getAuthorizationHeader(): Promise<string | undefined> {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env["SCOUT_API_KEY"];
-        if (bearer == null) {
-            throw new errors.ScoutError({
-                message:
-                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
-            });
+        if (bearer != null) {
+            return `Bearer ${bearer}`;
         }
 
-        return `Bearer ${bearer}`;
+        return undefined;
     }
 }

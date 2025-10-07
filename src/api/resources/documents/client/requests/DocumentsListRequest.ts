@@ -4,7 +4,13 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         limit: 1,
+ *         cursor: "cursor",
+ *         query: "query",
+ *         offset: 1,
+ *         sort_by: "sort_by"
+ *     }
  */
 export interface DocumentsListRequest {
     /**

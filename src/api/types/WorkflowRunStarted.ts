@@ -15,7 +15,7 @@ export interface WorkflowRunStarted {
     /** The timestamp of the event as UTC ISO 8601 string */
     timestamp?: string;
     data: Scout.WorkflowRunStartedData;
-    price: string;
-    event_type: string;
+    price?: string;
+    event_type?: string;
     version: Scout.EventVersion;
 }

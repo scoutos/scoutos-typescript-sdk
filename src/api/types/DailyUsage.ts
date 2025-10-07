@@ -8,5 +8,5 @@ export interface DailyUsage {
     name: Scout.UsageTypes;
     friendly_date: string;
     price: number;
-    display_name: string;
+    display_name?: string;
 }

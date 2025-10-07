@@ -4,7 +4,13 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         start_date: "start_date",
+ *         end_date: "end_date",
+ *         limit: 1,
+ *         cursor: "cursor",
+ *         tool_filter: "tool_filter"
+ *     }
  */
 export interface ListAgentSessionsSummaryObservabilityAgentsAgentIdSessionsSummaryGetRequest {
     /**

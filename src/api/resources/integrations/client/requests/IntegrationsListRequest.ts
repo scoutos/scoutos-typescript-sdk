@@ -4,7 +4,9 @@
 
 /**
  * @example
- *     {}
+ *     {
+ *         fetch_icons: true
+ *     }
  */
 export interface IntegrationsListRequest {
     fetch_icons?: boolean;

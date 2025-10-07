@@ -1,6 +1,8 @@
-export * from "./fetcher";
-export * from "./auth";
-export * from "./runtime";
-export * from "./form-data-utils";
-export * from "./streaming-fetcher";
-export * as serialization from "./schemas";
+export * from "./fetcher/index.js";
+export * from "./runtime/index.js";
+export * as url from "./url/index.js";
+export * from "./auth/index.js";
+export * from "./base64.js";
+export * from "./form-data-utils/index.js";
+export * from "./stream/index.js";
+export * as file from "./file/index.js";

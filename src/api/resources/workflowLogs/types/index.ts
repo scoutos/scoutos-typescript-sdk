@@ -1,1 +1,1 @@
-export * from "./WorkflowLogsListLogsResponse";
+export * from "./WorkflowLogsListLogsResponse.js";

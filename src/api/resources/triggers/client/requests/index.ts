@@ -1,2 +1,2 @@
-export { type TriggersListRequest } from "./TriggersListRequest";
-export { type TriggersUpdateCronAuthHeadersRequest } from "./TriggersUpdateCronAuthHeadersRequest";
+export { type TriggersListRequest } from "./TriggersListRequest.js";
+export { type TriggersUpdateCronAuthHeadersRequest } from "./TriggersUpdateCronAuthHeadersRequest.js";

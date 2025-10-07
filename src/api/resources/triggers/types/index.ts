@@ -1,3 +1,3 @@
-export * from "./TriggersCreateRequest";
-export * from "./TriggersUpdateRequest";
-export * from "./TriggersExecuteSlackResponse";
+export * from "./TriggersCreateRequest.js";
+export * from "./TriggersUpdateRequest.js";
+export * from "./TriggersExecuteSlackResponse.js";

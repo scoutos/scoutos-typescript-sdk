@@ -1,1 +1,1 @@
-export { type WorkflowLogsListLogsRequest } from "./WorkflowLogsListLogsRequest";
+export { type WorkflowLogsListLogsRequest } from "./WorkflowLogsListLogsRequest.js";

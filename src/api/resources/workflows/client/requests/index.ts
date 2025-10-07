@@ -1,6 +1,6 @@
-export { type WorkflowsCreateRevisionRequest } from "./WorkflowsCreateRevisionRequest";
-export { type WorkflowsListRequest } from "./WorkflowsListRequest";
-export { type WorkflowsCreateRequest } from "./WorkflowsCreateRequest";
-export { type WorkflowsRunStreamRequest } from "./WorkflowsRunStreamRequest";
-export { type WorkflowsRunRequest } from "./WorkflowsRunRequest";
-export { type SrcHandlersWorkflowsExecuteWithConfigReqBody } from "./SrcHandlersWorkflowsExecuteWithConfigReqBody";
+export { type WorkflowsCreateRevisionRequest } from "./WorkflowsCreateRevisionRequest.js";
+export { type WorkflowsListRequest } from "./WorkflowsListRequest.js";
+export { type WorkflowsCreateRequest } from "./WorkflowsCreateRequest.js";
+export { type WorkflowsRunStreamRequest } from "./WorkflowsRunStreamRequest.js";
+export { type WorkflowsRunRequest } from "./WorkflowsRunRequest.js";
+export { type SrcHandlersWorkflowsExecuteWithConfigReqBody } from "./SrcHandlersWorkflowsExecuteWithConfigReqBody.js";

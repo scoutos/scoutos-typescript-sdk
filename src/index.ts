@@ -1,5 +1,5 @@
-export * as Scout from "./api";
-export { ScoutClient } from "./Client";
-export { ScoutEnvironment } from "./environments";
-export { ScoutError, ScoutTimeoutError } from "./errors";
-export * as serialization from "./serialization";
+export * as Scout from "./api/index.js";
+export { ScoutError, ScoutTimeoutError } from "./errors/index.js";
+export { ScoutClient } from "./Client.js";
+export { ScoutEnvironment } from "./environments.js";
+export * from "./exports.js";

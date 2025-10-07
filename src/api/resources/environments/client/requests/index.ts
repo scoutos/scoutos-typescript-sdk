@@ -1,1 +1,1 @@
-export { type UpdateRequestBody } from "./UpdateRequestBody";
+export { type UpdateRequestBody } from "./UpdateRequestBody.js";

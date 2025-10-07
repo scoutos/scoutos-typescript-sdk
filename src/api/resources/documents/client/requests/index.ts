@@ -1,3 +1,3 @@
-export { type DocumentsListRequest } from "./DocumentsListRequest";
-export { type DocumentsCreateRequest } from "./DocumentsCreateRequest";
-export { type DocumentsUpdateBatchRequest } from "./DocumentsUpdateBatchRequest";
+export { type DocumentsListRequest } from "./DocumentsListRequest.js";
+export { type DocumentsCreateRequest } from "./DocumentsCreateRequest.js";
+export { type DocumentsUpdateBatchRequest } from "./DocumentsUpdateBatchRequest.js";

@@ -1,2 +1,2 @@
-export { ScoutError } from "./ScoutError";
-export { ScoutTimeoutError } from "./ScoutTimeoutError";
+export { ScoutError } from "./ScoutError.js";
+export { ScoutTimeoutError } from "./ScoutTimeoutError.js";

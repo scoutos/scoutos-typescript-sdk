@@ -20,11 +20,13 @@ A full reference for this library is available [here](https://github.com/scoutos
 Instantiate and use the client with the following:
 
 ```typescript
+import { createReadStream } from "fs";
 import { ScoutClient } from "scoutos";
 import * as fs from "fs";
 
 const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
-await client.parseFileV2FilesParsePost(fs.createReadStream("/path/to/your/file"), {
+await client.parseFileV2FilesParsePost({
+    file: fs.createReadStream("/path/to/your/file"),
     return_text: true,
 });
 ```
@@ -57,6 +59,7 @@ try {
         console.log(err.statusCode);
         console.log(err.message);
         console.log(err.body);
+        console.log(err.rawResponse);
     }
 }
 ```
@@ -75,13 +78,25 @@ const response = await client.parseFileV2FilesParsePost(..., {
 });
 ```
 
+### Additional Query String Parameters
+
+If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
+
+```typescript
+const response = await client.parseFileV2FilesParsePost(..., {
+    queryParams: {
+        'customQueryParamKey': 'custom query param value'
+    }
+});
+```
+
 ### Retries
 
 The SDK is instrumented with automatic retries with exponential backoff. A request will be retried as long
-as the request is deemed retriable and the number of retry attempts has not grown larger than the configured
+as the request is deemed retryable and the number of retry attempts has not grown larger than the configured
 retry limit (default: 2).
 
-A request is deemed retriable when any of the following HTTP status codes is returned:
+A request is deemed retryable when any of the following HTTP status codes is returned:
 
 - [408](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/408) (Timeout)
 - [429](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429) (Too Many Requests)
@@ -117,10 +132,21 @@ const response = await client.parseFileV2FilesParsePost(..., {
 controller.abort(); // aborts the request
 ```
 
+### Access Raw Response Data
+
+The SDK provides access to raw response data, including headers, through the `.withRawResponse()` method.
+The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
+
+```typescript
+const { data, rawResponse } = await client.parseFileV2FilesParsePost(...).withRawResponse();
+
+console.log(data);
+console.log(rawResponse.headers['X-My-Header']);
+```
+
 ### Runtime Compatibility
 
-The SDK defaults to `node-fetch` but will use the global fetch client if present. The SDK works in the following
-runtimes:
+The SDK works in the following runtimes:
 
 - Node.js 18+
 - Vercel
@@ -131,7 +157,7 @@ runtimes:
 
 ### Customizing Fetch Client
 
-The SDK provides a way for your to customize the underlying HTTP client / Fetch function. If you're running in an
+The SDK provides a way for you to customize the underlying HTTP client / Fetch function. If you're running in an
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript

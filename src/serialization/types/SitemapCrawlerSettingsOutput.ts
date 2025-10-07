@@ -19,6 +19,7 @@ export const SitemapCrawlerSettingsOutput: core.serialization.ObjectSchema<
     strip: core.serialization.string().optional(),
     strip_urls: core.serialization.boolean().optional(),
     allowed_domains: core.serialization.string().optional(),
+    user_agent_header: core.serialization.string().optional(),
     max_depth: core.serialization.number().optional(),
     max_page_count: core.serialization.number().optional(),
     exclude_before_lastmod_date: core.serialization.string().optional(),
@@ -33,6 +34,7 @@ export declare namespace SitemapCrawlerSettingsOutput {
         strip?: string | null;
         strip_urls?: boolean | null;
         allowed_domains?: string | null;
+        user_agent_header?: string | null;
         max_depth?: number | null;
         max_page_count?: number | null;
         exclude_before_lastmod_date?: string | null;

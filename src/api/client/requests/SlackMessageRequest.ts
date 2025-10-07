@@ -17,4 +17,5 @@ export interface SlackMessageRequest {
     username?: string;
     icon_url?: string;
     integration_id?: string;
+    unfurl_links?: boolean;
 }

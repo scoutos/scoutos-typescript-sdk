@@ -5,7 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { TextLongColumnAutomationConfig } from "./TextLongColumnAutomationConfig";
+import { TypescriptAutomationConfig } from "./TypescriptAutomationConfig";
 
 export const TextLongColumn: core.serialization.ObjectSchema<serializers.TextLongColumn.Raw, Scout.TextLongColumn> =
     core.serialization.object({
@@ -14,7 +14,7 @@ export const TextLongColumn: core.serialization.ObjectSchema<serializers.TextLon
         column_type: core.serialization.stringLiteral("text-long"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: TextLongColumnAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig.optional(),
         default: core.serialization.string().optional(),
     });
 
@@ -25,7 +25,7 @@ export declare namespace TextLongColumn {
         column_type: "text-long";
         data_type?: "string" | null;
         hidden?: boolean | null;
-        automation_config?: TextLongColumnAutomationConfig.Raw | null;
+        automation_config?: TypescriptAutomationConfig.Raw | null;
         default?: string | null;
     }
 }

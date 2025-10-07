@@ -16,6 +16,9 @@ export const ConnectIntegrationRequest: core.serialization.Schema<
     code: core.serialization.string().optional(),
     state: core.serialization.string().optional(),
     scope: core.serialization.string().optional(),
+    client_id: core.serialization.string().optional(),
+    client_secret: core.serialization.string().optional(),
+    environment: core.serialization.string().optional(),
 });
 
 export declare namespace ConnectIntegrationRequest {
@@ -25,5 +28,8 @@ export declare namespace ConnectIntegrationRequest {
         code?: string | null;
         state?: string | null;
         scope?: string | null;
+        client_id?: string | null;
+        client_secret?: string | null;
+        environment?: string | null;
     }
 }

@@ -5,7 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { MultiSelectColumnAutomationConfig } from "./MultiSelectColumnAutomationConfig";
+import { TypescriptAutomationConfig } from "./TypescriptAutomationConfig";
 import { SelectOptionItem } from "./SelectOptionItem";
 
 export const MultiSelectColumn: core.serialization.ObjectSchema<
@@ -17,7 +17,7 @@ export const MultiSelectColumn: core.serialization.ObjectSchema<
     column_type: core.serialization.stringLiteral("multi-select"),
     data_type: core.serialization.stringLiteral("string[]").optional(),
     hidden: core.serialization.boolean().optional(),
-    automation_config: MultiSelectColumnAutomationConfig.optional(),
+    automation_config: TypescriptAutomationConfig.optional(),
     options: core.serialization.list(SelectOptionItem).optional(),
 });
 
@@ -28,7 +28,7 @@ export declare namespace MultiSelectColumn {
         column_type: "multi-select";
         data_type?: "string[]" | null;
         hidden?: boolean | null;
-        automation_config?: MultiSelectColumnAutomationConfig.Raw | null;
+        automation_config?: TypescriptAutomationConfig.Raw | null;
         options?: SelectOptionItem.Raw[] | null;
     }
 }

@@ -19,4 +19,12 @@ export interface DocumentsListRequest {
      * Search query
      */
     query?: string;
+    /**
+     * Offset to fetch next set of records
+     */
+    offset?: number;
+    /**
+     * Sort by field
+     */
+    sort_by?: string;
 }

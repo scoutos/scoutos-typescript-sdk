@@ -15,8 +15,9 @@ export const DocumentsUpdateRequestValue: core.serialization.Schema<
     core.serialization.number(),
     core.serialization.string(),
     core.serialization.list(core.serialization.unknown()),
+    core.serialization.record(core.serialization.string(), core.serialization.unknown()),
 ]);
 
 export declare namespace DocumentsUpdateRequestValue {
-    export type Raw = boolean | number | number | string | unknown[];
+    export type Raw = boolean | number | number | string | unknown[] | Record<string, unknown>;
 }

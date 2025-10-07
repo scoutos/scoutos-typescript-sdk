@@ -5,7 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { TextShortColumnAutomationConfig } from "./TextShortColumnAutomationConfig";
+import { TypescriptAutomationConfig } from "./TypescriptAutomationConfig";
 
 export const TextShortColumn: core.serialization.ObjectSchema<serializers.TextShortColumn.Raw, Scout.TextShortColumn> =
     core.serialization.object({
@@ -14,7 +14,7 @@ export const TextShortColumn: core.serialization.ObjectSchema<serializers.TextSh
         column_type: core.serialization.stringLiteral("text-short"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: TextShortColumnAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig.optional(),
         default: core.serialization.string().optional(),
     });
 
@@ -25,7 +25,7 @@ export declare namespace TextShortColumn {
         column_type: "text-short";
         data_type?: "string" | null;
         hidden?: boolean | null;
-        automation_config?: TextShortColumnAutomationConfig.Raw | null;
+        automation_config?: TypescriptAutomationConfig.Raw | null;
         default?: string | null;
     }
 }

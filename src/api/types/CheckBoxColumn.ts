@@ -11,6 +11,6 @@ export interface CheckBoxColumn {
     data_type?: "boolean";
     hidden?: boolean;
     /** Optional automation configuration to automatically calculate values for this column */
-    automation_config?: Scout.CheckBoxColumnAutomationConfig;
+    automation_config?: Scout.TypescriptAutomationConfig;
     default?: boolean;
 }

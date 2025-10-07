@@ -7,7 +7,7 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { ColumnType } from "./ColumnType";
 import { DataType } from "./DataType";
-import { ColumnTypeBaseAutomationConfig } from "./ColumnTypeBaseAutomationConfig";
+import { TypescriptAutomationConfig } from "./TypescriptAutomationConfig";
 
 export const ColumnTypeBase: core.serialization.ObjectSchema<serializers.ColumnTypeBase.Raw, Scout.ColumnTypeBase> =
     core.serialization.object({
@@ -16,7 +16,7 @@ export const ColumnTypeBase: core.serialization.ObjectSchema<serializers.ColumnT
         column_type: ColumnType,
         data_type: DataType,
         hidden: core.serialization.boolean().optional(),
-        automation_config: ColumnTypeBaseAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig.optional(),
     });
 
 export declare namespace ColumnTypeBase {
@@ -26,6 +26,6 @@ export declare namespace ColumnTypeBase {
         column_type: ColumnType.Raw;
         data_type: DataType.Raw;
         hidden?: boolean | null;
-        automation_config?: ColumnTypeBaseAutomationConfig.Raw | null;
+        automation_config?: TypescriptAutomationConfig.Raw | null;
     }
 }

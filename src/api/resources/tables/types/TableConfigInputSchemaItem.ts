@@ -11,6 +11,7 @@ export type TableConfigInputSchemaItem =
     | Scout.MarkdownColumn
     | Scout.MultiSelectColumn
     | Scout.NumberColumn
+    | Scout.PeopleColumn
     | Scout.RelationColumn
     | Scout.SelectColumn
     | Scout.TextLongColumn

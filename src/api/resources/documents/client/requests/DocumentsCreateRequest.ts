@@ -18,8 +18,13 @@ export interface DocumentsCreateRequest {
      */
     job_id?: string;
     /**
+     * The sync id the job belongs to thats responsible for the document creation/update
+     */
+    sync_id?: string;
+    /**
      * Whether to wait for document creation/update to complete
      */
     await_completion?: boolean;
+    mode?: Scout.DocumentsCreateRequestMode;
     body: Scout.DocumentsCreateRequestBody;
 }

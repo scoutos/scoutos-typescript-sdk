@@ -5,7 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { RelationColumnAutomationConfig } from "./RelationColumnAutomationConfig";
+import { TypescriptAutomationConfig } from "./TypescriptAutomationConfig";
 
 export const RelationColumn: core.serialization.ObjectSchema<serializers.RelationColumn.Raw, Scout.RelationColumn> =
     core.serialization.object({
@@ -14,7 +14,7 @@ export const RelationColumn: core.serialization.ObjectSchema<serializers.Relatio
         column_type: core.serialization.stringLiteral("relation"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: RelationColumnAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig.optional(),
         target_table_id: core.serialization.string(),
         target_collection_id: core.serialization.string().optional(),
         display_field: core.serialization.string().optional(),
@@ -27,7 +27,7 @@ export declare namespace RelationColumn {
         column_type: "relation";
         data_type?: "string" | null;
         hidden?: boolean | null;
-        automation_config?: RelationColumnAutomationConfig.Raw | null;
+        automation_config?: TypescriptAutomationConfig.Raw | null;
         target_table_id: string;
         target_collection_id?: string | null;
         display_field?: string | null;

@@ -20,6 +20,7 @@ export type IntegrationConnectionIntegrationType =
     | "paypal"
     | "sentry"
     | "statsig"
+    | "reddit"
     | "scout_native_tools";
 export const IntegrationConnectionIntegrationType = {
     Hubspot: "hubspot",
@@ -39,5 +40,6 @@ export const IntegrationConnectionIntegrationType = {
     Paypal: "paypal",
     Sentry: "sentry",
     Statsig: "statsig",
+    Reddit: "reddit",
     ScoutNativeTools: "scout_native_tools",
 } as const;

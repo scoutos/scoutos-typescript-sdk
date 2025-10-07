@@ -17,6 +17,8 @@ export interface SitemapCrawlerSettingsInput {
     strip_urls?: boolean;
     /** Comma-separated list of domains to include. Only URLs from these domains will be crawled. Defaults to the domain of the startingURL. */
     allowed_domains?: string;
+    /** User agent header to use for the crawl. By default, crawler will rotate user agents. */
+    user_agent_header?: string;
     /** Maximum number of link levels to follow from the starting page */
     max_depth?: number;
     /** Maximum number of pages to crawl. */

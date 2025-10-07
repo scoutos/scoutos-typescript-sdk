@@ -11,6 +11,7 @@ import { JsonColumn } from "./JsonColumn";
 import { MarkdownColumn } from "./MarkdownColumn";
 import { MultiSelectColumn } from "./MultiSelectColumn";
 import { NumberColumn } from "./NumberColumn";
+import { PeopleColumn } from "./PeopleColumn";
 import { RelationColumn } from "./RelationColumn";
 import { SelectColumn } from "./SelectColumn";
 import { TextLongColumn } from "./TextLongColumn";
@@ -27,6 +28,7 @@ export const TableConfigOutputSchemaItem: core.serialization.Schema<
     MarkdownColumn,
     MultiSelectColumn,
     NumberColumn,
+    PeopleColumn,
     RelationColumn,
     SelectColumn,
     TextLongColumn,
@@ -42,6 +44,7 @@ export declare namespace TableConfigOutputSchemaItem {
         | MarkdownColumn.Raw
         | MultiSelectColumn.Raw
         | NumberColumn.Raw
+        | PeopleColumn.Raw
         | RelationColumn.Raw
         | SelectColumn.Raw
         | TextLongColumn.Raw

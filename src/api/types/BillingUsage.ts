@@ -5,4 +5,6 @@
 export interface BillingUsage {
     /** The number of workflow runs for their current billing cycle */
     workflow_invocations?: number;
+    /** The number of agent interactions for their current billing cycle */
+    agent_interactions?: number;
 }

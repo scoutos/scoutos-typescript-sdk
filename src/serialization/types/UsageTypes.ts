@@ -15,6 +15,10 @@ export const UsageTypes: core.serialization.Schema<serializers.UsageTypes.Raw, S
         "output_tokens",
         "text_embedding",
         "workflow_invocations",
+        "agent_interactions",
+        "seats",
+        "integrations",
+        "active_workflows",
     ]);
 
 export declare namespace UsageTypes {
@@ -25,5 +29,9 @@ export declare namespace UsageTypes {
         | "input_tokens"
         | "output_tokens"
         | "text_embedding"
-        | "workflow_invocations";
+        | "workflow_invocations"
+        | "agent_interactions"
+        | "seats"
+        | "integrations"
+        | "active_workflows";
 }

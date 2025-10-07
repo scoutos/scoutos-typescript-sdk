@@ -25,5 +25,7 @@ export interface SourceSyncWebsiteSettings {
     exclude_patterns?: string[];
     sitemap_urls?: string[];
     start_urls?: string[];
+    /** User agent header to use for the crawl. By default, crawler will rotate user agents. */
+    user_agent_header?: string;
     source_archetype_id: "com.scoutos.website";
 }

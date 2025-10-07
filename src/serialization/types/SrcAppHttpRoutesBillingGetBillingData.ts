@@ -9,6 +9,7 @@ import { FriendlyPaymentMethods } from "./FriendlyPaymentMethods";
 import { Subscription } from "./Subscription";
 import { BillingCycles } from "./BillingCycles";
 import { Invoice } from "./Invoice";
+import { DeterminedBillingLimits } from "./DeterminedBillingLimits";
 
 export const SrcAppHttpRoutesBillingGetBillingData: core.serialization.ObjectSchema<
     serializers.SrcAppHttpRoutesBillingGetBillingData.Raw,
@@ -24,6 +25,8 @@ export const SrcAppHttpRoutesBillingGetBillingData: core.serialization.ObjectSch
     failed_invoices: core.serialization.list(Invoice),
     has_failed_payment: core.serialization.boolean(),
     workflow_invocations: core.serialization.number(),
+    billing_limits: DeterminedBillingLimits,
+    agent_interactions: core.serialization.number(),
 });
 
 export declare namespace SrcAppHttpRoutesBillingGetBillingData {
@@ -38,5 +41,7 @@ export declare namespace SrcAppHttpRoutesBillingGetBillingData {
         failed_invoices: Invoice.Raw[];
         has_failed_payment: boolean;
         workflow_invocations: number;
+        billing_limits: DeterminedBillingLimits.Raw;
+        agent_interactions: number;
     }
 }

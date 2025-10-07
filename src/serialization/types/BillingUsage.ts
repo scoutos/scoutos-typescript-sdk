@@ -9,10 +9,12 @@ import * as core from "../../core";
 export const BillingUsage: core.serialization.ObjectSchema<serializers.BillingUsage.Raw, Scout.BillingUsage> =
     core.serialization.object({
         workflow_invocations: core.serialization.number().optional(),
+        agent_interactions: core.serialization.number().optional(),
     });
 
 export declare namespace BillingUsage {
     export interface Raw {
         workflow_invocations?: number | null;
+        agent_interactions?: number | null;
     }
 }

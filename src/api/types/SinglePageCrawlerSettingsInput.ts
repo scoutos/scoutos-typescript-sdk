@@ -17,6 +17,8 @@ export interface SinglePageCrawlerSettingsInput {
     strip_urls?: boolean;
     /** Comma-separated list of domains to include. Only URLs from these domains will be crawled. Defaults to the domain of the startingURL. */
     allowed_domains?: string;
+    /** User agent header to use for the crawl. By default, crawler will rotate user agents. */
+    user_agent_header?: string;
     /** Fixed to 1 for single page crawls */
     max_depth?: number;
     /** Fixed to 1 for single page crawls */

@@ -19,6 +19,7 @@ export const SinglePageCrawlerSettingsInput: core.serialization.ObjectSchema<
     strip: core.serialization.string().optional(),
     strip_urls: core.serialization.boolean().optional(),
     allowed_domains: core.serialization.string().optional(),
+    user_agent_header: core.serialization.string().optional(),
     max_depth: core.serialization.number().optional(),
     max_page_count: core.serialization.number().optional(),
 });
@@ -32,6 +33,7 @@ export declare namespace SinglePageCrawlerSettingsInput {
         strip?: string | null;
         strip_urls?: boolean | null;
         allowed_domains?: string | null;
+        user_agent_header?: string | null;
         max_depth?: number | null;
         max_page_count?: number | null;
     }

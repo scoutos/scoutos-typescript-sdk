@@ -20,6 +20,9 @@ export const Document: core.serialization.ObjectSchema<serializers.Document.Raw,
         last_updated_by: DocumentLastUpdatedBy,
         revision_id: core.serialization.string().optional(),
         job_id: core.serialization.string().optional(),
+        sync_id: core.serialization.string().optional(),
+        studio_row: core.serialization.boolean().optional(),
+        cells: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     });
 
 export declare namespace Document {
@@ -33,5 +36,8 @@ export declare namespace Document {
         last_updated_by: DocumentLastUpdatedBy.Raw;
         revision_id?: string | null;
         job_id?: string | null;
+        sync_id?: string | null;
+        studio_row?: boolean | null;
+        cells?: Record<string, unknown> | null;
     }
 }

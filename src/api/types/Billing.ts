@@ -8,5 +8,6 @@ export interface Billing {
     provider?: Scout.StripeProvider;
     subscriptions?: Scout.Subscription[];
     renewal_date?: Date;
+    limits?: Scout.BillingLimits;
     usage?: Scout.BillingUsage;
 }

@@ -25,6 +25,7 @@ export const IntegrationWithConnections: core.serialization.ObjectSchema<
     permissions: core.serialization
         .list(core.serialization.record(core.serialization.string(), core.serialization.unknown()))
         .optional(),
+    auth_configs: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     connected: core.serialization.boolean(),
     connections: core.serialization.list(IntegrationConnection),
     existing_auth_client_scope: core.serialization.list(core.serialization.string()),
@@ -43,6 +44,7 @@ export declare namespace IntegrationWithConnections {
         tags?: string[] | null;
         enabled?: boolean | null;
         permissions?: Record<string, unknown>[] | null;
+        auth_configs?: Record<string, unknown> | null;
         connected: boolean;
         connections: IntegrationConnection.Raw[];
         existing_auth_client_scope: string[];

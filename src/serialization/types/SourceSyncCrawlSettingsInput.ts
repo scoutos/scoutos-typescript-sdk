@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { MultiPageCrawlerSettingsInput } from "./MultiPageCrawlerSettingsInput";
+import { SourceSyncCrawlSettingsInputMode } from "./SourceSyncCrawlSettingsInputMode";
 
 export const SourceSyncCrawlSettingsInput: core.serialization.ObjectSchema<
     serializers.SourceSyncCrawlSettingsInput.Raw,
@@ -14,6 +15,7 @@ export const SourceSyncCrawlSettingsInput: core.serialization.ObjectSchema<
     source_archetype_id: core.serialization.stringLiteral("com.scoutos.crawl"),
     start_urls: core.serialization.string(),
     crawler_settings: MultiPageCrawlerSettingsInput.optional(),
+    mode: SourceSyncCrawlSettingsInputMode.optional(),
 });
 
 export declare namespace SourceSyncCrawlSettingsInput {
@@ -21,5 +23,6 @@ export declare namespace SourceSyncCrawlSettingsInput {
         source_archetype_id: "com.scoutos.crawl";
         start_urls: string;
         crawler_settings?: MultiPageCrawlerSettingsInput.Raw | null;
+        mode?: SourceSyncCrawlSettingsInputMode.Raw | null;
     }
 }

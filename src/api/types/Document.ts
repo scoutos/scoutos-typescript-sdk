@@ -14,4 +14,7 @@ export interface Document {
     last_updated_by: Scout.DocumentLastUpdatedBy;
     revision_id?: string;
     job_id?: string;
+    sync_id?: string;
+    studio_row?: boolean;
+    cells?: Record<string, unknown>;
 }

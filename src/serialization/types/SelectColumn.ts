@@ -5,7 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { SelectColumnAutomationConfig } from "./SelectColumnAutomationConfig";
+import { TypescriptAutomationConfig } from "./TypescriptAutomationConfig";
 import { SelectOptionItem } from "./SelectOptionItem";
 
 export const SelectColumn: core.serialization.ObjectSchema<serializers.SelectColumn.Raw, Scout.SelectColumn> =
@@ -15,7 +15,7 @@ export const SelectColumn: core.serialization.ObjectSchema<serializers.SelectCol
         column_type: core.serialization.stringLiteral("select"),
         data_type: core.serialization.stringLiteral("string").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: SelectColumnAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig.optional(),
         options: core.serialization.list(SelectOptionItem).optional(),
     });
 
@@ -26,7 +26,7 @@ export declare namespace SelectColumn {
         column_type: "select";
         data_type?: "string" | null;
         hidden?: boolean | null;
-        automation_config?: SelectColumnAutomationConfig.Raw | null;
+        automation_config?: TypescriptAutomationConfig.Raw | null;
         options?: SelectOptionItem.Raw[] | null;
     }
 }

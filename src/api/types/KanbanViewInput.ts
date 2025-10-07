@@ -19,5 +19,5 @@ export interface KanbanViewInput {
     filters?: Scout.ViewFilter[];
     query?: Scout.ViewQueryInput;
     type: "kanban";
-    settings: Scout.KanbanViewSettings;
+    settings: Scout.KanbanViewSettingsInput;
 }

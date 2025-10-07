@@ -27,4 +27,5 @@ export interface CollectionsListRequest {
      * Sort
      */
     sort?: string;
+    drive?: boolean;
 }

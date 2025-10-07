@@ -14,6 +14,7 @@ export const CreateIntegrationsResponse: core.serialization.ObjectSchema<
     success: core.serialization.boolean(),
     connected_integration: IntegrationConnection.optional(),
     error: core.serialization.string().optional(),
+    auth_url: core.serialization.string().optional(),
 });
 
 export declare namespace CreateIntegrationsResponse {
@@ -21,5 +22,6 @@ export declare namespace CreateIntegrationsResponse {
         success: boolean;
         connected_integration?: IntegrationConnection.Raw | null;
         error?: string | null;
+        auth_url?: string | null;
     }
 }

@@ -9,6 +9,7 @@ import { ActorIdentity } from "./ActorIdentity";
 import { ModelProvider } from "./ModelProvider";
 import { AgentRevisionModel } from "./AgentRevisionModel";
 import { AgentRevisionResponseStyle } from "./AgentRevisionResponseStyle";
+import { AgentRevisionToolConfigValue } from "./AgentRevisionToolConfigValue";
 
 export const AgentRevision: core.serialization.ObjectSchema<serializers.AgentRevision.Raw, Scout.AgentRevision> =
     core.serialization.object({
@@ -29,7 +30,7 @@ export const AgentRevision: core.serialization.ObjectSchema<serializers.AgentRev
         max_tokens: core.serialization.number().optional(),
         max_turns: core.serialization.number().optional(),
         tool_config: core.serialization
-            .record(core.serialization.string(), core.serialization.boolean().optional())
+            .record(core.serialization.string(), AgentRevisionToolConfigValue.optional())
             .optional(),
         conversation_starters: core.serialization.list(core.serialization.string()).optional(),
     });
@@ -52,7 +53,7 @@ export declare namespace AgentRevision {
         response_style?: AgentRevisionResponseStyle.Raw | null;
         max_tokens?: number | null;
         max_turns?: number | null;
-        tool_config?: Record<string, boolean | null | undefined> | null;
+        tool_config?: Record<string, AgentRevisionToolConfigValue.Raw | null | undefined> | null;
         conversation_starters?: string[] | null;
     }
 }

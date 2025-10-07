@@ -50,7 +50,7 @@ export class Documents {
         request: Scout.DocumentsListRequest = {},
         requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.SrcAppHttpRoutesCollectionGetDocumentsResponse> {
-        const { limit, cursor, query } = request;
+        const { limit, cursor, query, offset, sort_by: sortBy } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (limit != null) {
             _queryParams["limit"] = limit.toString();
@@ -62,6 +62,14 @@ export class Documents {
 
         if (query != null) {
             _queryParams["query"] = query;
+        }
+
+        if (offset != null) {
+            _queryParams["offset"] = offset.toString();
+        }
+
+        if (sortBy != null) {
+            _queryParams["sort_by"] = sortBy;
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -157,14 +165,24 @@ export class Documents {
         request: Scout.DocumentsCreateRequest,
         requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.DocumentResponse> {
-        const { job_id: jobId, await_completion: awaitCompletion, body: _body } = request;
+        const { job_id: jobId, sync_id: syncId, await_completion: awaitCompletion, mode, body: _body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (jobId != null) {
             _queryParams["job_id"] = jobId;
         }
 
+        if (syncId != null) {
+            _queryParams["sync_id"] = syncId;
+        }
+
         if (awaitCompletion != null) {
             _queryParams["await_completion"] = awaitCompletion.toString();
+        }
+
+        if (mode != null) {
+            _queryParams["mode"] = serializers.DocumentsCreateRequestMode.jsonOrThrow(mode, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({
@@ -261,14 +279,24 @@ export class Documents {
         request: Scout.DocumentsUpdateBatchRequest,
         requestOptions?: Documents.RequestOptions,
     ): Promise<Scout.DocumentResponse> {
-        const { job_id: jobId, await_completion: awaitCompletion, body: _body } = request;
+        const { job_id: jobId, sync_id: syncId, await_completion: awaitCompletion, mode, body: _body } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (jobId != null) {
             _queryParams["job_id"] = jobId;
         }
 
+        if (syncId != null) {
+            _queryParams["sync_id"] = syncId;
+        }
+
         if (awaitCompletion != null) {
             _queryParams["await_completion"] = awaitCompletion.toString();
+        }
+
+        if (mode != null) {
+            _queryParams["mode"] = serializers.DocumentsUpdateBatchRequestMode.jsonOrThrow(mode, {
+                unrecognizedObjectKeys: "strip",
+            });
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({

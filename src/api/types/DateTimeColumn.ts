@@ -11,6 +11,6 @@ export interface DateTimeColumn {
     data_type?: "datetime";
     hidden?: boolean;
     /** Optional automation configuration to automatically calculate values for this column */
-    automation_config?: Scout.DateTimeColumnAutomationConfig;
+    automation_config?: Scout.TypescriptAutomationConfig;
     default?: Date;
 }

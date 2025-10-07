@@ -21,5 +21,6 @@ export interface SrcAppHttpRoutesInboxHandleMessageInteractionRequest {
     participants: Scout.SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem[];
     history?: Scout.SrcAppHttpRoutesInboxHandleMessageIncomingMessage[];
     files?: Scout.FilesAttribute[];
+    mentions?: Scout.Mention[];
     ephemeral_agent_revision?: Scout.AgentRevision;
 }

@@ -5,14 +5,14 @@
 import * as serializers from "../../../index";
 import * as Scout from "../../../../api/index";
 import * as core from "../../../../core";
-import { KanbanViewSettings } from "../../../types/KanbanViewSettings";
-import { TableViewSettings } from "../../../types/TableViewSettings";
+import { KanbanViewSettingsInput } from "../../../types/KanbanViewSettingsInput";
+import { TableViewSettingsInput } from "../../../types/TableViewSettingsInput";
 
 export const CreateViewRequestSettings: core.serialization.Schema<
     serializers.CreateViewRequestSettings.Raw,
     Scout.CreateViewRequestSettings
-> = core.serialization.undiscriminatedUnion([KanbanViewSettings, TableViewSettings]);
+> = core.serialization.undiscriminatedUnion([KanbanViewSettingsInput, TableViewSettingsInput]);
 
 export declare namespace CreateViewRequestSettings {
-    export type Raw = KanbanViewSettings.Raw | TableViewSettings.Raw;
+    export type Raw = KanbanViewSettingsInput.Raw | TableViewSettingsInput.Raw;
 }

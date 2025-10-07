@@ -11,6 +11,6 @@ export interface TextShortColumn {
     data_type?: "string";
     hidden?: boolean;
     /** Optional automation configuration to automatically calculate values for this column */
-    automation_config?: Scout.TextShortColumnAutomationConfig;
+    automation_config?: Scout.TypescriptAutomationConfig;
     default?: string;
 }

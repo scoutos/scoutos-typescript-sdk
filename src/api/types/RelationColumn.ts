@@ -11,7 +11,7 @@ export interface RelationColumn {
     data_type?: "string";
     hidden?: boolean;
     /** Optional automation configuration to automatically calculate values for this column */
-    automation_config?: Scout.RelationColumnAutomationConfig;
+    automation_config?: Scout.TypescriptAutomationConfig;
     target_table_id: string;
     target_collection_id?: string;
     display_field?: string;

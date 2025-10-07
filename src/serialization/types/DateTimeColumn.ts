@@ -5,7 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { DateTimeColumnAutomationConfig } from "./DateTimeColumnAutomationConfig";
+import { TypescriptAutomationConfig } from "./TypescriptAutomationConfig";
 
 export const DateTimeColumn: core.serialization.ObjectSchema<serializers.DateTimeColumn.Raw, Scout.DateTimeColumn> =
     core.serialization.object({
@@ -14,7 +14,7 @@ export const DateTimeColumn: core.serialization.ObjectSchema<serializers.DateTim
         column_type: core.serialization.stringLiteral("datetime"),
         data_type: core.serialization.stringLiteral("datetime").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: DateTimeColumnAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig.optional(),
         default: core.serialization.date().optional(),
     });
 
@@ -25,7 +25,7 @@ export declare namespace DateTimeColumn {
         column_type: "datetime";
         data_type?: "datetime" | null;
         hidden?: boolean | null;
-        automation_config?: DateTimeColumnAutomationConfig.Raw | null;
+        automation_config?: TypescriptAutomationConfig.Raw | null;
         default?: string | null;
     }
 }

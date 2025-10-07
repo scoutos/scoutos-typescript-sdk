@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const ConnectIntegrationRequestAuthType: core.serialization.Schema<
     serializers.ConnectIntegrationRequestAuthType.Raw,
     Scout.ConnectIntegrationRequestAuthType
-> = core.serialization.enum_(["api_key", "oauth2"]);
+> = core.serialization.enum_(["api_key", "oauth2", "oauth2_custom"]);
 
 export declare namespace ConnectIntegrationRequestAuthType {
-    export type Raw = "api_key" | "oauth2";
+    export type Raw = "api_key" | "oauth2" | "oauth2_custom";
 }

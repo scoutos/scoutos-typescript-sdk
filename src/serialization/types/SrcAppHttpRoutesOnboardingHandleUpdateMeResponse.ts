@@ -5,17 +5,17 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { User } from "./User";
+import { Me } from "./Me";
 
 export const SrcAppHttpRoutesOnboardingHandleUpdateMeResponse: core.serialization.ObjectSchema<
     serializers.SrcAppHttpRoutesOnboardingHandleUpdateMeResponse.Raw,
     Scout.SrcAppHttpRoutesOnboardingHandleUpdateMeResponse
 > = core.serialization.object({
-    data: User,
+    data: Me,
 });
 
 export declare namespace SrcAppHttpRoutesOnboardingHandleUpdateMeResponse {
     export interface Raw {
-        data: User.Raw;
+        data: Me.Raw;
     }
 }

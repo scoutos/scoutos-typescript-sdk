@@ -33,6 +33,7 @@ export const SourceSyncWebsiteSettings: core.serialization.ObjectSchema<
     exclude_patterns: core.serialization.list(core.serialization.string()).optional(),
     sitemap_urls: core.serialization.list(core.serialization.string()).optional(),
     start_urls: core.serialization.list(core.serialization.string()).optional(),
+    user_agent_header: core.serialization.string().optional(),
     source_archetype_id: core.serialization.stringLiteral("com.scoutos.website"),
 });
 
@@ -57,6 +58,7 @@ export declare namespace SourceSyncWebsiteSettings {
         exclude_patterns?: string[] | null;
         sitemap_urls?: string[] | null;
         start_urls?: string[] | null;
+        user_agent_header?: string | null;
         source_archetype_id: "com.scoutos.website";
     }
 }

@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { SinglePageCrawlerSettingsOutput } from "./SinglePageCrawlerSettingsOutput";
+import { SourceSyncPageCrawlSettingsOutputMode } from "./SourceSyncPageCrawlSettingsOutputMode";
 
 export const SourceSyncPageCrawlSettingsOutput: core.serialization.ObjectSchema<
     serializers.SourceSyncPageCrawlSettingsOutput.Raw,
@@ -14,6 +15,7 @@ export const SourceSyncPageCrawlSettingsOutput: core.serialization.ObjectSchema<
     source_archetype_id: core.serialization.stringLiteral("com.scoutos.page_crawl"),
     start_urls: core.serialization.string(),
     crawler_settings: SinglePageCrawlerSettingsOutput.optional(),
+    mode: SourceSyncPageCrawlSettingsOutputMode.optional(),
 });
 
 export declare namespace SourceSyncPageCrawlSettingsOutput {
@@ -21,5 +23,6 @@ export declare namespace SourceSyncPageCrawlSettingsOutput {
         source_archetype_id: "com.scoutos.page_crawl";
         start_urls: string;
         crawler_settings?: SinglePageCrawlerSettingsOutput.Raw | null;
+        mode?: SourceSyncPageCrawlSettingsOutputMode.Raw | null;
     }
 }

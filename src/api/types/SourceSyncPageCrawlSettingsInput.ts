@@ -9,4 +9,6 @@ export interface SourceSyncPageCrawlSettingsInput {
     /** The starting URL for the crawl process. */
     start_urls: string;
     crawler_settings?: Scout.SinglePageCrawlerSettingsInput;
+    /** Merge: upsert documents keying off site url. Replace: merge and remove stale documents. */
+    mode?: Scout.SourceSyncPageCrawlSettingsInputMode;
 }

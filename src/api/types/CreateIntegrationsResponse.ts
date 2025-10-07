@@ -8,4 +8,5 @@ export interface CreateIntegrationsResponse {
     success: boolean;
     connected_integration?: Scout.IntegrationConnection;
     error?: string;
+    auth_url?: string;
 }

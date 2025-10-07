@@ -16,4 +16,7 @@ export interface ConnectIntegrationRequest {
     code?: string;
     state?: string;
     scope?: string;
+    client_id?: string;
+    client_secret?: string;
+    environment?: string;
 }

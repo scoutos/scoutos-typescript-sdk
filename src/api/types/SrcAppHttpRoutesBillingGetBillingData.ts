@@ -15,4 +15,6 @@ export interface SrcAppHttpRoutesBillingGetBillingData {
     failed_invoices: Scout.Invoice[];
     has_failed_payment: boolean;
     workflow_invocations: number;
+    billing_limits: Scout.DeterminedBillingLimits;
+    agent_interactions: number;
 }

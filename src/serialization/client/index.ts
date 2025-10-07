@@ -9,5 +9,6 @@ export * as handleMigrateIntegrationsIntegrationsMigratePost from "./handleMigra
 export * as uploadPrivateFilesInboxSessionIdFilesPost from "./uploadPrivateFilesInboxSessionIdFilesPost";
 export * as handlePostSessionParticipantInboxSessionsSessionIdParticipantsPost from "./handlePostSessionParticipantInboxSessionsSessionIdParticipantsPost";
 export * as getWorkflowUsageAccountsUsageWorkflowsGet from "./getWorkflowUsageAccountsUsageWorkflowsGet";
+export * as storeQueryFluentPulseStoreQueryFluentPost from "./storeQueryFluentPulseStoreQueryFluentPost";
 export * as sendFollowupEmailsOnboardingFollowupEmailsPost from "./sendFollowupEmailsOnboardingFollowupEmailsPost";
 export * from "./requests";

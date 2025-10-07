@@ -8,7 +8,7 @@ import * as core from "../../core";
 import { ViewVisibility } from "./ViewVisibility";
 import { ViewFilter } from "./ViewFilter";
 import { ViewQueryOutput } from "./ViewQueryOutput";
-import { TableViewSettings } from "./TableViewSettings";
+import { TableViewSettingsOutput } from "./TableViewSettingsOutput";
 
 export const TableViewOutput: core.serialization.ObjectSchema<serializers.TableViewOutput.Raw, Scout.TableViewOutput> =
     core.serialization.object({
@@ -26,7 +26,7 @@ export const TableViewOutput: core.serialization.ObjectSchema<serializers.TableV
         filters: core.serialization.list(ViewFilter).optional(),
         query: ViewQueryOutput.optional(),
         type: core.serialization.stringLiteral("table"),
-        settings: TableViewSettings,
+        settings: TableViewSettingsOutput,
     });
 
 export declare namespace TableViewOutput {
@@ -45,6 +45,6 @@ export declare namespace TableViewOutput {
         filters?: ViewFilter.Raw[] | null;
         query?: ViewQueryOutput.Raw | null;
         type: "table";
-        settings: TableViewSettings.Raw;
+        settings: TableViewSettingsOutput.Raw;
     }
 }

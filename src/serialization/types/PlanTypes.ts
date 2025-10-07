@@ -22,6 +22,8 @@ export const PlanTypes: core.serialization.Schema<serializers.PlanTypes.Raw, Sco
         "plan_11",
         "plan_12",
         "plan_13",
+        "plan_14",
+        "plan_15",
     ]);
 
 export declare namespace PlanTypes {
@@ -39,5 +41,7 @@ export declare namespace PlanTypes {
         | "plan_10"
         | "plan_11"
         | "plan_12"
-        | "plan_13";
+        | "plan_13"
+        | "plan_14"
+        | "plan_15";
 }

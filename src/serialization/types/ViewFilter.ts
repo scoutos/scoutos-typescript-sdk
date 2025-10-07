@@ -9,9 +9,9 @@ import { FilterOperator } from "./FilterOperator";
 
 export const ViewFilter: core.serialization.ObjectSchema<serializers.ViewFilter.Raw, Scout.ViewFilter> =
     core.serialization.object({
-        id: core.serialization.string(),
+        id: core.serialization.string().optional(),
         column_id: core.serialization.string(),
-        operator: FilterOperator,
+        operator: FilterOperator.optional(),
         value: core.serialization.unknown(),
         enabled: core.serialization.boolean().optional(),
         created_at: core.serialization.date().optional(),
@@ -19,9 +19,9 @@ export const ViewFilter: core.serialization.ObjectSchema<serializers.ViewFilter.
 
 export declare namespace ViewFilter {
     export interface Raw {
-        id: string;
+        id?: string | null;
         column_id: string;
-        operator: FilterOperator.Raw;
+        operator?: FilterOperator.Raw | null;
         value?: unknown;
         enabled?: boolean | null;
         created_at?: string | null;

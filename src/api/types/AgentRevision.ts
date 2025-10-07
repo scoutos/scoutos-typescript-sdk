@@ -21,6 +21,6 @@ export interface AgentRevision {
     response_style?: Scout.AgentRevisionResponseStyle;
     max_tokens?: number;
     max_turns?: number;
-    tool_config?: Record<string, boolean | undefined>;
+    tool_config?: Record<string, Scout.AgentRevisionToolConfigValue | undefined>;
     conversation_starters?: string[];
 }

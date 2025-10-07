@@ -5,5 +5,5 @@
 import * as Scout from "../index";
 
 export interface SrcAppHttpRoutesOnboardingHandleUpdateMeResponse {
-    data: Scout.User;
+    data: Scout.Me;
 }

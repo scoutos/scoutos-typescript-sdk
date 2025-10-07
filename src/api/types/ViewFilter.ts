@@ -5,9 +5,9 @@
 import * as Scout from "../index";
 
 export interface ViewFilter {
-    id: string;
+    id?: string;
     column_id: string;
-    operator: Scout.FilterOperator;
+    operator?: Scout.FilterOperator;
     value?: unknown;
     enabled?: boolean;
     created_at?: Date;

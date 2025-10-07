@@ -7,6 +7,7 @@ import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { StripeProvider } from "./StripeProvider";
 import { Subscription } from "./Subscription";
+import { BillingLimits } from "./BillingLimits";
 import { BillingUsage } from "./BillingUsage";
 
 export const Billing: core.serialization.ObjectSchema<serializers.Billing.Raw, Scout.Billing> =
@@ -14,6 +15,7 @@ export const Billing: core.serialization.ObjectSchema<serializers.Billing.Raw, S
         provider: StripeProvider.optional(),
         subscriptions: core.serialization.list(Subscription).optional(),
         renewal_date: core.serialization.date().optional(),
+        limits: BillingLimits.optional(),
         usage: BillingUsage.optional(),
     });
 
@@ -22,6 +24,7 @@ export declare namespace Billing {
         provider?: StripeProvider.Raw | null;
         subscriptions?: Subscription.Raw[] | null;
         renewal_date?: string | null;
+        limits?: BillingLimits.Raw | null;
         usage?: BillingUsage.Raw | null;
     }
 }

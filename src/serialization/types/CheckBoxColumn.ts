@@ -5,7 +5,7 @@
 import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
-import { CheckBoxColumnAutomationConfig } from "./CheckBoxColumnAutomationConfig";
+import { TypescriptAutomationConfig } from "./TypescriptAutomationConfig";
 
 export const CheckBoxColumn: core.serialization.ObjectSchema<serializers.CheckBoxColumn.Raw, Scout.CheckBoxColumn> =
     core.serialization.object({
@@ -14,7 +14,7 @@ export const CheckBoxColumn: core.serialization.ObjectSchema<serializers.CheckBo
         column_type: core.serialization.stringLiteral("checkbox"),
         data_type: core.serialization.stringLiteral("boolean").optional(),
         hidden: core.serialization.boolean().optional(),
-        automation_config: CheckBoxColumnAutomationConfig.optional(),
+        automation_config: TypescriptAutomationConfig.optional(),
         default: core.serialization.boolean().optional(),
     });
 
@@ -25,7 +25,7 @@ export declare namespace CheckBoxColumn {
         column_type: "checkbox";
         data_type?: "boolean" | null;
         hidden?: boolean | null;
-        automation_config?: CheckBoxColumnAutomationConfig.Raw | null;
+        automation_config?: TypescriptAutomationConfig.Raw | null;
         default?: boolean | null;
     }
 }

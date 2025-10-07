@@ -1,6 +1,6 @@
 # Reference
 
-<details><summary><code>client.<a href="/src/Client.ts">expireBlobsExpireBlobsPost</a>() -> unknown</code></summary>
+<details><summary><code>client.<a href="/src/Client.ts">revokeAccessDriveRevokePost</a>({ ...params }) -> unknown</code></summary>
 <dl>
 <dd>
 
@@ -13,7 +13,10 @@
 <dd>
 
 ```typescript
-await client.expireBlobsExpireBlobsPost();
+await client.revokeAccessDriveRevokePost({
+    agent_ids: ["agent_ids"],
+    resource_ids: ["resource_ids"],
+});
 ```
 
 </dd>
@@ -25,6 +28,14 @@ await client.expireBlobsExpireBlobsPost();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.SrcAppHttpRoutesDriveRevokeAccessPayload`
+
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -3437,24 +3448,9 @@ await client.sources.list();
 
 ## Syncs
 
-<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">list</a>(collection_id, table_id) -> Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel</code></summary>
+<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">list</a>() -> Scout.SrcAppHttpRoutesCollectionGetSyncsResponse</code></summary>
 <dl>
 <dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-List Sources by Destination, specifically given a collection and table
-
-</dd>
-</dl>
-</dd>
-</dl>
 
 #### 🔌 Usage
 
@@ -3465,7 +3461,7 @@ List Sources by Destination, specifically given a collection and table
 <dd>
 
 ```typescript
-await client.syncs.list("collection_id", "table_id");
+await client.syncs.list();
 ```
 
 </dd>
@@ -3481,15 +3477,59 @@ await client.syncs.list("collection_id", "table_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
+**requestOptions:** `Syncs.RequestOptions`
 
 </dd>
 </dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">create</a>({ ...params }) -> Scout.SrcAppHttpRoutesCollectionCreateSyncResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
 
 <dl>
 <dd>
 
-**table_id:** `string`
+<dl>
+<dd>
+
+```typescript
+await client.syncs.create({
+    sync_config: {
+        source_settings: {
+            source_archetype_id: "com.google.drive",
+        },
+        destination: {
+            destination_type: "collections.v2",
+            collection_id: "collection_id",
+            table_id: "table_id",
+        },
+        mapping: {},
+    },
+});
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.RequestBody`
 
 </dd>
 </dl>
@@ -3654,66 +3694,6 @@ await client.syncs.delete("sync_id");
 <dd>
 
 **sync_id:** `string`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `Syncs.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">create</a>({ ...params }) -> Scout.SrcAppHttpRoutesCollectionCreateSyncResponse</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.syncs.create({
-    sync_config: {
-        source_settings: {
-            source_archetype_id: "com.google.drive",
-        },
-        destination: {
-            destination_type: "collections.v2",
-            collection_id: "collection_id",
-            table_id: "table_id",
-        },
-        mapping: {},
-    },
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Scout.RequestBody`
 
 </dd>
 </dl>

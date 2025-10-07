@@ -4,4 +4,4 @@
 
 import * as Scout from "../../../index";
 
-export type UpdateViewRequestSettings = Scout.KanbanViewSettings | Scout.TableViewSettings;
+export type UpdateViewRequestSettings = Scout.KanbanViewSettingsInput | Scout.TableViewSettingsInput;

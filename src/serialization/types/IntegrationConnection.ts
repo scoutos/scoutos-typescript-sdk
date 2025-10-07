@@ -19,6 +19,8 @@ export const IntegrationConnection: core.serialization.ObjectSchema<
     api_key_secret_ref: core.serialization.string().optional(),
     access_token_secret_ref: core.serialization.string().optional(),
     refresh_token_secret_ref: core.serialization.string().optional(),
+    client_id_secret_ref: core.serialization.string().optional(),
+    client_secret_secret_ref: core.serialization.string().optional(),
     connected: core.serialization.boolean(),
     metadata: core.serialization.record(core.serialization.string(), core.serialization.unknown()).optional(),
     scopes: core.serialization.list(core.serialization.string()).optional(),
@@ -37,6 +39,8 @@ export declare namespace IntegrationConnection {
         api_key_secret_ref?: string | null;
         access_token_secret_ref?: string | null;
         refresh_token_secret_ref?: string | null;
+        client_id_secret_ref?: string | null;
+        client_secret_secret_ref?: string | null;
         connected: boolean;
         metadata?: Record<string, unknown> | null;
         scopes?: string[] | null;

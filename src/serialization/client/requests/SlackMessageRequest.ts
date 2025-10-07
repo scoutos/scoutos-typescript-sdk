@@ -19,6 +19,7 @@ export const SlackMessageRequest: core.serialization.Schema<
     username: core.serialization.string().optional(),
     icon_url: core.serialization.string().optional(),
     integration_id: core.serialization.string().optional(),
+    unfurl_links: core.serialization.boolean().optional(),
 });
 
 export declare namespace SlackMessageRequest {
@@ -30,5 +31,6 @@ export declare namespace SlackMessageRequest {
         username?: string | null;
         icon_url?: string | null;
         integration_id?: string | null;
+        unfurl_links?: boolean | null;
     }
 }

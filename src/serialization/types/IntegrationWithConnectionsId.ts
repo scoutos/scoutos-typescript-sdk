@@ -27,6 +27,7 @@ export const IntegrationWithConnectionsId: core.serialization.Schema<
     "paypal",
     "sentry",
     "statsig",
+    "reddit",
     "scout_native_tools",
 ]);
 
@@ -49,5 +50,6 @@ export declare namespace IntegrationWithConnectionsId {
         | "paypal"
         | "sentry"
         | "statsig"
+        | "reddit"
         | "scout_native_tools";
 }

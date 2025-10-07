@@ -8,7 +8,7 @@ import * as core from "../../core";
 import { ViewVisibility } from "./ViewVisibility";
 import { ViewFilter } from "./ViewFilter";
 import { ViewQueryInput } from "./ViewQueryInput";
-import { KanbanViewSettings } from "./KanbanViewSettings";
+import { KanbanViewSettingsInput } from "./KanbanViewSettingsInput";
 
 export const KanbanViewInput: core.serialization.ObjectSchema<serializers.KanbanViewInput.Raw, Scout.KanbanViewInput> =
     core.serialization.object({
@@ -26,7 +26,7 @@ export const KanbanViewInput: core.serialization.ObjectSchema<serializers.Kanban
         filters: core.serialization.list(ViewFilter).optional(),
         query: ViewQueryInput.optional(),
         type: core.serialization.stringLiteral("kanban"),
-        settings: KanbanViewSettings,
+        settings: KanbanViewSettingsInput,
     });
 
 export declare namespace KanbanViewInput {
@@ -45,6 +45,6 @@ export declare namespace KanbanViewInput {
         filters?: ViewFilter.Raw[] | null;
         query?: ViewQueryInput.Raw | null;
         type: "kanban";
-        settings: KanbanViewSettings.Raw;
+        settings: KanbanViewSettingsInput.Raw;
     }
 }

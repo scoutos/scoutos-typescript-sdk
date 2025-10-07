@@ -9,8 +9,8 @@ import * as core from "../../core";
 export const AgentRevisionResponseStyle: core.serialization.Schema<
     serializers.AgentRevisionResponseStyle.Raw,
     Scout.AgentRevisionResponseStyle
-> = core.serialization.enum_(["precise", "balanced", "creative", "experimental"]);
+> = core.serialization.enum_(["precise", "balanced", "creative", "experimental", "json"]);
 
 export declare namespace AgentRevisionResponseStyle {
-    export type Raw = "precise" | "balanced" | "creative" | "experimental";
+    export type Raw = "precise" | "balanced" | "creative" | "experimental" | "json";
 }

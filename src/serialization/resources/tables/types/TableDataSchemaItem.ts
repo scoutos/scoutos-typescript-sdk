@@ -11,6 +11,7 @@ import { JsonColumn } from "../../../types/JsonColumn";
 import { MarkdownColumn } from "../../../types/MarkdownColumn";
 import { MultiSelectColumn } from "../../../types/MultiSelectColumn";
 import { NumberColumn } from "../../../types/NumberColumn";
+import { PeopleColumn } from "../../../types/PeopleColumn";
 import { RelationColumn } from "../../../types/RelationColumn";
 import { SelectColumn } from "../../../types/SelectColumn";
 import { TextLongColumn } from "../../../types/TextLongColumn";
@@ -27,6 +28,7 @@ export const TableDataSchemaItem: core.serialization.Schema<
     MarkdownColumn,
     MultiSelectColumn,
     NumberColumn,
+    PeopleColumn,
     RelationColumn,
     SelectColumn,
     TextLongColumn,
@@ -42,6 +44,7 @@ export declare namespace TableDataSchemaItem {
         | MarkdownColumn.Raw
         | MultiSelectColumn.Raw
         | NumberColumn.Raw
+        | PeopleColumn.Raw
         | RelationColumn.Raw
         | SelectColumn.Raw
         | TextLongColumn.Raw

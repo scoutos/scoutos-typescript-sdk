@@ -19,6 +19,8 @@ export const Table: core.serialization.ObjectSchema<serializers.Table.Raw, Scout
     index_id: core.serialization.string().optional(),
     collection_id: core.serialization.string().optional(),
     documents_uploading: core.serialization.boolean().optional(),
+    migrated: core.serialization.boolean().optional(),
+    agent_table_id: core.serialization.string().optional(),
 });
 
 export declare namespace Table {
@@ -33,5 +35,7 @@ export declare namespace Table {
         index_id?: string | null;
         collection_id?: string | null;
         documents_uploading?: boolean | null;
+        migrated?: boolean | null;
+        agent_table_id?: string | null;
     }
 }

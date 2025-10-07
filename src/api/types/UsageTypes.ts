@@ -9,7 +9,11 @@ export type UsageTypes =
     | "input_tokens"
     | "output_tokens"
     | "text_embedding"
-    | "workflow_invocations";
+    | "workflow_invocations"
+    | "agent_interactions"
+    | "seats"
+    | "integrations"
+    | "active_workflows";
 export const UsageTypes = {
     Crawl: "crawl",
     Storage: "storage",
@@ -18,4 +22,8 @@ export const UsageTypes = {
     OutputTokens: "output_tokens",
     TextEmbedding: "text_embedding",
     WorkflowInvocations: "workflow_invocations",
+    AgentInteractions: "agent_interactions",
+    Seats: "seats",
+    Integrations: "integrations",
+    ActiveWorkflows: "active_workflows",
 } as const;

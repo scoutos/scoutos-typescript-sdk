@@ -13,7 +13,8 @@ export type ColumnType =
     | "datetime"
     | "url"
     | "markdown"
-    | "relation";
+    | "relation"
+    | "people";
 export const ColumnType = {
     Checkbox: "checkbox",
     Json: "json",
@@ -26,4 +27,5 @@ export const ColumnType = {
     Url: "url",
     Markdown: "markdown",
     Relation: "relation",
+    People: "people",
 } as const;

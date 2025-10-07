@@ -19,5 +19,5 @@ export interface TableViewInput {
     filters?: Scout.ViewFilter[];
     query?: Scout.ViewQueryInput;
     type: "table";
-    settings: Scout.TableViewSettings;
+    settings: Scout.TableViewSettingsInput;
 }

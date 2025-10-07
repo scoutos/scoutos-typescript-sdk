@@ -46,7 +46,7 @@ export class Collections {
         request: Scout.CollectionsListRequest = {},
         requestOptions?: Collections.RequestOptions,
     ): Promise<Scout.SrcAppHttpRoutesCollectionGetCollectionsResponse> {
-        const { start_at: startAt, limit, query, tags, sort } = request;
+        const { start_at: startAt, limit, query, tags, sort, drive } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (startAt != null) {
             _queryParams["start_at"] = startAt;
@@ -66,6 +66,10 @@ export class Collections {
 
         if (sort != null) {
             _queryParams["sort"] = sort;
+        }
+
+        if (drive != null) {
+            _queryParams["drive"] = drive.toString();
         }
 
         const _response = await (this._options.fetcher ?? core.fetcher)({

@@ -12,6 +12,8 @@ export interface IntegrationConnection {
     api_key_secret_ref?: string;
     access_token_secret_ref?: string;
     refresh_token_secret_ref?: string;
+    client_id_secret_ref?: string;
+    client_secret_secret_ref?: string;
     connected: boolean;
     metadata?: Record<string, unknown>;
     scopes?: string[];

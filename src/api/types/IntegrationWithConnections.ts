@@ -15,6 +15,7 @@ export interface IntegrationWithConnections {
     tags?: string[];
     enabled?: boolean;
     permissions?: Record<string, unknown>[];
+    auth_configs?: Record<string, unknown>;
     connected: boolean;
     connections: Scout.IntegrationConnection[];
     existing_auth_client_scope: string[];

@@ -16,7 +16,9 @@ export type PlanTypes =
     | "plan_10"
     | "plan_11"
     | "plan_12"
-    | "plan_13";
+    | "plan_13"
+    | "plan_14"
+    | "plan_15";
 export const PlanTypes = {
     Plan1: "plan_1",
     Plan2: "plan_2",
@@ -32,4 +34,6 @@ export const PlanTypes = {
     Plan11: "plan_11",
     Plan12: "plan_12",
     Plan13: "plan_13",
+    Plan14: "plan_14",
+    Plan15: "plan_15",
 } as const;

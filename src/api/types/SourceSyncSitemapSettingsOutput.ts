@@ -9,4 +9,6 @@ export interface SourceSyncSitemapSettingsOutput {
     /** The URL of the sitemap to be crawled. */
     sitemap_url: string;
     crawler_settings?: Scout.SitemapCrawlerSettingsOutput;
+    /** Merge: upsert documents keying off site url. Replace: merge and remove stale documents. */
+    mode?: Scout.SourceSyncSitemapSettingsOutputMode;
 }

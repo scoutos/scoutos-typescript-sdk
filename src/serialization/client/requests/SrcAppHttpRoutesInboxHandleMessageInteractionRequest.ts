@@ -8,6 +8,7 @@ import * as core from "../../../core";
 import { SrcAppHttpRoutesInboxHandleMessageIncomingMessage } from "../../types/SrcAppHttpRoutesInboxHandleMessageIncomingMessage";
 import { SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem } from "../../types/SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem";
 import { FilesAttribute } from "../../types/FilesAttribute";
+import { Mention } from "../../types/Mention";
 import { AgentRevision } from "../../types/AgentRevision";
 
 export const SrcAppHttpRoutesInboxHandleMessageInteractionRequest: core.serialization.Schema<
@@ -18,6 +19,7 @@ export const SrcAppHttpRoutesInboxHandleMessageInteractionRequest: core.serializ
     participants: core.serialization.list(SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem),
     history: core.serialization.list(SrcAppHttpRoutesInboxHandleMessageIncomingMessage).optional(),
     files: core.serialization.list(FilesAttribute).optional(),
+    mentions: core.serialization.list(Mention).optional(),
     ephemeral_agent_revision: AgentRevision.optional(),
 });
 
@@ -27,6 +29,7 @@ export declare namespace SrcAppHttpRoutesInboxHandleMessageInteractionRequest {
         participants: SrcAppHttpRoutesInboxHandleMessageInteractionRequestParticipantsItem.Raw[];
         history?: SrcAppHttpRoutesInboxHandleMessageIncomingMessage.Raw[] | null;
         files?: FilesAttribute.Raw[] | null;
+        mentions?: Mention.Raw[] | null;
         ephemeral_agent_revision?: AgentRevision.Raw | null;
     }
 }

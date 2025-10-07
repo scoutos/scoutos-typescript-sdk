@@ -6,6 +6,7 @@ import * as serializers from "../index";
 import * as Scout from "../../api/index";
 import * as core from "../../core";
 import { SitemapCrawlerSettingsInput } from "./SitemapCrawlerSettingsInput";
+import { SourceSyncSitemapSettingsInputMode } from "./SourceSyncSitemapSettingsInputMode";
 
 export const SourceSyncSitemapSettingsInput: core.serialization.ObjectSchema<
     serializers.SourceSyncSitemapSettingsInput.Raw,
@@ -14,6 +15,7 @@ export const SourceSyncSitemapSettingsInput: core.serialization.ObjectSchema<
     source_archetype_id: core.serialization.stringLiteral("com.scoutos.sitemap"),
     sitemap_url: core.serialization.string(),
     crawler_settings: SitemapCrawlerSettingsInput.optional(),
+    mode: SourceSyncSitemapSettingsInputMode.optional(),
 });
 
 export declare namespace SourceSyncSitemapSettingsInput {
@@ -21,5 +23,6 @@ export declare namespace SourceSyncSitemapSettingsInput {
         source_archetype_id: "com.scoutos.sitemap";
         sitemap_url: string;
         crawler_settings?: SitemapCrawlerSettingsInput.Raw | null;
+        mode?: SourceSyncSitemapSettingsInputMode.Raw | null;
     }
 }

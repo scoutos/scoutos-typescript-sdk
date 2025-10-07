@@ -15,4 +15,6 @@ export interface Table {
     index_id?: string;
     collection_id?: string;
     documents_uploading?: boolean;
+    migrated?: boolean;
+    agent_table_id?: string;
 }

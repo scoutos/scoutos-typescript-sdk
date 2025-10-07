@@ -19,6 +19,7 @@ export const ColumnType: core.serialization.Schema<serializers.ColumnType.Raw, S
         "url",
         "markdown",
         "relation",
+        "people",
     ]);
 
 export declare namespace ColumnType {
@@ -33,5 +34,6 @@ export declare namespace ColumnType {
         | "datetime"
         | "url"
         | "markdown"
-        | "relation";
+        | "relation"
+        | "people";
 }

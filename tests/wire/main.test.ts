@@ -4291,47 +4291,6 @@ describe("ScoutClient", () => {
         });
     });
 
-    test("send_followup_emails_onboarding_followup_emails_post (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
-        const rawResponseBody = { data: { ok: true, msg: "msg" } };
-        server
-            .mockEndpoint()
-            .post("/onboarding/followup-emails")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.sendFollowupEmailsOnboardingFollowupEmailsPost();
-        expect(response).toEqual({
-            data: {
-                ok: true,
-                msg: "msg",
-            },
-        });
-    });
-
-    test("send_followup_emails_onboarding_followup_emails_post (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { detail: undefined };
-        server
-            .mockEndpoint()
-            .post("/onboarding/followup-emails")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.sendFollowupEmailsOnboardingFollowupEmailsPost(undefined);
-        }).rejects.toThrow(Scout.UnprocessableEntityError);
-    });
-
     test("find_me_me_get", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });

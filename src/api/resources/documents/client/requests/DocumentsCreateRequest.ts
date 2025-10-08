@@ -21,6 +21,7 @@ export interface DocumentsCreateRequest {
     sync_id?: string;
     /** Whether to wait for document creation/update to complete */
     await_completion?: boolean;
+    /** The mode to use for the document creation/update */
     mode?: Scout.DocumentsCreateRequestMode;
     body: Scout.DocumentsCreateRequestBody;
 }

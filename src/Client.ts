@@ -9244,7 +9244,7 @@ export class ScoutClient {
 
     /**
      * @param {string} agent_id
-     * @param {string} session_id
+     * @param {string | undefined} session_id
      * @param {Scout.SrcAppHttpRoutesWorldInteractInteractionRequest} request
      * @param {ScoutClient.RequestOptions} requestOptions - Request-specific configuration.
      *
@@ -9259,7 +9259,7 @@ export class ScoutClient {
      */
     public interactHandlerWorldAgentIdSessionIdInteractPost(
         agent_id: string,
-        session_id: string,
+        session_id: string | undefined,
         request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
         requestOptions?: ScoutClient.RequestOptions,
     ): core.HttpResponsePromise<unknown> {
@@ -9270,7 +9270,7 @@ export class ScoutClient {
 
     private async __interactHandlerWorldAgentIdSessionIdInteractPost(
         agent_id: string,
-        session_id: string,
+        session_id: string | undefined,
         request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
         requestOptions?: ScoutClient.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {

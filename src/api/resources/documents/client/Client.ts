@@ -472,33 +472,31 @@ export class Documents {
      * @param {string} collection_id
      * @param {string} table_id
      * @param {string} document_id
-     * @param {Record<string, Scout.DocumentsUpdateDocumentRequestValue>} request
+     * @param {Record<string, Scout.DocumentsUpdateRequestValue | undefined>} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.documents.updateDocument("collection_id", "table_id", "document_id", {
-     *         "key": true
-     *     })
+     *     await client.documents.update("collection_id", "table_id", "document_id", {})
      */
-    public updateDocument(
+    public update(
         collection_id: string,
         table_id: string,
         document_id: string,
-        request: Record<string, Scout.DocumentsUpdateDocumentRequestValue>,
+        request: Record<string, Scout.DocumentsUpdateRequestValue | undefined>,
         requestOptions?: Documents.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse> {
         return core.HttpResponsePromise.fromPromise(
-            this.__updateDocument(collection_id, table_id, document_id, request, requestOptions),
+            this.__update(collection_id, table_id, document_id, request, requestOptions),
         );
     }
 
-    private async __updateDocument(
+    private async __update(
         collection_id: string,
         table_id: string,
         document_id: string,
-        request: Record<string, Scout.DocumentsUpdateDocumentRequestValue>,
+        request: Record<string, Scout.DocumentsUpdateRequestValue | undefined>,
         requestOptions?: Documents.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse>> {
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(

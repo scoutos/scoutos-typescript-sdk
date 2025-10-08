@@ -3254,7 +3254,7 @@ await client.documents.get("collection_id", "table_id", "document_id");
 </dl>
 </details>
 
-<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">updateDocument</a>(collection_id, table_id, document_id, { ...params }) -> Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse</code></summary>
+<details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">update</a>(collection_id, table_id, document_id, { ...params }) -> Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse</code></summary>
 <dl>
 <dd>
 
@@ -3267,9 +3267,7 @@ await client.documents.get("collection_id", "table_id", "document_id");
 <dd>
 
 ```typescript
-await client.documents.updateDocument("collection_id", "table_id", "document_id", {
-    key: true,
-});
+await client.documents.update("collection_id", "table_id", "document_id", {});
 ```
 
 </dd>
@@ -3309,7 +3307,7 @@ await client.documents.updateDocument("collection_id", "table_id", "document_id"
 <dl>
 <dd>
 
-**request:** `Record<string, Scout.DocumentsUpdateDocumentRequestValue>`
+**request:** `Record<string, Scout.DocumentsUpdateRequestValue | undefined>`
 
 </dd>
 </dl>

@@ -384,11 +384,11 @@ describe("Documents", () => {
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { key: "value" };
         const rawResponseBody = {
             data: {
                 document_id: "document_id",
-                data: { key: "value" },
+                data: { data: "data" },
                 document_data_id: "document_data_id",
                 created_at: "2024-01-15T09:30:00Z",
                 last_updated_at: "2024-01-15T09:30:00Z",
@@ -398,7 +398,7 @@ describe("Documents", () => {
                         user_id: "user_id",
                         org_id: "org_id",
                         scout_organization_id: "scout_organization_id",
-                        email: { key: "value" },
+                        email: { email: { key: "value" } },
                     },
                 },
                 last_updated_by: {
@@ -407,14 +407,14 @@ describe("Documents", () => {
                         user_id: "user_id",
                         org_id: "org_id",
                         scout_organization_id: "scout_organization_id",
-                        email: { key: "value" },
+                        email: { email: { key: "value" } },
                     },
                 },
                 revision_id: "revision_id",
                 job_id: "job_id",
                 sync_id: "sync_id",
                 studio_row: true,
-                cells: { key: "value" },
+                cells: { cells: { key: "value" } },
             },
         };
         server
@@ -426,12 +426,14 @@ describe("Documents", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.documents.update("collection_id", "table_id", "document_id", {});
+        const response = await client.documents.update("collection_id", "table_id", "document_id", {
+            key: "value",
+        });
         expect(response).toEqual({
             data: {
                 document_id: "document_id",
                 data: {
-                    key: "value",
+                    data: "data",
                 },
                 document_data_id: "document_data_id",
                 created_at: "2024-01-15T09:30:00Z",
@@ -443,7 +445,9 @@ describe("Documents", () => {
                         org_id: "org_id",
                         scout_organization_id: "scout_organization_id",
                         email: {
-                            key: "value",
+                            email: {
+                                key: "value",
+                            },
                         },
                     },
                 },
@@ -454,7 +458,9 @@ describe("Documents", () => {
                         org_id: "org_id",
                         scout_organization_id: "scout_organization_id",
                         email: {
-                            key: "value",
+                            email: {
+                                key: "value",
+                            },
                         },
                     },
                 },
@@ -463,7 +469,9 @@ describe("Documents", () => {
                 sync_id: "sync_id",
                 studio_row: true,
                 cells: {
-                    key: "value",
+                    cells: {
+                        key: "value",
+                    },
                 },
             },
         });
@@ -472,7 +480,7 @@ describe("Documents", () => {
     test("update (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { string: undefined };
+        const rawRequestBody = { key: "value" };
         const rawResponseBody = { detail: undefined };
         server
             .mockEndpoint()
@@ -485,7 +493,7 @@ describe("Documents", () => {
 
         await expect(async () => {
             return await client.documents.update("collection_id", "table_id", "document_id", {
-                string: undefined,
+                key: "value",
             });
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });

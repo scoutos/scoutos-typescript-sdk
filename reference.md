@@ -3267,7 +3267,9 @@ await client.documents.get("collection_id", "table_id", "document_id");
 <dd>
 
 ```typescript
-await client.documents.update("collection_id", "table_id", "document_id", {});
+await client.documents.update("collection_id", "table_id", "document_id", {
+    key: "value",
+});
 ```
 
 </dd>
@@ -3307,7 +3309,7 @@ await client.documents.update("collection_id", "table_id", "document_id", {});
 <dl>
 <dd>
 
-**request:** `Record<string, Scout.DocumentsUpdateRequestValue | undefined>`
+**request:** `unknown`
 
 </dd>
 </dl>

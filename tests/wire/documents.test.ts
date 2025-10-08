@@ -381,10 +381,10 @@ describe("Documents", () => {
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });
 
-    test("update (1)", async () => {
+    test("updateDocument (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { key: true };
         const rawResponseBody = {
             data: {
                 document_id: "document_id",
@@ -426,7 +426,9 @@ describe("Documents", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.documents.update("collection_id", "table_id", "document_id", {});
+        const response = await client.documents.updateDocument("collection_id", "table_id", "document_id", {
+            key: true,
+        });
         expect(response).toEqual({
             data: {
                 document_id: "document_id",
@@ -469,10 +471,10 @@ describe("Documents", () => {
         });
     });
 
-    test("update (2)", async () => {
+    test("updateDocument (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { string: undefined };
+        const rawRequestBody = { string: true };
         const rawResponseBody = { detail: undefined };
         server
             .mockEndpoint()
@@ -484,8 +486,8 @@ describe("Documents", () => {
             .build();
 
         await expect(async () => {
-            return await client.documents.update("collection_id", "table_id", "document_id", {
-                string: undefined,
+            return await client.documents.updateDocument("collection_id", "table_id", "document_id", {
+                string: true,
             });
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });

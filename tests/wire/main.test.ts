@@ -5139,7 +5139,7 @@ describe("ScoutClient", () => {
         const rawResponseBody = { detail: undefined };
         server
             .mockEndpoint()
-            .post("/world/agent_id/undefined/_interact")
+            .post("/world/agent_id/session_id/_interact")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(422)
@@ -5147,7 +5147,7 @@ describe("ScoutClient", () => {
             .build();
 
         await expect(async () => {
-            return await client.interactHandlerWorldAgentIdSessionIdInteractPost("agent_id", undefined, {
+            return await client.interactHandlerWorldAgentIdSessionIdInteractPost("agent_id", "session_id", {
                 messages: [
                     {
                         content: "content",

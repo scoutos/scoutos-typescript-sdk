@@ -8,7 +8,7 @@ import * as Scout from "../../../../index.js";
  *         job_id: "job_id",
  *         sync_id: "sync_id",
  *         await_completion: true,
- *         mode: "merge",
+ *         mode: "mode",
  *         body: {
  *             "key": true
  *         }
@@ -22,6 +22,6 @@ export interface DocumentsCreateRequest {
     /** Whether to wait for document creation/update to complete */
     await_completion?: boolean;
     /** The mode to use for the document creation/update */
-    mode?: Scout.DocumentsCreateRequestMode;
+    mode?: string;
     body: Scout.DocumentsCreateRequestBody;
 }

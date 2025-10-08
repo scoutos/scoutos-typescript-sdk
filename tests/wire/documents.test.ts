@@ -129,7 +129,7 @@ describe("Documents", () => {
             job_id: "job_id",
             sync_id: "sync_id",
             await_completion: true,
-            mode: "merge",
+            mode: "mode",
             body: {
                 key: true,
             },
@@ -220,7 +220,7 @@ describe("Documents", () => {
             job_id: "job_id",
             sync_id: "sync_id",
             await_completion: true,
-            mode: "merge",
+            mode: "mode",
             body: {
                 key: true,
             },

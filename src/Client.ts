@@ -70,8 +70,8 @@ export class ScoutClient {
                 {
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "scoutos",
-                    "X-Fern-SDK-Version": "0.10.6",
-                    "User-Agent": "scoutos/0.10.6",
+                    "X-Fern-SDK-Version": "0.10.7",
+                    "User-Agent": "scoutos/0.10.7",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },

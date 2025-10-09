@@ -20,6 +20,6 @@ export interface WorkflowHook {
     created_at: string;
     updated_at: string;
     created_by?: Record<string, unknown>;
-    target_type: "workflow";
+    target_type?: "workflow";
     target_config: Scout.WorkflowTargetConfig;
 }

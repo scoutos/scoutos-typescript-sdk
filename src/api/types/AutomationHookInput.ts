@@ -14,6 +14,6 @@ export interface AutomationHookInput {
     max_payload_size?: number;
     /** Whether to generate a secret for HMAC authentication */
     enable_auth?: boolean;
-    target_type: "automation";
+    target_type?: "automation";
     target_config?: Scout.AutomationTargetConfig;
 }

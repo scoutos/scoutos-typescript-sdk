@@ -14,6 +14,6 @@ export interface WorkflowHookInput {
     max_payload_size?: number;
     /** Whether to generate a secret for HMAC authentication */
     enable_auth?: boolean;
-    target_type: "workflow";
+    target_type?: "workflow";
     target_config?: Scout.WorkflowTargetConfig;
 }

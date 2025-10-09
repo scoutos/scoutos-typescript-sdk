@@ -20,6 +20,6 @@ export interface AgentHook {
     created_at: string;
     updated_at: string;
     created_by?: Record<string, unknown>;
-    target_type: "agent";
+    target_type?: "agent";
     target_config: Scout.AgentTargetConfig;
 }

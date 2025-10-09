@@ -39,6 +39,7 @@ export namespace IntegrationConnection {
         Sentry: "sentry",
         Statsig: "statsig",
         Reddit: "reddit",
+        Airtable: "airtable",
         ScoutNativeTools: "scout_native_tools",
     } as const;
     export type IntegrationType = (typeof IntegrationType)[keyof typeof IntegrationType];

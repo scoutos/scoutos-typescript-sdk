@@ -19,4 +19,6 @@ export interface Me {
     lead_id?: string;
     organizations?: Record<string, Scout.UserOrganizationConfig>;
     favorites?: Scout.FavoriteItem[];
+    flags: Scout.Flags;
+    permissions?: Record<string, boolean>;
 }

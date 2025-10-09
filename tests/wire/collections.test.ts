@@ -436,6 +436,91 @@ describe("Collections", () => {
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });
 
+    test("list_syncs (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            syncs: [
+                {
+                    sync_config: {
+                        source_settings: { source_archetype_id: "com.google.drive" },
+                        destination: {
+                            destination_type: "collections.v2",
+                            collection_id: "collection_id",
+                            table_id: "table_id",
+                        },
+                        mapping: {},
+                        schedule: undefined,
+                    },
+                    sync_id: "sync_id",
+                    trigger_id: "trigger_id",
+                    last_updated_at: "2024-01-15T09:30:00Z",
+                    created_at: "2024-01-15T09:30:00Z",
+                    created_by: { type: "user", details: undefined },
+                    last_updated_by: { type: "user", details: undefined },
+                },
+            ],
+        };
+        server
+            .mockEndpoint()
+            .get("/v2/collections/collection_id/tables/table_id/syncs")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.collections.listSyncs("collection_id", "table_id");
+        expect(response).toEqual({
+            syncs: [
+                {
+                    sync_config: {
+                        source_settings: {
+                            source_archetype_id: "com.google.drive",
+                        },
+                        destination: {
+                            destination_type: "collections.v2",
+                            collection_id: "collection_id",
+                            table_id: "table_id",
+                        },
+                        mapping: {},
+                        schedule: undefined,
+                    },
+                    sync_id: "sync_id",
+                    trigger_id: "trigger_id",
+                    last_updated_at: "2024-01-15T09:30:00Z",
+                    created_at: "2024-01-15T09:30:00Z",
+                    created_by: {
+                        type: "user",
+                        details: undefined,
+                    },
+                    last_updated_by: {
+                        type: "user",
+                        details: undefined,
+                    },
+                },
+            ],
+        });
+    });
+
+    test("list_syncs (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .get("/v2/collections/collection_id/tables/table_id/syncs")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.collections.listSyncs("collection_id", "table_id");
+        }).rejects.toThrow(Scout.UnprocessableEntityError);
+    });
+
     test("get_views (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });

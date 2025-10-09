@@ -20,6 +20,6 @@ export interface AutomationHook {
     created_at: string;
     updated_at: string;
     created_by?: Record<string, unknown>;
-    target_type: "automation";
+    target_type?: "automation";
     target_config: Scout.AutomationTargetConfig;
 }

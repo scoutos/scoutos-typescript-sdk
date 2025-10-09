@@ -40,6 +40,7 @@ export namespace IntegrationWithConnections {
         Sentry: "sentry",
         Statsig: "statsig",
         Reddit: "reddit",
+        Airtable: "airtable",
         ScoutNativeTools: "scout_native_tools",
     } as const;
     export type Id = (typeof Id)[keyof typeof Id];

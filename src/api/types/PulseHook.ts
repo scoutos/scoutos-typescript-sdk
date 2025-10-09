@@ -20,6 +20,6 @@ export interface PulseHook {
     created_at: string;
     updated_at: string;
     created_by?: Record<string, unknown>;
-    target_type: "pulse";
+    target_type?: "pulse";
     target_config: Scout.PulseTargetConfig;
 }

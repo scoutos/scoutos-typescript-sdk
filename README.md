@@ -20,14 +20,13 @@ A full reference for this library is available [here](https://github.com/scoutos
 Instantiate and use the client with the following:
 
 ```typescript
-import { createReadStream } from "fs";
 import { ScoutClient } from "scoutos";
-import * as fs from "fs";
 
 const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
-await client.parseFileV2FilesParsePost({
-    file: fs.createReadStream("/path/to/your/file"),
-    return_text: true,
+await client.workflows.createRevision({
+    workflow_id: "workflow_id",
+    workflow_key: "workflow_key",
+    body: {},
 });
 ```
 
@@ -53,7 +52,7 @@ will be thrown.
 import { ScoutError } from "scoutos";
 
 try {
-    await client.parseFileV2FilesParsePost(...);
+    await client.workflows.createRevision(...);
 } catch (err) {
     if (err instanceof ScoutError) {
         console.log(err.statusCode);
@@ -71,7 +70,7 @@ try {
 If you would like to send additional headers as part of the request, use the `headers` request option.
 
 ```typescript
-const response = await client.parseFileV2FilesParsePost(..., {
+const response = await client.workflows.createRevision(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -83,7 +82,7 @@ const response = await client.parseFileV2FilesParsePost(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.parseFileV2FilesParsePost(..., {
+const response = await client.workflows.createRevision(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -105,7 +104,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.parseFileV2FilesParsePost(..., {
+const response = await client.workflows.createRevision(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -115,7 +114,7 @@ const response = await client.parseFileV2FilesParsePost(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.parseFileV2FilesParsePost(..., {
+const response = await client.workflows.createRevision(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -126,7 +125,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.parseFileV2FilesParsePost(..., {
+const response = await client.workflows.createRevision(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -138,7 +137,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.parseFileV2FilesParsePost(...).withRawResponse();
+const { data, rawResponse } = await client.workflows.createRevision(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

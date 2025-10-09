@@ -14,6 +14,6 @@ export interface AgentHookInput {
     max_payload_size?: number;
     /** Whether to generate a secret for HMAC authentication */
     enable_auth?: boolean;
-    target_type: "agent";
+    target_type?: "agent";
     target_config?: Scout.AgentTargetConfig;
 }

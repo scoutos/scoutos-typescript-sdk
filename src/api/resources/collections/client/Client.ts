@@ -484,6 +484,92 @@ export class Collections {
     }
 
     /**
+     * List Sources by Destination, specifically given a collection and table
+     *
+     * @param {string} collection_id
+     * @param {string} table_id
+     * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.collections.listSyncs("collection_id", "table_id")
+     */
+    public listSyncs(
+        collection_id: string,
+        table_id: string,
+        requestOptions?: Collections.RequestOptions,
+    ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel> {
+        return core.HttpResponsePromise.fromPromise(this.__listSyncs(collection_id, table_id, requestOptions));
+    }
+
+    private async __listSyncs(
+        collection_id: string,
+        table_id: string,
+        requestOptions?: Collections.RequestOptions,
+    ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/collections/${encodeURIComponent(collection_id)}/tables/${encodeURIComponent(table_id)}/syncs`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        _response.error.body as Scout.HttpValidationError,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling GET /v2/collections/{collection_id}/tables/{table_id}/syncs.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
      * @param {string} collection_id
      * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
      *

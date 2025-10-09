@@ -7,7 +7,7 @@ import * as Scout from "../index.js";
  */
 export interface PulseHookInput {
     name: string;
-    target_type: "pulse";
+    target_type?: "pulse";
     target_id: string;
     description?: string;
     target_config?: Scout.PulseTargetConfig;

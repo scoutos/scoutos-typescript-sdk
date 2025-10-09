@@ -1,58 +1,5 @@
 # Reference
 
-<details><summary><code>client.<a href="/src/Client.ts">revokeAccessDriveRevokePost</a>({ ...params }) -> unknown</code></summary>
-<dl>
-<dd>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.revokeAccessDriveRevokePost({
-    agent_ids: ["agent_ids"],
-    resource_ids: ["resource_ids"],
-});
-```
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `Scout.SrcAppHttpRoutesDriveRevokeAccessPayload`
-
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ScoutClient.RequestOptions`
-
-</dd>
-</dl>
-</dd>
-</dl>
-
-</dd>
-</dl>
-</details>
-
-##
-
 ## Workflows
 
 <details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">createRevision</a>({ ...params }) -> Scout.SrcHandlersCreateWorkflowRevisionResponse</code></summary>
@@ -2155,6 +2102,77 @@ await client.collections.delete("collection_id");
 </dl>
 </details>
 
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">listSyncs</a>(collection_id, table_id) -> Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List Sources by Destination, specifically given a collection and table
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.collections.listSyncs("collection_id", "table_id");
+```
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**collection_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**table_id:** `string`
+
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Collections.RequestOptions`
+
+</dd>
+</dl>
+</dd>
+</dl>
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">getViews</a>(collection_id) -> Scout.ViewStateResponse</code></summary>
 <dl>
 <dd>
@@ -3267,9 +3285,7 @@ await client.documents.get("collection_id", "table_id", "document_id");
 <dd>
 
 ```typescript
-await client.documents.update("collection_id", "table_id", "document_id", {
-    key: "value",
-});
+await client.documents.update("collection_id", "table_id", "document_id", {});
 ```
 
 </dd>
@@ -3309,7 +3325,7 @@ await client.documents.update("collection_id", "table_id", "document_id", {
 <dl>
 <dd>
 
-**request:** `unknown`
+**request:** `Record<string, Scout.DocumentsUpdateRequestValue | undefined>`
 
 </dd>
 </dl>

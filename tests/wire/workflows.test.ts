@@ -218,6 +218,7 @@ describe("Workflows", () => {
             limit: 1,
             query: "query",
             tags: "tags",
+            drive: true,
         });
         expect(response).toEqual({
             data: [

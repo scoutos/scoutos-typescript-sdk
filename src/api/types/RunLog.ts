@@ -8,6 +8,8 @@ export interface RunLog {
     workflow_id: string;
     status: string;
     session_id: string;
+    environment?: string;
+    revision_id?: string;
     cost: number;
     blocks: Record<string, Scout.BlockRun>;
     output?: unknown;

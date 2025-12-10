@@ -4,8 +4,9 @@ import * as environments from "./environments.js";
 import * as core from "./core/index.js";
 import { mergeHeaders } from "./core/headers.js";
 import { Workflows } from "./api/resources/workflows/client/Client.js";
-import { Environments } from "./api/resources/environments/client/Client.js";
+import { WorkflowRevisions } from "./api/resources/workflowRevisions/client/Client.js";
 import { Revisions } from "./api/resources/revisions/client/Client.js";
+import { Environments } from "./api/resources/environments/client/Client.js";
 import { Usage } from "./api/resources/usage/client/Client.js";
 import { WorkflowLogs } from "./api/resources/workflowLogs/client/Client.js";
 import { Copilots } from "./api/resources/copilots/client/Client.js";
@@ -46,8 +47,9 @@ export declare namespace ScoutClient {
 export class ScoutClient {
     protected readonly _options: ScoutClient.Options;
     protected _workflows: Workflows | undefined;
-    protected _environments: Environments | undefined;
+    protected _workflowRevisions: WorkflowRevisions | undefined;
     protected _revisions: Revisions | undefined;
+    protected _environments: Environments | undefined;
     protected _usage: Usage | undefined;
     protected _workflowLogs: WorkflowLogs | undefined;
     protected _copilots: Copilots | undefined;
@@ -67,8 +69,8 @@ export class ScoutClient {
                 {
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "scoutos",
-                    "X-Fern-SDK-Version": "0.10.8",
-                    "User-Agent": "scoutos/0.10.8",
+                    "X-Fern-SDK-Version": "0.11.0",
+                    "User-Agent": "scoutos/0.11.0",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -81,12 +83,16 @@ export class ScoutClient {
         return (this._workflows ??= new Workflows(this._options));
     }
 
-    public get environments(): Environments {
-        return (this._environments ??= new Environments(this._options));
+    public get workflowRevisions(): WorkflowRevisions {
+        return (this._workflowRevisions ??= new WorkflowRevisions(this._options));
     }
 
     public get revisions(): Revisions {
         return (this._revisions ??= new Revisions(this._options));
+    }
+
+    public get environments(): Environments {
+        return (this._environments ??= new Environments(this._options));
     }
 
     public get usage(): Usage {

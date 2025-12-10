@@ -149,7 +149,8 @@ export class Workflows {
      *         start_at: "start_at",
      *         limit: 1,
      *         query: "query",
-     *         tags: "tags"
+     *         tags: "tags",
+     *         drive: true
      *     })
      */
     public list(
@@ -163,7 +164,7 @@ export class Workflows {
         request: Scout.WorkflowsListRequest = {},
         requestOptions?: Workflows.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcHandlersListWorkflowsResponse>> {
-        const { sort, direction, start_at: startAt, limit, query, tags } = request;
+        const { sort, direction, start_at: startAt, limit, query, tags, drive } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (sort != null) {
             _queryParams["sort"] = sort;
@@ -187,6 +188,10 @@ export class Workflows {
 
         if (tags != null) {
             _queryParams["tags"] = tags;
+        }
+
+        if (drive != null) {
+            _queryParams["drive"] = drive.toString();
         }
 
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(

@@ -19,6 +19,7 @@ describe("Copilots", () => {
                         loading_text: undefined,
                         message_placeholder: undefined,
                         allowed_origins: undefined,
+                        powered_by: undefined,
                     },
                     last_updated_at: "2024-01-15T09:30:00Z",
                     created_at: "2024-01-15T09:30:00Z",
@@ -67,6 +68,7 @@ describe("Copilots", () => {
                         loading_text: undefined,
                         message_placeholder: undefined,
                         allowed_origins: undefined,
+                        powered_by: undefined,
                     },
                     last_updated_at: "2024-01-15T09:30:00Z",
                     created_at: "2024-01-15T09:30:00Z",
@@ -130,6 +132,7 @@ describe("Copilots", () => {
                     loading_text: "loading_text",
                     message_placeholder: "message_placeholder",
                     allowed_origins: "allowed_origins",
+                    powered_by: "powered_by",
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -180,6 +183,7 @@ describe("Copilots", () => {
                     loading_text: "loading_text",
                     message_placeholder: "message_placeholder",
                     allowed_origins: "allowed_origins",
+                    powered_by: "powered_by",
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -227,6 +231,7 @@ describe("Copilots", () => {
             message_placeholder: undefined,
             initial_activity: undefined,
             allowed_origins: undefined,
+            powered_by: undefined,
         };
         const rawResponseBody = { detail: undefined };
         server
@@ -251,6 +256,7 @@ describe("Copilots", () => {
                 message_placeholder: undefined,
                 initial_activity: undefined,
                 allowed_origins: undefined,
+                powered_by: undefined,
             });
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });
@@ -261,6 +267,7 @@ describe("Copilots", () => {
 
         const rawResponseBody = {
             data: {
+                copilot_id: "copilot_id",
                 copilot_config: {
                     workflow_id: "workflow_id",
                     img_url: "img_url",
@@ -270,31 +277,8 @@ describe("Copilots", () => {
                     colors: { key: "value" },
                     loading_text: "loading_text",
                     message_placeholder: "message_placeholder",
-                    allowed_origins: "allowed_origins",
+                    powered_by: "powered_by",
                 },
-                last_updated_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
-                created_by: {
-                    type: "user",
-                    details: {
-                        user_id: "user_id",
-                        org_id: "org_id",
-                        scout_organization_id: "scout_organization_id",
-                        email: { key: "value" },
-                    },
-                },
-                last_updated_by: {
-                    type: "user",
-                    details: {
-                        user_id: "user_id",
-                        org_id: "org_id",
-                        scout_organization_id: "scout_organization_id",
-                        email: { key: "value" },
-                    },
-                },
-                revision_id: "revision_id",
-                copilot_id: "copilot_id",
-                is_draft: true,
             },
         };
         server
@@ -308,6 +292,7 @@ describe("Copilots", () => {
         const response = await client.copilots.get("copilot_id");
         expect(response).toEqual({
             data: {
+                copilot_id: "copilot_id",
                 copilot_config: {
                     workflow_id: "workflow_id",
                     img_url: "img_url",
@@ -319,35 +304,8 @@ describe("Copilots", () => {
                     },
                     loading_text: "loading_text",
                     message_placeholder: "message_placeholder",
-                    allowed_origins: "allowed_origins",
+                    powered_by: "powered_by",
                 },
-                last_updated_at: "2024-01-15T09:30:00Z",
-                created_at: "2024-01-15T09:30:00Z",
-                created_by: {
-                    type: "user",
-                    details: {
-                        user_id: "user_id",
-                        org_id: "org_id",
-                        scout_organization_id: "scout_organization_id",
-                        email: {
-                            key: "value",
-                        },
-                    },
-                },
-                last_updated_by: {
-                    type: "user",
-                    details: {
-                        user_id: "user_id",
-                        org_id: "org_id",
-                        scout_organization_id: "scout_organization_id",
-                        email: {
-                            key: "value",
-                        },
-                    },
-                },
-                revision_id: "revision_id",
-                copilot_id: "copilot_id",
-                is_draft: true,
             },
         });
     });
@@ -386,6 +344,7 @@ describe("Copilots", () => {
                     loading_text: "loading_text",
                     message_placeholder: "message_placeholder",
                     allowed_origins: "allowed_origins",
+                    powered_by: "powered_by",
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -436,6 +395,7 @@ describe("Copilots", () => {
                     loading_text: "loading_text",
                     message_placeholder: "message_placeholder",
                     allowed_origins: "allowed_origins",
+                    powered_by: "powered_by",
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -483,6 +443,7 @@ describe("Copilots", () => {
             message_placeholder: undefined,
             initial_activity: undefined,
             allowed_origins: undefined,
+            powered_by: undefined,
         };
         const rawResponseBody = { detail: undefined };
         server
@@ -507,6 +468,7 @@ describe("Copilots", () => {
                 message_placeholder: undefined,
                 initial_activity: undefined,
                 allowed_origins: undefined,
+                powered_by: undefined,
             });
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });

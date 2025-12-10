@@ -5,6 +5,43 @@ import { ScoutClient } from "../../src/Client";
 import * as Scout from "../../src/api/index";
 
 describe("Revisions", () => {
+    test("delete (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: "detail" };
+        server
+            .mockEndpoint()
+            .delete("/v2/workflows/workflow_id/revisions/revision_id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.revisions.delete("workflow_id", "revision_id");
+        expect(response).toEqual({
+            detail: "detail",
+        });
+    });
+
+    test("delete (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { detail: undefined };
+        server
+            .mockEndpoint()
+            .delete("/v2/workflows/workflow_id/revisions/revision_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.revisions.delete("workflow_id", "revision_id");
+        }).rejects.toThrow(Scout.UnprocessableEntityError);
+    });
+
     test("list (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
@@ -243,43 +280,6 @@ describe("Revisions", () => {
 
         await expect(async () => {
             return await client.revisions.update("workflow_id", "revision_id");
-        }).rejects.toThrow(Scout.UnprocessableEntityError);
-    });
-
-    test("delete (1)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { detail: "detail" };
-        server
-            .mockEndpoint()
-            .delete("/v2/workflows/workflow_id/revisions/revision_id")
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.revisions.delete("workflow_id", "revision_id");
-        expect(response).toEqual({
-            detail: "detail",
-        });
-    });
-
-    test("delete (2)", async () => {
-        const server = mockServerPool.createServer();
-        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-
-        const rawResponseBody = { detail: undefined };
-        server
-            .mockEndpoint()
-            .delete("/v2/workflows/workflow_id/revisions/revision_id")
-            .respondWith()
-            .statusCode(422)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        await expect(async () => {
-            return await client.revisions.delete("workflow_id", "revision_id");
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });
 });

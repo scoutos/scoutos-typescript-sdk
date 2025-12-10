@@ -8,7 +8,8 @@
  *         start_at: "start_at",
  *         limit: 1,
  *         query: "query",
- *         tags: "tags"
+ *         tags: "tags",
+ *         drive: true
  *     }
  */
 export interface WorkflowsListRequest {
@@ -24,4 +25,5 @@ export interface WorkflowsListRequest {
     query?: string;
     /** Filter by tags */
     tags?: string;
+    drive?: boolean;
 }

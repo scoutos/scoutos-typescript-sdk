@@ -230,7 +230,7 @@ export class Copilots {
     }
 
     /**
-     * Fetch app configuration by ID.
+     * Fetch copilot configuration by ID.
      *
      * @param {string} copilot_id
      * @param {Copilots.RequestOptions} requestOptions - Request-specific configuration.

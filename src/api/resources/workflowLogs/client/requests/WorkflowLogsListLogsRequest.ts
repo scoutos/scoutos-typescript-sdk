@@ -9,7 +9,8 @@
  *         limit: 1,
  *         session_id: "session_id",
  *         status: "status",
- *         cursor: "cursor"
+ *         cursor: "cursor",
+ *         summary_only: true
  *     }
  */
 export interface WorkflowLogsListLogsRequest {
@@ -20,4 +21,5 @@ export interface WorkflowLogsListLogsRequest {
     session_id?: string;
     status?: string;
     cursor?: string;
+    summary_only?: boolean;
 }

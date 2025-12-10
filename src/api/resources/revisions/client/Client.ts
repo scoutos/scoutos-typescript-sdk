@@ -39,6 +39,90 @@ export class Revisions {
     }
 
     /**
+     * @param {string} workflow_id
+     * @param {string} revision_id
+     * @param {Revisions.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.revisions.delete("workflow_id", "revision_id")
+     */
+    public delete(
+        workflow_id: string,
+        revision_id: string,
+        requestOptions?: Revisions.RequestOptions,
+    ): core.HttpResponsePromise<Scout.SrcHandlersDeleteWorkflowRevisionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__delete(workflow_id, revision_id, requestOptions));
+    }
+
+    private async __delete(
+        workflow_id: string,
+        revision_id: string,
+        requestOptions?: Revisions.RequestOptions,
+    ): Promise<core.WithRawResponse<Scout.SrcHandlersDeleteWorkflowRevisionResponse>> {
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions/${encodeURIComponent(revision_id)}`,
+            ),
+            method: "DELETE",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as Scout.SrcHandlersDeleteWorkflowRevisionResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        _response.error.body as Scout.HttpValidationError,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling DELETE /v2/workflows/{workflow_id}/revisions/{revision_id}.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
      * List all app revisions in the organization
      *
      * @param {string} workflow_id
@@ -196,90 +280,6 @@ export class Revisions {
             case "timeout":
                 throw new errors.ScoutTimeoutError(
                     "Timeout exceeded when calling PUT /v2/workflows/{workflow_id}/revisions/{revision_id}/promote.",
-                );
-            case "unknown":
-                throw new errors.ScoutError({
-                    message: _response.error.errorMessage,
-                    rawResponse: _response.rawResponse,
-                });
-        }
-    }
-
-    /**
-     * @param {string} workflow_id
-     * @param {string} revision_id
-     * @param {Revisions.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @throws {@link Scout.UnprocessableEntityError}
-     *
-     * @example
-     *     await client.revisions.delete("workflow_id", "revision_id")
-     */
-    public delete(
-        workflow_id: string,
-        revision_id: string,
-        requestOptions?: Revisions.RequestOptions,
-    ): core.HttpResponsePromise<Scout.SrcHandlersDeleteWorkflowRevisionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__delete(workflow_id, revision_id, requestOptions));
-    }
-
-    private async __delete(
-        workflow_id: string,
-        revision_id: string,
-        requestOptions?: Revisions.RequestOptions,
-    ): Promise<core.WithRawResponse<Scout.SrcHandlersDeleteWorkflowRevisionResponse>> {
-        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            this._options?.headers,
-            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
-            requestOptions?.headers,
-        );
-        const _response = await (this._options.fetcher ?? core.fetcher)({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.ScoutEnvironment.Prod,
-                `v2/workflows/${encodeURIComponent(workflow_id)}/revisions/${encodeURIComponent(revision_id)}`,
-            ),
-            method: "DELETE",
-            headers: _headers,
-            queryParameters: requestOptions?.queryParams,
-            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
-            maxRetries: requestOptions?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as Scout.SrcHandlersDeleteWorkflowRevisionResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            switch (_response.error.statusCode) {
-                case 422:
-                    throw new Scout.UnprocessableEntityError(
-                        _response.error.body as Scout.HttpValidationError,
-                        _response.rawResponse,
-                    );
-                default:
-                    throw new errors.ScoutError({
-                        statusCode: _response.error.statusCode,
-                        body: _response.error.body,
-                        rawResponse: _response.rawResponse,
-                    });
-            }
-        }
-
-        switch (_response.error.reason) {
-            case "non-json":
-                throw new errors.ScoutError({
-                    statusCode: _response.error.statusCode,
-                    body: _response.error.rawBody,
-                    rawResponse: _response.rawResponse,
-                });
-            case "timeout":
-                throw new errors.ScoutTimeoutError(
-                    "Timeout exceeded when calling DELETE /v2/workflows/{workflow_id}/revisions/{revision_id}.",
                 );
             case "unknown":
                 throw new errors.ScoutError({

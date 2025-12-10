@@ -57,6 +57,7 @@ export class WorkflowLogs {
             session_id: sessionId,
             status,
             cursor,
+            summary_only: summaryOnly,
         } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         _queryParams["workflow_id"] = workflowId;
@@ -82,6 +83,10 @@ export class WorkflowLogs {
 
         if (cursor != null) {
             _queryParams["cursor"] = cursor;
+        }
+
+        if (summaryOnly != null) {
+            _queryParams["summary_only"] = summaryOnly.toString();
         }
 
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -144,6 +149,100 @@ export class WorkflowLogs {
                 });
             case "timeout":
                 throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/run_logs.");
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * Get full log details for a specific workflow run.
+     * Requires either session_id or workflow_run_id to identify the log.
+     *
+     * @param {Scout.WorkflowLogsGetDetailsRequest} request
+     * @param {WorkflowLogs.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.workflowLogs.getDetails({
+     *         workflow_id: "workflow_id",
+     *         session_id: "session_id",
+     *         workflow_run_id: "workflow_run_id"
+     *     })
+     */
+    public getDetails(
+        request: Scout.WorkflowLogsGetDetailsRequest,
+        requestOptions?: WorkflowLogs.RequestOptions,
+    ): core.HttpResponsePromise<Scout.RunLog> {
+        return core.HttpResponsePromise.fromPromise(this.__getDetails(request, requestOptions));
+    }
+
+    private async __getDetails(
+        request: Scout.WorkflowLogsGetDetailsRequest,
+        requestOptions?: WorkflowLogs.RequestOptions,
+    ): Promise<core.WithRawResponse<Scout.RunLog>> {
+        const { workflow_id: workflowId, session_id: sessionId, workflow_run_id: workflowRunId } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        _queryParams["workflow_id"] = workflowId;
+        if (sessionId != null) {
+            _queryParams["session_id"] = sessionId;
+        }
+
+        if (workflowRunId != null) {
+            _queryParams["workflow_run_id"] = workflowRunId;
+        }
+
+        let _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                "v2/run_logs/details",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            timeoutMs: requestOptions?.timeoutInSeconds != null ? requestOptions.timeoutInSeconds * 1000 : 60000,
+            maxRetries: requestOptions?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Scout.RunLog, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        _response.error.body as Scout.HttpValidationError,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError("Timeout exceeded when calling GET /v2/run_logs/details.");
             case "unknown":
                 throw new errors.ScoutError({
                     message: _response.error.errorMessage,

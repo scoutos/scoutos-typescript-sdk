@@ -2,6 +2,6 @@
 
 import * as Scout from "../index.js";
 
-export interface SrcHandlersGetCopilotResponse {
-    data: Scout.PublicCopilotResponse;
+export interface SrcHandlersUpdateWorkflowRevisionResponse {
+    data?: Scout.Workflow;
 }

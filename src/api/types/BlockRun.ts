@@ -11,6 +11,8 @@ export interface BlockRun {
     metadata?: Record<string, unknown>;
     elapsed_time_ms?: number;
     cost?: number;
+    message?: string;
+    workflow_state?: Record<string, unknown>;
     status?: string;
     timestamp_start?: string;
     timestamp_end?: string;

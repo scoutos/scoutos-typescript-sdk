@@ -375,3 +375,5 @@ export * from "./SrcAppHttpRoutesTagsUpdateTagPayload.js";
 export * from "./SrcAppHttpRoutesTriggerCreateTriggerResponse.js";
 export * from "./SrcAppHttpRoutesWorldInteractIncomingMessage.js";
 export * from "./SrcAppHttpRoutesWorldInteractInteractionRequest.js";
+export * from "./DocumentsUpdateRequest.js";
+export * from "./DocumentsUpdateRequestValue.js";

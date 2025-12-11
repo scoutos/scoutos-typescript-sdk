@@ -472,7 +472,7 @@ export class Documents {
      * @param {string} collection_id
      * @param {string} table_id
      * @param {string} document_id
-     * @param {Record<string, Scout.DocumentsUpdateRequestValue | undefined>} request
+     * @param {Scout.DocumentsUpdateRequest} request
      * @param {Documents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -484,7 +484,7 @@ export class Documents {
         collection_id: string,
         table_id: string,
         document_id: string,
-        request: Record<string, Scout.DocumentsUpdateRequestValue | undefined>,
+        request: Scout.DocumentsUpdateRequest,
         requestOptions?: Documents.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse> {
         return core.HttpResponsePromise.fromPromise(
@@ -496,7 +496,7 @@ export class Documents {
         collection_id: string,
         table_id: string,
         document_id: string,
-        request: Record<string, Scout.DocumentsUpdateRequestValue | undefined>,
+        request: Scout.DocumentsUpdateRequest,
         requestOptions?: Documents.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse>> {
         let _headers: core.Fetcher.Args["headers"] = mergeHeaders(

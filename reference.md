@@ -3463,7 +3463,7 @@ await client.documents.update("collection_id", "table_id", "document_id", {});
 <dl>
 <dd>
 
-**request:** `Record<string, Scout.DocumentsUpdateRequestValue | undefined>`
+**request:** `Scout.DocumentsUpdateRequest`
 
 </dd>
 </dl>

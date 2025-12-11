@@ -1,1 +1,1 @@
-export { type IntegrationsListRequest } from "./IntegrationsListRequest.js";
+export type { IntegrationsListRequest } from "./IntegrationsListRequest.js";

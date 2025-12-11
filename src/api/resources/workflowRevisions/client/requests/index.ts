@@ -1,1 +1,1 @@
-export { type Payload } from "./Payload.js";
+export type { Payload } from "./Payload.js";

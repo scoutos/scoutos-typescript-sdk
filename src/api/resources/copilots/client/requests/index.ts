@@ -1,1 +1,1 @@
-export { type CopilotsListRequest } from "./CopilotsListRequest.js";
+export type { CopilotsListRequest } from "./CopilotsListRequest.js";

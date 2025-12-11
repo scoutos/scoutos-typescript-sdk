@@ -12,14 +12,15 @@ The Scoutos TypeScript library provides convenient access to the Scoutos APIs fr
 - [Usage](#usage)
 - [Request and Response Types](#request-and-response-types)
 - [Exception Handling](#exception-handling)
+- [Streaming Response](#streaming-response)
 - [Advanced](#advanced)
-    - [Additional Headers](#additional-headers)
-    - [Additional Query String Parameters](#additional-query-string-parameters)
-    - [Retries](#retries)
-    - [Timeouts](#timeouts)
-    - [Aborting Requests](#aborting-requests)
-    - [Access Raw Response Data](#access-raw-response-data)
-    - [Runtime Compatibility](#runtime-compatibility)
+  - [Additional Headers](#additional-headers)
+  - [Additional Query String Parameters](#additional-query-string-parameters)
+  - [Retries](#retries)
+  - [Timeouts](#timeouts)
+  - [Aborting Requests](#aborting-requests)
+  - [Access Raw Response Data](#access-raw-response-data)
+  - [Runtime Compatibility](#runtime-compatibility)
 - [Contributing](#contributing)
 
 ## Installation
@@ -43,7 +44,7 @@ const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
 await client.workflows.createRevision({
     workflow_id: "workflow_id",
     workflow_key: "workflow_key",
-    body: {},
+    body: {}
 });
 ```
 
@@ -77,6 +78,25 @@ try {
         console.log(err.body);
         console.log(err.rawResponse);
     }
+}
+```
+
+## Streaming Response
+
+Some endpoints return streaming responses instead of returning the full response at once.
+The SDK uses async iterators, so you can consume the responses using a `for await...of` loop.
+
+```typescript
+import { ScoutClient } from "scoutos";
+
+const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
+const response = await client.workflows.runStream("workflow_id", {
+    environment: "environment",
+    revision_id: "revision_id",
+    session_id: "session_id"
+});
+for await (const item of response) {
+    console.log(item);
 }
 ```
 
@@ -162,7 +182,10 @@ console.log(rawResponse.headers['X-My-Header']);
 
 ### Runtime Compatibility
 
+
 The SDK works in the following runtimes:
+
+
 
 - Node.js 18+
 - Vercel

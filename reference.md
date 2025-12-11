@@ -1,7 +1,5 @@
 # Reference
-
 ## Workflows
-
 <details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">createRevision</a>({ ...params }) -> Scout.SrcHandlersCreateWorkflowRevisionResponse</code></summary>
 <dl>
 <dd>
@@ -18,10 +16,10 @@
 await client.workflows.createRevision({
     workflow_id: "workflow_id",
     workflow_key: "workflow_key",
-    body: {},
+    body: {}
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -35,20 +33,21 @@ await client.workflows.createRevision({
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowsCreateRevisionRequest`
-
+**request:** `Scout.WorkflowsCreateRevisionRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Workflows.RequestOptions`
+**requestOptions:** `Workflows.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -67,7 +66,6 @@ await client.workflows.createRevision({
 <dd>
 
 List all workflows in the organization
-
 </dd>
 </dl>
 </dd>
@@ -89,10 +87,10 @@ await client.workflows.list({
     limit: 1,
     query: "query",
     tags: "tags",
-    drive: true,
+    drive: true
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -106,20 +104,21 @@ await client.workflows.list({
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowsListRequest`
-
+**request:** `Scout.WorkflowsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Workflows.RequestOptions`
+**requestOptions:** `Workflows.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -140,10 +139,10 @@ await client.workflows.list({
 ```typescript
 await client.workflows.create({
     workflow_key: "workflow_key",
-    body: {},
+    body: {}
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -157,20 +156,21 @@ await client.workflows.create({
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowsCreateRequest`
-
+**request:** `Scout.WorkflowsCreateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Workflows.RequestOptions`
+**requestOptions:** `Workflows.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -189,7 +189,6 @@ await client.workflows.create({
 <dd>
 
 Fetch app configuration by ID.
-
 </dd>
 </dl>
 </dd>
@@ -205,8 +204,8 @@ Fetch app configuration by ID.
 
 ```typescript
 await client.workflows.get("workflow_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -220,20 +219,21 @@ await client.workflows.get("workflow_id");
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Workflows.RequestOptions`
+**requestOptions:** `Workflows.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -253,8 +253,8 @@ await client.workflows.get("workflow_id");
 
 ```typescript
 await client.workflows.update("workflow_id", {});
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -268,28 +268,29 @@ await client.workflows.update("workflow_id", {});
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowConfigInput`
-
+**request:** `Scout.WorkflowConfigInput` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Workflows.RequestOptions`
+**requestOptions:** `Workflows.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -309,8 +310,8 @@ await client.workflows.update("workflow_id", {});
 
 ```typescript
 await client.workflows.delete("workflow_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -324,20 +325,21 @@ await client.workflows.delete("workflow_id");
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Workflows.RequestOptions`
+**requestOptions:** `Workflows.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -359,13 +361,13 @@ await client.workflows.delete("workflow_id");
 const response = await client.workflows.runStream("workflow_id", {
     environment: "environment",
     revision_id: "revision_id",
-    session_id: "session_id",
+    session_id: "session_id"
 });
 for await (const item of response) {
     console.log(item);
 }
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -379,28 +381,29 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowsRunStreamRequest`
-
+**request:** `Scout.WorkflowsRunStreamRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Workflows.RequestOptions`
+**requestOptions:** `Workflows.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -422,10 +425,10 @@ for await (const item of response) {
 await client.workflows.run("workflow_id", {
     environment: "environment",
     revision_id: "revision_id",
-    session_id: "session_id",
+    session_id: "session_id"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -439,28 +442,29 @@ await client.workflows.run("workflow_id", {
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowsRunRequest`
-
+**request:** `Scout.WorkflowsRunRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Workflows.RequestOptions`
+**requestOptions:** `Workflows.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -483,10 +487,10 @@ await client.workflows.runWithConfig({
     environment: "environment",
     revision_id: "revision_id",
     session_id: "session_id",
-    workflow_config: {},
+    workflow_config: {}
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -500,27 +504,27 @@ await client.workflows.runWithConfig({
 <dl>
 <dd>
 
-**request:** `Scout.SrcHandlersWorkflowsExecuteWithConfigReqBody`
-
+**request:** `Scout.SrcHandlersWorkflowsExecuteWithConfigReqBody` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Workflows.RequestOptions`
+**requestOptions:** `Workflows.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## WorkflowRevisions
-
 <details><summary><code>client.workflowRevisions.<a href="/src/api/resources/workflowRevisions/client/Client.ts">update</a>(workflow_id, revision_id, { ...params }) -> Scout.SrcHandlersUpdateWorkflowRevisionResponse</code></summary>
 <dl>
 <dd>
@@ -535,10 +539,10 @@ await client.workflows.runWithConfig({
 
 ```typescript
 await client.workflowRevisions.update("workflow_id", "revision_id", {
-    name: "name",
+    name: "name"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -552,43 +556,43 @@ await client.workflowRevisions.update("workflow_id", "revision_id", {
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**revision_id:** `string`
-
+**revision_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.Payload`
-
+**request:** `Scout.Payload` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `WorkflowRevisions.RequestOptions`
+**requestOptions:** `WorkflowRevisions.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Revisions
-
 <details><summary><code>client.revisions.<a href="/src/api/resources/revisions/client/Client.ts">delete</a>(workflow_id, revision_id) -> Scout.SrcHandlersDeleteWorkflowRevisionResponse</code></summary>
 <dl>
 <dd>
@@ -603,8 +607,8 @@ await client.workflowRevisions.update("workflow_id", "revision_id", {
 
 ```typescript
 await client.revisions.delete("workflow_id", "revision_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -618,28 +622,29 @@ await client.revisions.delete("workflow_id", "revision_id");
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**revision_id:** `string`
-
+**revision_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Revisions.RequestOptions`
+**requestOptions:** `Revisions.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -658,7 +663,6 @@ await client.revisions.delete("workflow_id", "revision_id");
 <dd>
 
 List all app revisions in the organization
-
 </dd>
 </dl>
 </dd>
@@ -674,8 +678,8 @@ List all app revisions in the organization
 
 ```typescript
 await client.revisions.list("workflow_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -689,20 +693,21 @@ await client.revisions.list("workflow_id");
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Revisions.RequestOptions`
+**requestOptions:** `Revisions.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -722,8 +727,8 @@ await client.revisions.list("workflow_id");
 
 ```typescript
 await client.revisions.update("workflow_id", "revision_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -737,35 +742,35 @@ await client.revisions.update("workflow_id", "revision_id");
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**revision_id:** `string`
-
+**revision_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Revisions.RequestOptions`
+**requestOptions:** `Revisions.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Environments
-
 <details><summary><code>client.environments.<a href="/src/api/resources/environments/client/Client.ts">list</a>(workflow_id) -> Scout.SrcHandlersGetWorkflowEnvironmentsResponse</code></summary>
 <dl>
 <dd>
@@ -779,7 +784,6 @@ await client.revisions.update("workflow_id", "revision_id");
 <dd>
 
 List all environments for a workflow in the organization
-
 </dd>
 </dl>
 </dd>
@@ -795,8 +799,8 @@ List all environments for a workflow in the organization
 
 ```typescript
 await client.environments.list("workflow_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -810,20 +814,21 @@ await client.environments.list("workflow_id");
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Environments.RequestOptions`
+**requestOptions:** `Environments.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -842,7 +847,6 @@ await client.environments.list("workflow_id");
 <dd>
 
 Update deployments within a workflow environment
-
 </dd>
 </dl>
 </dd>
@@ -860,14 +864,12 @@ Update deployments within a workflow environment
 await client.environments.update("workflow_id", "environment_id", {
     name: "name",
     description: "description",
-    deployments: [
-        {
-            revision_lookup: "latest",
-        },
-    ],
+    deployments: [{
+            revision_lookup: "latest"
+        }]
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -881,43 +883,43 @@ await client.environments.update("workflow_id", "environment_id", {
 <dl>
 <dd>
 
-**workflow_id:** `string`
-
+**workflow_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**environment_id:** `string`
-
+**environment_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.UpdateRequestBody`
-
+**request:** `Scout.UpdateRequestBody` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Environments.RequestOptions`
+**requestOptions:** `Environments.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Usage
-
 <details><summary><code>client.usage.<a href="/src/api/resources/usage/client/Client.ts">get</a>({ ...params }) -> Scout.ResponseModelUsage</code></summary>
 <dl>
 <dd>
@@ -933,10 +935,10 @@ await client.environments.update("workflow_id", "environment_id", {
 ```typescript
 await client.usage.get({
     start_date: "start_date",
-    end_date: "end_date",
+    end_date: "end_date"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -950,27 +952,27 @@ await client.usage.get({
 <dl>
 <dd>
 
-**request:** `Scout.UsageGetRequest`
-
+**request:** `Scout.UsageGetRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Usage.RequestOptions`
+**requestOptions:** `Usage.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## WorkflowLogs
-
 <details><summary><code>client.workflowLogs.<a href="/src/api/resources/workflowLogs/client/Client.ts">listLogs</a>({ ...params }) -> core.Stream<Scout.WorkflowLogsListLogsResponse></code></summary>
 <dl>
 <dd>
@@ -992,13 +994,13 @@ const response = await client.workflowLogs.listLogs({
     session_id: "session_id",
     status: "status",
     cursor: "cursor",
-    summary_only: true,
+    summary_only: true
 });
 for await (const item of response) {
     console.log(item);
 }
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1012,20 +1014,21 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowLogsListLogsRequest`
-
+**request:** `Scout.WorkflowLogsListLogsRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `WorkflowLogs.RequestOptions`
+**requestOptions:** `WorkflowLogs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1045,7 +1048,6 @@ for await (const item of response) {
 
 Get full log details for a specific workflow run.
 Requires either session_id or workflow_run_id to identify the log.
-
 </dd>
 </dl>
 </dd>
@@ -1063,10 +1065,10 @@ Requires either session_id or workflow_run_id to identify the log.
 await client.workflowLogs.getDetails({
     workflow_id: "workflow_id",
     session_id: "session_id",
-    workflow_run_id: "workflow_run_id",
+    workflow_run_id: "workflow_run_id"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1080,27 +1082,27 @@ await client.workflowLogs.getDetails({
 <dl>
 <dd>
 
-**request:** `Scout.WorkflowLogsGetDetailsRequest`
-
+**request:** `Scout.WorkflowLogsGetDetailsRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `WorkflowLogs.RequestOptions`
+**requestOptions:** `WorkflowLogs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Copilots
-
 <details><summary><code>client.copilots.<a href="/src/api/resources/copilots/client/Client.ts">list</a>({ ...params }) -> Scout.SrcHandlersListCopilotsResponse</code></summary>
 <dl>
 <dd>
@@ -1114,7 +1116,6 @@ await client.workflowLogs.getDetails({
 <dd>
 
 List all copilots in the organization
-
 </dd>
 </dl>
 </dd>
@@ -1134,10 +1135,10 @@ await client.copilots.list({
     direction: "direction",
     start_at: "start_at",
     limit: 1,
-    query: "query",
+    query: "query"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1151,20 +1152,21 @@ await client.copilots.list({
 <dl>
 <dd>
 
-**request:** `Scout.CopilotsListRequest`
-
+**request:** `Scout.CopilotsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1184,8 +1186,8 @@ await client.copilots.list({
 
 ```typescript
 await client.copilots.create({});
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1199,20 +1201,21 @@ await client.copilots.create({});
 <dl>
 <dd>
 
-**request:** `Scout.CopilotConfig`
-
+**request:** `Scout.CopilotConfig` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1231,7 +1234,6 @@ await client.copilots.create({});
 <dd>
 
 Fetch copilot configuration by ID.
-
 </dd>
 </dl>
 </dd>
@@ -1247,8 +1249,8 @@ Fetch copilot configuration by ID.
 
 ```typescript
 await client.copilots.get("copilot_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1262,20 +1264,21 @@ await client.copilots.get("copilot_id");
 <dl>
 <dd>
 
-**copilot_id:** `string`
-
+**copilot_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1295,8 +1298,8 @@ await client.copilots.get("copilot_id");
 
 ```typescript
 await client.copilots.update("copilot_id", {});
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1310,28 +1313,29 @@ await client.copilots.update("copilot_id", {});
 <dl>
 <dd>
 
-**copilot_id:** `string`
-
+**copilot_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.CopilotConfig`
-
+**request:** `Scout.CopilotConfig` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1351,8 +1355,8 @@ await client.copilots.update("copilot_id", {});
 
 ```typescript
 await client.copilots.delete("copilot_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1366,27 +1370,27 @@ await client.copilots.delete("copilot_id");
 <dl>
 <dd>
 
-**copilot_id:** `string`
-
+**copilot_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Copilots.RequestOptions`
+**requestOptions:** `Copilots.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Triggers
-
 <details><summary><code>client.triggers.<a href="/src/api/resources/triggers/client/Client.ts">list</a>({ ...params }) -> Scout.ListTriggersResponse</code></summary>
 <dl>
 <dd>
@@ -1402,7 +1406,6 @@ await client.copilots.delete("copilot_id");
 All apis and effects are injected into every endpoint
 via request.context. The request_context() utility can be used
 to get Intellisense type-completion
-
 </dd>
 </dl>
 </dd>
@@ -1419,10 +1422,10 @@ to get Intellisense type-completion
 ```typescript
 await client.triggers.list({
     action_type: "workflow.execute",
-    workflow_id: "workflow_id",
+    workflow_id: "workflow_id"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1436,20 +1439,21 @@ await client.triggers.list({
 <dl>
 <dd>
 
-**request:** `Scout.TriggersListRequest`
-
+**request:** `Scout.TriggersListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Triggers.RequestOptions`
+**requestOptions:** `Triggers.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1471,11 +1475,11 @@ await client.triggers.list({
 await client.triggers.create({
     action: {
         action_type: "source.sync",
-        sync_id: "sync_id",
-    },
+        sync_id: "sync_id"
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1489,20 +1493,21 @@ await client.triggers.create({
 <dl>
 <dd>
 
-**request:** `Scout.TriggersCreateRequest`
-
+**request:** `Scout.TriggersCreateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Triggers.RequestOptions`
+**requestOptions:** `Triggers.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1524,11 +1529,11 @@ await client.triggers.create({
 await client.triggers.update("trigger_id", {
     action: {
         action_type: "source.sync",
-        sync_id: "sync_id",
-    },
+        sync_id: "sync_id"
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1542,28 +1547,29 @@ await client.triggers.update("trigger_id", {
 <dl>
 <dd>
 
-**trigger_id:** `string`
-
+**trigger_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.TriggersUpdateRequest`
-
+**request:** `Scout.TriggersUpdateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Triggers.RequestOptions`
+**requestOptions:** `Triggers.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1583,8 +1589,8 @@ await client.triggers.update("trigger_id", {
 
 ```typescript
 await client.triggers.delete("trigger_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1598,20 +1604,21 @@ await client.triggers.delete("trigger_id");
 <dl>
 <dd>
 
-**trigger_id:** `string`
-
+**trigger_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Triggers.RequestOptions`
+**requestOptions:** `Triggers.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1631,8 +1638,8 @@ await client.triggers.delete("trigger_id");
 
 ```typescript
 await client.triggers.executeSlack();
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1646,12 +1653,13 @@ await client.triggers.executeSlack();
 <dl>
 <dd>
 
-**requestOptions:** `Triggers.RequestOptions`
+**requestOptions:** `Triggers.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1671,8 +1679,8 @@ await client.triggers.executeSlack();
 
 ```typescript
 await client.triggers.executeCron();
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1686,12 +1694,13 @@ await client.triggers.executeCron();
 <dl>
 <dd>
 
-**requestOptions:** `Triggers.RequestOptions`
+**requestOptions:** `Triggers.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1713,11 +1722,10 @@ Update Cloud Scheduler job Authorization headers for organizations.
 Lists all Cloud Scheduler jobs and updates those matching the trigger pattern.
 
 Args:
-dry_run: If True, only shows what would be updated without making changes
-test_org_id: If provided, only processes jobs for this specific organization ID
+    dry_run: If True, only shows what would be updated without making changes
+    test_org_id: If provided, only processes jobs for this specific organization ID
 
 Only accessible to Scout internal organizations for security.
-
 </dd>
 </dl>
 </dd>
@@ -1734,10 +1742,10 @@ Only accessible to Scout internal organizations for security.
 ```typescript
 await client.triggers.updateCronAuthHeaders({
     dry_run: true,
-    test_org_id: "test_org_id",
+    test_org_id: "test_org_id"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1751,27 +1759,27 @@ await client.triggers.updateCronAuthHeaders({
 <dl>
 <dd>
 
-**request:** `Scout.TriggersUpdateCronAuthHeadersRequest`
-
+**request:** `Scout.TriggersUpdateCronAuthHeadersRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Triggers.RequestOptions`
+**requestOptions:** `Triggers.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Integrations
-
 <details><summary><code>client.integrations.<a href="/src/api/resources/integrations/client/Client.ts">list</a>(service, { ...params }) -> Scout.Integration[]</code></summary>
 <dl>
 <dd>
@@ -1787,7 +1795,6 @@ await client.triggers.updateCronAuthHeaders({
 List all OAuth integrations for the organization
 
 If service is 'all', returns integrations for all services.
-
 </dd>
 </dl>
 </dd>
@@ -1803,10 +1810,10 @@ If service is 'all', returns integrations for all services.
 
 ```typescript
 await client.integrations.list("service", {
-    fetch_icons: true,
+    fetch_icons: true
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1820,28 +1827,29 @@ await client.integrations.list("service", {
 <dl>
 <dd>
 
-**service:** `string`
-
+**service:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.IntegrationsListRequest`
-
+**request:** `Scout.IntegrationsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Integrations.RequestOptions`
+**requestOptions:** `Integrations.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -1860,7 +1868,6 @@ await client.integrations.list("service", {
 <dd>
 
 List all channels for a specific Slack workspace
-
 </dd>
 </dl>
 </dd>
@@ -1876,8 +1883,8 @@ List all channels for a specific Slack workspace
 
 ```typescript
 await client.integrations.listChannels("team_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1891,27 +1898,27 @@ await client.integrations.listChannels("team_id");
 <dl>
 <dd>
 
-**team_id:** `string`
-
+**team_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Integrations.RequestOptions`
+**requestOptions:** `Integrations.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Organizations
-
 <details><summary><code>client.organizations.<a href="/src/api/resources/organizations/client/Client.ts">deleteIntegration</a>(integration_type, integration_id) -> Record<string, string></code></summary>
 <dl>
 <dd>
@@ -1926,8 +1933,8 @@ await client.integrations.listChannels("team_id");
 
 ```typescript
 await client.organizations.deleteIntegration("integration_type", "integration_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -1941,35 +1948,35 @@ await client.organizations.deleteIntegration("integration_type", "integration_id
 <dl>
 <dd>
 
-**integration_type:** `string`
-
+**integration_type:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**integration_id:** `string`
-
+**integration_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Organizations.RequestOptions`
+**requestOptions:** `Organizations.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Collections
-
 <details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>({ ...params }) -> Scout.SrcAppHttpRoutesCollectionGetCollectionsResponse</code></summary>
 <dl>
 <dd>
@@ -1989,10 +1996,10 @@ await client.collections.list({
     query: "query",
     tags: "tags",
     sort: "sort",
-    drive: true,
+    drive: true
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2006,20 +2013,21 @@ await client.collections.list({
 <dl>
 <dd>
 
-**request:** `Scout.CollectionsListRequest`
-
+**request:** `Scout.CollectionsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2039,8 +2047,8 @@ await client.collections.list({
 
 ```typescript
 await client.collections.create({});
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2054,20 +2062,21 @@ await client.collections.create({});
 <dl>
 <dd>
 
-**request:** `Scout.CollectionConfig`
-
+**request:** `Scout.CollectionConfig` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2087,8 +2096,8 @@ await client.collections.create({});
 
 ```typescript
 await client.collections.get("collection_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2102,20 +2111,21 @@ await client.collections.get("collection_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2135,8 +2145,8 @@ await client.collections.get("collection_id");
 
 ```typescript
 await client.collections.update("collection_id", {});
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2150,28 +2160,29 @@ await client.collections.update("collection_id", {});
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.CollectionConfig`
-
+**request:** `Scout.CollectionConfig` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2190,7 +2201,6 @@ await client.collections.update("collection_id", {});
 <dd>
 
 Delete a collection given a collection_id.
-
 </dd>
 </dl>
 </dd>
@@ -2206,8 +2216,8 @@ Delete a collection given a collection_id.
 
 ```typescript
 await client.collections.delete("collection_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2221,20 +2231,21 @@ await client.collections.delete("collection_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2253,7 +2264,6 @@ await client.collections.delete("collection_id");
 <dd>
 
 List Sources by Destination, specifically given a collection and table
-
 </dd>
 </dl>
 </dd>
@@ -2269,8 +2279,8 @@ List Sources by Destination, specifically given a collection and table
 
 ```typescript
 await client.collections.listSyncs("collection_id", "table_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2284,28 +2294,29 @@ await client.collections.listSyncs("collection_id", "table_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2325,8 +2336,8 @@ await client.collections.listSyncs("collection_id", "table_id");
 
 ```typescript
 await client.collections.getViews("collection_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2340,20 +2351,21 @@ await client.collections.getViews("collection_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2375,11 +2387,11 @@ await client.collections.getViews("collection_id");
 await client.collections.updateViews("collection_id", {
     view_state: {
         organization_id: "organization_id",
-        collection_id: "collection_id",
-    },
+        collection_id: "collection_id"
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2393,28 +2405,29 @@ await client.collections.updateViews("collection_id", {
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.UpdateViewStateRequest`
-
+**request:** `Scout.UpdateViewStateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2434,8 +2447,8 @@ await client.collections.updateViews("collection_id", {
 
 ```typescript
 await client.collections.deleteViews("collection_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2449,20 +2462,21 @@ await client.collections.deleteViews("collection_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2482,8 +2496,8 @@ await client.collections.deleteViews("collection_id");
 
 ```typescript
 await client.collections.listIndividualViews("collection_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2497,20 +2511,21 @@ await client.collections.listIndividualViews("collection_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2530,10 +2545,10 @@ await client.collections.listIndividualViews("collection_id");
 
 ```typescript
 await client.collections.createView("collection_id", {
-    name: "name",
+    name: "name"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2547,28 +2562,29 @@ await client.collections.createView("collection_id", {
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.CreateViewRequest`
-
+**request:** `Scout.CreateViewRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2588,8 +2604,8 @@ await client.collections.createView("collection_id", {
 
 ```typescript
 await client.collections.updateView("collection_id", "view_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2603,36 +2619,37 @@ await client.collections.updateView("collection_id", "view_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**view_id:** `string`
-
+**view_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.UpdateViewRequest`
-
+**request:** `Scout.UpdateViewRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2652,8 +2669,8 @@ await client.collections.updateView("collection_id", "view_id");
 
 ```typescript
 await client.collections.deleteView("collection_id", "view_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2667,35 +2684,35 @@ await client.collections.deleteView("collection_id", "view_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**view_id:** `string`
-
+**view_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Collections.RequestOptions`
+**requestOptions:** `Collections.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Tables
-
 <details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">list</a>(collection_id) -> Scout.SrcAppHttpRoutesCollectionGetTablesResponse</code></summary>
 <dl>
 <dd>
@@ -2710,8 +2727,8 @@ await client.collections.deleteView("collection_id", "view_id");
 
 ```typescript
 await client.tables.list("collection_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2725,20 +2742,21 @@ await client.tables.list("collection_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tables.RequestOptions`
+**requestOptions:** `Tables.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2758,8 +2776,8 @@ await client.tables.list("collection_id");
 
 ```typescript
 await client.tables.create("collection_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2773,28 +2791,29 @@ await client.tables.create("collection_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.TableConfigInput`
-
+**request:** `Scout.TableConfigInput` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tables.RequestOptions`
+**requestOptions:** `Tables.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2814,8 +2833,8 @@ await client.tables.create("collection_id");
 
 ```typescript
 await client.tables.get("collection_id", "table_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2829,28 +2848,29 @@ await client.tables.get("collection_id", "table_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tables.RequestOptions`
+**requestOptions:** `Tables.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2870,8 +2890,8 @@ await client.tables.get("collection_id", "table_id");
 
 ```typescript
 await client.tables.update("collection_id", "table_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2885,36 +2905,37 @@ await client.tables.update("collection_id", "table_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.TableData`
-
+**request:** `Scout.TableData` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tables.RequestOptions`
+**requestOptions:** `Tables.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -2933,7 +2954,6 @@ await client.tables.update("collection_id", "table_id");
 <dd>
 
 Delete a table given a collection_id and table_id.
-
 </dd>
 </dl>
 </dd>
@@ -2949,8 +2969,8 @@ Delete a table given a collection_id and table_id.
 
 ```typescript
 await client.tables.delete("collection_id", "table_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -2964,28 +2984,29 @@ await client.tables.delete("collection_id", "table_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tables.RequestOptions`
+**requestOptions:** `Tables.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3005,8 +3026,8 @@ await client.tables.delete("collection_id", "table_id");
 
 ```typescript
 await client.tables.getSchema("collection_id", "table_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3020,28 +3041,29 @@ await client.tables.getSchema("collection_id", "table_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tables.RequestOptions`
+**requestOptions:** `Tables.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3060,7 +3082,6 @@ await client.tables.getSchema("collection_id", "table_id");
 <dd>
 
 Sync a table with a list of documents.
-
 </dd>
 </dl>
 </dd>
@@ -3075,13 +3096,11 @@ Sync a table with a list of documents.
 <dd>
 
 ```typescript
-await client.tables.sync("collection_id", "table_id", [
-    {
-        key: "value",
-    },
-]);
-```
+await client.tables.sync("collection_id", "table_id", [{
+        "key": "value"
+    }]);
 
+```
 </dd>
 </dl>
 </dd>
@@ -3095,43 +3114,43 @@ await client.tables.sync("collection_id", "table_id", [
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Record<string, unknown>[]`
-
+**request:** `Record<string, unknown>[]` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Tables.RequestOptions`
+**requestOptions:** `Tables.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Documents
-
 <details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">list</a>(collection_id, table_id, { ...params }) -> Scout.SrcAppHttpRoutesCollectionGetDocumentsResponse</code></summary>
 <dl>
 <dd>
@@ -3150,10 +3169,10 @@ await client.documents.list("collection_id", "table_id", {
     cursor: "cursor",
     query: "query",
     offset: 1,
-    sort_by: "sort_by",
+    sort_by: "sort_by"
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3167,36 +3186,37 @@ await client.documents.list("collection_id", "table_id", {
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.DocumentsListRequest`
-
+**request:** `Scout.DocumentsListRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions`
+**requestOptions:** `Documents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3221,11 +3241,11 @@ await client.documents.create("collection_id", "table_id", {
     await_completion: true,
     mode: "mode",
     body: {
-        key: true,
-    },
+        "key": true
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3239,36 +3259,37 @@ await client.documents.create("collection_id", "table_id", {
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.DocumentsCreateRequest`
-
+**request:** `Scout.DocumentsCreateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions`
+**requestOptions:** `Documents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3293,11 +3314,11 @@ await client.documents.updateBatch("collection_id", "table_id", {
     await_completion: true,
     mode: "mode",
     body: {
-        key: true,
-    },
+        "key": true
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3311,36 +3332,37 @@ await client.documents.updateBatch("collection_id", "table_id", {
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.DocumentsUpdateBatchRequest`
-
+**request:** `Scout.DocumentsUpdateBatchRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions`
+**requestOptions:** `Documents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3360,8 +3382,8 @@ await client.documents.updateBatch("collection_id", "table_id", {
 
 ```typescript
 await client.documents.get("collection_id", "table_id", "document_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3375,36 +3397,37 @@ await client.documents.get("collection_id", "table_id", "document_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**document_id:** `string`
-
+**document_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions`
+**requestOptions:** `Documents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3424,8 +3447,8 @@ await client.documents.get("collection_id", "table_id", "document_id");
 
 ```typescript
 await client.documents.update("collection_id", "table_id", "document_id", {});
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3439,44 +3462,45 @@ await client.documents.update("collection_id", "table_id", "document_id", {});
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**document_id:** `string`
-
+**document_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.DocumentsUpdateRequest`
-
+**request:** `Scout.DocumentsUpdateRequest` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions`
+**requestOptions:** `Documents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3496,8 +3520,8 @@ await client.documents.update("collection_id", "table_id", "document_id", {});
 
 ```typescript
 await client.documents.delete("collection_id", "table_id", "document_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3511,36 +3535,37 @@ await client.documents.delete("collection_id", "table_id", "document_id");
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**document_id:** `string`
-
+**document_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions`
+**requestOptions:** `Documents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3559,7 +3584,6 @@ await client.documents.delete("collection_id", "table_id", "document_id");
 <dd>
 
 Delete documents given a list of document ids.
-
 </dd>
 </dl>
 </dd>
@@ -3575,8 +3599,8 @@ Delete documents given a list of document ids.
 
 ```typescript
 await client.documents.deleteBatch("collection_id", "table_id", ["string"]);
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3590,43 +3614,43 @@ await client.documents.deleteBatch("collection_id", "table_id", ["string"]);
 <dl>
 <dd>
 
-**collection_id:** `string`
-
+**collection_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**table_id:** `string`
-
+**table_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `string[]`
-
+**request:** `string[]` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Documents.RequestOptions`
+**requestOptions:** `Documents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Sources
-
 <details><summary><code>client.sources.<a href="/src/api/resources/sources/client/Client.ts">list</a>() -> Scout.SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel</code></summary>
 <dl>
 <dd>
@@ -3641,8 +3665,8 @@ await client.documents.deleteBatch("collection_id", "table_id", ["string"]);
 
 ```typescript
 await client.sources.list();
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3656,19 +3680,19 @@ await client.sources.list();
 <dl>
 <dd>
 
-**requestOptions:** `Sources.RequestOptions`
+**requestOptions:** `Sources.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
 </details>
 
 ## Syncs
-
 <details><summary><code>client.syncs.<a href="/src/api/resources/syncs/client/Client.ts">list</a>() -> Scout.SrcAppHttpRoutesCollectionGetSyncsResponse</code></summary>
 <dl>
 <dd>
@@ -3683,8 +3707,8 @@ await client.sources.list();
 
 ```typescript
 await client.syncs.list();
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3698,12 +3722,13 @@ await client.syncs.list();
 <dl>
 <dd>
 
-**requestOptions:** `Syncs.RequestOptions`
+**requestOptions:** `Syncs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3725,18 +3750,18 @@ await client.syncs.list();
 await client.syncs.create({
     sync_config: {
         source_settings: {
-            source_archetype_id: "com.google.drive",
+            source_archetype_id: "com.google.drive"
         },
         destination: {
             destination_type: "collections.v2",
             collection_id: "collection_id",
-            table_id: "table_id",
+            table_id: "table_id"
         },
-        mapping: {},
-    },
+        mapping: {}
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3750,20 +3775,21 @@ await client.syncs.create({
 <dl>
 <dd>
 
-**request:** `Scout.RequestBody`
-
+**request:** `Scout.RequestBody` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Syncs.RequestOptions`
+**requestOptions:** `Syncs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3783,8 +3809,8 @@ await client.syncs.create({
 
 ```typescript
 await client.syncs.get("sync_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3798,20 +3824,21 @@ await client.syncs.get("sync_id");
 <dl>
 <dd>
 
-**sync_id:** `string`
-
+**sync_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Syncs.RequestOptions`
+**requestOptions:** `Syncs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3833,18 +3860,18 @@ await client.syncs.get("sync_id");
 await client.syncs.update("sync_id", {
     sync_config: {
         source_settings: {
-            source_archetype_id: "com.google.drive",
+            source_archetype_id: "com.google.drive"
         },
         destination: {
             destination_type: "collections.v2",
             collection_id: "collection_id",
-            table_id: "table_id",
+            table_id: "table_id"
         },
-        mapping: {},
-    },
+        mapping: {}
+    }
 });
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3858,28 +3885,29 @@ await client.syncs.update("sync_id", {
 <dl>
 <dd>
 
-**sync_id:** `string`
-
+**sync_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**request:** `Scout.RequestBody`
-
+**request:** `Scout.RequestBody` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Syncs.RequestOptions`
+**requestOptions:** `Syncs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3899,8 +3927,8 @@ await client.syncs.update("sync_id", {
 
 ```typescript
 await client.syncs.delete("sync_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3914,20 +3942,21 @@ await client.syncs.delete("sync_id");
 <dl>
 <dd>
 
-**sync_id:** `string`
-
+**sync_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Syncs.RequestOptions`
+**requestOptions:** `Syncs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>
@@ -3947,8 +3976,8 @@ await client.syncs.delete("sync_id");
 
 ```typescript
 await client.syncs.execute("sync_id");
-```
 
+```
 </dd>
 </dl>
 </dd>
@@ -3962,20 +3991,21 @@ await client.syncs.execute("sync_id");
 <dl>
 <dd>
 
-**sync_id:** `string`
-
+**sync_id:** `string` 
+    
 </dd>
 </dl>
 
 <dl>
 <dd>
 
-**requestOptions:** `Syncs.RequestOptions`
+**requestOptions:** `Syncs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
 
-</dd>
-</dl>
-</dd>
-</dl>
 
 </dd>
 </dl>

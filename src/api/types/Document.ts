@@ -13,7 +13,7 @@ export interface Document {
     revision_id?: string;
     job_id?: string;
     sync_id?: string;
-    studio_row?: boolean;
+    studio_row_id?: string;
     cells?: Record<string, unknown>;
 }
 

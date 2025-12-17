@@ -8,4 +8,5 @@ export interface Billing {
     renewal_date?: string;
     limits?: Scout.BillingLimits;
     usage?: Scout.BillingUsage;
+    credits?: number;
 }

@@ -6,10 +6,17 @@
  */
 export interface Flags {
     automation_columns?: boolean;
-    display_scout_organization_id?: boolean;
-    inbox_agent_trace?: boolean;
-    multi_player_chat?: boolean;
     team_workspace?: boolean;
     token_counts?: boolean;
+    copilot_greeting?: boolean;
+    copilot_powered_by?: boolean;
+    copilot_shadow?: boolean;
+    copilot_show_scrollbar?: boolean;
+    copilot_fab_additional_options?: boolean;
+    nav_evaluations?: boolean;
+    nav_scorers?: boolean;
+    nav_feedback?: boolean;
+    feedback_discussion?: boolean;
     drive_integrations?: boolean;
+    self_service?: boolean;
 }

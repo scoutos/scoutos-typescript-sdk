@@ -3,9 +3,9 @@
 import type * as Scout from "../index.js";
 
 /**
- * Hook model for agent targets (future).
+ * Hook model for task targets.
  */
-export interface AgentHook {
+export interface TaskHook {
     id: string;
     organization_id: string;
     name: string;
@@ -20,6 +20,6 @@ export interface AgentHook {
     created_at: string;
     updated_at: string;
     created_by?: Record<string, unknown>;
-    target_type?: "agent";
-    target_config: Scout.AgentTargetConfig;
+    target_type?: "task";
+    target_config: Scout.TaskTargetConfig;
 }

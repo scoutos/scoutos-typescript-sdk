@@ -7,7 +7,9 @@
  *         cursor: "cursor",
  *         query: "query",
  *         offset: 1,
- *         sort_by: "sort_by"
+ *         sort_by: "sort_by",
+ *         filter_column: "filter_column",
+ *         filter_value: "filter_value"
  *     }
  */
 export interface DocumentsListRequest {
@@ -21,4 +23,8 @@ export interface DocumentsListRequest {
     offset?: number;
     /** Sort by field */
     sort_by?: string;
+    /** Column to filter by (column_id or column_display_name). Requires filter_value. Cannot be used with pagination, sorting or query. */
+    filter_column?: string;
+    /** Value to match on. No partial text matching. Requires filter_column. Cannot be used with pagination, sorting or query. */
+    filter_value?: string;
 }

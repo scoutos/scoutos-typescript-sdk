@@ -11,5 +11,5 @@ export interface SlackTriggerConfigOutput {
 }
 
 export namespace SlackTriggerConfigOutput {
-    export type Action = Scout.SourceSync | Scout.WorkflowExecute;
+    export type Action = Scout.AgentExecute | Scout.SourceSync | Scout.WorkflowExecute;
 }

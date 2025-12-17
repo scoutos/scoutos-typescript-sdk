@@ -4,4 +4,13 @@ import type * as Scout from "../index.js";
 
 export interface UserOrganizationConfig {
     favorites?: Scout.FavoriteRef[];
+    roles?: UserOrganizationConfig.Roles.Item[];
+}
+
+export namespace UserOrganizationConfig {
+    export type Roles = Roles.Item[];
+
+    export namespace Roles {
+        export type Item = "admin" | "member" | string;
+    }
 }

@@ -34,7 +34,9 @@ export class Documents {
      *         cursor: "cursor",
      *         query: "query",
      *         offset: 1,
-     *         sort_by: "sort_by"
+     *         sort_by: "sort_by",
+     *         filter_column: "filter_column",
+     *         filter_value: "filter_value"
      *     })
      */
     public list(
@@ -52,7 +54,15 @@ export class Documents {
         request: Scout.DocumentsListRequest = {},
         requestOptions?: Documents.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionGetDocumentsResponse>> {
-        const { limit, cursor, query, offset, sort_by: sortBy } = request;
+        const {
+            limit,
+            cursor,
+            query,
+            offset,
+            sort_by: sortBy,
+            filter_column: filterColumn,
+            filter_value: filterValue,
+        } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (limit != null) {
             _queryParams.limit = limit.toString();
@@ -72,6 +82,14 @@ export class Documents {
 
         if (sortBy != null) {
             _queryParams.sort_by = sortBy;
+        }
+
+        if (filterColumn != null) {
+            _queryParams.filter_column = filterColumn;
+        }
+
+        if (filterValue != null) {
+            _queryParams.filter_value = filterValue;
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -364,6 +382,8 @@ export class Documents {
     }
 
     /**
+     * Route handler for getting a document
+     *
      * @param {string} collection_id
      * @param {string} table_id
      * @param {string} document_id
@@ -451,6 +471,8 @@ export class Documents {
     }
 
     /**
+     * Route handler for updating a document
+     *
      * @param {string} collection_id
      * @param {string} table_id
      * @param {string} document_id

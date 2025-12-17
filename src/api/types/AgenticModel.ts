@@ -2,6 +2,7 @@
 
 import type * as Scout from "../index.js";
 
-export interface RequestBody {
-    sync_config: Scout.SyncConfigInput;
+export interface AgenticModel {
+    model: string;
+    model_provider: Scout.ModelProvider;
 }

@@ -31,7 +31,9 @@ export namespace IntegrationWithConnections {
         Notion: "notion",
         Gsuite: "gsuite",
         Salesforce: "salesforce",
+        SalesforceUserScoped: "salesforce_user_scoped",
         Linear: "linear",
+        Laserfiche: "laserfiche",
         Github: "github",
         Attio: "attio",
         Mcp: "mcp",
@@ -41,7 +43,11 @@ export namespace IntegrationWithConnections {
         Statsig: "statsig",
         Reddit: "reddit",
         Airtable: "airtable",
+        Pipedrive: "pipedrive",
+        GhlCrm: "ghl_crm",
         ScoutNativeTools: "scout_native_tools",
+        Fireflies: "fireflies",
+        Microsoft365: "microsoft365",
     } as const;
     export type Id = (typeof Id)[keyof typeof Id];
 }

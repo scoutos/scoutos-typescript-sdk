@@ -3,9 +3,9 @@
 import type * as Scout from "../index.js";
 
 /**
- * Input schema for agent hooks (future).
+ * Input schema for task hooks.
  */
-export interface AgentHookInput {
+export interface TaskHookInput {
     name: string;
     description?: string;
     target_id: string;
@@ -14,6 +14,6 @@ export interface AgentHookInput {
     max_payload_size?: number;
     /** Whether to generate a secret for HMAC authentication */
     enable_auth?: boolean;
-    target_type?: "agent";
-    target_config?: Scout.AgentTargetConfig;
+    target_type?: "task";
+    target_config?: Scout.TaskTargetConfig;
 }

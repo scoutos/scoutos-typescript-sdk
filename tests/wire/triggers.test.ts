@@ -14,7 +14,7 @@ describe("Triggers", () => {
                 {
                     trigger_config: {
                         trigger_type: "cron",
-                        action: { action_type: "source.sync", sync_id: "sync_id" },
+                        action: { action_type: "agent.execute", agent_id: "agent_id" },
                         cron_expression: "cron_expression",
                     },
                     organization_id: "organization_id",
@@ -37,8 +37,8 @@ describe("Triggers", () => {
                     trigger_config: {
                         trigger_type: "cron",
                         action: {
-                            action_type: "source.sync",
-                            sync_id: "sync_id",
+                            action_type: "agent.execute",
+                            agent_id: "agent_id",
                         },
                         cron_expression: "cron_expression",
                     },
@@ -67,13 +67,13 @@ describe("Triggers", () => {
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { action: { action_type: "source.sync", sync_id: "sync_id" } };
+        const rawRequestBody = { action: { action_type: "agent.execute", agent_id: "agent_id" } };
         const rawResponseBody = {
             data: {
                 trigger_config: {
                     trigger_display_name: "trigger_display_name",
                     trigger_type: "cron",
-                    action: { action_type: "source.sync", sync_id: "sync_id" },
+                    action: { action_type: "agent.execute", agent_id: "agent_id" },
                     status: "active",
                     cron_expression: "cron_expression",
                     timezone: "timezone",
@@ -97,8 +97,8 @@ describe("Triggers", () => {
 
         const response = await client.triggers.create({
             action: {
-                action_type: "source.sync",
-                sync_id: "sync_id",
+                action_type: "agent.execute",
+                agent_id: "agent_id",
             },
         });
         expect(response).toEqual({
@@ -107,8 +107,8 @@ describe("Triggers", () => {
                     trigger_display_name: "trigger_display_name",
                     trigger_type: "cron",
                     action: {
-                        action_type: "source.sync",
-                        sync_id: "sync_id",
+                        action_type: "agent.execute",
+                        agent_id: "agent_id",
                     },
                     status: "active",
                     cron_expression: "cron_expression",
@@ -129,7 +129,7 @@ describe("Triggers", () => {
     test("create (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { action: { action_type: "source.sync", sync_id: "sync_id" } };
+        const rawRequestBody = { action: { action_type: "agent.execute", agent_id: "agent_id" } };
         const rawResponseBody = {};
         server
             .mockEndpoint()
@@ -143,8 +143,8 @@ describe("Triggers", () => {
         await expect(async () => {
             return await client.triggers.create({
                 action: {
-                    action_type: "source.sync",
-                    sync_id: "sync_id",
+                    action_type: "agent.execute",
+                    agent_id: "agent_id",
                 },
             });
         }).rejects.toThrow(Scout.UnprocessableEntityError);
@@ -153,13 +153,13 @@ describe("Triggers", () => {
     test("update (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { action: { action_type: "source.sync", sync_id: "sync_id" } };
+        const rawRequestBody = { action: { action_type: "agent.execute", agent_id: "agent_id" } };
         const rawResponseBody = {
             data: {
                 trigger_config: {
                     trigger_display_name: "trigger_display_name",
                     trigger_type: "cron",
-                    action: { action_type: "source.sync", sync_id: "sync_id" },
+                    action: { action_type: "agent.execute", agent_id: "agent_id" },
                     status: "active",
                     cron_expression: "cron_expression",
                     timezone: "timezone",
@@ -183,8 +183,8 @@ describe("Triggers", () => {
 
         const response = await client.triggers.update("trigger_id", {
             action: {
-                action_type: "source.sync",
-                sync_id: "sync_id",
+                action_type: "agent.execute",
+                agent_id: "agent_id",
             },
         });
         expect(response).toEqual({
@@ -193,8 +193,8 @@ describe("Triggers", () => {
                     trigger_display_name: "trigger_display_name",
                     trigger_type: "cron",
                     action: {
-                        action_type: "source.sync",
-                        sync_id: "sync_id",
+                        action_type: "agent.execute",
+                        agent_id: "agent_id",
                     },
                     status: "active",
                     cron_expression: "cron_expression",
@@ -215,7 +215,7 @@ describe("Triggers", () => {
     test("update (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
-        const rawRequestBody = { action: { action_type: "source.sync", sync_id: "sync_id" } };
+        const rawRequestBody = { action: { action_type: "agent.execute", agent_id: "agent_id" } };
         const rawResponseBody = {};
         server
             .mockEndpoint()
@@ -229,8 +229,8 @@ describe("Triggers", () => {
         await expect(async () => {
             return await client.triggers.update("trigger_id", {
                 action: {
-                    action_type: "source.sync",
-                    sync_id: "sync_id",
+                    action_type: "agent.execute",
+                    agent_id: "agent_id",
                 },
             });
         }).rejects.toThrow(Scout.UnprocessableEntityError);

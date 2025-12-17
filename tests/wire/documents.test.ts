@@ -21,7 +21,7 @@ describe("Documents", () => {
                     revision_id: "revision_id",
                     job_id: "job_id",
                     sync_id: "sync_id",
-                    studio_row: true,
+                    studio_row_id: "studio_row_id",
                     cells: { key: "value" },
                 },
             ],
@@ -44,6 +44,8 @@ describe("Documents", () => {
             query: "query",
             offset: 1,
             sort_by: "sort_by",
+            filter_column: "filter_column",
+            filter_value: "filter_value",
         });
         expect(response).toEqual({
             data: [
@@ -61,7 +63,7 @@ describe("Documents", () => {
                     revision_id: "revision_id",
                     job_id: "job_id",
                     sync_id: "sync_id",
-                    studio_row: true,
+                    studio_row_id: "studio_row_id",
                     cells: {
                         key: "value",
                     },
@@ -108,7 +110,7 @@ describe("Documents", () => {
                     revision_id: "revision_id",
                     job_id: "job_id",
                     sync_id: "sync_id",
-                    studio_row: true,
+                    studio_row_id: "studio_row_id",
                     cells: { key: "value" },
                 },
             ],
@@ -148,7 +150,7 @@ describe("Documents", () => {
                     revision_id: "revision_id",
                     job_id: "job_id",
                     sync_id: "sync_id",
-                    studio_row: true,
+                    studio_row_id: "studio_row_id",
                     cells: {
                         key: "value",
                     },
@@ -197,7 +199,7 @@ describe("Documents", () => {
                     revision_id: "revision_id",
                     job_id: "job_id",
                     sync_id: "sync_id",
-                    studio_row: true,
+                    studio_row_id: "studio_row_id",
                     cells: { key: "value" },
                 },
             ],
@@ -237,7 +239,7 @@ describe("Documents", () => {
                     revision_id: "revision_id",
                     job_id: "job_id",
                     sync_id: "sync_id",
-                    studio_row: true,
+                    studio_row_id: "studio_row_id",
                     cells: {
                         key: "value",
                     },
@@ -302,7 +304,7 @@ describe("Documents", () => {
                 revision_id: "revision_id",
                 job_id: "job_id",
                 sync_id: "sync_id",
-                studio_row: true,
+                studio_row_id: "studio_row_id",
                 cells: { key: "value" },
             },
         };
@@ -349,7 +351,7 @@ describe("Documents", () => {
                 revision_id: "revision_id",
                 job_id: "job_id",
                 sync_id: "sync_id",
-                studio_row: true,
+                studio_row_id: "studio_row_id",
                 cells: {
                     key: "value",
                 },
@@ -407,7 +409,7 @@ describe("Documents", () => {
                 revision_id: "revision_id",
                 job_id: "job_id",
                 sync_id: "sync_id",
-                studio_row: true,
+                studio_row_id: "studio_row_id",
                 cells: { key: "value" },
             },
         };
@@ -455,7 +457,7 @@ describe("Documents", () => {
                 revision_id: "revision_id",
                 job_id: "job_id",
                 sync_id: "sync_id",
-                studio_row: true,
+                studio_row_id: "studio_row_id",
                 cells: {
                     key: "value",
                 },

@@ -3,6 +3,10 @@
 import type * as Scout from "../index.js";
 
 export interface ScoutHookEventTrigger {
-    type?: "agent.interaction.responded";
+    type?: ScoutHookEventTrigger.Type;
     discriminator?: Scout.ScoutHookEventDiscriminator;
+}
+
+export namespace ScoutHookEventTrigger {
+    export type Type = "agent.interaction.responded" | string;
 }

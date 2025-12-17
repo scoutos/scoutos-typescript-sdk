@@ -2,6 +2,10 @@
 
 import type * as Scout from "../index.js";
 
+/**
+ * A user w.r.t a particular organization aka. the user's preferences,
+ * permissions, and other configuration.
+ */
 export interface Me {
     id?: string;
     doc_type?: "user";
@@ -18,6 +22,8 @@ export interface Me {
     use_cases?: string[];
     lead_id?: string;
     organizations?: Record<string, Scout.UserOrganizationConfig>;
+    acting_as: Scout.MeOrganization;
+    memberships: Record<string, Scout.MeOrganization>;
     favorites?: Scout.FavoriteItem[];
     flags: Scout.Flags;
     permissions?: Record<string, boolean>;

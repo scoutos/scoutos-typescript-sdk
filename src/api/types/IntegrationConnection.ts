@@ -30,7 +30,9 @@ export namespace IntegrationConnection {
         Notion: "notion",
         Gsuite: "gsuite",
         Salesforce: "salesforce",
+        SalesforceUserScoped: "salesforce_user_scoped",
         Linear: "linear",
+        Laserfiche: "laserfiche",
         Github: "github",
         Attio: "attio",
         Mcp: "mcp",
@@ -40,7 +42,11 @@ export namespace IntegrationConnection {
         Statsig: "statsig",
         Reddit: "reddit",
         Airtable: "airtable",
+        Pipedrive: "pipedrive",
+        GhlCrm: "ghl_crm",
         ScoutNativeTools: "scout_native_tools",
+        Fireflies: "fireflies",
+        Microsoft365: "microsoft365",
     } as const;
     export type IntegrationType = (typeof IntegrationType)[keyof typeof IntegrationType];
     export const AuthType = {

@@ -1474,8 +1474,8 @@ await client.triggers.list({
 ```typescript
 await client.triggers.create({
     action: {
-        action_type: "source.sync",
-        sync_id: "sync_id"
+        action_type: "agent.execute",
+        agent_id: "agent_id"
     }
 });
 
@@ -1528,8 +1528,8 @@ await client.triggers.create({
 ```typescript
 await client.triggers.update("trigger_id", {
     action: {
-        action_type: "source.sync",
-        sync_id: "sync_id"
+        action_type: "agent.execute",
+        agent_id: "agent_id"
     }
 });
 
@@ -3169,7 +3169,9 @@ await client.documents.list("collection_id", "table_id", {
     cursor: "cursor",
     query: "query",
     offset: 1,
-    sort_by: "sort_by"
+    sort_by: "sort_by",
+    filter_column: "filter_column",
+    filter_value: "filter_value"
 });
 
 ```
@@ -3372,6 +3374,20 @@ await client.documents.updateBatch("collection_id", "table_id", {
 <dl>
 <dd>
 
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Route handler for getting a document
+</dd>
+</dl>
+</dd>
+</dl>
+
 #### 🔌 Usage
 
 <dl>
@@ -3436,6 +3452,20 @@ await client.documents.get("collection_id", "table_id", "document_id");
 <details><summary><code>client.documents.<a href="/src/api/resources/documents/client/Client.ts">update</a>(collection_id, table_id, document_id, { ...params }) -> Scout.SrcAppHttpRoutesCollectionUpdateDocumentResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Route handler for updating a document
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -3775,7 +3805,7 @@ await client.syncs.create({
 <dl>
 <dd>
 
-**request:** `Scout.RequestBody` 
+**request:** `Scout.SrcAppHttpRoutesCollectionCreateSyncRequestBody` 
     
 </dd>
 </dl>
@@ -3893,7 +3923,7 @@ await client.syncs.update("sync_id", {
 <dl>
 <dd>
 
-**request:** `Scout.RequestBody` 
+**request:** `Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody` 
     
 </dd>
 </dl>

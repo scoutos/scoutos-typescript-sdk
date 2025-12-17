@@ -11,6 +11,8 @@ export interface SrcAppHttpRoutesDriveCreateDriveCrawlPayload {
 export namespace SrcAppHttpRoutesDriveCreateDriveCrawlPayload {
     export type SourceSyncSettings =
         | Scout.SourceSyncGoogleDriveSettings
+        | Scout.SourceSyncLaserficheSettings
+        | Scout.SourceSyncMicrosoft365Settings
         | Scout.SourceSyncNotionSettingsInput
         | Scout.SourceSyncCrawlSettingsInput
         | Scout.SourceSyncPageCrawlSettingsInput

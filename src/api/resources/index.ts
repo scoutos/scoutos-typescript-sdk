@@ -12,6 +12,7 @@ export * as integrations from "./integrations/index.js";
 export * as organizations from "./organizations/index.js";
 export * as revisions from "./revisions/index.js";
 export * as sources from "./sources/index.js";
+export * from "./syncs/client/requests/index.js";
 export * as syncs from "./syncs/index.js";
 export * from "./tables/client/requests/index.js";
 export * as tables from "./tables/index.js";

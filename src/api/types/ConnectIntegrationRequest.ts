@@ -3,6 +3,7 @@
 export interface ConnectIntegrationRequest {
     auth_type: ConnectIntegrationRequest.AuthType;
     api_key?: string;
+    connection_name?: string;
     code?: string;
     state?: string;
     scope?: string;
@@ -10,6 +11,7 @@ export interface ConnectIntegrationRequest {
     client_id?: string;
     client_secret?: string;
     environment?: string;
+    metadata?: Record<string, unknown>;
 }
 
 export namespace ConnectIntegrationRequest {

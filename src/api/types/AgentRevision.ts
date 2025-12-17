@@ -21,6 +21,7 @@ export interface AgentRevision {
     max_turns?: number;
     tool_config?: Record<string, AgentRevision.ToolConfig.Value | undefined>;
     conversation_starters?: string[];
+    dynamic_fallbacks?: Scout.AgenticModel[];
 }
 
 export namespace AgentRevision {

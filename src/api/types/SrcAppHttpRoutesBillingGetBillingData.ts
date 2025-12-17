@@ -15,4 +15,5 @@ export interface SrcAppHttpRoutesBillingGetBillingData {
     workflow_invocations: number;
     billing_limits: Scout.DeterminedBillingLimits;
     agent_interactions: number;
+    credits: number;
 }

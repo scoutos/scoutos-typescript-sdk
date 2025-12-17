@@ -87,7 +87,7 @@ export class Syncs {
     }
 
     /**
-     * @param {Scout.RequestBody} request
+     * @param {Scout.SrcAppHttpRoutesCollectionCreateSyncRequestBody} request
      * @param {Syncs.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -108,14 +108,14 @@ export class Syncs {
      *     })
      */
     public create(
-        request: Scout.RequestBody,
+        request: Scout.SrcAppHttpRoutesCollectionCreateSyncRequestBody,
         requestOptions?: Syncs.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionCreateSyncResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: Scout.RequestBody,
+        request: Scout.SrcAppHttpRoutesCollectionCreateSyncRequestBody,
         requestOptions?: Syncs.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionCreateSyncResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -261,7 +261,7 @@ export class Syncs {
 
     /**
      * @param {string} sync_id
-     * @param {Scout.RequestBody} request
+     * @param {Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody} request
      * @param {Syncs.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -283,7 +283,7 @@ export class Syncs {
      */
     public update(
         sync_id: string,
-        request: Scout.RequestBody,
+        request: Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody,
         requestOptions?: Syncs.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionUpdateSyncResponse> {
         return core.HttpResponsePromise.fromPromise(this.__update(sync_id, request, requestOptions));
@@ -291,7 +291,7 @@ export class Syncs {
 
     private async __update(
         sync_id: string,
-        request: Scout.RequestBody,
+        request: Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody,
         requestOptions?: Syncs.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionUpdateSyncResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

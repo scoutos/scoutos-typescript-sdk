@@ -12,6 +12,8 @@ export interface SyncConfigOutput {
 export namespace SyncConfigOutput {
     export type SourceSettings =
         | Scout.SourceSyncGoogleDriveSettings
+        | Scout.SourceSyncLaserficheSettings
+        | Scout.SourceSyncMicrosoft365Settings
         | Scout.SourceSyncNotionSettingsOutput
         | Scout.SourceSyncCrawlSettingsOutput
         | Scout.SourceSyncPageCrawlSettingsOutput

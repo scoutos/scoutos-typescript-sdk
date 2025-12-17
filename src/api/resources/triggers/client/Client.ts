@@ -122,8 +122,8 @@ export class Triggers {
      * @example
      *     await client.triggers.create({
      *         action: {
-     *             action_type: "source.sync",
-     *             sync_id: "sync_id"
+     *             action_type: "agent.execute",
+     *             agent_id: "agent_id"
      *         }
      *     })
      */
@@ -210,8 +210,8 @@ export class Triggers {
      * @example
      *     await client.triggers.update("trigger_id", {
      *         action: {
-     *             action_type: "source.sync",
-     *             sync_id: "sync_id"
+     *             action_type: "agent.execute",
+     *             agent_id: "agent_id"
      *         }
      *     })
      */

@@ -144,14 +144,14 @@ export class Collections {
     public create(
         request: Scout.CollectionConfig,
         requestOptions?: Collections.RequestOptions,
-    ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionCreateCollectionResponse> {
+    ): core.HttpResponsePromise<Scout.Response> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: Scout.CollectionConfig,
         requestOptions?: Collections.RequestOptions,
-    ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionCreateCollectionResponse>> {
+    ): Promise<core.WithRawResponse<Scout.Response>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
@@ -175,10 +175,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as Scout.SrcAppHttpRoutesCollectionCreateCollectionResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as Scout.Response, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -297,17 +294,17 @@ export class Collections {
 
     /**
      * @param {string} collection_id
-     * @param {Scout.CollectionConfig} request
+     * @param {Scout.CollectionConfigUpdate} request
      * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.collections.update("collection_id", {})
+     *     await client.collections.update("collection_id")
      */
     public update(
         collection_id: string,
-        request: Scout.CollectionConfig,
+        request: Scout.CollectionConfigUpdate = {},
         requestOptions?: Collections.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionUpdateCollectionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__update(collection_id, request, requestOptions));
@@ -315,7 +312,7 @@ export class Collections {
 
     private async __update(
         collection_id: string,
-        request: Scout.CollectionConfig,
+        request: Scout.CollectionConfigUpdate = {},
         requestOptions?: Collections.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionUpdateCollectionResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -383,7 +380,8 @@ export class Collections {
     }
 
     /**
-     * Delete a collection given a collection_id.
+     * Queue collection deletion and return immediately.
+     * Deletion happens asynchronously in background.
      *
      * @param {string} collection_id
      * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
@@ -481,7 +479,7 @@ export class Collections {
         collection_id: string,
         table_id: string,
         requestOptions?: Collections.RequestOptions,
-    ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel> {
+    ): core.HttpResponsePromise<Scout.ResponseModel> {
         return core.HttpResponsePromise.fromPromise(this.__listSyncs(collection_id, table_id, requestOptions));
     }
 
@@ -489,7 +487,7 @@ export class Collections {
         collection_id: string,
         table_id: string,
         requestOptions?: Collections.RequestOptions,
-    ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel>> {
+    ): Promise<core.WithRawResponse<Scout.ResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
@@ -510,10 +508,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as Scout.ResponseModel, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -1128,12 +1123,15 @@ export class Collections {
         }
     }
 
-    protected async _getAuthorizationHeader(): Promise<string | undefined> {
+    protected async _getAuthorizationHeader(): Promise<string> {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env.SCOUT_API_KEY;
-        if (bearer != null) {
-            return `Bearer ${bearer}`;
+        if (bearer == null) {
+            throw new errors.ScoutError({
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
+            });
         }
 
-        return undefined;
+        return `Bearer ${bearer}`;
     }
 }

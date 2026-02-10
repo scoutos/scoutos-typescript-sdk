@@ -4,5 +4,6 @@ export const ActionType = {
     WorkflowExecute: "workflow.execute",
     SourceSync: "source.sync",
     AgentExecute: "agent.execute",
+    BriefingExecute: "briefing.execute",
 } as const;
 export type ActionType = (typeof ActionType)[keyof typeof ActionType];

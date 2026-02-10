@@ -78,6 +78,7 @@ describe("Collections", () => {
                     collection_img_url: "collection_img_url",
                     collection_description: "collection_description",
                     tags: ["tags"],
+                    table_order: ["table_order"],
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -120,6 +121,7 @@ describe("Collections", () => {
                     collection_img_url: "collection_img_url",
                     collection_description: "collection_description",
                     tags: ["tags"],
+                    table_order: ["table_order"],
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -181,6 +183,7 @@ describe("Collections", () => {
                     collection_img_url: "collection_img_url",
                     collection_description: "collection_description",
                     tags: ["tags"],
+                    table_order: ["table_order"],
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -222,6 +225,7 @@ describe("Collections", () => {
                     collection_img_url: "collection_img_url",
                     collection_description: "collection_description",
                     tags: ["tags"],
+                    table_order: ["table_order"],
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -282,6 +286,7 @@ describe("Collections", () => {
                     collection_img_url: "collection_img_url",
                     collection_description: "collection_description",
                     tags: ["tags"],
+                    table_order: ["table_order"],
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -316,7 +321,7 @@ describe("Collections", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.collections.update("collection_id", {});
+        const response = await client.collections.update("collection_id");
         expect(response).toEqual({
             data: {
                 collection_config: {
@@ -324,6 +329,7 @@ describe("Collections", () => {
                     collection_img_url: "collection_img_url",
                     collection_description: "collection_description",
                     tags: ["tags"],
+                    table_order: ["table_order"],
                 },
                 last_updated_at: "2024-01-15T09:30:00Z",
                 created_at: "2024-01-15T09:30:00Z",
@@ -370,7 +376,7 @@ describe("Collections", () => {
             .build();
 
         await expect(async () => {
-            return await client.collections.update("collection_id", {});
+            return await client.collections.update("collection_id");
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });
 
@@ -778,7 +784,6 @@ describe("Collections", () => {
                     last_updated_by: "last_updated_by",
                     visibility: "personal",
                     shared_with: ["shared_with"],
-                    query: {},
                     type: "kanban",
                     settings: { grouping_column: "grouping_column" },
                 },
@@ -809,7 +814,6 @@ describe("Collections", () => {
                     last_updated_by: "last_updated_by",
                     visibility: "personal",
                     shared_with: ["shared_with"],
-                    query: {},
                     type: "kanban",
                     settings: {
                         grouping_column: "grouping_column",
@@ -867,6 +871,7 @@ describe("Collections", () => {
                     column_visibility: { key: true },
                     column_order: ["column_order"],
                     column_widths: { key: 1 },
+                    column_pinned_count: 1,
                     type: "kanban",
                     grouping_column: "grouping_column",
                     group_visibility: { key: true },
@@ -924,6 +929,7 @@ describe("Collections", () => {
                     column_widths: {
                         key: 1,
                     },
+                    column_pinned_count: 1,
                     type: "kanban",
                     grouping_column: "grouping_column",
                     group_visibility: {
@@ -993,6 +999,7 @@ describe("Collections", () => {
                     column_visibility: { key: true },
                     column_order: ["column_order"],
                     column_widths: { key: 1 },
+                    column_pinned_count: 1,
                     type: "kanban",
                     grouping_column: "grouping_column",
                     group_visibility: { key: true },
@@ -1048,6 +1055,7 @@ describe("Collections", () => {
                     column_widths: {
                         key: 1,
                     },
+                    column_pinned_count: 1,
                     type: "kanban",
                     grouping_column: "grouping_column",
                     group_visibility: {

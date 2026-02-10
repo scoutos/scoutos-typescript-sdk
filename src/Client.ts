@@ -3,6 +3,7 @@
 import { Collections } from "./api/resources/collections/client/Client.js";
 import { Copilots } from "./api/resources/copilots/client/Client.js";
 import { Documents } from "./api/resources/documents/client/Client.js";
+import { Drive } from "./api/resources/drive/client/Client.js";
 import { Environments } from "./api/resources/environments/client/Client.js";
 import { Integrations } from "./api/resources/integrations/client/Client.js";
 import { Organizations } from "./api/resources/organizations/client/Client.js";
@@ -42,6 +43,7 @@ export class ScoutClient {
     protected _documents: Documents | undefined;
     protected _sources: Sources | undefined;
     protected _syncs: Syncs | undefined;
+    protected _drive: Drive | undefined;
 
     constructor(_options: ScoutClient.Options = {}) {
         this._options = {
@@ -50,8 +52,8 @@ export class ScoutClient {
                 {
                     "X-Fern-Language": "JavaScript",
                     "X-Fern-SDK-Name": "scoutos",
-                    "X-Fern-SDK-Version": "0.11.2",
-                    "User-Agent": "scoutos/0.11.2",
+                    "X-Fern-SDK-Version": "0.11.3",
+                    "User-Agent": "scoutos/0.11.3",
                     "X-Fern-Runtime": core.RUNTIME.type,
                     "X-Fern-Runtime-Version": core.RUNTIME.version,
                 },
@@ -118,5 +120,9 @@ export class ScoutClient {
 
     public get syncs(): Syncs {
         return (this._syncs ??= new Syncs(this._options));
+    }
+
+    public get drive(): Drive {
+        return (this._drive ??= new Drive(this._options));
     }
 }

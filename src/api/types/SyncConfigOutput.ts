@@ -16,6 +16,7 @@ export namespace SyncConfigOutput {
         | Scout.SourceSyncMicrosoft365Settings
         | Scout.SourceSyncNotionSettingsOutput
         | Scout.SourceSyncCrawlSettingsOutput
+        | Scout.SourceSyncGuidedCrawlSettingsOutput
         | Scout.SourceSyncPageCrawlSettingsOutput
         | Scout.SourceSyncSitemapSettingsOutput
         | Scout.SourceSyncWebsiteSettings;

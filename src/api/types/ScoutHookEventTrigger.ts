@@ -8,5 +8,5 @@ export interface ScoutHookEventTrigger {
 }
 
 export namespace ScoutHookEventTrigger {
-    export type Type = "agent.interaction.responded" | string;
+    export type Type = "agent.interaction.responded" | "studio_table.row.updated" | "studio_table.row.created" | string;
 }

@@ -261,7 +261,7 @@ export class Syncs {
 
     /**
      * @param {string} sync_id
-     * @param {Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody} request
+     * @param {Scout.RequestBody} request
      * @param {Syncs.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -283,7 +283,7 @@ export class Syncs {
      */
     public update(
         sync_id: string,
-        request: Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody,
+        request: Scout.RequestBody,
         requestOptions?: Syncs.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionUpdateSyncResponse> {
         return core.HttpResponsePromise.fromPromise(this.__update(sync_id, request, requestOptions));
@@ -291,7 +291,7 @@ export class Syncs {
 
     private async __update(
         sync_id: string,
-        request: Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody,
+        request: Scout.RequestBody,
         requestOptions?: Syncs.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionUpdateSyncResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -508,12 +508,15 @@ export class Syncs {
         }
     }
 
-    protected async _getAuthorizationHeader(): Promise<string | undefined> {
+    protected async _getAuthorizationHeader(): Promise<string> {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env.SCOUT_API_KEY;
-        if (bearer != null) {
-            return `Bearer ${bearer}`;
+        if (bearer == null) {
+            throw new errors.ScoutError({
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
+            });
         }
 
-        return undefined;
+        return `Bearer ${bearer}`;
     }
 }

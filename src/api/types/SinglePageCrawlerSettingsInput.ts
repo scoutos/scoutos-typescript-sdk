@@ -17,6 +17,8 @@ export interface SinglePageCrawlerSettingsInput {
     allowed_domains?: string;
     /** User agent header to use for the crawl. By default, crawler will rotate user agents. */
     user_agent_header?: string;
+    /** Include raw HTML content in the crawl output for ADA compliance analysis. */
+    include_raw_html?: boolean;
     /** Fixed to 1 for single page crawls */
     max_depth?: number;
     /** Fixed to 1 for single page crawls */

@@ -2,6 +2,8 @@
 
 export interface SourceSyncGoogleDriveSettings {
     source_archetype_id: "com.google.drive";
+    /** Which Google Drive connection to sync from. */
+    connection_id?: string;
     /** Narrow down resources you sync from the source. Ensure you include fetch_filters method on Source Sync Archetype. */
     filter_options?: string[];
 }

@@ -9,6 +9,7 @@ import type * as Scout from "../../../../index.js";
  *         sync_id: "sync_id",
  *         await_completion: true,
  *         mode: "mode",
+ *         merge_fields: true,
  *         body: {
  *             "key": true
  *         }
@@ -23,5 +24,7 @@ export interface DocumentsCreateRequest {
     await_completion?: boolean;
     /** The mode to use for the document creation/update */
     mode?: string;
+    /** Whether to merge only provided fields into existing document */
+    merge_fields?: boolean;
     body: Scout.DocumentsCreateRequestBody;
 }

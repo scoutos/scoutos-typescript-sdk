@@ -1,3 +1,4 @@
+export type { CollectionConfigUpdate } from "./CollectionConfigUpdate.js";
 export type { CollectionsListRequest } from "./CollectionsListRequest.js";
 export type { CreateViewRequest } from "./CreateViewRequest.js";
 export type { UpdateViewRequest } from "./UpdateViewRequest.js";

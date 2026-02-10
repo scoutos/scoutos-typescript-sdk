@@ -5,6 +5,8 @@ export * as copilots from "./copilots/index.js";
 export * from "./documents/client/requests/index.js";
 export * as documents from "./documents/index.js";
 export * from "./documents/types/index.js";
+export * from "./drive/client/requests/index.js";
+export * as drive from "./drive/index.js";
 export * from "./environments/client/requests/index.js";
 export * as environments from "./environments/index.js";
 export * from "./integrations/client/requests/index.js";

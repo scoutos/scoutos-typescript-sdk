@@ -14,6 +14,11 @@ export namespace ScoutHookUpdate {
     export type TriggeringEvents = TriggeringEvents.Item[];
 
     export namespace TriggeringEvents {
-        export type Item = "agent.interaction.responded" | string | Scout.ScoutHookEventTrigger;
+        export type Item =
+            | "agent.interaction.responded"
+            | "studio_table.row.updated"
+            | "studio_table.row.created"
+            | string
+            | Scout.ScoutHookEventTrigger;
     }
 }

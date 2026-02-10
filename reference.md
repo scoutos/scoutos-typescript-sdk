@@ -345,7 +345,7 @@ await client.workflows.delete("workflow_id");
 </dl>
 </details>
 
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">runStream</a>(workflow_id, { ...params }) -> core.Stream<Scout.WorkflowRunStreamResponse></code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">runStream</a>(workflow_id, { ...params }) -> core.Stream&lt;Scout.WorkflowRunStreamResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -973,7 +973,7 @@ await client.usage.get({
 </details>
 
 ## WorkflowLogs
-<details><summary><code>client.workflowLogs.<a href="/src/api/resources/workflowLogs/client/Client.ts">listLogs</a>({ ...params }) -> core.Stream<Scout.WorkflowLogsListLogsResponse></code></summary>
+<details><summary><code>client.workflowLogs.<a href="/src/api/resources/workflowLogs/client/Client.ts">listLogs</a>({ ...params }) -> core.Stream&lt;Scout.WorkflowLogsListLogsResponse&gt;</code></summary>
 <dl>
 <dd>
 
@@ -1919,7 +1919,7 @@ await client.integrations.listChannels("team_id");
 </details>
 
 ## Organizations
-<details><summary><code>client.organizations.<a href="/src/api/resources/organizations/client/Client.ts">deleteIntegration</a>(integration_type, integration_id) -> Record<string, string></code></summary>
+<details><summary><code>client.organizations.<a href="/src/api/resources/organizations/client/Client.ts">deleteIntegration</a>(integration_type, integration_id) -> Record&lt;string, string&gt;</code></summary>
 <dl>
 <dd>
 
@@ -2033,7 +2033,7 @@ await client.collections.list({
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">create</a>({ ...params }) -> Scout.SrcAppHttpRoutesCollectionCreateCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">create</a>({ ...params }) -> Scout.Response</code></summary>
 <dl>
 <dd>
 
@@ -2144,7 +2144,7 @@ await client.collections.get("collection_id");
 <dd>
 
 ```typescript
-await client.collections.update("collection_id", {});
+await client.collections.update("collection_id");
 
 ```
 </dd>
@@ -2168,7 +2168,7 @@ await client.collections.update("collection_id", {});
 <dl>
 <dd>
 
-**request:** `Scout.CollectionConfig` 
+**request:** `Scout.CollectionConfigUpdate` 
     
 </dd>
 </dl>
@@ -2200,7 +2200,8 @@ await client.collections.update("collection_id", {});
 <dl>
 <dd>
 
-Delete a collection given a collection_id.
+Queue collection deletion and return immediately.
+Deletion happens asynchronously in background.
 </dd>
 </dl>
 </dd>
@@ -2251,7 +2252,7 @@ await client.collections.delete("collection_id");
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">listSyncs</a>(collection_id, table_id) -> Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">listSyncs</a>(collection_id, table_id) -> Scout.ResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -3242,6 +3243,7 @@ await client.documents.create("collection_id", "table_id", {
     sync_id: "sync_id",
     await_completion: true,
     mode: "mode",
+    merge_fields: true,
     body: {
         "key": true
     }
@@ -3315,6 +3317,7 @@ await client.documents.updateBatch("collection_id", "table_id", {
     sync_id: "sync_id",
     await_completion: true,
     mode: "mode",
+    merge_fields: true,
     body: {
         "key": true
     }
@@ -3923,7 +3926,7 @@ await client.syncs.update("sync_id", {
 <dl>
 <dd>
 
-**request:** `Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody` 
+**request:** `Scout.RequestBody` 
     
 </dd>
 </dl>
@@ -4030,6 +4033,155 @@ await client.syncs.execute("sync_id");
 <dd>
 
 **requestOptions:** `Syncs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Drive
+<details><summary><code>client.drive.<a href="/src/api/resources/drive/client/Client.ts">upload</a>({ ...params }) -> Scout.SrcAppHttpRoutesDriveSdkDriveUploadResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Upload one or more files to Drive.
+
+- `files`: the file uploads (multipart)
+- `metadata`: a JSON string containing a list of per-file metadata dicts,
+  positionally aligned with `files`. Each dict may contain:
+    - `path`   — fully qualified destination path (takes precedence)
+    - `folder` — destination folder
+    - `name`   — destination filename
+
+Resolution logic for each file at index i:
+- If path is provided, use it as the fully qualified path
+- Else if folder and name are provided, combine as {folder}/{name}
+- Else if folder is provided, combine as {folder}/{upload_filename}
+- Else if name is provided, use /{name} (root)
+- Else fall back to None (domain default behavior)
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.drive.upload({
+    files: [fs.createReadStream("/path/to/your/file")]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.BodySdkDriveUploadDriveUploadPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Drive.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.drive.<a href="/src/api/resources/drive/client/Client.ts">download</a>({ ...params }) -> core.BinaryResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Download a single file from Drive.
+
+Provide one of the following to identify the file:
+- `path`: fully qualified path (e.g., '/foo/bar/hello.txt')
+- `name` + `folder`: file name within a specific folder (e.g., name='hello.txt', folder='/foo/bar')
+
+Returns the file content as a streaming binary response.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.drive.download();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.DriveDownloadRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Drive.RequestOptions` 
     
 </dd>
 </dl>

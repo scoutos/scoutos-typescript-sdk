@@ -8,4 +8,5 @@ export interface OAuthAuthType {
     token_uri?: string;
     base_url?: string;
     scopes?: string[];
+    environment?: string;
 }

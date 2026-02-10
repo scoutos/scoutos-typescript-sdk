@@ -13,5 +13,5 @@ export interface CronTriggerConfig {
 }
 
 export namespace CronTriggerConfig {
-    export type Action = Scout.AgentExecute | Scout.SourceSync | Scout.WorkflowExecute;
+    export type Action = Scout.AgentExecute | Scout.BriefingExecute | Scout.SourceSync | Scout.WorkflowExecute;
 }

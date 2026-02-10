@@ -130,6 +130,7 @@ describe("Documents", () => {
             sync_id: "sync_id",
             await_completion: true,
             mode: "mode",
+            merge_fields: true,
             body: {
                 key: true,
             },
@@ -219,6 +220,7 @@ describe("Documents", () => {
             sync_id: "sync_id",
             await_completion: true,
             mode: "mode",
+            merge_fields: true,
             body: {
                 key: true,
             },

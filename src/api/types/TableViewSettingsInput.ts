@@ -6,6 +6,7 @@ export interface TableViewSettingsInput {
     column_visibility?: Record<string, boolean>;
     column_order?: string[];
     column_widths?: Record<string, number>;
+    column_pinned_count?: number;
     type: "table";
     row_height?: TableViewSettingsInput.RowHeight;
     show_row_numbers?: boolean;

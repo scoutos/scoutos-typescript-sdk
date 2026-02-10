@@ -48,6 +48,8 @@ export namespace IntegrationWithConnections {
         ScoutNativeTools: "scout_native_tools",
         Fireflies: "fireflies",
         Microsoft365: "microsoft365",
+        Sanity: "sanity",
+        Myla: "myla",
     } as const;
     export type Id = (typeof Id)[keyof typeof Id];
 }

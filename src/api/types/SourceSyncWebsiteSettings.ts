@@ -13,6 +13,10 @@ export interface SourceSyncWebsiteSettings {
     exclude_before_lastmod_date?: string;
     splitter?: SourceSyncWebsiteSettings.Splitter;
     wait_for_load_state?: string;
+    /** Wait for timeout (in ms) to allow JS hydration of a page. Playwright only. */
+    wait_for_timeout?: number;
+    /** Wait for a custom page/window event (e.g., 'appLoaded') before scraping. The page must dispatch this event via window.dispatchEvent(new Event('eventName')). Playwright only. */
+    wait_for_event?: string;
     scraper?: string;
     text_extractor?: Scout.TextExtractor;
     text_extractor_config?: Record<string, unknown>;
@@ -25,6 +29,8 @@ export interface SourceSyncWebsiteSettings {
     start_urls?: string[];
     /** User agent header to use for the crawl. By default, crawler will rotate user agents. */
     user_agent_header?: string;
+    /** Include raw HTML content in the crawl output for ADA compliance analysis. */
+    include_raw_html?: boolean;
     source_archetype_id: "com.scoutos.website";
 }
 

@@ -3,7 +3,7 @@
 import type * as Scout from "../index.js";
 
 export interface SrcAppHttpRoutesWorldInteractInteractionRequest {
-    messages: Scout.SrcAppHttpRoutesWorldInteractIncomingMessage[];
+    messages: Scout.IncomingMessage[];
     /** Optional metadata (e.g., salesforce_session) */
     metadata?: Record<string, unknown>;
 }

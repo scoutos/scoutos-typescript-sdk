@@ -12,6 +12,7 @@ export namespace ToolConfigResource {
         Crawl: "crawl",
         File: "file",
         Integration: "integration",
+        Directory: "directory",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
 }

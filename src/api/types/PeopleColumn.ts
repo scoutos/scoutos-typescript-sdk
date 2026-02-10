@@ -11,6 +11,6 @@ export interface PeopleColumn {
     /** Optional automation configuration to automatically calculate values for this column */
     automation_config: Scout.TypescriptAutomationConfig;
     allow_multiple?: boolean;
-    /** Available options for selection */
+    /** Some available options and their configurations. Options are hydrated client side from the user's organization members. */
     options?: Scout.SelectOptionItem[];
 }

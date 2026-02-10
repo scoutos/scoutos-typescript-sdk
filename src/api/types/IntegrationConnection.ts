@@ -47,6 +47,8 @@ export namespace IntegrationConnection {
         ScoutNativeTools: "scout_native_tools",
         Fireflies: "fireflies",
         Microsoft365: "microsoft365",
+        Sanity: "sanity",
+        Myla: "myla",
     } as const;
     export type IntegrationType = (typeof IntegrationType)[keyof typeof IntegrationType];
     export const AuthType = {

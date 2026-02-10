@@ -5,4 +5,5 @@ export interface CollectionConfig {
     collection_img_url?: string;
     collection_description?: string;
     tags?: string[];
+    table_order?: string[];
 }

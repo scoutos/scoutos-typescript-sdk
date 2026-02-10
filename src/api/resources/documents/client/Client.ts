@@ -167,6 +167,7 @@ export class Documents {
      *         sync_id: "sync_id",
      *         await_completion: true,
      *         mode: "mode",
+     *         merge_fields: true,
      *         body: {
      *             "key": true
      *         }
@@ -187,7 +188,14 @@ export class Documents {
         request: Scout.DocumentsCreateRequest,
         requestOptions?: Documents.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.DocumentResponse>> {
-        const { job_id: jobId, sync_id: syncId, await_completion: awaitCompletion, mode, body: _body } = request;
+        const {
+            job_id: jobId,
+            sync_id: syncId,
+            await_completion: awaitCompletion,
+            mode,
+            merge_fields: mergeFields,
+            body: _body,
+        } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (jobId != null) {
             _queryParams.job_id = jobId;
@@ -203,6 +211,10 @@ export class Documents {
 
         if (mode != null) {
             _queryParams.mode = mode;
+        }
+
+        if (mergeFields != null) {
+            _queryParams.merge_fields = mergeFields.toString();
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -280,6 +292,7 @@ export class Documents {
      *         sync_id: "sync_id",
      *         await_completion: true,
      *         mode: "mode",
+     *         merge_fields: true,
      *         body: {
      *             "key": true
      *         }
@@ -302,7 +315,14 @@ export class Documents {
         request: Scout.DocumentsUpdateBatchRequest,
         requestOptions?: Documents.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.DocumentResponse>> {
-        const { job_id: jobId, sync_id: syncId, await_completion: awaitCompletion, mode, body: _body } = request;
+        const {
+            job_id: jobId,
+            sync_id: syncId,
+            await_completion: awaitCompletion,
+            mode,
+            merge_fields: mergeFields,
+            body: _body,
+        } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (jobId != null) {
             _queryParams.job_id = jobId;
@@ -318,6 +338,10 @@ export class Documents {
 
         if (mode != null) {
             _queryParams.mode = mode;
+        }
+
+        if (mergeFields != null) {
+            _queryParams.merge_fields = mergeFields.toString();
         }
 
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -750,12 +774,15 @@ export class Documents {
         }
     }
 
-    protected async _getAuthorizationHeader(): Promise<string | undefined> {
+    protected async _getAuthorizationHeader(): Promise<string> {
         const bearer = (await core.Supplier.get(this._options.apiKey)) ?? process?.env.SCOUT_API_KEY;
-        if (bearer != null) {
-            return `Bearer ${bearer}`;
+        if (bearer == null) {
+            throw new errors.ScoutError({
+                message:
+                    "Please specify a bearer by either passing it in to the constructor or initializing a SCOUT_API_KEY environment variable",
+            });
         }
 
-        return undefined;
+        return `Bearer ${bearer}`;
     }
 }

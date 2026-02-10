@@ -17,6 +17,8 @@ export interface MultiPageCrawlerSettingsInput {
     allowed_domains?: string;
     /** User agent header to use for the crawl. By default, crawler will rotate user agents. */
     user_agent_header?: string;
+    /** Include raw HTML content in the crawl output for ADA compliance analysis. */
+    include_raw_html?: boolean;
     /** Maximum number of link levels to follow from the starting page */
     max_depth?: number;
     /** Maximum number of pages to crawl. */

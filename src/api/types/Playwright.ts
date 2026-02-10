@@ -4,6 +4,10 @@ export interface Playwright {
     scraper_type: "playwright";
     /** Determines when the scraper considers navigation to be finished. */
     wait_for_load_state?: Playwright.WaitForLoadState;
+    /** Additional wait time in milliseconds after page load to allow JavaScript hydration. Only applies to Playwright scraper. */
+    wait_for_timeout?: number;
+    /** Wait for a custom page/window event (e.g., 'appLoaded') before scraping. The page must dispatch this event via window.dispatchEvent(new Event('eventName')). Playwright only. */
+    wait_for_event?: string;
 }
 
 export namespace Playwright {

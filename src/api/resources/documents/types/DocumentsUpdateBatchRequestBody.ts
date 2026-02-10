@@ -3,5 +3,5 @@
 export type DocumentsUpdateBatchRequestBody =
     | Record<string, boolean | Record<string, unknown> | number | number | string>
     | Record<string, (boolean | Record<string, unknown> | number | number | string) | undefined>
-    | Record<string, boolean | Record<string, unknown> | number | number | string | unknown[]>[]
+    | Record<string, boolean | Record<string, unknown> | number | number | string>[]
     | Record<string, (boolean | Record<string, unknown> | number | number | string | unknown[]) | undefined>[];

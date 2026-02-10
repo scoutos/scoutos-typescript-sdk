@@ -6,6 +6,7 @@ export interface KanbanViewSettingsInput {
     column_visibility?: Record<string, boolean>;
     column_order?: string[];
     column_widths?: Record<string, number>;
+    column_pinned_count?: number;
     type: "kanban";
     grouping_column: string;
     group_visibility?: Record<string, boolean>;

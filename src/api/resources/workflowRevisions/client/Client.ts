@@ -23,7 +23,7 @@ export class WorkflowRevisions {
     /**
      * @param {string} workflow_id
      * @param {string} revision_id
-     * @param {Scout.Payload} request
+     * @param {Scout.UpdateWorkflowRevisionPayload} request
      * @param {WorkflowRevisions.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -36,7 +36,7 @@ export class WorkflowRevisions {
     public update(
         workflow_id: string,
         revision_id: string,
-        request: Scout.Payload,
+        request: Scout.UpdateWorkflowRevisionPayload,
         requestOptions?: WorkflowRevisions.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcHandlersUpdateWorkflowRevisionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__update(workflow_id, revision_id, request, requestOptions));
@@ -45,7 +45,7 @@ export class WorkflowRevisions {
     private async __update(
         workflow_id: string,
         revision_id: string,
-        request: Scout.Payload,
+        request: Scout.UpdateWorkflowRevisionPayload,
         requestOptions?: WorkflowRevisions.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcHandlersUpdateWorkflowRevisionResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

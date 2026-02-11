@@ -1,3 +1,5 @@
+export * from "./agents/client/requests/index.js";
+export * as agents from "./agents/index.js";
 export * from "./collections/client/requests/index.js";
 export * as collections from "./collections/index.js";
 export * from "./copilots/client/requests/index.js";

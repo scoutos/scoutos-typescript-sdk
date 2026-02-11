@@ -109,11 +109,11 @@ You can upload files using the client:
 ```typescript
 import { createReadStream } from "fs";
 import { ScoutClient } from "scoutos";
-import * as fs from "fs";
 
 const client = new ScoutClient({ apiKey: "YOUR_API_KEY" });
-await client.drive.upload({
-    files: [fs.createReadStream("/path/to/your/file")]
+await client.agents.upsert({
+    agent: "agent",
+    revision: "revision"
 });
 ```
 The client accepts a variety of types for file upload parameters:

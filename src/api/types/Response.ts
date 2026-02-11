@@ -3,5 +3,7 @@
 import type * as Scout from "../index.js";
 
 export interface Response {
-    data?: Scout.Collection;
+    data?: Scout.Collection[];
+    has_more?: boolean;
+    next_cursor?: string;
 }

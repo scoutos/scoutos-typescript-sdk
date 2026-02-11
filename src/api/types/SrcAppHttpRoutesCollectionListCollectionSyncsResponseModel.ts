@@ -2,7 +2,6 @@
 
 import type * as Scout from "../index.js";
 
-export interface SrcAppHttpRoutesRootGetInfoResponse {
-    message?: string;
-    service: Scout.ServiceInfo;
+export interface SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel {
+    syncs: Scout.Sync[];
 }

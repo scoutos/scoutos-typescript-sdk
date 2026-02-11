@@ -3,5 +3,5 @@
 import type * as Scout from "../index.js";
 
 export interface ResponseModel {
-    syncs: Scout.Sync[];
+    sources: Scout.SourceArchetype[];
 }

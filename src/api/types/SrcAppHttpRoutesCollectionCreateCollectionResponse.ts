@@ -2,6 +2,6 @@
 
 import type * as Scout from "../index.js";
 
-export interface SrcAppHttpRoutesBillingGetBillingResponse {
-    data: Scout.Data;
+export interface SrcAppHttpRoutesCollectionCreateCollectionResponse {
+    data?: Scout.Collection;
 }

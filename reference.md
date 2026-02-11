@@ -572,7 +572,7 @@ await client.workflowRevisions.update("workflow_id", "revision_id", {
 <dl>
 <dd>
 
-**request:** `Scout.Payload` 
+**request:** `Scout.UpdateWorkflowRevisionPayload` 
     
 </dd>
 </dl>
@@ -1977,7 +1977,7 @@ await client.organizations.deleteIntegration("integration_type", "integration_id
 </details>
 
 ## Collections
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>({ ...params }) -> Scout.SrcAppHttpRoutesCollectionGetCollectionsResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>({ ...params }) -> Scout.Response</code></summary>
 <dl>
 <dd>
 
@@ -2033,7 +2033,7 @@ await client.collections.list({
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">create</a>({ ...params }) -> Scout.Response</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">create</a>({ ...params }) -> Scout.SrcAppHttpRoutesCollectionCreateCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2252,7 +2252,7 @@ await client.collections.delete("collection_id");
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">listSyncs</a>(collection_id, table_id) -> Scout.ResponseModel</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">listSyncs</a>(collection_id, table_id) -> Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -3684,7 +3684,7 @@ await client.documents.deleteBatch("collection_id", "table_id", ["string"]);
 </details>
 
 ## Sources
-<details><summary><code>client.sources.<a href="/src/api/resources/sources/client/Client.ts">list</a>() -> Scout.SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel</code></summary>
+<details><summary><code>client.sources.<a href="/src/api/resources/sources/client/Client.ts">list</a>() -> Scout.ResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -3926,7 +3926,7 @@ await client.syncs.update("sync_id", {
 <dl>
 <dd>
 
-**request:** `Scout.RequestBody` 
+**request:** `Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody` 
     
 </dd>
 </dl>
@@ -4033,6 +4033,213 @@ await client.syncs.execute("sync_id");
 <dd>
 
 **requestOptions:** `Syncs.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Agents
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">list</a>() -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.list();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">upsert</a>({ ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.upsert({
+    agent: "agent",
+    revision: "revision"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `Scout.BodyUpsertAgentAgentsPost` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">get</a>(agent_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve an agent and its active revision by agent_id.
+Verifies that the agent belongs to the actor's organization.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.get("agent_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">delete</a>(agent_id) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.delete("agent_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
     
 </dd>
 </dl>

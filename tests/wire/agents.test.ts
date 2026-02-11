@@ -5,24 +5,219 @@ import { ScoutClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("Agents", () => {
+    test("interact_sync (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { messages: [{ content: "content" }] };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/world/agent_id/_interact_sync")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.agents.interactSync("agent_id", {
+            session_id: "session_id",
+            body: {
+                messages: [
+                    {
+                        content: "content",
+                    },
+                ],
+            },
+        });
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
+
+    test("interact_sync (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { messages: [{ content: "content" }, { content: "content" }] };
+        const rawResponseBody = {};
+        server
+            .mockEndpoint()
+            .post("/world/agent_id/_interact_sync")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.agents.interactSync("agent_id", {
+                body: {
+                    messages: [
+                        {
+                            content: "content",
+                        },
+                        {
+                            content: "content",
+                        },
+                    ],
+                },
+            });
+        }).rejects.toThrow(Scout.UnprocessableEntityError);
+    });
+
+    test("interact_sync_with_session (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { messages: [{ content: "content" }] };
+        const rawResponseBody = { key: "value" };
+        server
+            .mockEndpoint()
+            .post("/world/agent_id/session_id/_interact_sync")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.agents.interactSyncWithSession("agent_id", "session_id", {
+            messages: [
+                {
+                    content: "content",
+                },
+            ],
+        });
+        expect(response).toEqual({
+            key: "value",
+        });
+    });
+
+    test("interact_sync_with_session (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { messages: [{ content: "content" }, { content: "content" }] };
+        const rawResponseBody = {};
+        server
+            .mockEndpoint()
+            .post("/world/agent_id/undefined/_interact_sync")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.agents.interactSyncWithSession("agent_id", undefined, {
+                messages: [
+                    {
+                        content: "content",
+                    },
+                    {
+                        content: "content",
+                    },
+                ],
+            });
+        }).rejects.toThrow(Scout.UnprocessableEntityError);
+    });
+
     test("list", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = [
+            {
+                id: "id",
+                doc_type: "agent",
+                created_by: { type: "organization", id: "system" },
+                updated_by: { type: "organization", id: "system" },
+                created_at: "2024-01-15T09:30:00Z",
+                updated_at: "2024-01-15T09:30:00Z",
+                is_seed: true,
+                name: "name",
+                description: "description",
+                profile_icon_fill: "profile_icon_fill",
+                profile_asset_url: "profile_asset_url",
+                parent: "parent",
+                active_revision: "active_revision",
+                visibility: { type: "organization", id: "system" },
+                from_persona: "from_persona",
+            },
+        ];
         server.mockEndpoint().get("/agents").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.agents.list();
-        expect(response).toEqual({
-            key: "value",
-        });
+        expect(response).toEqual([
+            {
+                id: "id",
+                doc_type: "agent",
+                created_by: {
+                    type: "organization",
+                    id: "system",
+                },
+                updated_by: {
+                    type: "organization",
+                    id: "system",
+                },
+                created_at: "2024-01-15T09:30:00Z",
+                updated_at: "2024-01-15T09:30:00Z",
+                is_seed: true,
+                name: "name",
+                description: "description",
+                profile_icon_fill: "profile_icon_fill",
+                profile_asset_url: "profile_asset_url",
+                parent: "parent",
+                active_revision: "active_revision",
+                visibility: {
+                    type: "organization",
+                    id: "system",
+                },
+                from_persona: "from_persona",
+            },
+        ]);
     });
 
     test("get (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = {
+            agent: {
+                id: "id",
+                doc_type: "agent",
+                created_by: { type: "organization", id: "system" },
+                updated_by: { type: "organization", id: "system" },
+                created_at: "2024-01-15T09:30:00Z",
+                updated_at: "2024-01-15T09:30:00Z",
+                is_seed: true,
+                name: "name",
+                description: "description",
+                profile_icon_fill: "profile_icon_fill",
+                profile_asset_url: "profile_asset_url",
+                parent: "parent",
+                active_revision: "active_revision",
+                visibility: { type: "organization", id: "system" },
+                from_persona: "from_persona",
+            },
+            revision: {
+                id: "id",
+                doc_type: "agent_revision",
+                created_by: { type: "organization", id: "system" },
+                updated_by: { type: "organization", id: "system" },
+                created_at: "2024-01-15T09:30:00Z",
+                updated_at: "2024-01-15T09:30:00Z",
+                is_seed: true,
+                parent: "parent",
+                organization_id: "organization_id",
+                model_provider: "open_ai",
+                model: "_dynamic",
+                system: "system",
+                temperature: 1.1,
+                response_style: "precise",
+                max_tokens: 1,
+                max_turns: 1,
+                tool_config: { key: true },
+                conversation_starters: ["conversation_starters"],
+                dynamic_fallbacks: [{ model: "model", model_provider: "open_ai" }],
+            },
+        };
         server
             .mockEndpoint()
             .get("/agents/agent_id/active")
@@ -33,7 +228,66 @@ describe("Agents", () => {
 
         const response = await client.agents.get("agent_id");
         expect(response).toEqual({
-            key: "value",
+            agent: {
+                id: "id",
+                doc_type: "agent",
+                created_by: {
+                    type: "organization",
+                    id: "system",
+                },
+                updated_by: {
+                    type: "organization",
+                    id: "system",
+                },
+                created_at: "2024-01-15T09:30:00Z",
+                updated_at: "2024-01-15T09:30:00Z",
+                is_seed: true,
+                name: "name",
+                description: "description",
+                profile_icon_fill: "profile_icon_fill",
+                profile_asset_url: "profile_asset_url",
+                parent: "parent",
+                active_revision: "active_revision",
+                visibility: {
+                    type: "organization",
+                    id: "system",
+                },
+                from_persona: "from_persona",
+            },
+            revision: {
+                id: "id",
+                doc_type: "agent_revision",
+                created_by: {
+                    type: "organization",
+                    id: "system",
+                },
+                updated_by: {
+                    type: "organization",
+                    id: "system",
+                },
+                created_at: "2024-01-15T09:30:00Z",
+                updated_at: "2024-01-15T09:30:00Z",
+                is_seed: true,
+                parent: "parent",
+                organization_id: "organization_id",
+                model_provider: "open_ai",
+                model: "_dynamic",
+                system: "system",
+                temperature: 1.1,
+                response_style: "precise",
+                max_tokens: 1,
+                max_turns: 1,
+                tool_config: {
+                    key: true,
+                },
+                conversation_starters: ["conversation_starters"],
+                dynamic_fallbacks: [
+                    {
+                        model: "model",
+                        model_provider: "open_ai",
+                    },
+                ],
+            },
         });
     });
 
@@ -59,7 +313,7 @@ describe("Agents", () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { key: "value" };
+        const rawResponseBody = { detail: "detail" };
         server
             .mockEndpoint()
             .delete("/agents/agent_id")
@@ -70,7 +324,7 @@ describe("Agents", () => {
 
         const response = await client.agents.delete("agent_id");
         expect(response).toEqual({
-            key: "value",
+            detail: "detail",
         });
     });
 

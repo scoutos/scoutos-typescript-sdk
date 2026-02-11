@@ -2,7 +2,7 @@
 
 import type * as Scout from "../index.js";
 
-export interface AgentRevision {
+export interface AgentRevisionInput {
     id?: string;
     doc_type?: "agent_revision";
     created_by: Scout.ActorIdentity;
@@ -13,18 +13,18 @@ export interface AgentRevision {
     parent: string;
     organization_id: string;
     model_provider?: Scout.ModelProvider;
-    model: AgentRevision.Model;
+    model: AgentRevisionInput.Model;
     system: string;
     temperature?: number;
-    response_style?: AgentRevision.ResponseStyle;
+    response_style?: AgentRevisionInput.ResponseStyle;
     max_tokens?: number;
     max_turns?: number;
-    tool_config?: Record<string, AgentRevision.ToolConfig.Value | undefined>;
+    tool_config?: Record<string, AgentRevisionInput.ToolConfig.Value | undefined>;
     conversation_starters?: string[];
     dynamic_fallbacks?: Scout.AgenticModel[];
 }
 
-export namespace AgentRevision {
+export namespace AgentRevisionInput {
     export type Model = "_dynamic" | string;
     export const ResponseStyle = {
         Precise: "precise",

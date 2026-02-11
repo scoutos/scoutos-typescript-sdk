@@ -39,14 +39,14 @@ export class Collections {
     public list(
         request: Scout.CollectionsListRequest = {},
         requestOptions?: Collections.RequestOptions,
-    ): core.HttpResponsePromise<Scout.Response> {
+    ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionGetCollectionsResponse> {
         return core.HttpResponsePromise.fromPromise(this.__list(request, requestOptions));
     }
 
     private async __list(
         request: Scout.CollectionsListRequest = {},
         requestOptions?: Collections.RequestOptions,
-    ): Promise<core.WithRawResponse<Scout.Response>> {
+    ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionGetCollectionsResponse>> {
         const { start_at: startAt, limit, query, tags, sort, drive } = request;
         const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
         if (startAt != null) {
@@ -93,7 +93,10 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as Scout.Response, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as Scout.SrcAppHttpRoutesCollectionGetCollectionsResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {

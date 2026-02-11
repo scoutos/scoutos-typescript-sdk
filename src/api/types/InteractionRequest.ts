@@ -3,18 +3,7 @@
 import type * as Scout from "../index.js";
 
 export interface InteractionRequest {
-    messages: Scout.SrcAppHttpRoutesInboxHandleMessageIncomingMessage[];
-    participants: InteractionRequest.Participants.Item[];
-    history?: Scout.SrcAppHttpRoutesInboxHandleMessageIncomingMessage[];
-    files?: Scout.FilesAttribute[];
-    mentions?: Scout.Mention[];
-    ephemeral_agent_revision?: Scout.AgentRevision;
-}
-
-export namespace InteractionRequest {
-    export type Participants = Participants.Item[];
-
-    export namespace Participants {
-        export type Item = Scout.ScoutUser | Scout.AiAgent;
-    }
+    messages: Scout.IncomingMessage[];
+    /** Optional metadata (e.g., salesforce_session) */
+    metadata?: Record<string, unknown>;
 }

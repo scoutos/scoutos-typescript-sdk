@@ -12,6 +12,7 @@ export interface ConnectIntegrationRequest {
     client_secret?: string;
     environment?: string;
     metadata?: Record<string, unknown>;
+    user_scoped?: boolean;
 }
 
 export namespace ConnectIntegrationRequest {

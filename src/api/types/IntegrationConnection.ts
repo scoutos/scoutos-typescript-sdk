@@ -17,6 +17,7 @@ export interface IntegrationConnection {
     updated_at: string;
     expires_in?: number;
     has_permission?: boolean;
+    user_id?: string;
 }
 
 export namespace IntegrationConnection {

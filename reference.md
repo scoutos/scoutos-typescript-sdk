@@ -1977,7 +1977,7 @@ await client.organizations.deleteIntegration("integration_type", "integration_id
 </details>
 
 ## Collections
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>({ ...params }) -> Scout.Response</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">list</a>({ ...params }) -> Scout.SrcAppHttpRoutesCollectionGetCollectionsResponse</code></summary>
 <dl>
 <dd>
 
@@ -3926,7 +3926,7 @@ await client.syncs.update("sync_id", {
 <dl>
 <dd>
 
-**request:** `Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody` 
+**request:** `Scout.RequestBody` 
     
 </dd>
 </dl>
@@ -4045,7 +4045,279 @@ await client.syncs.execute("sync_id");
 </details>
 
 ## Agents
-<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">list</a>() -> unknown</code></summary>
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">interact</a>(agent_id, { ...params }) -> core.Stream&lt;unknown&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.agents.interact("agent_id", {
+    session_id: "session_id",
+    body: {
+        messages: [{
+                content: "content"
+            }]
+    }
+});
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Scout.AgentsInteractRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">interactSync</a>(agent_id, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.interactSync("agent_id", {
+    session_id: "session_id",
+    body: {
+        messages: [{
+                content: "content"
+            }]
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Scout.AgentsInteractSyncRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">interactWithSession</a>(agent_id, session_id, { ...params }) -> core.Stream&lt;unknown&gt;</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+const response = await client.agents.interactWithSession("agent_id", "session_id", {
+    messages: [{
+            content: "content"
+        }]
+});
+for await (const item of response) {
+    console.log(item);
+}
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `string | undefined` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Scout.InteractionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">interactSyncWithSession</a>(agent_id, session_id, { ...params }) -> unknown</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.interactSyncWithSession("agent_id", "session_id", {
+    messages: [{
+            content: "content"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `string | undefined` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Scout.InteractionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">list</a>() -> Scout.Agent[]</code></summary>
 <dl>
 <dd>
 
@@ -4086,7 +4358,7 @@ await client.agents.list();
 </dl>
 </details>
 
-<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">upsert</a>({ ...params }) -> unknown</code></summary>
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">upsert</a>({ ...params }) -> Scout.UpsertAgentResponse</code></summary>
 <dl>
 <dd>
 
@@ -4138,7 +4410,7 @@ await client.agents.upsert({
 </dl>
 </details>
 
-<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">get</a>(agent_id) -> unknown</code></summary>
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">get</a>(agent_id) -> Scout.ActiveAgentResponse</code></summary>
 <dl>
 <dd>
 
@@ -4202,7 +4474,7 @@ await client.agents.get("agent_id");
 </dl>
 </details>
 
-<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">delete</a>(agent_id) -> unknown</code></summary>
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">delete</a>(agent_id) -> Scout.DeleteAgentResponse</code></summary>
 <dl>
 <dd>
 

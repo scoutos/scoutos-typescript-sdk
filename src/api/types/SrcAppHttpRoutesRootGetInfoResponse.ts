@@ -2,6 +2,7 @@
 
 import type * as Scout from "../index.js";
 
-export interface Response {
-    data: Scout.SrcAppHttpRoutesBillingCreatePortalSessionData;
+export interface SrcAppHttpRoutesRootGetInfoResponse {
+    message?: string;
+    service: Scout.ServiceInfo;
 }

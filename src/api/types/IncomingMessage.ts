@@ -3,11 +3,19 @@
 export interface IncomingMessage {
     /** The content of the incoming message */
     content: IncomingMessage.Content;
+    /** The type of content in the message */
+    content_type: IncomingMessage.ContentType;
 }
 
 export namespace IncomingMessage {
     /**
      * The content of the incoming message
      */
-    export type Content = string | Record<string, unknown> | (Record<string, unknown> | string)[];
+    export type Content = string | Record<string, unknown>;
+    /** The type of content in the message */
+    export const ContentType = {
+        TextPlain: "text/plain",
+        ApplicationJson: "application/json",
+    } as const;
+    export type ContentType = (typeof ContentType)[keyof typeof ContentType];
 }

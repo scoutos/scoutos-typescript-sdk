@@ -293,6 +293,43 @@ describe("Triggers", () => {
         });
     });
 
+    test("execute_telegram (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { key: true };
+        server
+            .mockEndpoint()
+            .post("/v2/triggers/telegram/execute/connection_id")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.triggers.executeTelegram("connection_id");
+        expect(response).toEqual({
+            key: true,
+        });
+    });
+
+    test("execute_telegram (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {};
+        server
+            .mockEndpoint()
+            .post("/v2/triggers/telegram/execute/connection_id")
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.triggers.executeTelegram("connection_id");
+        }).rejects.toThrow(Scout.UnprocessableEntityError);
+    });
+
     test("execute_cron", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });

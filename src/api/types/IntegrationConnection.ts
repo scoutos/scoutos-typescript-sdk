@@ -2,6 +2,7 @@
 
 export interface IntegrationConnection {
     id: string;
+    connection_name?: string;
     auth_client: string;
     integration_type: IntegrationConnection.IntegrationType;
     auth_type: IntegrationConnection.AuthType;
@@ -50,11 +51,14 @@ export namespace IntegrationConnection {
         Microsoft365: "microsoft365",
         Sanity: "sanity",
         Myla: "myla",
+        Northbeam: "northbeam",
+        Telegram: "telegram",
     } as const;
     export type IntegrationType = (typeof IntegrationType)[keyof typeof IntegrationType];
     export const AuthType = {
-        ApiKey: "api_key",
         Oauth2: "oauth2",
+        Oauth2Custom: "oauth2_custom",
+        ApiKey: "api_key",
         Mcp: "mcp",
     } as const;
     export type AuthType = (typeof AuthType)[keyof typeof AuthType];

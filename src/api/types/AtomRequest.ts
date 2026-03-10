@@ -14,17 +14,20 @@ import type * as Scout from "../index.js";
  * - More fields → more specific cache → fewer hits, fresher data
  * - Fewer fields → broader cache → more hits, potentially staler
  *
- * Platform always injects org_id and user_id from the authenticated session.
+ * Platform always injects org_id from the authenticated session.
+ * Product faces can include user_id in context if per-user caching is desired.
  */
 export interface AtomRequest {
     /** Schema definitions for each atom type. Keys are atom type names. Values are JSON Schema objects. Used for prompt injection + validation. */
     atoms: Record<string, Record<string, unknown>>;
     /** Free-form text instructions for the agent. Can include markdown, code blocks, structured examples. */
     instructions: string;
-    /** Product-defined context for cache granularity. Platform injects org_id and user_id from session. Product can add page, date, or other fields to control caching. */
+    /** Product-defined context for cache granularity. Platform injects org_id from session. Product can add user_id, page, date, or other fields to control caching. */
     context?: Record<string, unknown>;
     /** Client-controlled caching directives */
     cache?: Scout.CacheDirective;
-    /** Additional tool names to enable for the agent. Platform always enables emit_atoms. Product can request integration tools (e.g., 'Salesforce__salesforce_query'). */
+    /** DEPRECATED: Use agent.tools instead. Additional tool names to enable for the agent. Falls back to this if agent.tools is not set. */
     tools?: string[];
+    /** Agent configuration overrides (model, temperature, max_tokens, tools). */
+    agent?: Scout.AgentConfig;
 }

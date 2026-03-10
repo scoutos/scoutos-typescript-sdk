@@ -1665,6 +1665,71 @@ await client.triggers.executeSlack();
 </dl>
 </details>
 
+<details><summary><code>client.triggers.<a href="/src/api/resources/triggers/client/Client.ts">executeTelegram</a>(connection_id) -> Record&lt;string, boolean&gt;</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Receive Telegram webhook updates.
+Telegram sends POST with JSON body (Update object). Respond 200 quickly;
+look up Trigger docs for this connection and run agent, streaming replies to Telegram.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.triggers.executeTelegram("connection_id");
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**connection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Triggers.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.triggers.<a href="/src/api/resources/triggers/client/Client.ts">executeCron</a>() -> Scout.ExecuteTriggerResponse</code></summary>
 <dl>
 <dd>
@@ -3926,7 +3991,7 @@ await client.syncs.update("sync_id", {
 <dl>
 <dd>
 
-**request:** `Scout.RequestBody` 
+**request:** `Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody` 
     
 </dd>
 </dl>
@@ -4228,7 +4293,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `Scout.InteractionRequest` 
+**request:** `Scout.SrcAppHttpRoutesWorldInteractInteractionRequest` 
     
 </dd>
 </dl>
@@ -4297,7 +4362,7 @@ await client.agents.interactSyncWithSession("agent_id", "session_id", {
 <dl>
 <dd>
 
-**request:** `Scout.InteractionRequest` 
+**request:** `Scout.SrcAppHttpRoutesWorldInteractInteractionRequest` 
     
 </dd>
 </dl>

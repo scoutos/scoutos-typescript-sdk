@@ -3,5 +3,7 @@
 import type * as Scout from "../index.js";
 
 export interface Response {
-    data: Scout.SrcAppHttpRoutesBillingCreatePortalSessionData;
+    original_file_text?: string;
+    original_file: Scout.File_;
+    parsed_text_file: Scout.File_;
 }

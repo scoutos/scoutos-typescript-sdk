@@ -50,6 +50,8 @@ export namespace IntegrationWithConnections {
         Microsoft365: "microsoft365",
         Sanity: "sanity",
         Myla: "myla",
+        Northbeam: "northbeam",
+        Telegram: "telegram",
     } as const;
     export type Id = (typeof Id)[keyof typeof Id];
 }

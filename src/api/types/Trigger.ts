@@ -12,5 +12,5 @@ export interface Trigger {
 }
 
 export namespace Trigger {
-    export type TriggerConfig = Scout.CronTriggerConfig | Scout.SlackTriggerConfigOutput;
+    export type TriggerConfig = Scout.CronTriggerConfig | Scout.SlackTriggerConfigOutput | Scout.TelegramTriggerConfig;
 }

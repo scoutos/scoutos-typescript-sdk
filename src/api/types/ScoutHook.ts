@@ -10,7 +10,7 @@ export interface ScoutHook {
     created_at?: string;
     updated_at?: string;
     is_seed?: boolean;
-    hook_config: Scout.ScoutHookConfigHttp;
+    hook_config: Record<string, unknown>;
     name: string;
     description?: string;
     metadata: Record<string, unknown>;

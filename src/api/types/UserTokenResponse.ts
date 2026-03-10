@@ -3,5 +3,4 @@
 export interface UserTokenResponse {
     integration_type: string;
     access_token: string;
-    refresh_token?: string;
 }

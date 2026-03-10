@@ -5,6 +5,7 @@
  */
 export interface TemplateInstallRequest {
     template_name: string;
+    template_slug?: string;
     template_description: string;
     steps: string[];
     tools?: string[];

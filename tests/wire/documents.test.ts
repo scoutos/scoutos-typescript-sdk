@@ -23,6 +23,7 @@ describe("Documents", () => {
                     sync_id: "sync_id",
                     studio_row_id: "studio_row_id",
                     cells: { key: "value" },
+                    search_metadata: [{}],
                 },
             ],
             next_cursor: "next_cursor",
@@ -67,6 +68,7 @@ describe("Documents", () => {
                     cells: {
                         key: "value",
                     },
+                    search_metadata: [{}],
                 },
             ],
             next_cursor: "next_cursor",
@@ -112,6 +114,7 @@ describe("Documents", () => {
                     sync_id: "sync_id",
                     studio_row_id: "studio_row_id",
                     cells: { key: "value" },
+                    search_metadata: [{}],
                 },
             ],
             status: "status",
@@ -155,6 +158,7 @@ describe("Documents", () => {
                     cells: {
                         key: "value",
                     },
+                    search_metadata: [{}],
                 },
             ],
             status: "status",
@@ -202,6 +206,7 @@ describe("Documents", () => {
                     sync_id: "sync_id",
                     studio_row_id: "studio_row_id",
                     cells: { key: "value" },
+                    search_metadata: [{}],
                 },
             ],
             status: "status",
@@ -245,6 +250,7 @@ describe("Documents", () => {
                     cells: {
                         key: "value",
                     },
+                    search_metadata: [{}],
                 },
             ],
             status: "status",
@@ -308,6 +314,7 @@ describe("Documents", () => {
                 sync_id: "sync_id",
                 studio_row_id: "studio_row_id",
                 cells: { key: "value" },
+                search_metadata: [{}],
             },
         };
         server
@@ -357,6 +364,7 @@ describe("Documents", () => {
                 cells: {
                     key: "value",
                 },
+                search_metadata: [{}],
             },
         });
     });
@@ -413,6 +421,7 @@ describe("Documents", () => {
                 sync_id: "sync_id",
                 studio_row_id: "studio_row_id",
                 cells: { key: "value" },
+                search_metadata: [{}],
             },
         };
         server
@@ -463,6 +472,7 @@ describe("Documents", () => {
                 cells: {
                     key: "value",
                 },
+                search_metadata: [{}],
             },
         });
     });

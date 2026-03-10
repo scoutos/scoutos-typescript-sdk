@@ -16,6 +16,7 @@ export interface AgentSchedule {
     timezone?: string;
     agent_directives: AgentSchedule.AgentDirectives.Item[];
     scheduled_up_to: string;
+    consecutive_agent_not_found_count?: number;
 }
 
 export namespace AgentSchedule {

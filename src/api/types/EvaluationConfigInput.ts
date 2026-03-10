@@ -36,5 +36,10 @@ export namespace EvaluationConfigInput {
     /**
      * What to evaluate (workflow/agent/tool/prompt)
      */
-    export type Target = Scout.AgentTarget | Scout.PromptTarget | Scout.ToolTarget | Scout.WorkflowTarget;
+    export type Target =
+        | Scout.AgentTarget
+        | Scout.ByoTarget
+        | Scout.PromptTarget
+        | Scout.ToolTarget
+        | Scout.WorkflowTarget;
 }

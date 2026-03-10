@@ -3,7 +3,7 @@
 import type * as Scout from "../index.js";
 
 export interface ScoutHookUpdate {
-    hook_config?: Scout.ScoutHookConfigHttp;
+    hook_config?: Record<string, unknown>;
     name?: string;
     description?: string;
     metadata?: Record<string, unknown>;

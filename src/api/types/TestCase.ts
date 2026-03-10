@@ -18,6 +18,8 @@ export interface TestCase {
     scorers?: Scout.ScorerConfigRuntime[];
     /** Additional metadata (e.g., row_id, tags) */
     metadata?: Record<string, unknown>;
+    /** Tags for grouping (e.g., feature names) */
+    tags?: string[];
 }
 
 export namespace TestCase {

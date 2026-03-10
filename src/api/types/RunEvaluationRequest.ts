@@ -11,5 +11,10 @@ export interface RunEvaluationRequest {
 }
 
 export namespace RunEvaluationRequest {
-    export type TargetOverride = Scout.AgentTarget | Scout.PromptTarget | Scout.ToolTarget | Scout.WorkflowTarget;
+    export type TargetOverride =
+        | Scout.AgentTarget
+        | Scout.ByoTarget
+        | Scout.PromptTarget
+        | Scout.ToolTarget
+        | Scout.WorkflowTarget;
 }

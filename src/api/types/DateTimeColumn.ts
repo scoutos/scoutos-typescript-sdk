@@ -11,4 +11,25 @@ export interface DateTimeColumn {
     /** Optional automation configuration to automatically calculate values for this column */
     automation_config: Scout.TypescriptAutomationConfig;
     default?: string;
+    include_time?: boolean;
+    date_format?: DateTimeColumn.DateFormat;
+    time_format?: DateTimeColumn.TimeFormat;
+    time_zone?: string;
+}
+
+export namespace DateTimeColumn {
+    export const DateFormat = {
+        Full: "full",
+        Short: "short",
+        Iso: "iso",
+        European: "european",
+        Relative: "relative",
+    } as const;
+    export type DateFormat = (typeof DateFormat)[keyof typeof DateFormat];
+    export const TimeFormat = {
+        TwelveH: "12h",
+        TwentyFourH: "24h",
+        TwentyFourHSeconds: "24h_seconds",
+    } as const;
+    export type TimeFormat = (typeof TimeFormat)[keyof typeof TimeFormat];
 }

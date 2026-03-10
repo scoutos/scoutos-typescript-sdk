@@ -26,6 +26,10 @@ export interface EvaluationMetrics {
     scorer_metrics?: Record<string, Record<string, number | undefined> | undefined>;
     /** Average composite score across all tests (0-1) */
     avg_composite_score?: number;
+    /** Per-dimension aggregated metrics {dimension_name: {avg, min, max, count}} */
+    dimension_metrics?: Record<string, Record<string, number | undefined> | undefined>;
+    /** Metrics grouped by test case tags {tag: {count, pass_rate, ...}} */
+    tag_metrics?: Record<string, Record<string, unknown> | undefined>;
     /** Number of test cases with pending human reviews */
     human_review_pending_count?: number;
     /** Average test latency */

@@ -210,7 +210,7 @@ export class Agents {
     public interactWithSession(
         agent_id: string,
         session_id: string | undefined,
-        request: Scout.InteractionRequest,
+        request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
         requestOptions?: Agents.RequestOptions,
     ): core.HttpResponsePromise<core.Stream<unknown>> {
         return core.HttpResponsePromise.fromPromise(
@@ -221,7 +221,7 @@ export class Agents {
     private async __interactWithSession(
         agent_id: string,
         session_id: string | undefined,
-        request: Scout.InteractionRequest,
+        request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<core.Stream<unknown>>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -300,7 +300,7 @@ export class Agents {
     /**
      * @param {string} agent_id
      * @param {string | undefined} session_id
-     * @param {Scout.InteractionRequest} request
+     * @param {Scout.SrcAppHttpRoutesWorldInteractInteractionRequest} request
      * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -315,7 +315,7 @@ export class Agents {
     public interactSyncWithSession(
         agent_id: string,
         session_id: string | undefined,
-        request: Scout.InteractionRequest,
+        request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
         requestOptions?: Agents.RequestOptions,
     ): core.HttpResponsePromise<unknown> {
         return core.HttpResponsePromise.fromPromise(
@@ -326,7 +326,7 @@ export class Agents {
     private async __interactSyncWithSession(
         agent_id: string,
         session_id: string | undefined,
-        request: Scout.InteractionRequest,
+        request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

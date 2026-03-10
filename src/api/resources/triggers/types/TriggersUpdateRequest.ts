@@ -5,4 +5,7 @@ import type * as Scout from "../../../index.js";
 /**
  * The updated configuration for the trigger.
  */
-export type TriggersUpdateRequest = Scout.SlackTriggerConfigInput | Scout.CronTriggerConfig;
+export type TriggersUpdateRequest =
+    | Scout.SlackTriggerConfigInput
+    | Scout.TelegramTriggerConfig
+    | Scout.CronTriggerConfig;

@@ -17,9 +17,10 @@ export interface ConnectIntegrationRequest {
 
 export namespace ConnectIntegrationRequest {
     export const AuthType = {
-        ApiKey: "api_key",
         Oauth2: "oauth2",
         Oauth2Custom: "oauth2_custom",
+        ApiKey: "api_key",
+        Mcp: "mcp",
     } as const;
     export type AuthType = (typeof AuthType)[keyof typeof AuthType];
 }

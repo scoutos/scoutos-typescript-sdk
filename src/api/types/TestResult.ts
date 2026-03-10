@@ -38,6 +38,8 @@ export interface TestResult {
     error_details?: Record<string, unknown>;
     /** Test case metadata passed through */
     metadata?: Record<string, unknown>;
+    /** Tags from the original test case */
+    tags?: string[];
 }
 
 export namespace TestResult {

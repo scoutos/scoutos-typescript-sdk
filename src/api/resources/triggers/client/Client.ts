@@ -427,6 +427,88 @@ export class Triggers {
     }
 
     /**
+     * Receive Telegram webhook updates.
+     * Telegram sends POST with JSON body (Update object). Respond 200 quickly;
+     * look up Trigger docs for this connection and run agent, streaming replies to Telegram.
+     *
+     * @param {string} connection_id
+     * @param {Triggers.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.triggers.executeTelegram("connection_id")
+     */
+    public executeTelegram(
+        connection_id: string,
+        requestOptions?: Triggers.RequestOptions,
+    ): core.HttpResponsePromise<Record<string, boolean>> {
+        return core.HttpResponsePromise.fromPromise(this.__executeTelegram(connection_id, requestOptions));
+    }
+
+    private async __executeTelegram(
+        connection_id: string,
+        requestOptions?: Triggers.RequestOptions,
+    ): Promise<core.WithRawResponse<Record<string, boolean>>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `v2/triggers/telegram/execute/${core.url.encodePathParam(connection_id)}`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return { data: _response.body as Record<string, boolean>, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        _response.error.body as Scout.HttpValidationError,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /v2/triggers/telegram/execute/{connection_id}.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
      * @param {Triggers.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example

@@ -15,6 +15,8 @@ export interface Document {
     sync_id?: string;
     studio_row_id?: string;
     cells?: Record<string, unknown>;
+    /** Present when document was returned from a search query; enables relevance sorting and match highlighting. */
+    search_metadata?: Scout.Details[];
 }
 
 export namespace Document {

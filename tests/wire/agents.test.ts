@@ -118,6 +118,131 @@ describe("Agents", () => {
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });
 
+    test("interact_async (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { messages: [{ content: "content" }], callback_url: "callback_url" };
+        const rawResponseBody = { session_id: "session_id", events_url: "events_url" };
+        server
+            .mockEndpoint()
+            .post("/world/agent_id/_interact_async")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.agents.interactAsync("agent_id", {
+            session_id: "session_id",
+            body: {
+                messages: [
+                    {
+                        content: "content",
+                    },
+                ],
+                callback_url: "callback_url",
+            },
+        });
+        expect(response).toEqual({
+            session_id: "session_id",
+            events_url: "events_url",
+        });
+    });
+
+    test("interact_async (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            messages: [{ content: "content" }, { content: "content" }],
+            callback_url: "callback_url",
+        };
+        const rawResponseBody = {};
+        server
+            .mockEndpoint()
+            .post("/world/agent_id/_interact_async")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.agents.interactAsync("agent_id", {
+                body: {
+                    messages: [
+                        {
+                            content: "content",
+                        },
+                        {
+                            content: "content",
+                        },
+                    ],
+                    callback_url: "callback_url",
+                },
+            });
+        }).rejects.toThrow(Scout.UnprocessableEntityError);
+    });
+
+    test("interact_async_with_session (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = { messages: [{ content: "content" }], callback_url: "callback_url" };
+        const rawResponseBody = { session_id: "session_id", events_url: "events_url" };
+        server
+            .mockEndpoint()
+            .post("/world/agent_id/session_id/_interact_async")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.agents.interactAsyncWithSession("agent_id", "session_id", {
+            messages: [
+                {
+                    content: "content",
+                },
+            ],
+            callback_url: "callback_url",
+        });
+        expect(response).toEqual({
+            session_id: "session_id",
+            events_url: "events_url",
+        });
+    });
+
+    test("interact_async_with_session (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            messages: [{ content: "content" }, { content: "content" }],
+            callback_url: "callback_url",
+        };
+        const rawResponseBody = {};
+        server
+            .mockEndpoint()
+            .post("/world/agent_id/undefined/_interact_async")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(422)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.agents.interactAsyncWithSession("agent_id", undefined, {
+                messages: [
+                    {
+                        content: "content",
+                    },
+                    {
+                        content: "content",
+                    },
+                ],
+                callback_url: "callback_url",
+            });
+        }).rejects.toThrow(Scout.UnprocessableEntityError);
+    });
+
     test("list", async () => {
         const server = mockServerPool.createServer();
         const client = new ScoutClient({ apiKey: "test", environment: server.baseUrl });

@@ -482,7 +482,7 @@ export class Collections {
         collection_id: string,
         table_id: string,
         requestOptions?: Collections.RequestOptions,
-    ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel> {
+    ): core.HttpResponsePromise<Scout.ResponseModel> {
         return core.HttpResponsePromise.fromPromise(this.__listSyncs(collection_id, table_id, requestOptions));
     }
 
@@ -490,7 +490,7 @@ export class Collections {
         collection_id: string,
         table_id: string,
         requestOptions?: Collections.RequestOptions,
-    ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel>> {
+    ): Promise<core.WithRawResponse<Scout.ResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
@@ -511,10 +511,7 @@ export class Collections {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as Scout.ResponseModel, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {

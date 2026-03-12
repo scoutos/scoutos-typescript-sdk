@@ -1459,7 +1459,7 @@ await client.triggers.list({
 </dl>
 </details>
 
-<details><summary><code>client.triggers.<a href="/src/api/resources/triggers/client/Client.ts">create</a>({ ...params }) -> Scout.SrcAppHttpRoutesTriggerCreateTriggerResponse</code></summary>
+<details><summary><code>client.triggers.<a href="/src/api/resources/triggers/client/Client.ts">create</a>({ ...params }) -> Scout.Response</code></summary>
 <dl>
 <dd>
 
@@ -2317,7 +2317,7 @@ await client.collections.delete("collection_id");
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">listSyncs</a>(collection_id, table_id) -> Scout.SrcAppHttpRoutesCollectionListCollectionSyncsResponseModel</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">listSyncs</a>(collection_id, table_id) -> Scout.ResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -3749,7 +3749,7 @@ await client.documents.deleteBatch("collection_id", "table_id", ["string"]);
 </details>
 
 ## Sources
-<details><summary><code>client.sources.<a href="/src/api/resources/sources/client/Client.ts">list</a>() -> Scout.ResponseModel</code></summary>
+<details><summary><code>client.sources.<a href="/src/api/resources/sources/client/Client.ts">list</a>() -> Scout.SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel</code></summary>
 <dl>
 <dd>
 
@@ -3991,7 +3991,7 @@ await client.syncs.update("sync_id", {
 <dl>
 <dd>
 
-**request:** `Scout.SrcAppHttpRoutesCollectionUpdateSyncRequestBody` 
+**request:** `Scout.RequestBody` 
     
 </dd>
 </dl>
@@ -4293,7 +4293,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `Scout.SrcAppHttpRoutesWorldInteractInteractionRequest` 
+**request:** `Scout.InteractionRequest` 
     
 </dd>
 </dl>
@@ -4362,7 +4362,174 @@ await client.agents.interactSyncWithSession("agent_id", "session_id", {
 <dl>
 <dd>
 
-**request:** `Scout.SrcAppHttpRoutesWorldInteractInteractionRequest` 
+**request:** `Scout.InteractionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">interactAsync</a>(agent_id, { ...params }) -> Scout.AsyncInteractionAcceptedResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Dedicated handler for async agent interactions exposed via the SDK.
+
+Requires callback_url and always returns 202 with session_id + events_url.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.interactAsync("agent_id", {
+    session_id: "session_id",
+    body: {
+        messages: [{
+                content: "content"
+            }],
+        callback_url: "callback_url"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Scout.AgentsInteractAsyncRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `Agents.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.agents.<a href="/src/api/resources/agents/client/Client.ts">interactAsyncWithSession</a>(agent_id, session_id, { ...params }) -> Scout.AsyncInteractionAcceptedResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Dedicated handler for async agent interactions exposed via the SDK.
+
+Requires callback_url and always returns 202 with session_id + events_url.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.agents.interactAsyncWithSession("agent_id", "session_id", {
+    messages: [{
+            content: "content"
+        }],
+    callback_url: "callback_url"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**agent_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**session_id:** `string | undefined` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Scout.AsyncInteractionRequest` 
     
 </dd>
 </dl>

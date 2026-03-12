@@ -26,11 +26,15 @@ export class Sources {
      * @example
      *     await client.sources.list()
      */
-    public list(requestOptions?: Sources.RequestOptions): core.HttpResponsePromise<Scout.ResponseModel> {
+    public list(
+        requestOptions?: Sources.RequestOptions,
+    ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel> {
         return core.HttpResponsePromise.fromPromise(this.__list(requestOptions));
     }
 
-    private async __list(requestOptions?: Sources.RequestOptions): Promise<core.WithRawResponse<Scout.ResponseModel>> {
+    private async __list(
+        requestOptions?: Sources.RequestOptions,
+    ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
@@ -51,7 +55,10 @@ export class Sources {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as Scout.ResponseModel, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as Scout.SrcAppHttpRoutesCollectionListSourceArchetypesResponseModel,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {

@@ -2,11 +2,11 @@
 
 import type * as Scout from "../index.js";
 
-export interface InteractionRequest {
+export interface AsyncInteractionRequest {
     /** List of incoming user messages and drive file references. */
     messages: Scout.IncomingMessage[];
     /** Optional metadata (e.g., salesforce_session) */
     metadata?: Record<string, unknown>;
-    /** Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url. */
-    callback_url?: string;
+    /** Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key. */
+    callback_url: string;
 }

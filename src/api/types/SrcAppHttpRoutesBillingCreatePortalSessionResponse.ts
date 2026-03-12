@@ -3,5 +3,5 @@
 import type * as Scout from "../index.js";
 
 export interface SrcAppHttpRoutesBillingCreatePortalSessionResponse {
-    data: Scout.SrcAppHttpRoutesBillingCreatePortalSessionData;
+    data: Scout.Data;
 }

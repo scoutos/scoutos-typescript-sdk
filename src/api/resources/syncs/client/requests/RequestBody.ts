@@ -18,6 +18,6 @@ import type * as Scout from "../../../../index.js";
  *         }
  *     }
  */
-export interface SrcAppHttpRoutesCollectionUpdateSyncRequestBody {
+export interface RequestBody {
     sync_config: Scout.SyncConfigInput;
 }

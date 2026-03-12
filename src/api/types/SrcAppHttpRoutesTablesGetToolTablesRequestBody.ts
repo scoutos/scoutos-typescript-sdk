@@ -2,7 +2,7 @@
 
 import type * as Scout from "../index.js";
 
-export interface RequestBody {
+export interface SrcAppHttpRoutesTablesGetToolTablesRequestBody {
     query?: string;
     limit?: number;
     include_tables?: Scout.TableAndCollectionItem[];

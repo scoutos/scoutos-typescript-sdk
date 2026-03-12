@@ -9,11 +9,12 @@ import type * as Scout from "../../../../index.js";
  *         body: {
  *             messages: [{
  *                     content: "content"
- *                 }]
+ *                 }],
+ *             callback_url: "callback_url"
  *         }
  *     }
  */
-export interface AgentsInteractSyncRequest {
+export interface AgentsInteractAsyncRequest {
     session_id?: string;
-    body: Scout.InteractionRequest;
+    body: Scout.AsyncInteractionRequest;
 }

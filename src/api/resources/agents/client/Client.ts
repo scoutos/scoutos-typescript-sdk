@@ -210,7 +210,7 @@ export class Agents {
     public interactWithSession(
         agent_id: string,
         session_id: string | undefined,
-        request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
+        request: Scout.InteractionRequest,
         requestOptions?: Agents.RequestOptions,
     ): core.HttpResponsePromise<core.Stream<unknown>> {
         return core.HttpResponsePromise.fromPromise(
@@ -221,7 +221,7 @@ export class Agents {
     private async __interactWithSession(
         agent_id: string,
         session_id: string | undefined,
-        request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
+        request: Scout.InteractionRequest,
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<core.Stream<unknown>>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -300,7 +300,7 @@ export class Agents {
     /**
      * @param {string} agent_id
      * @param {string | undefined} session_id
-     * @param {Scout.SrcAppHttpRoutesWorldInteractInteractionRequest} request
+     * @param {Scout.InteractionRequest} request
      * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -315,7 +315,7 @@ export class Agents {
     public interactSyncWithSession(
         agent_id: string,
         session_id: string | undefined,
-        request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
+        request: Scout.InteractionRequest,
         requestOptions?: Agents.RequestOptions,
     ): core.HttpResponsePromise<unknown> {
         return core.HttpResponsePromise.fromPromise(
@@ -326,7 +326,7 @@ export class Agents {
     private async __interactSyncWithSession(
         agent_id: string,
         session_id: string | undefined,
-        request: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest,
+        request: Scout.InteractionRequest,
         requestOptions?: Agents.RequestOptions,
     ): Promise<core.WithRawResponse<unknown>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -381,6 +381,212 @@ export class Agents {
             case "timeout":
                 throw new errors.ScoutTimeoutError(
                     "Timeout exceeded when calling POST /world/{agent_id}/{session_id}/_interact_sync.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * Dedicated handler for async agent interactions exposed via the SDK.
+     *
+     * Requires callback_url and always returns 202 with session_id + events_url.
+     *
+     * @param {string} agent_id
+     * @param {Scout.AgentsInteractAsyncRequest} request
+     * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.agents.interactAsync("agent_id", {
+     *         session_id: "session_id",
+     *         body: {
+     *             messages: [{
+     *                     content: "content"
+     *                 }],
+     *             callback_url: "callback_url"
+     *         }
+     *     })
+     */
+    public interactAsync(
+        agent_id: string,
+        request: Scout.AgentsInteractAsyncRequest,
+        requestOptions?: Agents.RequestOptions,
+    ): core.HttpResponsePromise<Scout.AsyncInteractionAcceptedResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__interactAsync(agent_id, request, requestOptions));
+    }
+
+    private async __interactAsync(
+        agent_id: string,
+        request: Scout.AgentsInteractAsyncRequest,
+        requestOptions?: Agents.RequestOptions,
+    ): Promise<core.WithRawResponse<Scout.AsyncInteractionAcceptedResponse>> {
+        const { session_id: sessionId, body: _body } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (sessionId != null) {
+            _queryParams.session_id = sessionId;
+        }
+
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `world/${core.url.encodePathParam(agent_id)}/_interact_async`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            requestType: "json",
+            body: _body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as Scout.AsyncInteractionAcceptedResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        _response.error.body as Scout.HttpValidationError,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /world/{agent_id}/_interact_async.",
+                );
+            case "unknown":
+                throw new errors.ScoutError({
+                    message: _response.error.errorMessage,
+                    rawResponse: _response.rawResponse,
+                });
+        }
+    }
+
+    /**
+     * Dedicated handler for async agent interactions exposed via the SDK.
+     *
+     * Requires callback_url and always returns 202 with session_id + events_url.
+     *
+     * @param {string} agent_id
+     * @param {string | undefined} session_id
+     * @param {Scout.AsyncInteractionRequest} request
+     * @param {Agents.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link Scout.UnprocessableEntityError}
+     *
+     * @example
+     *     await client.agents.interactAsyncWithSession("agent_id", "session_id", {
+     *         messages: [{
+     *                 content: "content"
+     *             }],
+     *         callback_url: "callback_url"
+     *     })
+     */
+    public interactAsyncWithSession(
+        agent_id: string,
+        session_id: string | undefined,
+        request: Scout.AsyncInteractionRequest,
+        requestOptions?: Agents.RequestOptions,
+    ): core.HttpResponsePromise<Scout.AsyncInteractionAcceptedResponse> {
+        return core.HttpResponsePromise.fromPromise(
+            this.__interactAsyncWithSession(agent_id, session_id, request, requestOptions),
+        );
+    }
+
+    private async __interactAsyncWithSession(
+        agent_id: string,
+        session_id: string | undefined,
+        request: Scout.AsyncInteractionRequest,
+        requestOptions?: Agents.RequestOptions,
+    ): Promise<core.WithRawResponse<Scout.AsyncInteractionAcceptedResponse>> {
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.ScoutEnvironment.Prod,
+                `world/${core.url.encodePathParam(agent_id)}/${core.url.encodePathParam(session_id)}/_interact_async`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as Scout.AsyncInteractionAcceptedResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 422:
+                    throw new Scout.UnprocessableEntityError(
+                        _response.error.body as Scout.HttpValidationError,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.ScoutError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        switch (_response.error.reason) {
+            case "non-json":
+                throw new errors.ScoutError({
+                    statusCode: _response.error.statusCode,
+                    body: _response.error.rawBody,
+                    rawResponse: _response.rawResponse,
+                });
+            case "timeout":
+                throw new errors.ScoutTimeoutError(
+                    "Timeout exceeded when calling POST /world/{agent_id}/{session_id}/_interact_async.",
                 );
             case "unknown":
                 throw new errors.ScoutError({

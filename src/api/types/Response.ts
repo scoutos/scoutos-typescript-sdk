@@ -3,7 +3,5 @@
 import type * as Scout from "../index.js";
 
 export interface Response {
-    original_file_text?: string;
-    original_file: Scout.File_;
-    parsed_text_file: Scout.File_;
+    data?: Scout.Trigger;
 }

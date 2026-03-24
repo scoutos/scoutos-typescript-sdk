@@ -1,6 +1,6 @@
 {
     "name": "scoutos",
-    "version": "0.12.1",
+    "version": "12.2.0",
     "private": false,
     "repository": "github:scoutos/scoutos-typescript-sdk",
     "type": "commonjs",

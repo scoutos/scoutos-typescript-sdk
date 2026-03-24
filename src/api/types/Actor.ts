@@ -6,4 +6,5 @@ export interface Actor {
     scout_organization_id: string;
     identity: Scout.LegacyIdentity;
     actor_identity: Scout.ActorIdentity;
+    permissions?: string[];
 }

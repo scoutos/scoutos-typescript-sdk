@@ -130,14 +130,14 @@ export class Triggers {
     public create(
         request: Scout.TriggersCreateRequest,
         requestOptions?: Triggers.RequestOptions,
-    ): core.HttpResponsePromise<Scout.Response> {
+    ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesTriggerCreateTriggerResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
         request: Scout.TriggersCreateRequest,
         requestOptions?: Triggers.RequestOptions,
-    ): Promise<core.WithRawResponse<Scout.Response>> {
+    ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesTriggerCreateTriggerResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
@@ -161,7 +161,10 @@ export class Triggers {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return { data: _response.body as Scout.Response, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as Scout.SrcAppHttpRoutesTriggerCreateTriggerResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {

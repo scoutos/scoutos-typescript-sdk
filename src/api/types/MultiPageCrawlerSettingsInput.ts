@@ -19,6 +19,10 @@ export interface MultiPageCrawlerSettingsInput {
     user_agent_header?: string;
     /** Include raw HTML content in the crawl output for ADA compliance analysis. */
     include_raw_html?: boolean;
+    /** Requests per second */
+    crawl_rate_rps?: number;
+    /** Number of concurrent requests */
+    concurrent_requests?: number;
     /** Maximum number of link levels to follow from the starting page */
     max_depth?: number;
     /** Maximum number of pages to crawl. */

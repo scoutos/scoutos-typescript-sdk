@@ -2,13 +2,14 @@
 
 import type * as Scout from "../index.js";
 
-export interface AsyncInteractionRequest {
+export interface SrcAppHttpRoutesWorldInteractInteractionRequest {
     /** List of incoming user messages and drive file references. */
     messages: Scout.IncomingMessage[];
     /** Optional metadata (e.g., salesforce_session) */
     metadata?: Record<string, unknown>;
-    /** Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key. */
-    callback_url: string;
+    /** Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url. */
+    callback_url?: string;
+    revision_id?: string;
     /** Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'. */
     tags?: string[];
 }

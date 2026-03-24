@@ -2,6 +2,6 @@
 
 import type * as Scout from "../index.js";
 
-export interface SrcAppHttpRoutesBillingFreePlanUsageResponse {
-    data: Scout.Data;
+export interface SrcAppHttpRoutesTriggerCreateTriggerResponse {
+    data?: Scout.Trigger;
 }

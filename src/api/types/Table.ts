@@ -3,7 +3,7 @@
 import type * as Scout from "../index.js";
 
 export interface Table {
-    table_config: Scout.TableConfigOutput;
+    table_config: Scout.TableConfig;
     created_at?: string;
     last_updated_at?: string;
     created_by: Scout.LegacyIdentity;

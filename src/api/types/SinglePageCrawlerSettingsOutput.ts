@@ -19,6 +19,10 @@ export interface SinglePageCrawlerSettingsOutput {
     user_agent_header?: string;
     /** Include raw HTML content in the crawl output for ADA compliance analysis. */
     include_raw_html?: boolean;
+    /** Requests per second */
+    crawl_rate_rps?: number;
+    /** Number of concurrent requests */
+    concurrent_requests?: number;
     /** Fixed to 1 for single page crawls */
     max_depth?: number;
     /** Fixed to 1 for single page crawls */

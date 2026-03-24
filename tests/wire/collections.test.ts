@@ -113,7 +113,7 @@ describe("Collections", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.collections.create({});
+        const response = await client.collections.create();
         expect(response).toEqual({
             data: {
                 collection_config: {
@@ -168,7 +168,7 @@ describe("Collections", () => {
             .build();
 
         await expect(async () => {
-            return await client.collections.create({});
+            return await client.collections.create();
         }).rejects.toThrow(Scout.UnprocessableEntityError);
     });
 
@@ -393,7 +393,9 @@ describe("Collections", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.collections.delete("collection_id");
+        const response = await client.collections.delete("collection_id", {
+            await_completion: true,
+        });
         expect(response).toEqual({
             detail: "detail",
         });

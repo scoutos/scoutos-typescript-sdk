@@ -133,23 +133,23 @@ export class Collections {
     }
 
     /**
-     * @param {Scout.CollectionConfig} request
+     * @param {Scout.CreateCollectionRequest} request
      * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.collections.create({})
+     *     await client.collections.create()
      */
     public create(
-        request: Scout.CollectionConfig,
+        request: Scout.CreateCollectionRequest = {},
         requestOptions?: Collections.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionCreateCollectionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(request, requestOptions));
     }
 
     private async __create(
-        request: Scout.CollectionConfig,
+        request: Scout.CreateCollectionRequest = {},
         requestOptions?: Collections.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionCreateCollectionResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -383,28 +383,39 @@ export class Collections {
     }
 
     /**
-     * Queue collection deletion and return immediately.
-     * Deletion happens asynchronously in background.
+     * Delete a collection. By default, enqueues deletion and returns immediately.
+     * Pass await_completion=true to block until deletion is fully complete.
      *
      * @param {string} collection_id
+     * @param {Scout.CollectionsDeleteRequest} request
      * @param {Collections.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
      *
      * @example
-     *     await client.collections.delete("collection_id")
+     *     await client.collections.delete("collection_id", {
+     *         await_completion: true
+     *     })
      */
     public delete(
         collection_id: string,
+        request: Scout.CollectionsDeleteRequest = {},
         requestOptions?: Collections.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionDeleteCollectionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__delete(collection_id, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__delete(collection_id, request, requestOptions));
     }
 
     private async __delete(
         collection_id: string,
+        request: Scout.CollectionsDeleteRequest = {},
         requestOptions?: Collections.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionDeleteCollectionResponse>> {
+        const { await_completion: awaitCompletion } = request;
+        const _queryParams: Record<string, string | string[] | object | object[] | null> = {};
+        if (awaitCompletion != null) {
+            _queryParams.await_completion = awaitCompletion.toString();
+        }
+
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
@@ -419,7 +430,7 @@ export class Collections {
             ),
             method: "DELETE",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

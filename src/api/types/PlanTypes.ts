@@ -23,5 +23,6 @@ export const PlanTypes = {
     Plan19: "plan_19",
     Plan20: "plan_20",
     Plan21: "plan_21",
+    Plan22: "plan_22",
 } as const;
 export type PlanTypes = (typeof PlanTypes)[keyof typeof PlanTypes];

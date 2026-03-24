@@ -1459,7 +1459,7 @@ await client.triggers.list({
 </dl>
 </details>
 
-<details><summary><code>client.triggers.<a href="/src/api/resources/triggers/client/Client.ts">create</a>({ ...params }) -> Scout.Response</code></summary>
+<details><summary><code>client.triggers.<a href="/src/api/resources/triggers/client/Client.ts">create</a>({ ...params }) -> Scout.SrcAppHttpRoutesTriggerCreateTriggerResponse</code></summary>
 <dl>
 <dd>
 
@@ -2111,7 +2111,7 @@ await client.collections.list({
 <dd>
 
 ```typescript
-await client.collections.create({});
+await client.collections.create();
 
 ```
 </dd>
@@ -2127,7 +2127,7 @@ await client.collections.create({});
 <dl>
 <dd>
 
-**request:** `Scout.CollectionConfig` 
+**request:** `Scout.CreateCollectionRequest` 
     
 </dd>
 </dl>
@@ -2253,7 +2253,7 @@ await client.collections.update("collection_id");
 </dl>
 </details>
 
-<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">delete</a>(collection_id) -> Scout.SrcAppHttpRoutesCollectionDeleteCollectionResponse</code></summary>
+<details><summary><code>client.collections.<a href="/src/api/resources/collections/client/Client.ts">delete</a>(collection_id, { ...params }) -> Scout.SrcAppHttpRoutesCollectionDeleteCollectionResponse</code></summary>
 <dl>
 <dd>
 
@@ -2265,8 +2265,8 @@ await client.collections.update("collection_id");
 <dl>
 <dd>
 
-Queue collection deletion and return immediately.
-Deletion happens asynchronously in background.
+Delete a collection. By default, enqueues deletion and returns immediately.
+Pass await_completion=true to block until deletion is fully complete.
 </dd>
 </dl>
 </dd>
@@ -2281,7 +2281,9 @@ Deletion happens asynchronously in background.
 <dd>
 
 ```typescript
-await client.collections.delete("collection_id");
+await client.collections.delete("collection_id", {
+    await_completion: true
+});
 
 ```
 </dd>
@@ -2298,6 +2300,14 @@ await client.collections.delete("collection_id");
 <dd>
 
 **collection_id:** `string` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**request:** `Scout.CollectionsDeleteRequest` 
     
 </dd>
 </dl>
@@ -2865,7 +2875,7 @@ await client.tables.create("collection_id");
 <dl>
 <dd>
 
-**request:** `Scout.TableConfigInput` 
+**request:** `Scout.CreateTableRequest` 
     
 </dd>
 </dl>
@@ -3135,7 +3145,7 @@ await client.tables.getSchema("collection_id", "table_id");
 </dl>
 </details>
 
-<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">sync</a>(collection_id, table_id, { ...params }) -> Scout.SrcAppHttpRoutesCollectionSyncTableResponse</code></summary>
+<details><summary><code>client.tables.<a href="/src/api/resources/tables/client/Client.ts">sync</a>(collection_id, table_id, { ...params }) -> Scout.Response</code></summary>
 <dl>
 <dd>
 
@@ -4293,7 +4303,7 @@ for await (const item of response) {
 <dl>
 <dd>
 
-**request:** `Scout.InteractionRequest` 
+**request:** `Scout.SrcAppHttpRoutesWorldInteractInteractionRequest` 
     
 </dd>
 </dl>
@@ -4362,7 +4372,7 @@ await client.agents.interactSyncWithSession("agent_id", "session_id", {
 <dl>
 <dd>
 
-**request:** `Scout.InteractionRequest` 
+**request:** `Scout.SrcAppHttpRoutesWorldInteractInteractionRequest` 
     
 </dd>
 </dl>

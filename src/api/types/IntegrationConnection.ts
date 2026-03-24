@@ -53,6 +53,7 @@ export namespace IntegrationConnection {
         Myla: "myla",
         Northbeam: "northbeam",
         Telegram: "telegram",
+        CommonPaper: "common_paper",
     } as const;
     export type IntegrationType = (typeof IntegrationType)[keyof typeof IntegrationType];
     export const AuthType = {

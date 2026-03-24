@@ -103,7 +103,7 @@ export class Tables {
 
     /**
      * @param {string} collection_id
-     * @param {Scout.TableConfigInput} request
+     * @param {Scout.CreateTableRequest} request
      * @param {Tables.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @throws {@link Scout.UnprocessableEntityError}
@@ -113,7 +113,7 @@ export class Tables {
      */
     public create(
         collection_id: string,
-        request: Scout.TableConfigInput = {},
+        request: Scout.CreateTableRequest = {},
         requestOptions?: Tables.RequestOptions,
     ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionCreateTableResponse> {
         return core.HttpResponsePromise.fromPromise(this.__create(collection_id, request, requestOptions));
@@ -121,7 +121,7 @@ export class Tables {
 
     private async __create(
         collection_id: string,
-        request: Scout.TableConfigInput = {},
+        request: Scout.CreateTableRequest = {},
         requestOptions?: Tables.RequestOptions,
     ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionCreateTableResponse>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -549,7 +549,7 @@ export class Tables {
         table_id: string,
         request: Record<string, unknown>[],
         requestOptions?: Tables.RequestOptions,
-    ): core.HttpResponsePromise<Scout.SrcAppHttpRoutesCollectionSyncTableResponse> {
+    ): core.HttpResponsePromise<Scout.Response> {
         return core.HttpResponsePromise.fromPromise(this.__sync(collection_id, table_id, request, requestOptions));
     }
 
@@ -558,7 +558,7 @@ export class Tables {
         table_id: string,
         request: Record<string, unknown>[],
         requestOptions?: Tables.RequestOptions,
-    ): Promise<core.WithRawResponse<Scout.SrcAppHttpRoutesCollectionSyncTableResponse>> {
+    ): Promise<core.WithRawResponse<Scout.Response>> {
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             this._options?.headers,
             mergeOnlyDefinedHeaders({ Authorization: await this._getAuthorizationHeader() }),
@@ -582,10 +582,7 @@ export class Tables {
             abortSignal: requestOptions?.abortSignal,
         });
         if (_response.ok) {
-            return {
-                data: _response.body as Scout.SrcAppHttpRoutesCollectionSyncTableResponse,
-                rawResponse: _response.rawResponse,
-            };
+            return { data: _response.body as Scout.Response, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {

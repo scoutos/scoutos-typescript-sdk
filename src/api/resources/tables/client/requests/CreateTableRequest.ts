@@ -6,18 +6,20 @@ import type * as Scout from "../../../../index.js";
  * @example
  *     {}
  */
-export interface TableConfigInput {
+export interface CreateTableRequest {
     table_display_name?: string;
     table_img_url?: string;
     table_description?: string;
-    schema?: TableConfigInput.Schema.Item[];
+    schema?: CreateTableRequest.Schema.Item[];
     icon_emoji?: string;
     icon_asset_url?: string;
     icon_fill?: string;
     plural_name?: string;
+    /** Optional user-provided table ID. Must be a lowercase slug (a-z, 0-9, hyphens, underscores) between 3 and 63 characters. If omitted, an ID is auto-generated. */
+    table_id?: string;
 }
 
-export namespace TableConfigInput {
+export namespace CreateTableRequest {
     export type Schema = Schema.Item[];
 
     export namespace Schema {

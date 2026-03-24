@@ -3,10 +3,18 @@
 import type * as Scout from "../index.js";
 
 export interface InteractionRequest {
-    /** List of incoming user messages and drive file references. */
-    messages: Scout.IncomingMessage[];
-    /** Optional metadata (e.g., salesforce_session) */
-    metadata?: Record<string, unknown>;
-    /** Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url. */
-    callback_url?: string;
+    messages: Scout.SrcAppHttpRoutesInboxHandleMessageIncomingMessage[];
+    participants: InteractionRequest.Participants.Item[];
+    history?: Scout.SrcAppHttpRoutesInboxHandleMessageIncomingMessage[];
+    files?: Scout.FilesAttribute[];
+    mentions?: Scout.Mention[];
+    ephemeral_agent_revision?: Scout.AgentRevisionInput;
+}
+
+export namespace InteractionRequest {
+    export type Participants = Participants.Item[];
+
+    export namespace Participants {
+        export type Item = Scout.ScoutUser | Scout.AiAgent;
+    }
 }

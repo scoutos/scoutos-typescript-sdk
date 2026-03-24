@@ -1,5 +1,7 @@
 export type { CollectionConfigUpdate } from "./CollectionConfigUpdate.js";
+export type { CollectionsDeleteRequest } from "./CollectionsDeleteRequest.js";
 export type { CollectionsListRequest } from "./CollectionsListRequest.js";
+export type { CreateCollectionRequest } from "./CreateCollectionRequest.js";
 export type { CreateViewRequest } from "./CreateViewRequest.js";
 export type { UpdateViewRequest } from "./UpdateViewRequest.js";
 export type { UpdateViewStateRequest } from "./UpdateViewStateRequest.js";

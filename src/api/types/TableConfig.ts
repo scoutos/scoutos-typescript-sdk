@@ -2,18 +2,18 @@
 
 import type * as Scout from "../index.js";
 
-export interface TableConfigOutput {
+export interface TableConfig {
     table_display_name?: string;
     table_img_url?: string;
     table_description?: string;
-    schema?: TableConfigOutput.Schema.Item[];
+    schema?: TableConfig.Schema.Item[];
     icon_emoji?: string;
     icon_asset_url?: string;
     icon_fill?: string;
     plural_name?: string;
 }
 
-export namespace TableConfigOutput {
+export namespace TableConfig {
     export type Schema = Schema.Item[];
 
     export namespace Schema {

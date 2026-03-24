@@ -30,6 +30,7 @@ describe("Documents", () => {
             has_more: true,
             total_count: 1,
             documents_uploading: true,
+            column_mapping: { key: "value" },
         };
         server
             .mockEndpoint()
@@ -75,6 +76,9 @@ describe("Documents", () => {
             has_more: true,
             total_count: 1,
             documents_uploading: true,
+            column_mapping: {
+                key: "value",
+            },
         });
     });
 

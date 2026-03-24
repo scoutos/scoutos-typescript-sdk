@@ -15,5 +15,5 @@ import type * as Scout from "../../../../index.js";
  */
 export interface AgentsInteractSyncRequest {
     session_id?: string;
-    body: Scout.InteractionRequest;
+    body: Scout.SrcAppHttpRoutesWorldInteractInteractionRequest;
 }

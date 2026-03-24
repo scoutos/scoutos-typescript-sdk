@@ -2,6 +2,8 @@
 
 export interface SourceSyncLaserficheSettings {
     source_archetype_id: "com.laserfiche.repository";
+    /** Which Laserfiche connection to use when multiple are connected to the organization. */
+    connection_id?: string;
     /** The Laserfiche repository ID to sync from (e.g., 'r-7144d39a'). If not provided, uses the first available repository. */
     repository_id?: string;
     /** Folder IDs to sync from. If empty, syncs from repository root. */

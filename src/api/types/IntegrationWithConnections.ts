@@ -52,6 +52,7 @@ export namespace IntegrationWithConnections {
         Myla: "myla",
         Northbeam: "northbeam",
         Telegram: "telegram",
+        CommonPaper: "common_paper",
     } as const;
     export type Id = (typeof Id)[keyof typeof Id];
 }

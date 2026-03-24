@@ -8,4 +8,5 @@ export interface SrcAppHttpRoutesCollectionGetDocumentsResponse {
     has_more?: boolean;
     total_count?: number;
     documents_uploading?: boolean;
+    column_mapping?: Record<string, string | undefined>;
 }

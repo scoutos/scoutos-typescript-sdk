@@ -7,6 +7,8 @@ export interface SrcAppHttpRoutesWorldInteractInteractionRequest {
     messages: Scout.IncomingMessage[];
     /** Optional metadata (e.g., salesforce_session) */
     metadata?: Record<string, unknown>;
+    /** Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON. */
+    variables?: Record<string, unknown>;
     /** Optional callback URL. If provided, the interaction runs asynchronously and the response returns 202 with session_id + events_url. */
     callback_url?: string;
     revision_id?: string;

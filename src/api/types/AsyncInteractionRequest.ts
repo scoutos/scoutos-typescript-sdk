@@ -7,6 +7,8 @@ export interface AsyncInteractionRequest {
     messages: Scout.IncomingMessage[];
     /** Optional metadata (e.g., salesforce_session) */
     metadata?: Record<string, unknown>;
+    /** Optional interaction-local variables for tool input interpolation. Keys are variable names; values may be any JSON. */
+    variables?: Record<string, unknown>;
     /** Callback URL that Scout will POST to when the interaction completes. The request is signed with HMAC-SHA256 using the organization's secret key. */
     callback_url: string;
     /** Optional tags for categorizing this interaction in observability history. Max 20 tags, each up to 32 lowercase alphanumeric characters plus ':', '_', '-'. */

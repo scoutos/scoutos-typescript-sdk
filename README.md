@@ -1,5 +1,19 @@
 # Scoutos TypeScript Library
 
+> [!WARNING]
+> This SDK and the `scoutos` npm package are deprecated and no longer maintained.
+> Do not use them for new integrations. Use [`@scoutos/connect`](https://www.npmjs.com/package/scoutos-connect)
+> instead:
+>
+> ```sh
+> npm install @scoutos/connect@npm:scoutos-connect
+> ```
+>
+> `@scoutos/connect` is a curated SDK and is not a drop-in replacement for every API in this generated
+> client. See its package documentation for supported features and legacy Workflow migration guidance.
+> If you would like a feature exposed in `@scoutos/connect`, please reach out to us.
+> The documentation below remains available for existing integrations.
+
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fscoutos%2Fscoutos-typescript-sdk)
 [![npm shield](https://img.shields.io/npm/v/scoutos)](https://www.npmjs.com/package/scoutos)
 
